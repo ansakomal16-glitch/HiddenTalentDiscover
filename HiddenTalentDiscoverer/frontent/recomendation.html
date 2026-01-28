@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Recommendations</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>Recommendations</h1>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Personalized Recommendations</h2>
+  <div id="recommendations"></div>
+</div>
+
+<script>
+async function loadRecommendations(){
+    const recs = await getRecommendations(); // backend endpoint
+    const container = document.getElementById('recommendations');
+    recs.forEach(r=>{
+        const div = document.createElement('div');
+        div.className = 'rec-card';
+        div.innerHTML = `<h3>${r.title}</h3><p>${r.description}</p>`;
+        container.appendChild(div);
+    });
+}
+
+window.onload = loadRecommendations;
+</script>
+</body>
+</html>

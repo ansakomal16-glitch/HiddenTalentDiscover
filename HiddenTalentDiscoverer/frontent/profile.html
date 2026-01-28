@@ -1,0 +1,40 @@
+<script>
+const API_URL = "http://localhost:5000";
+let token = localStorage.getItem('token'); // token login se store kar sakte ho
+
+async function loadProfile(){
+    const res = await fetch(`${API_URL}/profile`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+    const profile = await res.json();
+    document.getElementById('profileName').value = profile.name || "";
+    document.getElementById('profileInterests').value = profile.interests || "";
+    document.getElementById('profileSkills').value = profile.skills || "";
+}
+
+document.getElementById('updateProfileBtn').addEventListener('click', async () => {
+    const name = document.getElementById('profileName').value;
+    const interests = document.getElementById('profileInterests').value;
+    const skills = document.getElementById('profileSkills').value;
+
+    const res = await fetch(`${API_URL}/profile`, {
+        method: "PUT",
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ name, interests, skills })
+    });
+
+    const data = await res.json();
+    alert(JSON.stringify(data));
+});
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('token');
+    window.location.href = "login.html";
+});
+
+window.onload = loadProfile;
+</script>

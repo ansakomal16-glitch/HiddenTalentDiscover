@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog - Hidden Talent Discoverer</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>Blog & Tips</h1>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Latest Articles</h2>
+  <div id="blogPosts"></div>
+</div>
+
+<script>
+async function loadBlog(){
+    const posts = await getBlogPosts(); // backend endpoint
+    const container = document.getElementById('blogPosts');
+    posts.forEach(p=>{
+        const div = document.createElement('div');
+        div.className = 'blog-card';
+        div.innerHTML = `<h3>${p.title}</h3><p>${p.content}</p>`;
+        container.appendChild(div);
+    });
+}
+
+window.onload = loadBlog;
+</script>
+</body>
+</html>

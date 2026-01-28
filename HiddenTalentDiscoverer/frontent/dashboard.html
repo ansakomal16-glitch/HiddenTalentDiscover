@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard - Hidden Talent Discoverer</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>Dashboard</h1>
+  <nav>
+    <a href="profile.html">Profile</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="logout.html" id="logoutNav">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Your Quiz Progress</h2>
+  <canvas id="scoreChart" width="400" height="200"></canvas>
+</div>
+
+<script>
+async function loadDashboard(){
+    const profile = await getProfile();
+    const quizResults = await getQuizResults(); // assume backend endpoint
+
+    const labels = quizResults.map(r=>r.date);
+    const scores = quizResults.map(r=>r.score);
+
+    const ctx = document.getElementById('scoreChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets:[{label:"Score", data:scores, backgroundColor:"rgba(46,134,222,0.2)", borderColor:"#2e86de", borderWidth:2}] },
+        options: { responsive:true, scales:{y:{beginAtZero:true}} }
+    });
+}
+
+window.onload = loadDashboard;
+</script>
+</body>
+</html>

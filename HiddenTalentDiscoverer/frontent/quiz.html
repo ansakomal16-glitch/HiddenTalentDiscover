@@ -1,0 +1,43 @@
+<script>
+const API_URL = "http://localhost:5000";
+let token = localStorage.getItem('token');
+
+async function loadQuiz(){
+    const res = await fetch(`${API_URL}/quiz`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+    const questions = await res.json();
+
+    const quizDiv = document.getElementById('quizContainer');
+    quizDiv.innerHTML = "";
+    questions.forEach(q => {
+        const optionsHTML = q.options.map(opt => `<label><input type="radio" name="q${q.id}" value="${opt}"> ${opt}</label><br>`).join('');
+        quizDiv.innerHTML += `<div><strong>${q.question}</strong><br>${optionsHTML}</div><hr>`;
+    });
+}
+
+// Submit Quiz
+document.getElementById('submitQuizBtn').addEventListener('click', async () => {
+    const answers = [];
+    const questions = document.querySelectorAll('#quizContainer div');
+    questions.forEach((qDiv, index) => {
+        const qId = index + 1;
+        const selected = document.querySelector(`input[name="q${qId}"]:checked`);
+        if(selected) answers.push({ id: qId, answer: selected.value });
+    });
+
+    const res = await fetch(`${API_URL}/quiz`, {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ answers })
+    });
+
+    const result = await res.json();
+    alert(`Quiz Submitted ✅\nScore: ${result.totalScore}`);
+});
+
+window.onload = loadQuiz;
+</script>

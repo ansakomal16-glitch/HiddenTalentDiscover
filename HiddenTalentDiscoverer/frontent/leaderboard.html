@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Leaderboard</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>Leaderboard</h1>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Top Users</h2>
+  <table id="leaderboardTable">
+    <tr><th>Rank</th><th>Name</th><th>Score</th></tr>
+  </table>
+</div>
+
+<script>
+async function loadLeaderboard(){
+    const topUsers = await getLeaderboard(); // backend call
+    const table = document.getElementById('leaderboardTable');
+    topUsers.forEach((u,i)=>{
+        const row = table.insertRow();
+        row.insertCell(0).innerText = i+1;
+        row.insertCell(1).innerText = u.name;
+        row.insertCell(2).innerText = u.score;
+    });
+}
+
+window.onload = loadLeaderboard;
+</script>
+</body>
+</html>
