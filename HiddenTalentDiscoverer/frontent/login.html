@@ -1,130 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - Hidden Talent Discoverer</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-    /* --- Global Styles --- */
-    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-    body { 
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        height:100vh;
-        display:flex; justify-content:center; align-items:center; 
-    }
-    .container {
-        background:white; 
-        padding:40px; 
-        border-radius:15px; 
-        box-shadow:0 10px 25px rgba(0,0,0,0.2); 
-        width:350px;
-        text-align:center;
-        position:relative;
-    }
-    h2 { color:#2e86de; margin-bottom:20px; }
-    input {
-        width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc; font-size:1rem;
-    }
-    button {
-        width:100%; padding:12px; margin-top:10px; border:none; border-radius:8px;
-        background:#2e86de; color:white; font-size:1rem; cursor:pointer; transition:0.3s;
-    }
-    button:hover { background:#1b4f72; }
-    .toggle { margin-top:15px; font-size:0.9rem; }
-    .toggle a { color:#2e86de; text-decoration:none; font-weight:600; }
-    .toggle a:hover { text-decoration:underline; }
-    .message { margin-top:10px; font-size:0.9rem; padding:8px; border-radius:5px; display:none; }
-    .message.error { background:#f8d7da; color:#721c24; }
-    .message.success { background:#d4edda; color:#155724; }
-    .spinner {
-        position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-        display:none;
-        border: 4px solid #f3f3f3;
-        border-top: 4px solid #2e86de;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    .password-toggle { position:relative; display:flex; align-items:center; }
-    .password-toggle span { position:absolute; right:15px; cursor:pointer; color:#2e86de; font-weight:600; }
-</style>
+  <meta charset="UTF-8">
+  <title>Login</title>
 </head>
 <body>
 
-<div class="container">
-    <div class="spinner" id="spinner"></div>
-    <h2>Login</h2>
-    <div class="message" id="message"></div>
-    <form id="loginForm">
-        <input type="email" id="loginEmail" placeholder="Email" required>
-        <div class="password-toggle">
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <span id="togglePassword">Show</span>
-        </div>
-        <button type="submit">Login</button>
-    </form>
-    <div class="toggle">
-        Don't have an account? <a href="signup.html">Sign Up</a>
-    </div>
-</div>
+<h2>Login</h2>
+
+<form id="loginForm">
+  <input type="email" id="email" placeholder="Enter Email" required><br><br>
+  <input type="password" id="password" placeholder="Enter Password" required><br><br>
+  <button type="submit">Login</button>
+</form>
+
+<p id="message"></p>
 
 <script>
-const API_URL = "http://localhost:5000"; // backend URL
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault();
 
-const messageDiv = document.getElementById('message');
-const spinner = document.getElementById('spinner');
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
 
-// Toggle password show/hide
-document.getElementById('togglePassword').addEventListener('click', () => {
-    const pass = document.getElementById('loginPassword');
-    if(pass.type === "password"){ 
-        pass.type = "text"; 
-        document.getElementById('togglePassword').innerText = "Hide";
-    } else { 
-        pass.type = "password"; 
-        document.getElementById('togglePassword').innerText = "Show";
-    }
-});
-
-// Login form submit
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    messageDiv.style.display = 'none';
-    spinner.style.display = 'block';
-
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-
-    try {
-        const res = await fetch(`${API_URL}/login`, {
-            method:"POST",
-            headers:{ "Content-Type":"application/json" },
-            body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        spinner.style.display = 'none';
-
-        if(data.token){
-            localStorage.setItem('token', data.token);
-            messageDiv.className = 'message success';
-            messageDiv.innerText = 'Login Successful! Redirecting... ✅';
-            messageDiv.style.display = 'block';
-            setTimeout(()=>{ window.location.href = 'home.html'; }, 1500);
-        } else {
-            messageDiv.className = 'message error';
-            messageDiv.innerText = data.message || 'Login failed ❌';
-            messageDiv.style.display = 'block';
-        }
-    } catch(err){
-        spinner.style.display = 'none';
-        messageDiv.className = 'message error';
-        messageDiv.innerText = 'Server error ❌';
-        messageDiv.style.display = 'block';
-        console.error(err);
-    }
+  if(email === "user@gmail.com" && pass === "1234"){
+    document.getElementById("message").innerHTML = "✅ Successfully Login!";
+    setTimeout(() => {
+      window.location.href = "quiz.html";
+    }, 1000);
+  } else {
+    document.getElementById("message").innerHTML = "❌ Wrong Email or Password!";
+  }
 });
 </script>
 
