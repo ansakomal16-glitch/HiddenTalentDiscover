@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Marketing Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>Performance Marketing Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+
+        <div id="questions-container">
+
+            <!-- 20 MCQs -->
+            <!-- 1 -->
+            <div class="question-box">
+                <h2>1. Performance Marketing ka main focus kya hota hai?</h2>
+                <button class="option" data-score="3">Results & ROI</button>
+                <button class="option" data-score="2">Brand Awareness</button>
+                <button class="option" data-score="0">Random Posting</button>
+            </div>
+
+            <!-- 2 -->
+            <div class="question-box hidden">
+                <h2>2. Aap CPC kis cheez ko kehte hain?</h2>
+                <button class="option" data-score="3">Cost Per Click</button>
+                <button class="option" data-score="1">Cost Per Comment</button>
+                <button class="option" data-score="0">Cost Per Contact</button>
+            </div>
+
+            <!-- 3 -->
+            <div class="question-box hidden">
+                <h2>3. Performance marketing ka sab se important metric?</h2>
+                <button class="option" data-score="3">Conversion Rate</button>
+                <button class="option" data-score="2">Likes</button>
+                <button class="option" data-score="0">Shares</button>
+            </div>
+
+            <!-- 4 -->
+            <div class="question-box hidden">
+                <h2>4. Aap kis tareqe se ads optimize karte ho?</h2>
+                <button class="option" data-score="3">A/B Testing</button>
+                <button class="option" data-score="1">Random Changes</button>
+                <button class="option" data-score="0">No Testing</button>
+            </div>
+
+            <!-- 5 -->
+            <div class="question-box hidden">
+                <h2>5. Performance marketing ka goal kya hota hai?</h2>
+                <button class="option" data-score="3">Better ROI</button>
+                <button class="option" data-score="2">Reach</button>
+                <button class="option" data-score="0">Posting daily</button>
+            </div>
+
+            <!-- 6 -->
+            <div class="question-box hidden">
+                <h2>6. Remarketing kis ko target karta hai?</h2>
+                <button class="option" data-score="3">Previous Visitors</button>
+                <button class="option" data-score="1">New Audience</button>
+                <button class="option" data-score="0">Random People</button>
+            </div>
+
+            <!-- 7 -->
+            <div class="question-box hidden">
+                <h2>7. CTR ka full form?</h2>
+                <button class="option" data-score="3">Click Through Rate</button>
+                <button class="option" data-score="1">Customer Trust Rate</button>
+                <button class="option" data-score="0">Click To Reach</button>
+            </div>
+
+            <!-- 8 -->
+            <div class="question-box hidden">
+                <h2>8. Kis ad platform ka ROI best hota hai?</h2>
+                <button class="option" data-score="3">Google Ads</button>
+                <button class="option" data-score="2">Facebook Ads</button>
+                <button class="option" data-score="1">Depends on Audience</button>
+            </div>
+
+            <!-- 9 -->
+            <div class="question-box hidden">
+                <h2>9. Performance marketer ko sab se zyada kya ata hona chahiye?</h2>
+                <button class="option" data-score="3">Analytics</button>
+                <button class="option" data-score="2">Content Writing</button>
+                <button class="option" data-score="1">Designing</button>
+            </div>
+
+            <!-- 10 -->
+            <div class="question-box hidden">
+                <h2>10. ROAS kya measure karta hai?</h2>
+                <button class="option" data-score="3">Return from Ads Spend</button>
+                <button class="option" data-score="1">Reach from Ads</button>
+                <button class="option" data-score="0">Comments from Ads</button>
+            </div>
+
+            <!-- 11–20 (10 more questions) -->
+            <!-- I'll continue quickly with similar pattern -->
+
+            <div class="question-box hidden"><h2>11. Best ad objective kaun sa hota hai?</h2>
+                <button class="option" data-score="3">Conversions</button>
+                <button class="option" data-score="2">Traffic</button>
+                <button class="option" data-score="0">Engagement</button></div>
+
+            <div class="question-box hidden"><h2>12. Landing page ka purpose?</h2>
+                <button class="option" data-score="3">Convert Visitor</button>
+                <button class="option" data-score="2">Show Info</button>
+                <button class="option" data-score="0">Just Design</button></div>
+
+            <div class="question-box hidden"><h2>13. Best skill for performance marketer?</h2>
+                <button class="option" data-score="3">Data Analysis</button>
+                <button class="option" data-score="2">Creativity</button>
+                <button class="option" data-score="1">Basic Posting</button></div>
+
+            <div class="question-box hidden"><h2>14. Funnel mein last step kaun sa hota hai?</h2>
+                <button class="option" data-score="3">Conversion</button>
+                <button class="option" data-score="1">Interest</button>
+                <button class="option" data-score="0">Awareness</button></div>
+
+            <div class="question-box hidden"><h2>15. Audience targeting kis base pe hoti hai?</h2>
+                <button class="option" data-score="3">Interest + Behavior</button>
+                <button class="option" data-score="1">Random</button>
+                <button class="option" data-score="0">Trend</button></div>
+
+            <div class="question-box hidden"><h2>16. Conversion tracking kis se hota hai?</h2>
+                <button class="option" data-score="3">Pixel</button>
+                <button class="option" data-score="2">Hashtags</button>
+                <button class="option" data-score="0">Captions</button></div>
+
+            <div class="question-box hidden"><h2>17. CPM kis cheez ka cost hota hai?</h2>
+                <button class="option" data-score="3">1000 Impressions</button>
+                <button class="option" data-score="1">1000 Clicks</button>
+                <button class="option" data-score="0">1000 Followers</button></div>
+
+            <div class="question-box hidden"><h2>18. Sab se important optimization?</h2>
+                <button class="option" data-score="3">Conversion Optimization</button>
+                <button class="option" data-score="2">Traffic Optimization</button>
+                <button class="option" data-score="0">Boost Post</button></div>
+
+            <div class="question-box hidden"><h2>19. Kis tool se user behavior pata chalta hai?</h2>
+                <button class="option" data-score="3">Google Analytics</button>
+                <button class="option" data-score="2">Canva</button>
+                <button class="option" data-score="0">ChatGPT</button></div>
+
+            <div class="question-box hidden"><h2>20. Performance marketing best for?</h2>
+                <button class="option" data-score="3">Sales</button>
+                <button class="option" data-score="2">Leads</button>
+                <button class="option" data-score="0">Likes</button></div>
+
+        </div>
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-box" class="result-box hidden">
+        <h2>Your Result</h2>
+        <p id="scoreText"></p>
+
+        <div class="circle-box">
+            <div class="circle">
+                <span id="percentValue">0%</span>
+            </div>
+        </div>
+
+        <canvas id="resultChart" width="300" height="200"></canvas>
+
+        <h3 id="careerTitle"></h3>
+        <p id="careerMessage"></p>
+
+        <div id="improveBox"></div>
+
+        <h3>📚 Recommended Courses</h3>
+        <ul id="courseList"></ul>
+
+        <h3>💼 Jobs</h3>
+        <ul id="jobList"></ul>
+    </div>
+
+    <script src="per.js"></script>
+
+</body>
+</html>

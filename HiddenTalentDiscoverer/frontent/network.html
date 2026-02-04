@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+</head>
+
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>🌐 Network Security Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+        <div id="questions-container">
+
+            <!-- QUESTIONS (20 TOTAL) -->
+            
+            <!-- Q1 -->
+            <div class="question-box">
+                <h2>1. What is Network Security?</h2>
+                <button class="option" data-score="3">Protecting networks and data</button>
+                <button class="option" data-score="0">Playing online games</button>
+                <button class="option" data-score="0">Watching videos</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-box hidden">
+                <h2>2. Firewall ka main role kya hai?</h2>
+                <button class="option" data-score="3">Block unauthorized access</button>
+                <button class="option" data-score="1">Boost device speed</button>
+                <button class="option" data-score="0">Delete viruses</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-box hidden">
+                <h2>3. VPN ka purpose kya hota hai?</h2>
+                <button class="option" data-score="3">Secure private connection</button>
+                <button class="option" data-score="0">Increase RAM</button>
+                <button class="option" data-score="0">Free calls</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-box hidden">
+                <h2>4. DDoS attack kis cheez ko target karta hai?</h2>
+                <button class="option" data-score="3">Server</button>
+                <button class="option" data-score="0">Keyboard</button>
+                <button class="option" data-score="0">Mobile battery</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-box hidden">
+                <h2>5. IDS stands for?</h2>
+                <button class="option" data-score="3">Intrusion Detection System</button>
+                <button class="option" data-score="0">Internal Disk Storage</button>
+                <button class="option" data-score="0">Internet Download Speed</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-box hidden">
+                <h2>6. Strong password ka example?</h2>
+                <button class="option" data-score="3">P@ssw0rd#2024</button>
+                <button class="option" data-score="0">123456</button>
+                <button class="option" data-score="1">hello123</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-box hidden">
+                <h2>7. Phishing attack kis cheez se related hai?</h2>
+                <button class="option" data-score="3">Fake emails/messages</button>
+                <button class="option" data-score="0">WiFi speed</button>
+                <button class="option" data-score="0">Screen brightness</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-box hidden">
+                <h2>8. Encryption kis liye use hoti hai?</h2>
+                <button class="option" data-score="3">Data secure karne ke liye</button>
+                <button class="option" data-score="0">Data delete karne ke liye</button>
+                <button class="option" data-score="0">Website color change</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q9 -->
+            <div class="question-box hidden">
+                <h2>9. HTTPS ka "S" kya mean karta hai?</h2>
+                <button class="option" data-score="3">Secure</button>
+                <button class="option" data-score="0">Server</button>
+                <button class="option" data-score="0">Speed</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q10 -->
+            <div class="question-box hidden">
+                <h2>10. MAC address kiske liye hota hai?</h2>
+                <button class="option" data-score="3">Device identification</button>
+                <button class="option" data-score="0">Internet speed</button>
+                <button class="option" data-score="0">Font style</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q11 -->
+            <div class="question-box hidden">
+                <h2>11. Port 80 kis protocol ke liye hota hai?</h2>
+                <button class="option" data-score="3">HTTP</button>
+                <button class="option" data-score="0">FTP</button>
+                <button class="option" data-score="0">DNS</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q12 -->
+            <div class="question-box hidden">
+                <h2>12. Malware ki best definition?</h2>
+                <button class="option" data-score="3">Malicious software</button>
+                <button class="option" data-score="0">Media player</button>
+                <button class="option" data-score="0">Memory card</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q13 -->
+            <div class="question-box hidden">
+                <h2>13. Social engineering attack ka target?</h2>
+                <button class="option" data-score="3">Human psychology</button>
+                <button class="option" data-score="0">Keyboard keys</button>
+                <button class="option" data-score="0">Monitor</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q14 -->
+            <div class="question-box hidden">
+                <h2>14. Two-Factor Authentication ka faida?</h2>
+                <button class="option" data-score="3">Extra security layer</button>
+                <button class="option" data-score="1">Phone speed boost</button>
+                <button class="option" data-score="0">Free storage</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q15 -->
+            <div class="question-box hidden">
+                <h2>15. SQL Injection kis cheez ko target karta hai?</h2>
+                <button class="option" data-score="3">Databases</button>
+                <button class="option" data-score="0">Keyboard</button>
+                <button class="option" data-score="0">Printer</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q16 -->
+            <div class="question-box hidden">
+                <h2>16. Public WiFi par sabse risky cheez?</h2>
+                <button class="option" data-score="3">Online banking</button>
+                <button class="option" data-score="1">YouTube</button>
+                <button class="option" data-score="0">Music listening</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q17 -->
+            <div class="question-box hidden">
+                <h2>17. Penetration testing ka main aim?</h2>
+                <button class="option" data-score="3">Find vulnerabilities</button>
+                <button class="option" data-score="0">Fix battery</button>
+                <button class="option" data-score="0">Install games</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q18 -->
+            <div class="question-box hidden">
+                <h2>18. HoneyPot ka use?</h2>
+                <button class="option" data-score="3">Trap hackers</button>
+                <button class="option" data-score="0">Increase WiFi range</button>
+                <button class="option" data-score="0">Block ads</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q19 -->
+            <div class="question-box hidden">
+                <h2>19. SSL certificate kis liye hota hai?</h2>
+                <button class="option" data-score="3">Encrypt communication</button>
+                <button class="option" data-score="0">Website color change</button>
+                <button class="option" data-score="0">Speed increase</button>
+                <button class="next-btn hidden">Next</button>
+            </div>
+
+            <!-- Q20 -->
+            <div class="question-box hidden">
+                <h2>20. Strongest network security practice?</h2>
+                <button class="option" data-score="3">Regular updates + strong passwords</button>
+                <button class="option" data-score="1">Sometimes update</button>
+                <button class="option" data-score="0">Never update</button>
+                <button class="next-btn hidden">Finish</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div class="result-screen hidden" id="result-screen">
+        <h2>Your Result</h2>
+        <p id="result-text"></p>
+        <button onclick="location.reload()">Restart Quiz</button>
+    </div>
+
+    <script src="network.js"></script>
+</body>
+</html>

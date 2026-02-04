@@ -1,40 +1,93 @@
-<script>
-const API_URL = "http://localhost:5000";
-let token = localStorage.getItem('token'); // token login se store kar sakte ho
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile – Hidden Talent Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-async function loadProfile(){
-    const res = await fetch(`${API_URL}/profile`, {
-        headers: { "Authorization": `Bearer ${token}` }
-    });
-    const profile = await res.json();
-    document.getElementById('profileName').value = profile.name || "";
-    document.getElementById('profileInterests').value = profile.interests || "";
-    document.getElementById('profileSkills').value = profile.skills || "";
+<body>
+
+<header>
+    <div class="navbar-row">
+    <a href="index.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="recommendations.html">Recommendations</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="badges.html">Badges</a>
+    <a href="about.html">About Us</a>
+
+    <a href="login.html" class="navbar-login">Login</a>
+    <a href="signup.html" class="navbar-signup">Sign Up</a>
+</div>
+
+    <h1>Your Profile</h1>
+    
+</header>
+
+<div class="container">
+
+    <h2>Update Your Profile ✨</h2>
+
+    <input type="text" id="profileName" placeholder="Your Name">
+    <input type="text" id="profileInterests" placeholder="Your Interests (e.g: AI, Coding)">
+    <input type="text" id="profileSkills" placeholder="Your Skills (e.g: HTML, Python)">
+    
+    <button onclick="saveProfile()">Save Profile</button>
+
+</div>
+
+<script>
+function loadProfile() {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (!user) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    document.getElementById("profileName").value = user.name || "";
+    document.getElementById("profileInterests").value = user.interests || "";
+    document.getElementById("profileSkills").value = user.skills || "";
 }
 
-document.getElementById('updateProfileBtn').addEventListener('click', async () => {
-    const name = document.getElementById('profileName').value;
-    const interests = document.getElementById('profileInterests').value;
-    const skills = document.getElementById('profileSkills').value;
+function saveProfile() {
+    const name = document.getElementById("profileName").value.trim();
+    const interests = document.getElementById("profileInterests").value.trim();
+    const skills = document.getElementById("profileSkills").value.trim();
 
-    const res = await fetch(`${API_URL}/profile`, {
-        method: "PUT",
-        headers: { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({ name, interests, skills })
-    });
+    if (!name) {
+        alert("Name is required ❌");
+        return;
+    }
 
-    const data = await res.json();
-    alert(JSON.stringify(data));
-});
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let user = JSON.parse(localStorage.getItem("currentUser"));
 
-// Logout
-document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('token');
+    const updatedUser = {
+        ...user,
+        name,
+        interests,
+        skills
+    };
+
+    users = users.map(u => u.email === user.email ? updatedUser : u);
+
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+
+    alert("Profile updated successfully! ✅");
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
     window.location.href = "login.html";
-});
+}
 
 window.onload = loadProfile;
 </script>
+
+</body>
+</html>

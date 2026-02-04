@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Security Skill Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>Information Security Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+
+        <div id="questions-container">
+
+            <!-- 20 QUESTIONS -->
+            <div class="question-box">
+                <h2>1. Do you understand what a computer virus is?</h2>
+                <button class="option" data-score="3">Yes, clearly</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">Not at all</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>2. Can you identify a suspicious email or link?</h2>
+                <button class="option" data-score="3">Easily</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>3. Do you know what phishing is?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">Heard about it</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>4. Can you create a strong password?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">Not really</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>5. Do you know what 2FA (Two Factor Authentication) is?</h2>
+                <button class="option" data-score="3">Of course</button>
+                <button class="option" data-score="1">Kind of</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>6. Are you aware of ransomware attacks?</h2>
+                <button class="option" data-score="3">Yes, fully</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>7. Can you detect fake websites?</h2>
+                <button class="option" data-score="3">Most of the time</button>
+                <button class="option" data-score="1">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>8. Do you know the importance of data encryption?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>9. How often do you update your system/software?</h2>
+                <button class="option" data-score="3">Regularly</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">Rarely</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>10. Do you understand firewall usage?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">Basic idea</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>11. Can you recognize social engineering tricks?</h2>
+                <button class="option" data-score="3">Usually yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">Not really</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>12. Do you know about network security?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">Some knowledge</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>13. Can you detect unusual device activity?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>14. Do you understand the importance of backups?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">Not really</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>15. How well do you know cyber laws?</h2>
+                <button class="option" data-score="3">Well</button>
+                <button class="option" data-score="1">A little</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>16. Are you good at analyzing security risks?</h2>
+                <button class="option" data-score="3">Very good</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>17. Do you know about ethical hacking basics?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">A bit</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>18. Can you protect your Wi-Fi network?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>19. Do you know how cyber criminals operate?</h2>
+                <button class="option" data-score="3">Mostly</button>
+                <button class="option" data-score="2">Little bit</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>20. How comfortable are you learning InfoSec tools?</h2>
+                <button class="option" data-score="3">Very comfortable</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">Not much</button>
+            </div>
+
+        </div>
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-box" class="result-box hidden">
+
+        <h2>Your Result</h2>
+        <p id="scoreText"></p>
+
+        <div class="circle-box">
+            <div class="circle">
+                <span id="percentValue">0%</span>
+            </div>
+        </div>
+
+        <canvas id="resultChart" width="300" height="200"></canvas>
+
+        <h3 id="careerTitle"></h3>
+        <p id="careerMessage"></p>
+
+        <div id="improveBox"></div>
+
+        <h3>📚 Recommended Courses</h3>
+        <ul id="courseList"></ul>
+
+        <h3>💼 Available Opportunities</h3>
+        <ul id="jobList"></ul>
+
+    </div>
+
+    <script src="infos.js"></script>
+</body>
+</html>

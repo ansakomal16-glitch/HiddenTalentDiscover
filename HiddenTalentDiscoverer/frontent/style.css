@@ -1,0 +1,131 @@
+/* ------------------ GLOBAL STYLING ------------------ */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #0d0d27, #000000);
+    color: #fff;
+}
+
+/* Smooth effect */
+* {
+    box-sizing: border-box;
+    transition: 0.3s ease-in-out;
+}
+
+/* Links */
+a {
+    color: #7f9fff;
+    text-decoration: none;
+}
+a:hover {
+    color: #c3d4ff;
+    text-shadow: 0 0 10px #7f9fff;
+}
+
+/* ------------------ HEADER ------------------ */
+header {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+    text-shadow: 0 0 15px #8a5cff;
+}
+
+nav a {
+    margin: 0 12px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* ------------------ CONTAINER ------------------ */
+.container {
+    width: 50%;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.06);
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 0 20px rgba(138, 92, 255, 0.3);
+    backdrop-filter: blur(12px);
+}
+
+/* ------------------ INPUTS ------------------ */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 16px;
+}
+
+input:focus {
+    box-shadow: 0 0 12px #8a5cff;
+}
+
+/* ------------------ BUTTONS ------------------ */
+button, .btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #8a5cff, #3dbaff);
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 12px;
+    box-shadow: 0 0 20px rgba(100, 100, 255, 0.4);
+}
+
+button:hover, .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(120,120,255,0.8);
+}
+
+/* ------------------ CARD STYLE ------------------ */
+.card {
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(100,100,255,0.3);
+}
+
+/* ------------------ QUIZ BUTTONS ------------------ */
+#quizBox button {
+    width: 45%;
+    margin: 10px;
+}
+
+/* ------------------ TABLE ------------------ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+tr:hover {
+    background: rgba(255,255,255,0.10);
+}
+
+/* ------------------ DASHBOARD TEXT ------------------ */
+h2, h3 {
+    text-shadow: 0 0 10px #8a5cff;
+}

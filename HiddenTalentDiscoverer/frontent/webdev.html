@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Development Quiz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg") no-repeat center/cover;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+        .hidden { display: none; }
+        #start-screen button,
+        #nextBtn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #a09dda, #af9dcd);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .question-box {
+            width: 80%;
+            margin: auto;
+            margin-top: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        .option {
+            margin: 10px;
+            padding: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 8px solid #caa6ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.7rem;
+        }
+        .circle-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 8px solid #a57bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 10px #b889ff;
+    box-shadow: 0 0 20px rgba(165, 123, 255, 0.6);
+}
+
+        #resultChart {
+    width: 300px !important;
+    height: 200px !important;
+    display: block;
+    margin: 15px auto;
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar-row">
+        <a href="index.html">Home</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="recommendations.html">Recommendations</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="badges.html">Badges</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html" class="navbar-login">Login</a>
+        <a href="signup.html" class="navbar-signup">Sign Up</a>
+    </div>
+</header>
+
+<!-- Start Screen -->
+<div id="start-screen">
+    <h1>Web Development Quiz</h1>
+    <button id="startBtn">Start Quiz</button>
+</div>
+
+<!-- Quiz Screen -->
+<div id="quiz-screen" class="hidden">
+    <h2>Question</h2>
+    <div id="questions-container"></div>
+    <button id="nextBtn" class="hidden">Next</button>
+</div>
+
+<!-- Result Screen -->
+<div id="result-box" class="hidden">
+    <h2>Your Result</h2>
+    <p id="scoreText"></p>
+
+    <div class="circle">
+        <span id="percentValue">0%</span>
+    </div>
+
+    <canvas id="resultChart" width="300" height="200"></canvas>
+
+    <h3 id="careerTitle"></h3>
+    <p id="careerMessage"></p>
+
+    <div id="improveBox"></div>
+
+    <h3>📚 Recommended Courses</h3>
+    <li>
+  <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp/" 
+     target="_blank">💻 Complete Web Development Bootcamp – Udemy</a>
+</li>
+<li>
+  <a href="https://www.freecodecamp.org/learn" 
+     target="_blank">🔥 FreeCodeCamp – Free Full Web Dev Course</a>
+</li>
+<li>
+  <a href="https://www.coursera.org/professional-certificates/meta-front-end-developer" 
+     target="_blank">🌟 Meta Front-End Developer – Coursera</a>
+</li>
+<li>
+  <a href="https://www.coursera.org/specializations/web-design" 
+     target="_blank">🎨 Web Design Specialization – Coursera</a>
+</li>
+
+    <ul id="courseList"></ul>
+
+    <h3>💼 Jobs</h3>
+    <ul id="jobList"></ul>
+    <li>
+  <a href="https://www.linkedin.com/jobs/search/?keywords=Junior%20Front%20End%20Developer" 
+     target="_blank">💼 Junior Front-End Developer Jobs – LinkedIn</a>
+</li>
+<li>
+  <a href="https://www.glassdoor.com/Job/junior-web-developer-jobs-SRCH_KO0,21.htm" 
+     target="_blank">🔧 Junior Web Developer Jobs – Glassdoor</a>
+</li>
+
+</div>
+
+<script src="wedev.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <header>
+    <div class="navbar-row">
+        <a href="index.html">Home</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="recommendations.html">Recommendations</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="badges.html">Badges</a>
+        <a href="about.html">About Us</a>
+
+        <a href="login.html" class="navbar-login">Login</a>
+        <a href="signup.html" class="navbar-signup">Sign Up</a>
+    </div>
+
+    <h1 class="title-typing">𝓣-𝓠𝓾𝓲𝔃</h1>
+</header>
+
+    <title>Digital Marketing - FIELD</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            background: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg") no-repeat center/cover;
+            height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .cs-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 0 15px #a57bff;
+            margin-bottom: 40px;
+        }
+
+        .cs-btn {
+            display: block;
+            width: 50%;
+            margin: 15px auto;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(45deg, #a09dda, #af9dcd);
+            box-shadow: 0 0 25px rgba(255,255,255,0.2);
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateX(-40px);
+            animation: showBtns 1.3s ease forwards;
+        }
+
+        .cs-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #ff7ce9;
+        }
+
+        .cs-btn:nth-child(2) { animation-delay: 0.2s; }
+        .cs-btn:nth-child(3) { animation-delay: 0.4s; }
+        .cs-btn:nth-child(4) { animation-delay: 0.6s; }
+        .cs-btn:nth-child(5) { animation-delay: 0.8s; }
+        .cs-btn:nth-child(6) { animation-delay: 1.0s; }
+        .cs-btn:nth-child(7) { animation-delay: 1.2s; }
+        .cs-btn:nth-child(8) { animation-delay: 1.4s; }
+
+        @keyframes showBtns {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="cs-container">
+    <h1>Digital Marketing Fields</h1>
+
+    <button class="cs-btn" onclick="window.location.href='social-media.html';">
+        Social Media Marketing
+    </button>
+
+    <button class="cs-btn" onclick="window.location.href='performance.html';">
+        Performance Marketing (Ads)
+    </button>
+
+    <button class="cs-btn" onclick="window.location.href='seo.html';">
+        SEO (Search Engine Optimization)
+    </button>
+
+    <button class="cs-btn" onclick="window.location.href='ecommerce.html';">
+        E-Commerce Marketing
+    </button>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Marketing Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>Social Media Marketing Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+
+        <div id="questions-container">
+
+            <div class="question-box">
+                <h2>1. Which platform do you prefer for creating content?</h2>
+                <button class="option" data-score="3">TikTok</button>
+                <button class="option" data-score="2">Instagram</button>
+                <button class="option" data-score="1">Facebook</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>2. How comfortable are you with video editing?</h2>
+                <button class="option" data-score="3">Very Good</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Not Good</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>3. Which content style do you enjoy?</h2>
+                <button class="option" data-score="3">Short videos</button>
+                <button class="option" data-score="2">Photo posts</button>
+                <button class="option" data-score="1">Stories</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>4. How good are you at tracking trends?</h2>
+                <button class="option" data-score="3">Always updated</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">Rarely</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>5. Do you enjoy analyzing social media insights?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">A bit</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>6. Which skill describes you best?</h2>
+                <button class="option" data-score="3">Creative</button>
+                <button class="option" data-score="2">Analytical</button>
+                <button class="option" data-score="1">Organized</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>7. How often do you use social media?</h2>
+                <button class="option" data-score="3">Daily</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="1">Rarely</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>8. Do you enjoy planning content?</h2>
+                <button class="option" data-score="3">Yes a lot</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>9. Which SMM role suits you more?</h2>
+                <button class="option" data-score="3">Content Creator</button>
+                <button class="option" data-score="2">Social Media Manager</button>
+                <button class="option" data-score="1">Designer</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>10. How good are you at communication?</h2>
+                <button class="option" data-score="3">Excellent</button>
+                <button class="option" data-score="2">Good</button>
+                <button class="option" data-score="1">Average</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>11. Do you like working with brand collaborations?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>12. How do you handle audience feedback?</h2>
+                <button class="option" data-score="3">Positively</button>
+                <button class="option" data-score="2">Neutral</button>
+                <button class="option" data-score="0">Poorly</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>13. How much do you know about hashtags?</h2>
+                <button class="option" data-score="3">Expert</button>
+                <button class="option" data-score="1">Basic</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>14. Are you consistent with posting?</h2>
+                <button class="option" data-score="3">Yes always</button>
+                <button class="option" data-score="1">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>15. What type of content can you create easily?</h2>
+                <button class="option" data-score="3">Reels</button>
+                <button class="option" data-score="2">Photos</button>
+                <button class="option" data-score="1">Quotes</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>16. Which tool do you like?</h2>
+                <button class="option" data-score="3">CapCut</button>
+                <button class="option" data-score="2">Canva</button>
+                <button class="option" data-score="1">Photoshop</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>17. How good are you at writing captions?</h2>
+                <button class="option" data-score="3">Very good</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Not good</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>18. How fast can you adapt to new features?</h2>
+                <button class="option" data-score="3">Very fast</button>
+                <button class="option" data-score="2">Normal</button>
+                <button class="option" data-score="1">Slow</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>19. What makes you excited about SMM?</h2>
+                <button class="option" data-score="3">Creativity</button>
+                <button class="option" data-score="2">Popularity</button>
+                <button class="option" data-score="1">Money</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>20. Why do you want to choose SMM?</h2>
+                <button class="option" data-score="3">Passion</button>
+                <button class="option" data-score="2">Interest</button>
+                <button class="option" data-score="1">Trend</button>
+            </div>
+
+        </div>
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+<div id="result-box" class="result-box hidden">
+
+    <h2>Your Result</h2>
+    <p id="scoreText"></p>
+
+    <div class="circle-box">
+        <div class="circle">
+            <span id="percentValue">0%</span>
+        </div>
+    </div>
+
+    <canvas id="resultChart" width="300" height="200"></canvas>
+
+    <h3 id="careerTitle"></h3>
+    <p id="careerMessage"></p>
+
+    <div id="improveBox"></div>
+
+    <h3>📚 Recommended Courses</h3>
+    <ul id="courseList"></ul>
+
+    <h3>💼 Available Jobs</h3>
+    <ul id="jobList"></ul>
+
+</div>
+
+<script src="smm.js"></script>
+
+</body>
+</html>

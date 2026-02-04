@@ -1,40 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Recommendations</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/main.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Recommendations – Hidden Talent Finder</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+
 <header>
-  <h1>Recommendations</h1>
-  <nav>
+    <div class="navbar-row">
+    <a href="index.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="recommendations.html">Recommendations</a>
     <a href="dashboard.html">Dashboard</a>
     <a href="profile.html">Profile</a>
-    <a href="quiz.html">Quiz</a>
-    <a href="logout.html">Logout</a>
-  </nav>
+    <a href="badges.html">Badges</a>
+    <a href="about.html">About Us</a>
+
+    <a href="login.html" class="navbar-login">Login</a>
+    <a href="signup.html" class="navbar-signup">Sign Up</a>
+</div>
+    <h1>Recommendations</h1>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
 </header>
 
 <div class="container">
-  <h2>Personalized Recommendations</h2>
-  <div id="recommendations"></div>
+
+    <h2>Your Recommended Learning Path 📚</h2>
+
+    <div id="recoBox">
+        Loading recommendations...
+    </div>
+
 </div>
 
 <script>
-async function loadRecommendations(){
-    const recs = await getRecommendations(); // backend endpoint
-    const container = document.getElementById('recommendations');
-    recs.forEach(r=>{
-        const div = document.createElement('div');
-        div.className = 'rec-card';
-        div.innerHTML = `<h3>${r.title}</h3><p>${r.description}</p>`;
-        container.appendChild(div);
+// Fetch recommendations from localStorage talent area
+function loadRecommendations() {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (!user) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const field = localStorage.getItem("talentArea");
+
+    if (!field) {
+        document.getElementById("recoBox").innerHTML =
+            "<p>You have not completed any quiz yet ❌</p>";
+        return;
+    }
+
+    const data = {
+        CS: [
+            { title: "Learn JavaScript", description: "Start with basics." },
+            { title: "Practice DSA", description: "Sharpen logic." },
+            { title: "Make small projects", description: "Improve coding skills." }
+        ],
+        AI: [
+            { title: "Learn Python", description: "Base for ML." },
+            { title: "Study ML Algorithms", description: "Regression to Neural Nets." },
+            { title: "Practice datasets", description: "Kaggle beginner projects." }
+        ],
+        PHYSICS: [
+            { title: "Read Stephen Hawking", description: "Boost concepts." },
+            { title: "Learn Quantum Basics", description: "Understand particles." },
+            { title: "Practice Numerical Problems", description: "Sharpen skills." }
+        ],
+        MATH: [
+            { title: "Solve puzzles daily", description: "Improve logic." },
+            { title: "Learn Algebra basics", description: "Foundation." },
+            { title: "Study Calculus", description: "Advance your skill." }
+        ]
+    };
+
+    const recos = data[field] || [];
+    let html = "";
+
+    recos.forEach(r => {
+        html += `
+            <div class="card">
+                <h3>${r.title}</h3>
+                <p>${r.description}</p>
+            </div>
+        `;
     });
+
+    document.getElementById("recoBox").innerHTML = html;
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
 }
 
 window.onload = loadRecommendations;
 </script>
+
 </body>
 </html>

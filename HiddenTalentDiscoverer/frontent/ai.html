@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Skill Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>AI / Machine learning quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+
+        <div id="questions-container">
+
+            <div class="question-box">
+    <h2>1. Do you understand how AI learns from data?</h2>
+    <button class="option" data-score="3">Yes, very well</button>
+    <button class="option" data-score="2">A little</button>
+    <button class="option" data-score="0">Not at all</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>2. Can you explain what Machine Learning means?</h2>
+    <button class="option" data-score="3">Yes, clearly</button>
+    <button class="option" data-score="1">Maybe</button>
+    <button class="option" data-score="0">No idea</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>3. Are you comfortable learning Python?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="2">Maybe</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>4. Do you enjoy solving logical problems?</h2>
+    <button class="option" data-score="3">Very much</button>
+    <button class="option" data-score="2">Sometimes</button>
+    <button class="option" data-score="0">Not really</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>5. Can you work with numbers and data?</h2>
+    <button class="option" data-score="3">Very easy</button>
+    <button class="option" data-score="2">Average</button>
+    <button class="option" data-score="0">Difficult</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>6. Have you used any AI tools before (ChatGPT, Midjourney, etc.)?</h2>
+    <button class="option" data-score="3">Yes, many</button>
+    <button class="option" data-score="1">Some</button>
+    <button class="option" data-score="0">Never</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>7. Do you understand what neural networks are?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="1">A bit</button>
+    <button class="option" data-score="0">Not at all</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>8. Are you comfortable with basic math like probability?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="1">Some</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>9. Do you enjoy working with technology?</h2>
+    <button class="option" data-score="3">Yes!</button>
+    <button class="option" data-score="2">Sometimes</button>
+    <button class="option" data-score="0">Not really</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>10. Can you identify patterns in data quickly?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="2">Sometimes</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>11. Do you enjoy experimenting with new technologies?</h2>
+    <button class="option" data-score="3">Love it!</button>
+    <button class="option" data-score="2">Sometimes</button>
+    <button class="option" data-score="0">Not much</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>12. Are you comfortable writing algorithms?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="1">A bit</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>13. Do you understand what datasets are?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="1">Somewhat</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>14. Do you enjoy tasks that require attention to detail?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="2">Sometimes</button>
+    <button class="option" data-score="0">Not really</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>15. Are you comfortable learning advanced concepts?</h2>
+    <button class="option" data-score="3">Very comfortable</button>
+    <button class="option" data-score="2">Maybe</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>16. Do you know what training a model means?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="1">Some idea</button>
+    <button class="option" data-score="0">No idea</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>17. Are you interested in building AI projects?</h2>
+    <button class="option" data-score="3">Very interested</button>
+    <button class="option" data-score="2">Maybe</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>18. Do you enjoy problem-solving challenges?</h2>
+    <button class="option" data-score="3">Yes</button>
+    <button class="option" data-score="2">Sometimes</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>19. Are you good at analyzing mistakes and fixing them?</h2>
+    <button class="option" data-score="3">Very good</button>
+    <button class="option" data-score="2">Somewhat</button>
+    <button class="option" data-score="0">No</button>
+</div>
+
+<div class="question-box hidden">
+    <h2>20. Do you want a career in AI / Machine Learning?</h2>
+    <button class="option" data-score="3">Absolutely!</button>
+    <button class="option" data-score="2">Maybe</button>
+    <button class="option" data-score="0">Not sure</button>
+</div>
+
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+<div id="result-box" class="result-box hidden">
+
+    <h2>Your Result</h2>
+    <p id="scoreText"></p>
+
+    <!-- Circle -->
+    <div class="circle-box">
+        <div class="circle">
+            <span id="percentValue">0%</span>
+        </div>
+    </div>
+
+    <!-- Graph -->
+    <canvas id="resultChart" width="300" height="200"></canvas>
+
+    <!-- Recommendation -->
+    <h3 id="careerTitle"></h3>
+    <p id="careerMessage"></p>
+
+    <!-- Improve -->
+    <div id="improveBox"></div>
+
+    <!-- Courses -->
+    <h3>📚 Recommended Courses</h3>
+    <ul id="courseList"></ul>
+
+    <!-- Jobs -->
+    <h3>💼 Available Opportunities</h3>
+    <ul id="jobList"></ul>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="ai.js"></script>
+
+</body>
+</html>

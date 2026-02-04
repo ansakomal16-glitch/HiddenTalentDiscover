@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Skill Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>E-Commerce Business Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+
+        <div id="questions-container">
+
+            <div class="question-box">
+                <h2>1. How familiar are you with online shopping platforms?</h2>
+                <button class="option" data-score="3">Very familiar</button>
+                <button class="option" data-score="2">Somewhat familiar</button>
+                <button class="option" data-score="0">Not at all</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>2. Are you good at identifying trending products?</h2>
+                <button class="option" data-score="3">Yes, very good</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">Not really</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>3. Do you know basic digital marketing?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>4. Can you manage product listings and descriptions?</h2>
+                <button class="option" data-score="3">Easily</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>5. Do you enjoy handling customers online?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>6. How strong are your social media skills?</h2>
+                <button class="option" data-score="3">Very strong</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Weak</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>7. Do you understand online payment methods?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>8. Can you identify profitable niches?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">Not really</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>9. Are you comfortable with competition analysis?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">A little</button>
+                <button class="option" data-score="0">Not at all</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>10. How familiar are you with SEO for products?</h2>
+                <button class="option" data-score="3">Very familiar</button>
+                <button class="option" data-score="1">Basic idea</button>
+                <button class="option" data-score="0">Not familiar</button>
+            </div>
+
+        </div>
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+<div id="result-box" class="result-box hidden">
+
+    <h2>Your Result</h2>
+    <p id="scoreText"></p>
+
+    <!-- Circle -->
+    <div class="circle-box">
+        <div class="circle">
+            <span id="percentValue">0%</span>
+        </div>
+    </div>
+
+    <!-- Graph -->
+    <canvas id="resultChart" width="300" height="200"></canvas>
+
+    <!-- Recommendation -->
+    <h3 id="careerTitle"></h3>
+    <p id="careerMessage"></p>
+
+    <!-- Improve -->
+    <div id="improveBox"></div>
+
+    <!-- Courses -->
+    <h3>📚 Recommended Courses</h3>
+    <ul id="courseList"></ul>
+
+    <!-- Jobs -->
+    <h3>💼 Available Opportunities</h3>
+    <ul id="jobList"></ul>
+
+</div>
+
+<script src="ecommerce.js"></script>
+
+</body>
+</html>

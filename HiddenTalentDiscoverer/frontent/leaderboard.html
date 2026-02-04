@@ -1,41 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Leaderboard</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/main.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Leaderboard – Hidden Talent Finder</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<header>
-  <h1>Leaderboard</h1>
-  <nav>
+
+
+
+   
+ <div class="navbar-row">
+    <a href="index.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="recommendations.html">Recommendations</a>
     <a href="dashboard.html">Dashboard</a>
     <a href="profile.html">Profile</a>
-    <a href="logout.html">Logout</a>
-  </nav>
-</header>
+    <a href="badges.html">Badges</a>
+    <a href="about.html">About Us</a>
 
+    <a href="login.html" class="navbar-login">Login</a>
+    <a href="signup.html" class="navbar-signup">Sign Up</a>
+</div>
+<header>
+    <h1>Leaderboard</h1>
+    
+</header>
+<header class="top-header">
 <div class="container">
-  <h2>Top Users</h2>
-  <table id="leaderboardTable">
-    <tr><th>Rank</th><th>Name</th><th>Score</th></tr>
-  </table>
+    <h2>Top Performers 🏆</h2>
+
+    <table border="1" cellpadding="10" style="width:100%; text-align:center;">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboardBody"></tbody>
+    </table>
 </div>
 
 <script>
-async function loadLeaderboard(){
-    const topUsers = await getLeaderboard(); // backend call
-    const table = document.getElementById('leaderboardTable');
-    topUsers.forEach((u,i)=>{
-        const row = table.insertRow();
-        row.insertCell(0).innerText = i+1;
-        row.insertCell(1).innerText = u.name;
-        row.insertCell(2).innerText = u.score;
+function loadLeaderboard() {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (!user) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Get user last quiz score
+    const lastResult = localStorage.getItem("lastQuizResult");
+    let userScore = 0;
+
+    if (lastResult) {
+        userScore = parseInt(lastResult.split("Score: ")[1]);
+    }
+
+    // Fake leaderboard data
+    let leaderboard = [
+        { name: "Ayesha", score: 9 },
+        { name: "Hamza", score: 8 },
+        { name: "Zara", score: 7 },
+        { name: "Ali", score: 6 },
+    ];
+
+    // Add current user
+    leaderboard.push({ name: user.name, score: userScore });
+
+    // Sort descending
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    const tbody = document.getElementById("leaderboardBody");
+    tbody.innerHTML = "";
+
+    leaderboard.forEach((p, index) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${p.name}</td>
+                <td>${p.score}</td>
+            </tr>
+        `;
     });
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
 }
 
 window.onload = loadLeaderboard;
 </script>
+
 </body>
 </html>

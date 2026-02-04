@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Quiz</title>
+
+    <!-- AI Quiz CSS Theme -->
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>SEO Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+        <div id="questions-container">
+
+            <!-- 20 QUESTIONS FOR SEO -->
+            <div class="question-box">
+                <h2>1. What does SEO stand for?</h2>
+                <button class="option" data-score="3">Search Engine Optimization</button>
+                <button class="option" data-score="0">Social Email Outreach</button>
+                <button class="option" data-score="1">Search Engine Operation</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>2. How familiar are you with Google ranking factors?</h2>
+                <button class="option" data-score="3">Very familiar</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">Not at all</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>3. What is most important for SEO?</h2>
+                <button class="option" data-score="3">Quality content</button>
+                <button class="option" data-score="2">Backlinks</button>
+                <button class="option" data-score="1">Social media</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>4. Do you understand keyword research?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>5. What is On-Page SEO?</h2>
+                <button class="option" data-score="3">Optimizing page content</button>
+                <button class="option" data-score="1">Making ads</button>
+                <button class="option" data-score="0">Buying backlinks</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>6. How often do you use SEO tools?</h2>
+                <button class="option" data-score="3">Daily</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">Never</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>7. Do you know how to optimize images?</h2>
+                <button class="option" data-score="3">Yes, fully</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>8. Which SEO type interests you?</h2>
+                <button class="option" data-score="3">Technical SEO</button>
+                <button class="option" data-score="2">Content SEO</button>
+                <button class="option" data-score="1">Local SEO</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>9. How well do you understand backlinks?</h2>
+                <button class="option" data-score="3">Very well</button>
+                <button class="option" data-score="2">Some idea</button>
+                <button class="option" data-score="0">No idea</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>10. Do you enjoy analyzing website performance?</h2>
+                <button class="option" data-score="3">Yes, a lot</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>11. How familiar are you with Google Search Console?</h2>
+                <button class="option" data-score="3">Expert</button>
+                <button class="option" data-score="2">Beginner</button>
+                <button class="option" data-score="0">Not used</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>12. Do you know how to write SEO-friendly content?</h2>
+                <button class="option" data-score="3">Yes, perfectly</button>
+                <button class="option" data-score="2">Basic level</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>13. What is your skill level in analyzing competition?</h2>
+                <button class="option" data-score="3">Strong</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Weak</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>14. Do you know page speed optimization?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>15. Which SEO trend excites you most?</h2>
+                <button class="option" data-score="3">AI SEO</button>
+                <button class="option" data-score="2">E-Commerce SEO</button>
+                <button class="option" data-score="1">Local SEO</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>16. Are you comfortable working with analytics data?</h2>
+                <button class="option" data-score="3">Very comfortable</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>17. Do you understand site structure & sitemaps?</h2>
+                <button class="option" data-score="3">Yes, fully</button>
+                <button class="option" data-score="2">Basic idea</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>18. Do you enjoy optimizing websites?</h2>
+                <button class="option" data-score="3">Very much</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>19. What motivates you to choose SEO?</h2>
+                <button class="option" data-score="3">High salary potential</button>
+                <button class="option" data-score="2">Growing demand</button>
+                <button class="option" data-score="1">Just interest</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>20. How confident are you in building SEO strategy?</h2>
+                <button class="option" data-score="3">Very confident</button>
+                <button class="option" data-score="2">Somewhat</button>
+                <button class="option" data-score="0">Not confident</button>
+            </div>
+
+        </div>
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-box" class="result-box hidden">
+        <h2>Your Result</h2>
+        <p id="scoreText"></p>
+
+        <div class="circle-box">
+            <div class="circle">
+                <span id="percentValue">0%</span>
+            </div>
+        </div>
+
+        <canvas id="resultChart" width="300" height="200"></canvas>
+
+        <h3 id="careerTitle"></h3>
+        <p id="careerMessage"></p>
+
+        <div id="improveBox"></div>
+
+        <h3>📚 Recommended Courses</h3>
+        <ul id="courseList"></ul>
+
+        <h3>💼 Available Jobs</h3>
+        <ul id="jobList"></ul>
+    </div>
+
+<script src="seo.js"></script>
+</body>
+</html>

@@ -1,101 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Talent Quiz</title>
+    <meta charset="UTF-8">
+    <title>Talent Quiz – Hidden Talent Finder</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 
-<h2>🌟 Select Your Interest</h2>
 
-<button onclick="startQuiz('cs')">💻 Computer Science</button>
-<button onclick="startQuiz('ai')">🤖 Artificial Intelligence</button>
-<button onclick="startQuiz('physics')">⚛ Physics</button>
-<button onclick="startQuiz('math')">📐 Mathematics</button>
+    
+       <body class="quiz-page">
 
-<div id="quizBox" style="margin-top:20px;"></div>
+    <!-- NAVBAR START -->
+    <header>
+        <div class="navbar-row">
+            <a href="index.html">Home</a>
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="recommendations.html">Recommendations</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html">Profile</a>
+            <a href="badges.html">Badges</a>
+            <a href="about.html">About Us</a>
 
-<script>
-const questions = {
-  cs: [
-    "Do you enjoy breaking big problems into small steps?",
-    "Do you like fixing bugs?",
-    "Do you enjoy building apps or websites?",
-    "Do you like logical challenges?",
-    "Do you enjoy automation?",
-    "Do you enjoy learning new tech?",
-    "Do you like puzzles?",
-    "Do you enjoy coding?",
-    "Do you like designing systems?",
-    "Do you enjoy debugging?"
-  ],
-  ai: [
-    "Do you enjoy teaching machines?",
-    "Do you like working with data?",
-    "Do you enjoy predictions?",
-    "Do you like smart systems?",
-    "Do you enjoy patterns?",
-    "Do you enjoy future tech?",
-    "Do you like automation?",
-    "Do you enjoy experiments?",
-    "Do you like problem solving?",
-    "Do you enjoy research?"
-  ],
-  physics: [
-    "Do you wonder how the universe works?",
-    "Do you enjoy experiments?",
-    "Do you like calculations?",
-    "Do you enjoy space topics?",
-    "Do you like discovering laws?",
-    "Do you enjoy challenges?",
-    "Do you like problem solving?",
-    "Do you enjoy mechanics?",
-    "Do you like energy topics?",
-    "Do you enjoy research?"
-  ],
-  math: [
-    "Do you enjoy puzzles?",
-    "Do you like numbers?",
-    "Do you enjoy logic?",
-    "Do you like equations?",
-    "Do you enjoy challenges?",
-    "Do you enjoy patterns?",
-    "Do you like reasoning?",
-    "Do you enjoy brain teasers?",
-    "Do you like proofs?",
-    "Do you enjoy problem solving?"
-  ]
-};
+            <a href="login.html" class="navbar-login">Login</a>
+            <a href="signup.html" class="navbar-signup">Sign Up</a>
+        </div>
 
-let current = 0;
-let field = "";
+        <div class="nav-green-line"></div>
+    </header>
+    <!-- NAVBAR END -->
 
-function startQuiz(f){
-  field = f;
-  current = 0;
-  showQuestion();
-}
+    <h1 class="page-title">𝕊𝕖𝕝𝕖𝕔𝕥 𝕐𝕠𝕦𝕣 𝔽𝕚𝕖𝕝𝕕</h1>
 
-function showQuestion(){
-  document.getElementById("quizBox").innerHTML = `
-    <h3>${questions[field][current]}</h3>
-    <button onclick="next()">Yes</button>
-    <button onclick="next()">No</button>
-  `;
-}
+<div class="fields-container">
 
-function next(){
-  current++;
-  if(current < questions[field].length){
-    showQuestion();
-  } else {
-    document.getElementById("quizBox").innerHTML = `
-      <h2>🎉 Quiz Completed!</h2>
-      <p>You have strong interest in <b>${field.toUpperCase()}</b> 🎯</p>
-    `;
-  }
-}
-</script>
+    <!-- Computer Science -->
+    <a href="cs.html" class="field-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/906/906175.png" alt="">
+        <h3>𝐂𝐨𝐦𝐩𝐮𝐭𝐞𝐫 𝐬𝐜𝐢𝐞𝐧𝐜𝐞 
+</h3>
+        
+    </a>
 
-</body>
-</html>
+    <!-- Cyber Security -->
+    <a href="c-security.html" class="field-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="">
+        <h3>Cyber Security</h3>
+        
+    </a>
+
+    <!-- Digital Marketing -->
+    <a href="digital-marketing.html" class="field-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1688/1688400.png" alt="">
+        <h3>Digital Marketing</h3>
+        
+    </a>
+
+</div>
+
+
+
+
+</h2>
+    <img src="https://png.pngtree.com/png-vector/20251013/ourmid/pngtree-cartoon-question-and-exclamation-marks-with-funny-emoji-faces-png-image_17711065.webp" class="quiz-img">
+
+
+  

@@ -1,36 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Settings</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/main.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Settings – Hidden Talent Finder</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+
 <header>
-  <h1>Settings</h1>
-  <nav>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="profile.html">Profile</a>
-    <a href="quiz.html">Quiz</a>
-    <a href="logout.html">Logout</a>
-  </nav>
+    <h1>Settings</h1>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
 </header>
 
 <div class="container">
-  <h2>Change Password</h2>
-  <input type="password" id="oldPassword" placeholder="Old Password">
-  <input type="password" id="newPassword" placeholder="New Password">
-  <button id="changePasswordBtn">Update Password</button>
+
+    <h2>Change Your Password 🔐</h2>
+
+    <input type="password" id="oldPassword" placeholder="Old Password">
+    <input type="password" id="newPassword" placeholder="New Password">
+    
+    <button onclick="changePassword()">Update Password</button>
+
 </div>
 
 <script>
-document.getElementById('changePasswordBtn').addEventListener('click', async ()=>{
-    const oldP = document.getElementById('oldPassword').value;
-    const newP = document.getElementById('newPassword').value;
-    const res = await changePassword(oldP,newP); // backend endpoint
-    alert(JSON.stringify(res));
-});
+function changePassword() {
+    const oldP = document.getElementById("oldPassword").value.trim();
+    const newP = document.getElementById("newPassword").value.trim();
+
+    if (!oldP || !newP) {
+        alert("Both fields are required ❌");
+        return;
+    }
+
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    if (user.password !== oldP) {
+        alert("Old password is incorrect ❌");
+        return;
+    }
+
+    // Update password
+    user.password = newP;
+
+    // Update in users list
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users = users.map(u => u.email === user.email ? user : u);
+
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("currentUser", JSON.stringify(user));
+
+    alert("Password updated successfully! ✅");
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+}
+
 </script>
+
 </body>
 </html>

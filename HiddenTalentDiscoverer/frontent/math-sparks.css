@@ -1,0 +1,235 @@
+body {
+    background: radial-gradient(circle at top, #0a0f2c, #000);
+    font-family: Poppins, sans-serif;
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.title {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #00eaff;
+    text-shadow: 0 0 15px #00eaff;
+}
+
+.subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: .8;
+}
+
+.game-container {
+    max-width: 400px;
+    margin: auto;
+}
+
+#timer {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #ff3e3e;
+    text-shadow: 0 0 12px #ff3e3e;
+}
+
+.question-box {
+    background: rgba(255, 255, 255, 0.07);
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 32px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#answer {
+    width: 70px;
+    font-size: 28px;
+    border: none;
+    outline: none;
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+button {
+    padding: 12px 25px;
+    background: #00eaff;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px;
+    color: #000;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+#result {
+    margin-top: 25px;
+    font-size: 24px;
+    font-weight: bold;
+}
+body {
+  
+  margin: 0;
+  
+  padding: 0;
+  
+  background-image: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg");
+  
+  background-size: cover;        /* image full screen cover kare */
+  
+  background-position: center;   /* center mein rahe */
+  
+  background-repeat: no-repeat;  /* repeat na ho */
+  
+  background-attachment: fixed;  /* scroll karne se image move na ho */
+  
+  height: 100vh;                 /* full screen height */
+  
+}/* === PAGE ENTRANCE TRANSITION === */
+.game-container {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeSlideIn 0.8s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === SHAPE CHANGE TRANSITION === */
+.shape-box {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.shape-animate {
+    transform: translateX(25px);
+    opacity: 0;
+}
+
+/* When new shape appears */
+.shape-animate-new {
+    transform: translateX(-25px);
+    opacity: 0;
+}
+
+/* === RESULT SHOW ANIMATION === */
+#result {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+}
+
+#result.show {
+    opacity: 1;
+    transform: scale(1);
+}
+.shape-box {
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 80px;
+    color: #00eaff;
+    text-shadow: 0 0 12px #00eaff;
+
+    border: 2px solid rgba(0, 234, 255, 0.4);
+    box-shadow: 0 0 12px rgba(0, 234, 255, 0.2);
+}
+.question-box {
+    margin: 20px auto;
+    width: 70%;
+    padding: 20px;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(0, 234, 255, 0.4);
+    border-radius: 20px;
+    font-size: 22px;
+    text-align: center;
+    color: #00eaff;
+    box-shadow: 0 0 10px rgba(0,234,255,0.3);
+    transition: all 0.4s ease;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.opt-btn {
+    padding: 12px 25px;
+    background: #00eaff;
+    border: none;
+    border-radius: 20px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00eaff;
+    transition: all 0.3s ease;
+}
+
+.opt-btn:hover {
+    transform: translateY(-4px);
+}
+.grid {
+    width: 260px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    gap: 10px;
+}
+
+.box {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid cyan;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.05);
+}
+
+.blink {
+    background: cyan !important;
+    box-shadow: 0 0 20px cyan;
+    transition: 0.2s;
+}
+
+.fade-in {
+    animation: fadeSlide 0.5s ease;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.glow {
+    background: lime !important;
+    box-shadow: 0 0 25px lime;
+    transition: 0.3s;
+}
+.move-effect {
+    animation: moveButton 0.4s ease forwards;
+}
+
+@keyframes moveButton {
+    0%   { transform: translateX(0); opacity: 1; }
+    50%  { transform: translateX(20px); opacity: 0.7; }
+    100% { transform: translateX(0); opacity: 1; }
+}

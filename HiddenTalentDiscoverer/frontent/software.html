@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>Software Engineering Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+
+        <div id="questions-container">
+
+            <!-- 20 Questions -->
+            <div class="question-box">
+                <h2>1. Do you enjoy solving complex logic problems?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>2. Your interest in programming?</h2>
+                <button class="option" data-score="3">Very High</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Low</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>3. Do you enjoy building websites, apps, or tools?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">Not Really</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>4. Your coding skill level?</h2>
+                <button class="option" data-score="3">Strong</button>
+                <button class="option" data-score="2">Beginner</button>
+                <button class="option" data-score="0">Weak</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>5. Do you like debugging issues?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>6. Your interest in software architecture?</h2>
+                <button class="option" data-score="3">High</button>
+                <button class="option" data-score="1">Low</button>
+                <button class="option" data-score="0">None</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>7. Do you like long-term projects?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>8. Teamwork or solo?</h2>
+                <button class="option" data-score="3">Both</button>
+                <button class="option" data-score="2">Team</button>
+                <button class="option" data-score="1">Solo</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>9. Do you follow tech trends?</h2>
+                <button class="option" data-score="3">Daily</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>10. Your mathematics level?</h2>
+                <button class="option" data-score="3">Strong</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Weak</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>11. Do you enjoy creating logical workflows?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>12. Do you like structured planning?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Not much</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>13. Can you work under pressure?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="1">Not Really</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>14. Do you enjoy system design?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">A bit</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>15. Do you like improving software performance?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>16. Your problem-solving speed?</h2>
+                <button class="option" data-score="3">Fast</button>
+                <button class="option" data-score="2">Normal</button>
+                <button class="option" data-score="1">Slow</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>17. Do you understand APIs?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Little Bit</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>18. How focused are you?</h2>
+                <button class="option" data-score="3">Very Focused</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="1">Low</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>19. Interest in software testing?</h2>
+                <button class="option" data-score="3">High</button>
+                <button class="option" data-score="2">Medium</button>
+                <button class="option" data-score="0">Low</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>20. Why do you want Software Engineering?</h2>
+                <button class="option" data-score="3">Future Growth</button>
+                <button class="option" data-score="2">Interest</button>
+                <button class="option" data-score="1">Trend</button>
+            </div>
+
+        </div>
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-box" class="result-box hidden">
+        <h2>Your Result</h2>
+        <p id="scoreText"></p>
+
+        <div class="circle-box">
+            <div class="circle">
+                <span id="percentValue">0%</span>
+            </div>
+        </div>
+
+        <canvas id="resultChart" width="300" height="200"></canvas>
+
+        <h3 id="careerTitle"></h3>
+        <p id="careerMessage"></p>
+
+        <div id="improveBox"></div>
+
+        <h3>📚 Recommended Courses</h3>
+        <ul id="courseList"></ul>
+
+        <h3>💼 Available Jobs</h3>
+        <ul id="jobList"></ul>
+    </div>
+
+    <script src="software.js"></script>
+
+</body>
+</html>

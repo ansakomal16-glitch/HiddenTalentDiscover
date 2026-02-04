@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Design Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>UI / UX Design Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+
+        <div id="questions-container">
+
+            <!-- 20 Questions -->
+            <div class="question-box">
+                <h2>1. Do you enjoy designing creative layouts?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>2. Are you good at choosing color combinations?</h2>
+                <button class="option" data-score="3">Very Good</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Weak</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>3. Do you like making user-friendly designs?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>4. Your interest in creative work?</h2>
+                <button class="option" data-score="3">High</button>
+                <button class="option" data-score="2">Medium</button>
+                <button class="option" data-score="0">Low</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>5. Do you understand user psychology?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">A little</button>
+                <button class="option" data-score="0">Not Much</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>6. Are you good with tools like Figma or Canva?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Beginner</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>7. Do you notice small design details?</h2>
+                <button class="option" data-score="3">Always</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">Rarely</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>8. Do you enjoy drawing or sketching?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>9. Can you work with feedback?</h2>
+                <button class="option" data-score="3">Yes, I improve fast</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="1">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>10. Are you good at understanding what people need?</h2>
+                <button class="option" data-score="3">Very Good</button>
+                <button class="option" data-score="2">Average</button>
+                <button class="option" data-score="0">Weak</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>11. Do you enjoy creative brainstorming?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Not Much</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>12. Do you like organizing content visually?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>13. Can you work long on one design?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Maybe</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>14. Do you enjoy fixing layout issues?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="1">A little</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>15. Do you have patience for revisions?</h2>
+                <button class="option" data-score="3">A lot</button>
+                <button class="option" data-score="2">Some</button>
+                <button class="option" data-score="1">Very little</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>16. Your interest in product design?</h2>
+                <button class="option" data-score="3">High</button>
+                <button class="option" data-score="2">Medium</button>
+                <button class="option" data-score="0">Low</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>17. Do you understand basic shapes & spacing?</h2>
+                <button class="option" data-score="3">Yes</button>
+                <button class="option" data-score="2">Learning</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>18. Can you think from user perspective?</h2>
+                <button class="option" data-score="3">Always</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="1">Rarely</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>19. Do visuals inspire you?</h2>
+                <button class="option" data-score="3">Yes, very</button>
+                <button class="option" data-score="2">Sometimes</button>
+                <button class="option" data-score="0">No</button>
+            </div>
+
+            <div class="question-box hidden">
+                <h2>20. Why do you want UI/UX Design?</h2>
+                <button class="option" data-score="3">I love designing</button>
+                <button class="option" data-score="2">Good career</button>
+                <button class="option" data-score="1">Trend only</button>
+            </div>
+
+        </div>
+
+        <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-box" class="result-box hidden">
+        <h2>Your Result</h2>
+        <p id="scoreText"></p>
+
+        <div class="circle-box">
+            <div class="circle">
+                <span id="percentValue">0%</span>
+            </div>
+        </div>
+
+        <canvas id="resultChart" width="300" height="200"></canvas>
+
+        <h3 id="careerTitle"></h3>
+        <p id="careerMessage"></p>
+
+        <div id="improveBox"></div>
+
+        <h3>📚 Recommended Courses</h3>
+        <ul id="courseList"></ul>
+
+        <h3>💼 Available Jobs</h3>
+        <ul id="jobList"></ul>
+    </div>
+
+    <script src="uiux.js"></script>
+
+</body>
+</html>

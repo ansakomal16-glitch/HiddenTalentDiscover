@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethical Hacking Quiz</title>
+
+    <link rel="stylesheet" href="css/ai.css">
+</head>
+
+<body>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>🛡 Ethical Hacking Skill Quiz</h1>
+        <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen hidden" id="quiz-screen">
+        <div id="questions-container">
+
+            <!-- Q1 -->
+            <div class="question-box">
+                <h2>1. What is Ethical Hacking?</h2>
+                <button class="option" data-score="3">Finding & fixing security weaknesses</button>
+                <button class="option" data-score="0">Hacking to steal data</button>
+                <button class="option" data-score="0">Creating viruses</button>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-box hidden">
+                <h2>2. Ethical hackers are also called?</h2>
+                <button class="option" data-score="3">White Hat Hackers</button>
+                <button class="option" data-score="1">Grey Hat Hackers</button>
+                <button class="option" data-score="0">Black Hat Hackers</button>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-box hidden">
+                <h2>3. Which tool is used for network scanning?</h2>
+                <button class="option" data-score="3">Nmap</button>
+                <button class="option" data-score="0">Paint</button>
+                <button class="option" data-score="0">MS Word</button>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-box hidden">
+                <h2>4. Strong password kis se banta hai?</h2>
+                <button class="option" data-score="3">Aa@123_ mix</button>
+                <button class="option" data-score="1">Only numbers</button>
+                <button class="option" data-score="0">Your name</button>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-box hidden">
+                <h2>5. SQL Injection kis cheez ko target karta hai?</h2>
+                <button class="option" data-score="3">Databases</button>
+                <button class="option" data-score="0">Photos</button>
+                <button class="option" data-score="0">Printer</button>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-box hidden">
+                <h2>6. Firewall ka main purpose kya hai?</h2>
+                <button class="option" data-score="3">Block unauthorized access</button>
+                <button class="option" data-score="0">Make internet fast</button>
+                <button class="option" data-score="0">Store files</button>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-box hidden">
+                <h2>7. Social engineering kya hota hai?</h2>
+                <button class="option" data-score="3">Tricking people to reveal info</button>
+                <button class="option" data-score="0">Fixing computers</button>
+                <button class="option" data-score="0">Designing websites</button>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-box hidden">
+                <h2>8. VPN ka use kis liye hota hai?</h2>
+                <button class="option" data-score="3">Secure + private browsing</button>
+                <button class="option" data-score="0">Fast charging</button>
+                <button class="option" data-score="0">Gaming only</button>
+            </div>
+
+            <!-- Q9 -->
+            <div class="question-box hidden">
+                <h2>9. Brute force attack kis cheez ko crack karta hai?</h2>
+                <button class="option" data-score="3">Passwords</button>
+                <button class="option" data-score="0">Photos</button>
+                <button class="option" data-score="0">USB</button>
+            </div>
+
+            <!-- Q10 -->
+            <div class="question-box hidden">
+                <h2>10. Wireshark kis liye use hota hai?</h2>
+                <button class="option" data-score="3">Network packet analysis</button>
+                <button class="option" data-score="0">Video editing</button>
+                <button class="option" data-score="0">3D modeling</button>
+            </div>
+
+            <!-- Q11 -->
+            <div class="question-box hidden">
+                <h2>11. Encryption kis liye hota hai?</h2>
+                <button class="option" data-score="3">Data secure karne ke liye</button>
+                <button class="option" data-score="0">Data delete karne</button>
+                <button class="option" data-score="0">Storage clean</button>
+            </div>
+
+            <!-- Q12 -->
+            <div class="question-box hidden">
+                <h2>12. Penetration testing kya hota hai?</h2>
+                <button class="option" data-score="3">Security weaknesses find karna</button>
+                <button class="option" data-score="0">App install</button>
+                <button class="option" data-score="0">Laptop repair</button>
+            </div>
+
+            <!-- Q13 -->
+            <div class="question-box hidden">
+                <h2>13. DDoS attack ka main target?</h2>
+                <button class="option" data-score="3">Server down karna</button>
+                <button class="option" data-score="0">Laptop charge karna</button>
+                <button class="option" data-score="0">Music play karna</button>
+            </div>
+
+            <!-- Q14 -->
+            <div class="question-box hidden">
+                <h2>14. Keylogger kya karta hai?</h2>
+                <button class="option" data-score="3">Keyboard ke keys record</button>
+                <button class="option" data-score="0">Laptop cool</button>
+                <button class="option" data-score="0">WiFi fast</button>
+            </div>
+
+            <!-- Q15 -->
+            <div class="question-box hidden">
+                <h2>15. Kali Linux kahan use hota hai?</h2>
+                <button class="option" data-score="3">Cyber security tools</button>
+                <button class="option" data-score="0">Gaming</button>
+                <button class="option" data-score="0">Movie editing</button>
+            </div>
+
+            <!-- Q16 -->
+            <div class="question-box hidden">
+                <h2>16. Hashing ka purpose?</h2>
+                <button class="option" data-score="3">Password store safely</button>
+                <button class="option" data-score="0">Password show</button>
+                <button class="option" data-score="0">Internet speed</button>
+            </div>
+
+            <!-- Q17 -->
+            <div class="question-box hidden">
+                <h2>17. Footprinting kis ka part hai?</h2>
+                <button class="option" data-score="3">Information gathering</button>
+                <button class="option" data-score="0">Hardware repair</button>
+                <button class="option" data-score="0">Video calls</button>
+            </div>
+
+            <!-- Q18 -->
+            <div class="question-box hidden">
+                <h2>18. Phishing attack ka goal?</h2>
+                <button class="option" data-score="3">User se sensitive info lena</button>
+                <button class="option" data-score="0">Backup banana</button>
+                <button class="option" data-score="0">Laptop clean</button>
+            </div>
+
+            <!-- Q19 -->
+            <div class="question-box hidden">
+                <h2>19. Bug bounty kya hota hai?</h2>
+                <button class="option" data-score="3">Companies pay for bugs</button>
+                <button class="option" data-score="0">Computer repair job</button>
+                <button class="option" data-score="0">Game mission</button>
+            </div>
+
+            <!-- Q20 -->
+            <div class="question-box hidden">
+                <h2>20. Backdoor kya hota hai?</h2>
+                <button class="option" data-score="3">Hidden access to system</button>
+                <button class="option" data-score="0">New keyboard</button>
+                <button class="option" data-score="0">Laptop wallpaper</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div class="result-screen hidden" id="result-screen">
+        <h2>Your Result</h2>
+        <p id="result-text"></p>
+        <button onclick="location.reload()">Restart Quiz</button>
+    </div>
+
+    <script src="ethical.js"></script>
+</body>
+</html>
