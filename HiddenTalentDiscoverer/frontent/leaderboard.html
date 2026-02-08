@@ -2,100 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Leaderboard – Hidden Talent Finder</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Stream | Hall of Fame</title>
+    <style>
+        :root {
+            --primary: #00d2ff; --accent: #00ff41; --bg: #050508;
+            --glass: rgba(255, 255, 255, 0.05); --border: rgba(255, 255, 255, 0.1);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg); color: #fff; padding: 60px 20px; text-align: center; }
+
+        /* HEADER WITHOUT ERROR-PRONE CSS */
+        header h1 { 
+            font-size: 50px; font-weight: 900; color: #fff;
+            text-shadow: 0 0 15px var(--primary); margin-bottom: 10px;
+        }
+        header p { opacity: 0.5; letter-spacing: 4px; font-size: 12px; margin-bottom: 50px; }
+
+        /* PREMIUM PODIUM */
+        .podium { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 20px; align-items: flex-end; max-width: 900px; margin: 0 auto 50px; }
+        .p-card {
+            background: var(--glass); border: 1px solid var(--border); border-radius: 30px;
+            padding: 40px 20px; backdrop-filter: blur(10px); transition: 0.4s;
+        }
+        .rank-1 { height: 320px; border-color: #FFD700; box-shadow: 0 0 30px rgba(255,215,0,0.2); }
+        .rank-2 { height: 250px; border-color: #C0C0C0; }
+        .rank-3 { height: 220px; border-color: #CD7F32; }
+
+        .medal { font-size: 30px; display: block; margin-bottom: 15px; }
+        .p-name { font-size: 24px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; }
+        .p-score { font-size: 45px; font-weight: 900; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        /* UNIQUE LIST */
+        .list-container { max-width: 850px; margin: 0 auto; background: var(--glass); border-radius: 25px; overflow: hidden; }
+        .list-item {
+            display: flex; align-items: center; padding: 25px 40px; border-bottom: 1px solid var(--border);
+            transition: 0.3s;
+        }
+        .list-item:hover { background: rgba(255,255,255,0.08); transform: scale(1.02); }
+        .l-rank { width: 60px; font-weight: 900; font-size: 20px; opacity: 0.3; }
+        .l-info { flex-grow: 1; text-align: left; }
+        .l-name { font-weight: 700; font-size: 18px; }
+        .l-cat { font-size: 11px; color: var(--accent); font-weight: 800; }
+        .l-score { font-size: 26px; font-weight: 900; color: var(--primary); }
+
+        .btn-back {
+            display: inline-block; margin-top: 50px; padding: 18px 50px; background: #fff;
+            color: #000; text-decoration: none; border-radius: 50px; font-weight: 900; transition: 0.3s;
+        }
+        .btn-back:hover { box-shadow: 0 0 20px #fff; transform: translateY(-5px); }
+    </style>
+</head>
 <body>
 
-
-
-   
- <div class="navbar-row">
-    <a href="index.html">Home</a>
-    <a href="leaderboard.html">Leaderboard</a>
-    <a href="recommendations.html">Recommendations</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="profile.html">Profile</a>
-    <a href="badges.html">Badges</a>
-    <a href="about.html">About Us</a>
-
-    <a href="login.html" class="navbar-login">Login</a>
-    <a href="signup.html" class="navbar-signup">Sign Up</a>
-</div>
 <header>
-    <h1>Leaderboard</h1>
-    
+    <h1>Global <span style="color: var(--primary);">Hall of Fame</span></h1>
+    <p>NEURAL INTELLIGENCE RANKINGS</p>
 </header>
-<header class="top-header">
-<div class="container">
-    <h2>Top Performers 🏆</h2>
 
-    <table border="1" cellpadding="10" style="width:100%; text-align:center;">
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody id="leaderboardBody"></tbody>
-    </table>
-</div>
+<div id="podium" class="podium"></div>
+<div id="list" class="list-container"></div>
+
+<a href="dashboard.html" class="btn-back">BACK TO COMMAND CENTER</a>
 
 <script>
-function loadLeaderboard() {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
+    async function init() {
+        try {
+            const res = await fetch('http://127.0.0.1:5000/api/global-leaderboard');
+            const data = await res.json();
+            
+            const podium = document.getElementById('podium');
+            const list = document.getElementById('list');
 
-    if (!user) {
-        alert("Please login first!");
-        window.location.href = "login.html";
-        return;
+            // Top 3 Rendering
+            const t = data.slice(0, 3);
+            podium.innerHTML = `
+                <div class="p-card rank-2">
+                    <span class="medal">🥈</span>
+                    <span class="p-name">${t[1]?.username || '---'}</span>
+                    <span class="p-score">${t[1]?.score || 0}</span>
+                </div>
+                <div class="p-card rank-1">
+                    <span class="medal">🥇</span>
+                    <span class="p-name">${t[0]?.username || '---'}</span>
+                    <span class="p-score">${t[0]?.score || 0}</span>
+                </div>
+                <div class="p-card rank-3">
+                    <span class="medal">🥉</span>
+                    <span class="p-name">${t[2]?.username || '---'}</span>
+                    <span class="p-score">${t[2]?.score || 0}</span>
+                </div>
+            `;
+
+            // Others
+            list.innerHTML = data.slice(3).map((u, i) => `
+                <div class="list-item">
+                    <div class="l-rank">#${i+4}</div>
+                    <div class="l-info">
+                        <div class="l-name">${u.username}</div>
+                        <div class="l-cat">AGENT • ${u.category}</div>
+                    </div>
+                    <div class="l-score">${u.score}</div>
+                </div>
+            `).join('');
+        } catch(e) { console.log("DB Offline"); }
     }
-
-    // Get user last quiz score
-    const lastResult = localStorage.getItem("lastQuizResult");
-    let userScore = 0;
-
-    if (lastResult) {
-        userScore = parseInt(lastResult.split("Score: ")[1]);
-    }
-
-    // Fake leaderboard data
-    let leaderboard = [
-        { name: "Ayesha", score: 9 },
-        { name: "Hamza", score: 8 },
-        { name: "Zara", score: 7 },
-        { name: "Ali", score: 6 },
-    ];
-
-    // Add current user
-    leaderboard.push({ name: user.name, score: userScore });
-
-    // Sort descending
-    leaderboard.sort((a, b) => b.score - a.score);
-
-    const tbody = document.getElementById("leaderboardBody");
-    tbody.innerHTML = "";
-
-    leaderboard.forEach((p, index) => {
-        tbody.innerHTML += `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${p.name}</td>
-                <td>${p.score}</td>
-            </tr>
-        `;
-    });
-}
-
-function logout() {
-    localStorage.removeItem("currentUser");
-    window.location.href = "login.html";
-}
-
-window.onload = loadLeaderboard;
+    window.onload = init;
 </script>
-
 </body>
 </html>

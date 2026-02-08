@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Scout | Talent Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --neon-green: #00ff41; 
+            --neon-purple: #bc13fe;
+            --bg: #0a0514; 
+            --card-glass: rgba(255, 255, 255, 0.03);
+        }
+
+        body { 
+            background: var(--bg);
+            color: #fff; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; height: 100vh;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+            /* Animated neural grid pattern */
+            background-image: radial-gradient(var(--neon-purple) 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+        }
+
+        /* Top Glowing Navbar */
+        .navbar { 
+            display: flex; justify-content: center; gap: 20px;
+            padding: 20px; background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            position: relative; z-index: 10;
+        }
+
+        .navbar a { 
+            color: #888; text-decoration: none; font-size: 0.75rem; 
+            font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.4s;
+        }
+
+        .navbar a:hover { 
+            color: var(--neon-green); 
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* Main AI Interface */
+        #ai-wrapper {
+            flex: 1; display: flex; justify-content: center; align-items: center;
+            padding: 20px; position: relative;
+        }
+
+        /* Background Glow Orb */
+        .orb {
+            position: absolute; width: 400px; height: 400px;
+            background: var(--neon-purple); filter: blur(180px);
+            opacity: 0.15; border-radius: 50%; z-index: 0;
+        }
+
+        #ai-container { 
+            width: 100%; max-width: 550px; height: 75vh; 
+            background: var(--card-glass); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 40px; display: flex; flex-direction: column; 
+            backdrop-filter: blur(30px); position: relative; z-index: 1;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .header { 
+            padding: 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 11px; font-weight: 800; border-radius: 40px 40px 0 0;
+            color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green);
+            background: rgba(255,255,255,0.02);
+        }
+
+        #chat-box { 
+            flex: 1; padding: 25px; overflow-y: auto; 
+            display: flex; flex-direction: column; gap: 20px; 
+            scrollbar-width: none;
+        }
+
+        #chat-box::-webkit-scrollbar { display: none; }
+
+        .bubble { 
+            max-width: 80%; padding: 15px 20px; border-radius: 25px; 
+            font-size: 14px; line-height: 1.6; position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } }
+
+        .user-m { 
+            align-self: flex-end; 
+            background: linear-gradient(135deg, #ffffff, #e2e8f0); 
+            color: #000; font-weight: 600;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .ai-m { 
+            align-self: flex-start; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #eee; border-bottom-left-radius: 5px;
+        }
+
+        /* Footer Area */
+        .footer { 
+            padding: 25px; display: flex; gap: 12px; 
+            background: rgba(0,0,0,0.2); border-radius: 0 0 40px 40px;
+        }
+
+        input { 
+            flex: 1; background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            padding: 15px 20px; border-radius: 20px; 
+            color: #fff; outline: none; transition: 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus { border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0,255,65,0.1); }
+
+        button { 
+            background: var(--neon-green); border: none; 
+            padding: 0 25px; border-radius: 20px; 
+            font-weight: 900; color: #000; cursor: pointer; 
+            transition: 0.3s; text-transform: uppercase; font-size: 12px;
+        }
+
+        button:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--neon-green); }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="recommendations.html">Recommendations</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="badges.html">Badges</a>
+    <a href="about.html">About Us</a>
+</nav>
+
+<div id="ai-wrapper">
+    <div class="orb"></div>
+    <div id="ai-container">
+        <div class="header">NEURAL SCOUT // INTERFACE ACTIVE</div>
+        <div id="chat-box">
+            <div class="bubble ai-m">
+                Secure connection established. <br>
+                <strong>I am your AI Professional Mentor.</strong> <br>
+                Describe your skills, passions, or interests for neural analysis.
+            </div>
+        </div>
+        <div class="footer">
+            <input type="text" id="userInput" placeholder="Input neural data here...">
+            <button onclick="sendMsg()">Scan</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const input = document.getElementById('userInput');
+
+    function sendMsg() {
+        const val = input.value.trim();
+        if(!val) return;
+
+        addBubble('user-m', val);
+        input.value = '';
+
+        // Simulated processing effect
+        const typing = document.createElement('div');
+        typing.className = 'bubble ai-m';
+        typing.innerText = "Processing neural patterns...";
+        chatBox.appendChild(typing);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        setTimeout(() => {
+            chatBox.removeChild(typing);
+            const reply = getAIAnalysis(val);
+            addBubble('ai-m', reply);
+        }, 1000);
+    }
+
+    function getAIAnalysis(msg) {
+        msg = msg.toLowerCase();
+        if(msg.includes("math") || msg.includes("logic")) 
+            return "Neural Scan Complete: Your <strong>Analytical Quadrant</strong> shows high activity. I recommend exploring Quantitative Finance or Data Architecture.";
+        
+        if(msg.includes("art") || msg.includes("design") || msg.includes("creative")) 
+            return "Visual Pattern Detected: Your <strong>Creative Core</strong> is dominant. You should focus on UI/UX Design or Creative Direction.";
+        
+        if(msg.includes("code") || msg.includes("programming") || msg.includes("web")) 
+            return "Logic Loop Identified: You are optimized for <strong>Software Engineering</strong>. Consider specializing in Full-Stack or AI Development.";
+
+        if(msg.includes("hello") || msg.includes("hi")) 
+            return "Greetings, Explorer. I am ready to decode your professional potential. Tell me what you're good at.";
+
+        return "Pattern Incomplete: I need more data points to generate an accurate talent map. Tell me about your favorite projects or hobbies.";
+    }
+
+    function addBubble(cls, txt) {
+        const div = document.createElement('div');
+        div.className = `bubble ${cls}`;
+        div.innerHTML = txt; 
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    input.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMsg(); });
+</script>
+
+</body>
+</html>

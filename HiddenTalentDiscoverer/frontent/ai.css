@@ -1,0 +1,98 @@
+body {
+            background: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg") no-repeat center/cover;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+
+        .hidden { display: none; }
+
+        #start-screen button,
+        #nextBtn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #7570ce, #af9dcd);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        #nextBtn:hover {
+            scale: 1.05;
+            box-shadow: 0 0 15px #907bb6;
+        }
+
+       /* QUESTION BOX */
+        /* QUESTION BOX → neon frame + dark gradient */
+
+          /* QUESTION BOX — only question inside */
+
+
+
+.options {
+    margin-top: 5px;
+}
+
+.option {
+    width: 50%;
+    margin: 10px auto;
+    padding: 12px 20px;
+    background: rgba(0,0,0,0.4);
+    border: 2px solid white;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.option:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.03);
+}
+
+
+        .circle-box {
+            width: 100%;
+             display: flex;
+            justify-content: center;
+             margin-top: 20px;
+        }
+
+        .circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 8px solid #caa6ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.7rem;
+        }#resultChart {
+            background: white;
+    color: black;
+    width: 320px !important;
+
+    height: 220px !important;
+    margin: 0 auto;
+    display: block;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+}
+#result-box {
+    background: white !important;
+    color: black;
+    width: 85%;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 10;
+}

@@ -2,108 +2,277 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recommendations – Hidden Talent Finder</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathways | Elite Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #9d50bb;
+            --bg: #03030b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --locked: rgba(255, 255, 255, 0.1);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(157, 80, 187, 0.08) 0%, transparent 50%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 1. Glass Navbar */
+        header {
+            margin: 20px 5%;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: var(--primary); text-transform: uppercase; }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        /* 2. Hero & Progress Section */
+        .hero { text-align: center; padding: 80px 20px 40px; }
+
+        .hero h1 {
+            font-size: clamp(35px, 6vw, 60px);
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+        }
+
+        .progress-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            height: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #progressBar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: 1s ease;
+        }
+
+        /* 3. Roadmap Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px 100px; }
+
+        #recoBox {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* 4. Professional Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 45px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card.locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+            cursor: not-allowed !important;
+        }
+
+        .card:not(.locked):hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-num {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 { font-size: 24px; margin-bottom: 15px; }
+        .card p { color: #aaa; font-size: 15px; line-height: 1.7; margin-bottom: 25px; }
+
+        /* 5. Working Buttons */
+        .btn-start {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .btn-start:hover:not(.disabled) {
+            background: #fff;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .btn-start.completed {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .lock-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
 <body>
 
 <header>
-    <div class="navbar-row">
-    <a href="index.html">Home</a>
-    <a href="leaderboard.html">Leaderboard</a>
-    <a href="recommendations.html">Recommendations</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="profile.html">Profile</a>
-    <a href="badges.html">Badges</a>
-    <a href="about.html">About Us</a>
-
-    <a href="login.html" class="navbar-login">Login</a>
-    <a href="signup.html" class="navbar-signup">Sign Up</a>
-</div>
-    <h1>Recommendations</h1>
+    <div class="logo">Talent.AI</div>
     <nav>
         <a href="dashboard.html">Dashboard</a>
+        <a href="recommendations.html" style="color: var(--primary)">Roadmap</a>
         <a href="profile.html">Profile</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="leaderboard.html">Leaderboard</a>
-        <a href="#" onclick="logout()">Logout</a>
+        <a href="#" onclick="logout()" style="color: #ff4b2b">Logout</a>
     </nav>
 </header>
 
-<div class="container">
-
-    <h2>Your Recommended Learning Path 📚</h2>
-
-    <div id="recoBox">
-        Loading recommendations...
+<section class="hero">
+    <h1 id="userTitle">Career Roadmap</h1>
+    <p>Complete each stage to unlock the next level of your professional journey.</p>
+    <div class="progress-container">
+        <div id="progressBar"></div>
     </div>
+    <small id="progressText" style="color: var(--primary)">0% Mastery</small>
+</section>
 
+<div class="container">
+    <div id="recoBox">
+        </div>
 </div>
 
 <script>
-// Fetch recommendations from localStorage talent area
-function loadRecommendations() {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-
-    if (!user) {
-        alert("Please login first!");
-        window.location.href = "login.html";
-        return;
-    }
-
-    const field = localStorage.getItem("talentArea");
-
-    if (!field) {
-        document.getElementById("recoBox").innerHTML =
-            "<p>You have not completed any quiz yet ❌</p>";
-        return;
-    }
-
-    const data = {
+    // 1. Data Structure with Resources
+    const roadmapData = {
         CS: [
-            { title: "Learn JavaScript", description: "Start with basics." },
-            { title: "Practice DSA", description: "Sharpen logic." },
-            { title: "Make small projects", description: "Improve coding skills." }
+            { id: 1, t: "Logic & Algorithms", d: "Master the fundamental building blocks of software engineering.", link: "https://roadmap.sh/computer-science" },
+            { id: 2, t: "System Architecture", d: "Learn how to design scalable and distributed systems for millions.", link: "https://roadmap.sh/backend" },
+            { id: 3, t: "Cloud Mastery", d: "Deploy and manage secure cloud infrastructures like a pro.", link: "https://roadmap.sh/devops" }
         ],
         AI: [
-            { title: "Learn Python", description: "Base for ML." },
-            { title: "Study ML Algorithms", description: "Regression to Neural Nets." },
-            { title: "Practice datasets", description: "Kaggle beginner projects." }
-        ],
-        PHYSICS: [
-            { title: "Read Stephen Hawking", description: "Boost concepts." },
-            { title: "Learn Quantum Basics", description: "Understand particles." },
-            { title: "Practice Numerical Problems", description: "Sharpen skills." }
-        ],
-        MATH: [
-            { title: "Solve puzzles daily", description: "Improve logic." },
-            { title: "Learn Algebra basics", description: "Foundation." },
-            { title: "Study Calculus", description: "Advance your skill." }
+            { id: 1, t: "Data Science Math", d: "Linear algebra and statistics for neural networks.", link: "https://roadmap.sh/ai-data-scientist" },
+            { id: 2, t: "Deep Learning ML", d: "Building and training advanced machine learning models.", link: "https://roadmap.sh/ai-engineer" },
+            { id: 3, t: "Agentic AI Systems", d: "The future of AI: Building autonomous decision-making agents.", link: "https://applied-ai.org/" }
         ]
     };
 
-    const recos = data[field] || [];
-    let html = "";
+    function loadContent() {
+        const name = localStorage.getItem("userName") || "Genius";
+        const email = localStorage.getItem("userEmail");
+        const area = localStorage.getItem("talentArea") || "CS";
+        
+        // Progress track karre hain (localStorage se uthayenge)
+        let currentStep = parseInt(localStorage.getItem("roadmapProgress")) || 1;
 
-    recos.forEach(r => {
-        html += `
-            <div class="card">
-                <h3>${r.title}</h3>
-                <p>${r.description}</p>
-            </div>
-        `;
-    });
+        if (!email) { window.location.href = "login.html"; return; }
 
-    document.getElementById("recoBox").innerHTML = html;
-}
+        document.getElementById("userTitle").innerText = `${name}'s Path`;
 
-function logout() {
-    localStorage.removeItem("currentUser");
-    window.location.href = "login.html";
-}
+        const currentPath = roadmapData[area];
+        let html = "";
+        
+        currentPath.forEach((item, i) => {
+            const stepNum = i + 1;
+            const isLocked = stepNum > currentStep;
+            const isCompleted = stepNum < currentStep;
 
-window.onload = loadRecommendations;
+            html += `
+                <div class="card ${isLocked ? 'locked' : ''}">
+                    <span class="card-num">Phase 0${stepNum}</span>
+                    ${isLocked ? '<div class="lock-icon">🔒</div>' : ''}
+                    <h3>${item.t}</h3>
+                    <p>${item.d}</p>
+                    ${isLocked ? 
+                        `<button class="btn-start" style="background:#333; cursor:not-allowed">Locked</button>` : 
+                        `<button onclick="handleStage(${stepNum}, '${item.link}')" class="btn-start ${isCompleted ? 'completed' : ''}">
+                            ${isCompleted ? 'Review Module ✓' : 'Unlock Now'}
+                        </button>`
+                    }
+                </div>
+            `;
+        });
+        
+        document.getElementById("recoBox").innerHTML = html;
+        updateProgressBar(currentStep, currentPath.length);
+    }
+
+    // 2. Button Action: Progress Handle Karega
+    function handleStage(step, url) {
+        let currentProgress = parseInt(localStorage.getItem("roadmapProgress")) || 1;
+
+        if (step === currentProgress) {
+            alert("🚀 Excellent! Unlocking resources and advancing your profile...");
+            // Progress bar barhayenge
+            localStorage.setItem("roadmapProgress", currentProgress + 1);
+            window.open(url, "_blank");
+            loadContent(); // Page refresh bina reload kiye
+        } else {
+            // Agar pehle hi complete kar chuka hai toh sirf link kholo
+            window.open(url, "_blank");
+        }
+    }
+
+    // 3. Progress Bar Logic
+    function updateProgressBar(current, total) {
+        const percentage = ((current - 1) / total) * 100;
+        document.getElementById("progressBar").style.width = percentage + "%";
+        document.getElementById("progressText").innerText = Math.round(percentage) + "% Mastery Reached";
+    }
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
+
+    window.onload = loadContent;
 </script>
 
 </body>

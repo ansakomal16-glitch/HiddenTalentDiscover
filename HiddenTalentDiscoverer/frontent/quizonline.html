@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Stream | Elite Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #9d50bb;
+            --bg: #030305;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --correct: #00ff41;
+            --wrong: #ff4b2b;
+            --gold: #ffcc00;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            background: var(--bg); 
+            background-image: radial-gradient(circle at 50% 50%, #101015 0%, #030305 100%);
+            color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; 
+        }
+
+        .quiz-card {
+            width: 95%; max-width: 850px;
+            background: var(--glass); backdrop-filter: blur(25px);
+            border: 1px solid var(--border); border-radius: 40px;
+            padding: 50px; position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* Category Grid */
+        .category-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+            gap: 15px; margin-top: 35px; 
+        }
+        
+        .cat-card {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+            padding: 20px; border-radius: 22px; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center; position: relative; overflow: hidden;
+        }
+        
+        .cat-card:hover { 
+            border-color: var(--primary); 
+            background: rgba(0, 210, 255, 0.08); 
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.2);
+        }
+
+        .cat-card i { font-size: 28px; display: block; margin-bottom: 12px; }
+        .cat-card h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
+        .cat-card p { font-size: 10px; opacity: 0.5; margin-top: 5px; }
+
+        /* Timer & UI */
+        .timer-wrapper { width: 100%; height: 4px; background: rgba(255,255,255,0.05); margin: 25px 0; border-radius: 10px; overflow: hidden; }
+        #timer-bar { height: 100%; width: 100%; background: linear-gradient(to right, var(--primary), var(--secondary)); transition: width 15s linear; }
+        
+        .option {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            padding: 18px 25px; border-radius: 18px; margin-bottom: 15px;
+            cursor: pointer; transition: 0.3s; display: flex; justify-content: space-between; align-items: center;
+        }
+        .option:hover { background: rgba(255,255,255,0.07); border-color: var(--primary); padding-left: 30px; }
+        .option.correct { background: rgba(0, 255, 65, 0.15); border-color: var(--correct); color: var(--correct); font-weight: bold; }
+        .option.wrong { background: rgba(255, 75, 43, 0.15); border-color: var(--wrong); color: var(--wrong); }
+
+        .hidden { display: none; }
+        #loader-text { text-align: center; font-weight: 800; color: var(--primary); letter-spacing: 4px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        
+        #final-screen { text-align: center; }
+        
+        /* FIXED: Error-free Gradient Text CSS */
+        #final-score { 
+            font-size: 80px; 
+            margin: 10px 0; 
+            font-weight: 800; 
+            background: linear-gradient(to bottom, #fff, var(--primary)); 
+            background-clip: text;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .btn-dash { 
+            display: inline-block; margin-top: 30px; padding: 15px 40px; 
+            background: linear-gradient(45deg, var(--primary), var(--secondary)); 
+            color: #fff; text-decoration: none; border-radius: 15px; font-weight: 800; 
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3); transition: 0.3s;
+        }
+        .btn-dash:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0, 210, 255, 0.5); }
+    </style>
+</head>
+<body>
+
+<div class="quiz-card">
+    <div id="selection-screen">
+        <h1 style="font-weight: 800; letter-spacing: -2px; font-size: 32px;">Choose Your <span style="color: var(--primary);">Intelligence Domain</span></h1>
+        <p style="opacity: 0.4; margin-top: 8px; font-size: 14px;">Neural stream will calibrate questions based on your selection.</p>
+        
+        <div class="category-grid">
+            <div class="cat-card" onclick="startQuiz(18, 'Computer Science')"><i>💻</i><h3>Tech & CS</h3><p>Algorithms & Web</p></div>
+            <div class="cat-card" onclick="startQuiz(17, 'Science & Nature')"><i>🔬</i><h3>Science</h3><p>Bio, Chem, Physics</p></div>
+            <div class="cat-card" onclick="startQuiz(19, 'Mathematics')"><i>🔢</i><h3>Mathematics</h3><p>Logic & Numbers</p></div>
+            <div class="cat-card" onclick="startQuiz(30, 'Gadgets')"><i>📱</i><h3>Gadgets</h3><p>Modern Hardware</p></div>
+            <div class="cat-card" onclick="startQuiz(21, 'Sports')"><i>🏆</i><h3>Sports</h3><p>Global Athletics</p></div>
+            <div class="cat-card" onclick="startQuiz(23, 'History')"><i>📜</i><h3>History</h3><p>World Events</p></div>
+            <div class="cat-card" onclick="startQuiz(22, 'Geography')"><i>🌍</i><h3>Geography</h3><p>Maps & Nations</p></div>
+            <div class="cat-card" onclick="startQuiz(24, 'Politics')"><i>🏛️</i><h3>Politics</h3><p>Global Affairs</p></div>
+        </div>
+    </div>
+
+    <div id="loader-screen" class="hidden">
+        <div style="text-align: center;">
+            <div id="loader-text">INITIALIZING NEURAL LINK</div>
+            <p style="font-size: 12px; opacity: 0.4; margin-top: 10px;">Fetching encrypted data from global nodes...</p>
+        </div>
+    </div>
+
+    <div id="quiz-ui" class="hidden">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <span id="current-field" style="color: var(--primary); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">DOMAIN</span>
+                <h4 style="font-size: 18px; margin-top: 5px;">Level: <span style="color: var(--gold);">Expert</span></h4>
+            </div>
+            <div style="text-align: right;">
+                <p style="font-size: 10px; opacity: 0.5;">REAL-TIME SCORE</p>
+                <span style="font-size: 24px; font-weight: 800; color: var(--primary);" id="score">0</span>
+            </div>
+        </div>
+        
+        <div class="timer-wrapper"><div id="timer-bar"></div></div>
+        
+        <h2 id="question" style="margin: 30px 0; font-size: 22px; line-height: 1.4; font-weight: 600;">Question loading...</h2>
+        
+        <div id="options"></div>
+        
+        <div style="display: flex; justify-content: space-between; margin-top: 30px; align-items: center;">
+            <p style="opacity: 0.4; font-size: 12px;">Verification Protocol: <span style="color:var(--primary)">ACTIVE</span></p>
+            <p style="font-weight: 800; font-size: 14px; opacity: 0.8;">Q <span id="q-count" style="color: var(--primary);">1</span> <span style="opacity: 0.3;">/ 10</span></p>
+        </div>
+    </div>
+
+    <div id="final-screen" class="hidden">
+        <div style="font-size: 60px; margin-bottom: 10px;">🎯</div>
+        <h2 style="font-size: 28px; letter-spacing: -1px;">Assessment Synchronized</h2>
+        <p style="opacity: 0.5; margin-top: 5px;">Your Intelligence Quotient for this domain is:</p>
+        
+        <p id="final-score">0</p>
+        
+        <p id="db-msg" style="font-size: 12px; letter-spacing: 1px; font-weight: bold;">UPDATING ATLAS CLUSTER...</p>
+        <a href="dashboard.html" class="btn-dash">ACCESS DASHBOARD</a>
+    </div>
+</div>
+
+<script>
+    let score = 0;
+    let currentFieldId = 18;
+    let currentFieldName = "";
+    let questionIndex = 0;
+    let questions = [];
+    let timer;
+
+    // Helper function to decode HTML characters safely
+    function decodeHTML(html) {
+        const txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    }
+
+    async function startQuiz(id, name) {
+        currentFieldId = id;
+        currentFieldName = name;
+        
+        document.getElementById('selection-screen').classList.add('hidden');
+        document.getElementById('loader-screen').classList.remove('hidden');
+
+        try {
+            const response = await fetch(`https://opentdb.com/api.php?amount=10&category=${currentFieldId}&difficulty=medium&type=multiple`);
+            const data = await response.json();
+            
+            if(!data.results || data.results.length === 0) throw new Error("No data");
+            
+            questions = data.results;
+            
+            setTimeout(() => {
+                document.getElementById('loader-screen').classList.add('hidden');
+                document.getElementById('quiz-ui').classList.remove('hidden');
+                document.getElementById('current-field').innerText = name;
+                loadQuestion();
+            }, 1500);
+            
+        } catch (err) {
+            console.error("Fetch error, trying backup...");
+            const backupResponse = await fetch(`https://opentdb.com/api.php?amount=10&category=${currentFieldId}&type=multiple`);
+            const backupData = await backupResponse.json();
+            questions = backupData.results;
+            document.getElementById('loader-screen').classList.add('hidden');
+            document.getElementById('quiz-ui').classList.remove('hidden');
+            document.getElementById('current-field').innerText = name;
+            loadQuestion();
+        }
+    }
+
+    function loadQuestion() {
+        if (questionIndex >= 10) {
+            endQuiz();
+            return;
+        }
+
+        const qData = questions[questionIndex];
+        const qText = document.getElementById('question');
+        const optionsContainer = document.getElementById('options');
+        document.getElementById('q-count').innerText = questionIndex + 1;
+
+        qText.innerText = decodeHTML(qData.question);
+
+        optionsContainer.innerHTML = '';
+        const allAns = [...qData.incorrect_answers, qData.correct_answer].sort(() => Math.random() - 0.5);
+
+        allAns.forEach(ans => {
+            const cleanAns = decodeHTML(ans);
+            const opt = document.createElement('div');
+            opt.className = 'option';
+            opt.innerHTML = `<span>${cleanAns}</span><span class="indicator"></span>`;
+            opt.onclick = () => selectAnswer(opt, cleanAns, decodeHTML(qData.correct_answer));
+            optionsContainer.appendChild(opt);
+        });
+
+        resetTimer();
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        const bar = document.getElementById('timer-bar');
+        bar.style.transition = 'none';
+        bar.style.width = '100%';
+        
+        setTimeout(() => {
+            bar.style.transition = 'width 15s linear';
+            bar.style.width = '0%';
+        }, 50);
+
+        timer = setInterval(() => {
+            questionIndex++;
+            loadQuestion();
+        }, 15000);
+    }
+
+    function selectAnswer(element, selected, correct) {
+        clearInterval(timer);
+        
+        const options = document.querySelectorAll('.option');
+        options.forEach(o => o.style.pointerEvents = 'none');
+
+        if (selected === correct) {
+            score += 10;
+            element.classList.add('correct');
+            document.getElementById('score').innerText = score;
+        } else {
+            element.classList.add('wrong');
+            options.forEach(o => {
+                if(o.innerText === correct) o.classList.add('correct');
+            });
+        }
+
+        setTimeout(() => {
+            questionIndex++;
+            loadQuestion();
+        }, 1500);
+    }
+
+    async function endQuiz() {
+        document.getElementById('quiz-ui').classList.add('hidden');
+        document.getElementById('final-screen').classList.remove('hidden');
+        document.getElementById('final-score').innerText = score;
+
+        const payload = {
+            username: localStorage.getItem('userName') || "Agent",
+            email: localStorage.getItem('userEmail') || "guest@neural.com",
+            score: score,
+            category: currentFieldName
+        };
+
+        try {
+            const res = await fetch('http://localhost:5000/api/save-result', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if(result.success) {
+                document.getElementById('db-msg').innerText = "✅ NEURAL DATABASE UPDATED";
+                document.getElementById('db-msg').style.color = "var(--correct)";
+            }
+        } catch (e) {
+            document.getElementById('db-msg').innerText = "❌ LOCAL LINK ONLY - SERVER OFFLINE";
+            document.getElementById('db-msg').style.color = "var(--wrong)";
+        }
+    }
+</script>
+
+</body>
+</html>

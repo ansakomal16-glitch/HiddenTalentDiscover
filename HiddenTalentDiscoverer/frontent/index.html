@@ -1,154 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    
-    
-    
-    /<meta charset="UTF-8">
-    <title>Hidden Talent Discover – Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Talent | Neon Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { 
+            --primary: #a855f7; 
+            --neon-green: #00ff41; 
+            --bg: #1a0b2e; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #ffffff;
+        }
 
-    <link rel="stylesheet" href="ai.css"> <!-- Optional agar tum use karti ho -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Tumhari CSS -->
+        body { 
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(168, 85, 247, 0.4), transparent 70%),
+                url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+            color: var(--text-main); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .neon-divider {
+            height: 2px;
+            width: 100%;
+            background: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green);
+            position: fixed;
+            top: 70px;
+            z-index: 1001;
+        }
+
+        .navbar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 5%; 
+            height: 70px;
+            background: rgba(26, 11, 46, 0.8);
+            backdrop-filter: blur(20px);
+            position: sticky; 
+            top: 0; 
+            z-index: 1100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -1px; min-width: 180px; }
+        .logo span { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+
+        .navbar-row {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .navbar-row a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-row a:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .locked-content { filter: blur(30px); opacity: 0.3; pointer-events: none; transition: 1.5s ease; }
+        .unlocked { filter: blur(0); opacity: 1; pointer-events: auto; }
+
+        .hero { text-align: center; padding: 100px 20px; position: relative; z-index: 1; }
+        
+        .main-title { 
+            font-size: clamp(2rem, 6vw, 4rem); 
+            font-weight: 800; 
+            letter-spacing: -2px;
+            margin-bottom: 40px;
+        }
+
+        .card-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 40px 25px; 
+            border-radius: 25px; 
+            width: 260px; 
+            cursor: pointer; 
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--neon-green);
+            box-shadow: 0 15px 40px rgba(0, 255, 65, 0.15);
+        }
+
+        .icon-box {
+            width: 60px; height: 60px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem; color: #fff;
+        }
+
+        #authOverlay { 
+            position: fixed; inset: 0; background: rgba(10, 5, 20, 0.98); 
+            display: flex; justify-content: center; align-items: center; z-index: 2000; 
+        }
+        .auth-box { 
+            background: rgba(46, 16, 101, 0.5); padding: 50px; border-radius: 40px; 
+            text-align: center; border: 1px solid var(--primary); 
+            max-width: 350px; 
+        }
+
+        .btn-main { 
+            background: var(--neon-green); color: #000; padding: 12px 30px; 
+            border-radius: 12px; text-decoration: none; display: inline-block; 
+            font-weight: 800; transition: 0.3s; border: none; cursor: pointer;
+            text-transform: uppercase; font-size: 0.8rem;
+        }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--neon-green); }
+
+        .hidden { display: none !important; }
+    </style>
 </head>
-
 <body>
 
-    <!-- ==== TOP NAVIGATION BAR ==== -->
-    
+    <div class="neon-divider"></div>
 
-     <nav class="navbar">
-    <div class="logo">
-        <img src="https://img.freepik.com/premium-vector/illustration-modern-talent-show-logo-vector-with-star-icon_629524-647.jpg?w=2000" alt="Logo">
-        <span>𝓗𝓘𝓓𝓔𝓝 𝓣𝓐𝓛𝓔𝓝𝓣</span>
+    <nav class="navbar">
+        <div class="logo">HIDDEN <span>TALENT</span>DISCOVERER</div>
+        
+        <div class="navbar-row">
+            <a href="index.html">Home</a>
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="recomendation.html">Recommendations</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html">Profile</a>
+            <a href="badges.html">Badges</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div id="userSection" style="display:none; gap: 15px; align-items: center;">
+            <span id="userName" style="font-size: 0.8rem; font-weight: 700;">Explorer</span>
+            <button onclick="logout()" style="background:none; border: 1px solid #ff4444; color:#ff4444; padding:5px 12px; border-radius:8px; cursor:pointer; font-size: 0.7rem;">LOGOUT</button>
+        </div>
+        
+        <div id="guestSection">
+            <a href="login.html" class="btn-main" style="padding: 8px 20px;">Initialize</a>
+        </div>
+    </nav>
+
+    <div id="authOverlay" class="hidden">
+        <div class="auth-box">
+            <i class="fas fa-fingerprint" style="font-size: 3rem; color: var(--neon-green); margin-bottom: 20px;"></i>
+            <h2 style="font-weight: 800;">Identity Required</h2>
+            <p style="color: #b0a3c4; font-size: 0.9rem;">Your Neural Dashboard is encrypted. Please authorize access to continue.</p>
+            <a href="login.html" class="btn-main">Authorize Access</a>
+        </div>
     </div>
 
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#">Leaderboard</a></li>
-        <li><a href="recomendation.html">Recommendations</a></li>
-
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Badges</a></li>
-        <li><a href="about.html">About</a></li>
-
-        <li><a href="#">Contact</a></li>
-    </ul>
-
-    <div class="nav-buttons">
-    <a href="#" class="login-btn">Login</a>
-    <a href="#" class="signup-btn">Sign Up</a>
-</div>
-
-</nav>
-
-
-    </header>
-
-
-    <!-- ==== MAIN TITLE ==== -->
-    <h1 class="main-title smooth-title">
-        ℍ𝕚𝕕𝕕𝕖𝕟 𝕋𝕒𝕝𝕖𝕟𝕥 𝔻𝕚𝕤𝕔𝕠𝕧𝕖𝕣
-    </h1>
-
-
-    <!-- ==== ROUND CIRCLE SECTION ==== -->
-    <div class="circle-container">
-
-        <!-- ===== CIRCLE 1: QUIZ ===== -->
-        <a href="quiz.html">
-            <div class="circle-box">
-                <div class="icon">🧠</div>
-                <h3>Ｑｕｉｚｚｅｚ
-</h3>
-            </div>
-        </a>
-
-        <!-- ===== CIRCLE 2: GAMES ===== -->
-        <a href="games.html">
-            <div class="circle-box">
-                <div class="icon">🎮</div>
-                <h3>ＧＡＭＥＳ</h3>
-            </div>
-        </a>
-
-        <!-- ===== CIRCLE 3: CHATBOT ===== -->
-        <a href="chatbot.html">
-            <div class="circle-box">
-                <div class="icon">🤖</div>
-                <h3>ＣＨＡＴＢＯＴ</h3>
-            </div>
-        </a>
-
-    </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const circle = document.querySelector(".circle-container");
-    circle.classList.add("show");  // page load par show
-
-    const links = document.querySelectorAll(".circle-container a");
-
-    links.forEach(link => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            circle.classList.remove("show");  // hide animation
+    <main id="mainBody" class="locked-content">
+        <section class="hero">
+            <h1 class="main-title">Map Your Neural<br><span style="color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green);">Potential.</span></h1>
             
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 300);
-        });
-    });
-});
-</script>
+            <div class="card-container">
+                <div class="card" onclick="location.href='quiz.html'">
+                    <div class="icon-box"><i class="fas fa-brain"></i></div>
+                    <h3>Neural Quiz</h3>
+                    <p style="font-size: 0.85rem; color: #b0a3c4;">Identify your dominant brain archetypes.</p>
+                </div>
 
-  
- 
+                <div class="card" onclick="location.href='games.html'">
+                    <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                    <h3>Skill Forge</h3>
+                    <p style="font-size: 0.85rem; color: #b0a3c4;">Measure your logical reflexes.</p>
+                </div>
+ <div class="card-container">
+                <div class="card" onclick="location.href='quizonline.html'">
+                    <div class="icon-box"><i class="fas fa-brain"></i></div>
+                    <h3>Online Quiz</h3>
+                    <p style="font-size: 0.85rem; color: #b0a3c4;">Identify your dominant brain archetypes.</p>
+                </div>
+                <div class="card" onclick="location.href='chatbot.html'">
+                    <div class="icon-box"><i class="fas fa-microchip"></i></div>
+                    <h3>AI Mentor</h3>
+                    <p style="font-size: 0.85rem; color: #b0a3c4;">Real-time guidance from discovery AI.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <script>
+        function checkState() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const storedName = localStorage.getItem('userName');
+            
+            const overlay = document.getElementById('authOverlay');
+            const mainBody = document.getElementById('mainBody');
+            const guestSection = document.getElementById('guestSection');
+            const userSection = document.getElementById('userSection');
+            const nameDisplay = document.getElementById('userName');
 
-    <img id="transitionEmoji" class="transition-emoji" 
-     src="https://cdn-icons-png.flaticon.com/512/742/742751.png" 
-     alt="emoji">
+            if (isLoggedIn === 'true') {
+                overlay.classList.add('hidden');
+                mainBody.classList.add('unlocked');
+                mainBody.classList.remove('locked-content');
+                guestSection.classList.add('hidden');
+                userSection.style.display = 'flex';
+                nameDisplay.innerText = storedName || "Explorer";
+            } else {
+                overlay.classList.remove('hidden');
+                mainBody.classList.add('locked-content');
+                mainBody.classList.remove('unlocked');
+                guestSection.classList.remove('hidden');
+                userSection.style.display = 'none';
+            }
+        }
 
+        window.addEventListener('DOMContentLoaded', checkState);
 
-
-
-
-
-    
-
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    const circle = document.querySelector(".circle-container");
-    const emoji = document.getElementById("transitionEmoji");
-    const links = document.querySelectorAll(".circle-container a");
-
-    links.forEach(link => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            // 1. Circle hide animation
-            circle.classList.remove("show");
-
-            // 2. Emoji animation start
-            emoji.classList.add("show");
-
-            // 3. Page change baad me (emoji exit ke baad)
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 3500);  // 3.5 sec — animation complete then page open
-        });
-    });
-
-});
-</script>
-
-
-
+        // --- HIGHLY PROFESSIONAL LOGOUT ---
+        function logout() {
+            // Ye line memory ko bilkul saaf kar degi taake naye account se purani details na dikhein
+            localStorage.clear(); 
+            // Ab browser ko refresh karein taake login page wala flow dobara chalu ho jaye
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>

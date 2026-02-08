@@ -2,68 +2,228 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Signup – Hidden Talent Finder</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Identity | Hidden Talent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --bg: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background: var(--bg);
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(0, 210, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(157, 80, 187, 0.1) 0%, transparent 40%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .signup-card {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 45px;
+            border-radius: 35px;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            position: relative;
+            transition: border-color 0.5s ease;
+        }
+
+        h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
+
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; padding-left: 5px; }
+
+        .input-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field i {
+            position: absolute;
+            left: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: #fff;
+            outline: none;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+        }
+
+        .input-field input:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 15px;
+            color: #000;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.3);
+            background: #fff;
+        }
+
+        button:disabled {
+            background: #222;
+            color: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #status { 
+            font-size: 12px; 
+            margin-top: 20px; 
+            padding: 12px;
+            border-radius: 12px;
+            display: none; 
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .footer-text { margin-top: 25px; font-size: 14px; color: #666; }
+        .footer-text a { color: var(--primary); text-decoration: none; font-weight: 700; }
+        
+    </style>
+</head>
 <body>
 
-<header>
-    <h1>Create Account</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-    </nav>
-</header>
+    <div class="signup-card" id="card">
+        <div style="font-size: 45px; margin-bottom: 15px; color: var(--primary);"><i class="fas fa-user-plus"></i></div>
+        <h2>Join Elite</h2>
+        <p class="subtitle">Initialize your profile and sync with our cloud.</p>
+        
+        <form onsubmit="handleSignup(event)">
+            <div class="input-group">
+                <label>Full Name</label>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Areeba Akhtar" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Email Endpoint</label>
+                <div class="input-field">
+                    <i class="fas fa-at"></i>
+                    <input type="email" id="email" placeholder="name@domain.com" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Security Key</label>
+                <div class="input-field">
+                    <i class="fas fa-shield-alt"></i>
+                    <input type="password" id="password" placeholder="••••••••" minlength="6" required>
+                </div>
+            </div>
+            
+            <button type="submit" id="submitBtn">Initialize Account</button>
+            <div id="status"></div>
+        </form>
 
-<div class="container">
+        <p class="footer-text">Already synced? <a href="login.html">Access Portal</a></p>
+    </div>
 
-    <h2>Join Us ✨</h2>
+    <script>
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('status');
+            const card = document.getElementById('card');
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-    <input type="text" id="name" placeholder="Full Name">
-    <input type="email" id="email" placeholder="Email Address">
-    <input type="password" id="password" placeholder="Create Password">
+            // UI State: Loading
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-sync fa-spin"></i> Syncing with Cloud...';
+            status.style.display = "block";
+            status.style.background = "rgba(255,255,255,0.05)";
+            status.style.color = "#aaa";
+            status.innerText = "Querying MongoDB Cluster...";
 
-    <button onclick="signupUser()">Sign Up</button>
+            try {
+                const response = await fetch('http://localhost:5000/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
 
-    <p>Already have an account?
-        <a href="login.html">Login</a>
-    </p>
-</div>
+                const data = await response.json();
 
-<script>
-function signupUser() {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+                if (response.ok) {
+                    // --- 🔑 AUTO-LOGIN LOGIC ---
+                    // Signup hote hi data save karlo taaki user seedha andar jaye
+                    localStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("userName", username);
+                    localStorage.setItem("userEmail", email);
 
-    if (!name || !email || !password) {
-        alert("Please fill all fields ❌");
-        return;
-    }
-
-    // Get existing users
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    // Check if email already exists
-    const exists = users.some(u => u.email === email);
-
-    if (exists) {
-        alert("User already exists with this email ❌");
-        return;
-    }
-
-    // Create new user
-    const newUser = { name, email, password };
-
-    // Save to localStorage
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-
-    alert("Signup successful! 🎉");
-    window.location.href = "login.html";
-}
-</script>
-
+                    // Success UI
+                    status.style.color = "#00ff88";
+                    status.style.background = "rgba(0, 255, 136, 0.1)";
+                    status.innerHTML = '✨ Account Secured! Unlocking Dashboard...';
+                    card.style.borderColor = "#00ff88";
+                    
+                    setTimeout(() => {
+                        window.location.href = "index.html"; 
+                    }, 2000);
+                    
+                } else {
+                    status.style.color = "#ff4b2b";
+                    status.style.background = "rgba(255, 75, 43, 0.1)";
+                    status.innerText = "❌ Registration Failed: " + (data.error || "System Error");
+                    btn.disabled = false;
+                    btn.innerText = "Initialize Account";
+                }
+            } catch (error) {
+                status.style.color = "#ff9f43";
+                status.style.background = "rgba(255, 159, 67, 0.1)";
+                status.innerText = "⚠️ Backend Offline: Check Node.js Connection!";
+                btn.disabled = false;
+                btn.innerText = "Retry Sync";
+            }
+        }
+    </script>
 </body>
 </html>

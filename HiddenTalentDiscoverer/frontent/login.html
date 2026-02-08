@@ -2,61 +2,232 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login – Hidden Talent Finder</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Access | Secure Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #9d50bb;
+            --secondary: #6e48aa;
+            --accent: #00ff88;
+            --bg: #050505;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background: var(--bg);
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(157, 80, 187, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(110, 72, 170, 0.15) 0%, transparent 40%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 45px;
+            border-radius: 35px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 35px; }
+
+        .input-group { margin-bottom: 22px; text-align: left; }
+        .input-group label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; padding-left: 5px; }
+
+        .input-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field i {
+            position: absolute;
+            left: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: #fff;
+            outline: none;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+        }
+
+        .input-field input:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 25px rgba(157, 80, 187, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(157, 80, 187, 0.4);
+        }
+
+        button:disabled {
+            background: #333;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #status { 
+            font-size: 12px; 
+            margin-top: 20px; 
+            padding: 10px;
+            border-radius: 10px;
+            display: none; 
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .footer-link { margin-top: 30px; font-size: 14px; color: #777; }
+        .footer-link a { color: var(--primary); text-decoration: none; font-weight: 700; }
+        
+    </style>
+</head>
 <body>
 
-<header>
-    <h1>Login</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="signup.html">Signup</a>
-    </nav>
-</header>
+    <div class="login-card">
+        <div style="font-size: 40px; margin-bottom: 20px; color: var(--primary);"><i class="fas fa-fingerprint"></i></div>
+        <h2>Access Portal</h2>
+        <p class="subtitle">Enter your credentials to unlock the talent club.</p>
+        
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label>Verified Email</label>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="name@company.com" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Security Key</label>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+            </div>
+            
+            <button type="submit" id="loginBtn">Authorize Entry</button>
+            <div id="status"></div>
+        </form>
 
-<div class="container">
+        <p class="footer-link">Not recognized? <a href="signup.html">Create Identity</a></p>
+    </div>
 
-    <h2>Welcome Back 👋</h2>
+    <script>
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('loginBtn');
+            const status = document.getElementById('status');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-    <input type="email" id="loginEmail" placeholder="Enter Email">
-    <input type="password" id="loginPassword" placeholder="Enter Password">
+            // UI Loading State
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Verifying Access...';
+            status.style.display = "block";
+            status.style.background = "rgba(255,255,255,0.05)";
+            status.style.color = "#aaa";
+            status.innerText = "Connecting to Neural Server...";
 
-    <button onclick="loginUser()">Login</button>
+            try {
+                // Correct Backend API Endpoint
+                const response = await fetch('http://localhost:5000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
 
-    <p>Don't have an account?  
-        <a href="signup.html">Create one</a>
-    </p>
-</div>
+                const data = await response.json();
 
-<script>
-function loginUser() {
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
+                if (response.ok && data.success) {
+                    // --- 🔥 THE CRITICAL FIX: STORING MONGODB DATA ---
+                    // Har naye login par purana cache saaf karein
+                    localStorage.clear();
 
-    if (!email || !password) {
-        alert("Please fill all fields ❌");
-        return;
-    }
+                    // MongoDB se aaya hua username aur email save karein
+                    localStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("userName", data.user.name); 
+                    localStorage.setItem("userEmail", data.user.email);
+                    
+                    // Dashboard compatibility ke liye poora object bhi save kar rahe hain
+                    localStorage.setItem("currentUser", JSON.stringify(data.user));
 
-    // Users stored in localStorage
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+                    // Success Feedback
+                    status.style.color = "#00ff88";
+                    status.style.background = "rgba(0, 255, 136, 0.1)";
+                    status.innerHTML = `✅ Identity Confirmed. Welcome, ${data.user.name}!`;
+                    
+                    // Redirect after animation
+                    setTimeout(() => {
+                        window.location.href = "index.html"; 
+                    }, 1500);
+                    
+                } else {
+                    // Backend Error Handling
+                    status.style.color = "#ff4b2b";
+                    status.style.background = "rgba(255, 75, 43, 0.1)";
+                    status.innerText = "❌ Access Denied: " + (data.message || "Invalid Credentials");
+                    btn.disabled = false;
+                    btn.innerText = "Retry Authorization";
+                }
+            } catch (error) {
+                // Connection Error
+                status.style.color = "#ff9f43";
+                status.style.background = "rgba(255, 159, 67, 0.1)";
+                status.innerText = "⚠️ Server Offline: Make sure your Node.js server is running on Port 5000!";
+                btn.disabled = false;
+                btn.innerText = "Re-Attempt Access";
+            }
+        }
 
-    const found = users.find(u => u.email === email && u.password === password);
-
-    if (!found) {
-        alert("Invalid email or password ❌");
-        return;
-    }
-
-    // Save current logged-in user
-    localStorage.setItem("currentUser", JSON.stringify(found));
-
-    alert("Login successful! ✅");
-    window.location.href = "dashboard.html";
-}
-</script>
-
+        // Auto-Redirect logic
+        window.onload = () => {
+            if(localStorage.getItem("isLoggedIn") === "true") {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
 </body>
 </html>

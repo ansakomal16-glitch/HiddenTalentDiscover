@@ -2,91 +2,283 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile – Hidden Talent Finder</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Identity | Talent Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #9d50bb;
+            --bg-deep: #050508;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-gray: #8e8e93;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(157, 80, 187, 0.05) 0%, transparent 40%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- Minimalist High-End Navbar --- */
+        header {
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 8, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo { font-size: 20px; font-weight: 800; letter-spacing: -1px; color: #fff; }
+        .logo span { color: var(--primary); }
+
+        nav a {
+            color: var(--text-gray);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover { color: #fff; }
+
+        /* --- Main Profile Section --- */
+        .main-wrapper {
+            flex: 1;
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+        }
+
+        /* Side Info Card */
+        .identity-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 40px;
+            text-align: center;
+            backdrop-filter: blur(40px);
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+        }
+
+        .avatar-main {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 40px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 45px; font-weight: 800; color: #fff;
+            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.2);
+            transform: rotate(-5deg);
+        }
+
+        .identity-card h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+        .identity-card p { color: var(--primary); font-size: 14px; margin-top: 5px; opacity: 0.8; }
+
+        /* Form Styling (Bento Box Style) */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .bento-input {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .bento-input label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 16px;
+            padding-bottom: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--primary); }
+
+        /* High-Class Action Button */
+        .action-btn {
+            grid-column: span 2;
+            padding: 20px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 10px;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.02);
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.3);
+        }
+
+        .status-badge {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 100px;
+            font-size: 12px;
+            color: var(--text-gray);
+            display: inline-block;
+        }
+
+        @media (max-width: 850px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            .form-container { grid-template-columns: 1fr; }
+            .full-width, .action-btn { grid-column: span 1; }
+        }
+    </style>
+</head>
 <body>
 
 <header>
-    <div class="navbar-row">
-    <a href="index.html">Home</a>
-    <a href="leaderboard.html">Leaderboard</a>
-    <a href="recommendations.html">Recommendations</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="profile.html">Profile</a>
-    <a href="badges.html">Badges</a>
-    <a href="about.html">About Us</a>
-
-    <a href="login.html" class="navbar-login">Login</a>
-    <a href="signup.html" class="navbar-signup">Sign Up</a>
-</div>
-
-    <h1>Your Profile</h1>
-    
+    <div class="logo">Hidden<span>Talent.</span></div>
+    <nav>
+        <a href="dashboard.html">Insight</a>
+        <a href="recomendation.html">Pathways</a>
+        <a href="leaderboard.html">Rankings</a>
+        <a href="#" onclick="logout()" style="color: #ff4b2b;">Sign Out</a>
+    </nav>
 </header>
 
-<div class="container">
+<div class="main-wrapper">
+    <div class="profile-grid">
+        <div class="identity-card">
+            <div class="avatar-wrapper">
+                <div class="avatar-main" id="userInitial">U</div>
+            </div>
+            <h2 id="displayUserName">Neural Identity</h2>
+            <p id="displayUserEmail">connecting...</p>
+            <div class="status-badge">Elite Talent Index: Ranked #12</div>
+        </div>
 
-    <h2>Update Your Profile ✨</h2>
+        <div class="form-container">
+            <div class="bento-input full-width">
+                <label>Signature Name</label>
+                <input type="text" id="profileName" placeholder="Edit your legal name">
+            </div>
 
-    <input type="text" id="profileName" placeholder="Your Name">
-    <input type="text" id="profileInterests" placeholder="Your Interests (e.g: AI, Coding)">
-    <input type="text" id="profileSkills" placeholder="Your Skills (e.g: HTML, Python)">
-    
-    <button onclick="saveProfile()">Save Profile</button>
+            <div class="bento-input">
+                <label>Industry Focus</label>
+                <input type="text" id="profileInterests" placeholder="e.g. AI Ethics">
+            </div>
 
+            <div class="bento-input">
+                <label>Mastery Skills</label>
+                <input type="text" id="profileSkills" placeholder="e.g. Neural Architecture">
+            </div>
+
+            <div class="bento-input full-width">
+                <label>Professional Bio</label>
+                <input type="text" id="profileBio" placeholder="Tell us your vision in one sentence...">
+            </div>
+
+            <button class="action-btn" onclick="saveProfile()">Synchronize Profile</button>
+        </div>
+    </div>
 </div>
 
 <script>
-function loadProfile() {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
+    // Load Data with refined logic
+    function loadProfile() {
+        const name = localStorage.getItem("userName");
+        const email = localStorage.getItem("userEmail");
 
-    if (!user) {
-        alert("Please login first!");
+        if (!email) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        document.getElementById("displayUserName").innerText = name || "New Explorer";
+        document.getElementById("displayUserEmail").innerText = email;
+        document.getElementById("profileName").value = name || "";
+        document.getElementById("userInitial").innerText = (name ? name.charAt(0).toUpperCase() : "U");
+
+        document.getElementById("profileInterests").value = localStorage.getItem("userInterests") || "";
+        document.getElementById("profileSkills").value = localStorage.getItem("userSkills") || "";
+        document.getElementById("profileBio").value = localStorage.getItem("userBio") || "";
+    }
+
+    function saveProfile() {
+        const newName = document.getElementById("profileName").value.trim();
+        const interests = document.getElementById("profileInterests").value.trim();
+        const skills = document.getElementById("profileSkills").value.trim();
+        const bio = document.getElementById("profileBio").value.trim();
+
+        if (!newName) {
+            showNotification("Name protocol required!");
+            return;
+        }
+
+        localStorage.setItem("userName", newName);
+        localStorage.setItem("userInterests", interests);
+        localStorage.setItem("userSkills", skills);
+        localStorage.setItem("userBio", bio);
+
+        // Instant UI Update
+        document.getElementById("displayUserName").innerText = newName;
+        document.getElementById("userInitial").innerText = newName.charAt(0).toUpperCase();
+
+        alert("Database Synchronized ✅");
+    }
+
+    function logout() {
+        localStorage.clear();
         window.location.href = "login.html";
-        return;
     }
 
-    document.getElementById("profileName").value = user.name || "";
-    document.getElementById("profileInterests").value = user.interests || "";
-    document.getElementById("profileSkills").value = user.skills || "";
-}
-
-function saveProfile() {
-    const name = document.getElementById("profileName").value.trim();
-    const interests = document.getElementById("profileInterests").value.trim();
-    const skills = document.getElementById("profileSkills").value.trim();
-
-    if (!name) {
-        alert("Name is required ❌");
-        return;
-    }
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    let user = JSON.parse(localStorage.getItem("currentUser"));
-
-    const updatedUser = {
-        ...user,
-        name,
-        interests,
-        skills
-    };
-
-    users = users.map(u => u.email === user.email ? updatedUser : u);
-
-    localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
-
-    alert("Profile updated successfully! ✅");
-}
-
-function logout() {
-    localStorage.removeItem("currentUser");
-    window.location.href = "login.html";
-}
-
-window.onload = loadProfile;
+    window.onload = loadProfile;
 </script>
 
 </body>
