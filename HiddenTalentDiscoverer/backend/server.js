@@ -3,146 +3,145 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-
-// --- 1. MIDDLEWARES ---
 app.use(express.json());
 
-// CORS configuration (No errors, smooth connection)
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST']
-}));
+// CORS Fix for all browsers
+app.use(cors({ origin: '*', methods: ['GET', 'POST'] }));
 
-// --- 2. MONGODB CONNECTION ---
 const uri = "mongodb+srv://areebaakhtar444_db_user:Hu8tXYH1GIFPJzX3@cluster0.ibssaj5.mongodb.net/HiddenTalentDB?retryWrites=true&w=majority";
 
 mongoose.connect(uri)
-    .then(() => console.log("🔥 Neural Server: MongoDB Connected Successfully!"))
-    .catch(err => {
-        console.error("❌ MongoDB Connection Error:", err.message);
-    });
+    .then(() => console.log("🔥 Neural Server: Connected & Ready!"))
+    .catch(err => console.error("❌ DB Connection Error:", err.message));
 
-// --- 3. DATA MODELS ---
+// --- 1. MODELS ---
 
-// User Model
 const User = mongoose.model('User', new mongoose.Schema({ 
-    username: { type: String, required: true }, 
-    email: { type: String, required: true, unique: true }, 
-    password: { type: String, required: true } 
+    username: String, 
+    email: { type: String, unique: true }, 
+    password: String 
 }));
 
-// Result Model
-const resultSchema = new mongoose.Schema({
-    username: { type: String, default: "Explorer" },
-    email: { type: String, required: true },
-    score: { type: Number, required: true },
-    category: { type: String, default: "General Quiz" },
-    date: { type: Date, default: Date.now }
+const QuizResult = mongoose.model('QuizResult', new mongoose.Schema({
+    username: String, email: String, score: Number, category: String, date: { type: Date, default: Date.now }
+}));
+
+const GameResult = mongoose.model('GameResult', new mongoose.Schema({
+    username: String, email: String, score: Number, gameName: String, date: { type: Date, default: Date.now }
+}));
+
+const Leaderboard = mongoose.model('Leaderboard', new mongoose.Schema({
+    username: String,
+    email: { type: String, unique: true },
+    totalQuizScore: { type: Number, default: 0 },
+    totalGameScore: { type: Number, default: 0 },
+    overallTotal: { type: Number, default: 0 },
+    lastUpdated: { type: Date, default: Date.now }
+}));
+
+// --- 2. THE BRAIN: SYNC FUNCTION ---
+async function syncLeaderboard(email, username, score, type) {
+    let update = {};
+    if (type === 'quiz') {
+        update = { $inc: { totalQuizScore: score, overallTotal: score } };
+    } else {
+        update = { $inc: { totalGameScore: score, overallTotal: score } };
+    }
+
+    return await Leaderboard.findOneAndUpdate(
+        { email: email },
+        { ...update, username: username, lastUpdated: new Date() },
+        { upsert: true, new: true }
+    );
+}
+
+// --- 3. ROUTES ---
+
+// SAVE QUIZ
+app.post('/api/save-quiz', async (req, res) => {
+    try {
+        const { email, username, score, category } = req.body;
+        const result = new QuizResult({ email, username, score, category });
+        await result.save();
+        await syncLeaderboard(email, username, score, 'quiz');
+        res.json({ success: true, message: "Quiz Synced!" });
+    } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-const Result = mongoose.model('Result', resultSchema);
-
-// --- 4. ROUTES ---
-
-app.get('/', (req, res) => res.send("🚀 Neural Server is LIVE!"));
-
-// Signup
-app.post('/api/signup', async (req, res) => {
+// SAVE GAME
+app.post('/api/save-game', async (req, res) => {
     try {
-        const newUser = new User(req.body);
-        await newUser.save();
-        res.json({ success: true, message: "Agent Created!" });
-    } catch (err) {
-        res.status(400).json({ success: false, error: "Email already exists" });
+        const { email, username, score, gameName } = req.body;
+        const result = new GameResult({ email, username, score, gameName });
+        await result.save();
+        await syncLeaderboard(email, username, score, 'game');
+        res.json({ success: true, message: "Game Synced!" });
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET USER PROFILE (For Dashboard)
+app.get('/api/user-profile/:email', async (req, res) => {
+    try {
+        const email = req.params.email;
+        // Pehle Leaderboard se stats nikalein
+        let stats = await Leaderboard.findOne({ email: email });
+        
+        // Agar naya user hai jisne abhi kuch nahi khela, toh default stats bhejein
+        if (!stats) {
+            stats = { totalQuizScore: 0, totalGameScore: 0, overallTotal: 0 };
+        }
+
+        const quizHistory = await QuizResult.find({ email }).sort({ date: -1 }).limit(5);
+        const gameHistory = await GameResult.find({ email }).sort({ date: -1 }).limit(5);
+        
+        res.json({ stats, quizHistory, gameHistory });
+    } catch (err) { 
+        res.status(500).json({ error: "Profile Load Error" }); 
     }
 });
 
-// Login Route - FIXED
+// GET GLOBAL LEADERBOARD
+app.get('/api/global-leaderboard', async (req, res) => {
+    try {
+        const data = await Leaderboard.find().sort({ overallTotal: -1 }).limit(10);
+        res.json(data);
+    } catch (err) { res.status(500).json({ error: "Ranking Load Error" }); }
+});
+
+// AUTH: Login
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        
-        // 1. User ko dhoondo
-        const user = await User.findOne({ email: email });
-        
-        if (!user) {
-            return res.status(400).json({ success: false, message: "User nahi mila!" });
+        const user = await User.findOne({ email, password });
+        if (user) {
+            res.json({ success: true, user: { name: user.username, email: user.email } });
+        } else {
+            res.status(401).json({ success: false, message: "Invalid Credentials" });
         }
-
-        // 2. Password match (Case sensitive check)
-        if (user.password !== password) { 
-            return res.status(400).json({ success: false, message: "Password galat hai!" });
-        }
-
-        // 3. SUCCESS: Data wapis bhejo (Correct Field Names ke sath)
-        res.json({
-            success: true,
-            user: {
-                name: user.username, // FIXED: Aapke model mein 'username' hai, 'name' nahi
-                email: user.email
-            }
-        });
-    } catch (err) {
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
+    } catch (err) { res.status(500).json({ error: err.message }); }
 });
-// Save Result
-app.post('/api/save-result', async (req, res) => {
+
+// AUTH: Signup
+app.post('/api/signup', async (req, res) => {
     try {
-        const newResult = new Result(req.body);
-        await newResult.save();
-        res.json({ success: true, message: "Result Saved!" });
-    } catch (err) {
-        res.status(500).json({ error: "Failed to save" });
-    }
+        const { username, email, password } = req.body;
+        const newUser = new User({ username, email, password });
+        await newUser.save();
+        
+        // Signup ke waqt hi leaderboard entry bana den taake dashboard crash na ho
+        const initialLeaderboard = new Leaderboard({ username, email });
+        await initialLeaderboard.save();
+        
+        res.json({ success: true });
+    } catch (err) { res.status(400).json({ error: "Email already exists" }); }
 });
 
-// [🔥 UNIQUE LEADERBOARD LOGIC - FIXES DUPLICATES]
-app.get('/api/global-leaderboard', async (req, res) => {
-    try {
-        const leaderboard = await Result.aggregate([
-            // Stage 1: Sabse pehle scores ko high to low sort karo
-            { $sort: { score: -1 } },
-
-            // Stage 2: Email ke mutabiq GROUP karo taake har bnde ka sirf ek record bache
-            {
-                $group: {
-                    _id: "$email", // Har unique email ka ek group banega
-                    username: { $first: "$username" }, // Us group ka pehla (highest) naam
-                    score: { $first: "$score" },    // Us group ka pehla (highest) score
-                    category: { $first: "$category" }
-                }
-            },
-
-            // Stage 3: Grouping ke baad ranking ke liye dubara sort karo
-            { $sort: { score: -1 } },
-
-            // Stage 4: Top 15 Unique bnde uthao
-            { $limit: 15 }
-        ]);
-
-        res.json(leaderboard);
-    } catch (err) {
-        console.error("Leaderboard Aggregation Error:", err);
-        res.status(500).json({ error: "Leaderboard update failed" });
-    }
-});
-
-// User Stats for Dashboard
-app.get('/api/user-stats/:email', async (req, res) => {
-    try {
-        const results = await Result.find({ email: req.params.email }).sort({ date: -1 });
-        res.json(results);
-    } catch (err) {
-        res.status(500).json({ error: "Fetch Error" });
-    }
-});
-
-// --- 5. SERVER START ---
 const PORT = 5000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`\n======================================`);
-    console.log(`🚀 NEURAL SERVER RUNNING ON PORT: ${PORT}`);
-    console.log(`🔗 ACCESS LOCAL: http://localhost:${PORT}`);
-    console.log(`======================================\n`);
+    console.log(`
+    =========================================
+    🚀 NEURAL SERVER LIVE ON PORT: ${PORT}
+    📡 CONNECTION: http://localhost:${PORT}
+    =========================================
+    `);
 });

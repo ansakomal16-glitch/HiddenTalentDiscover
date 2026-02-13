@@ -4,111 +4,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neural Stream | Hall of Fame</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00d2ff; --accent: #00ff41; --bg: #050508;
-            --glass: rgba(255, 255, 255, 0.05); --border: rgba(255, 255, 255, 0.1);
+            --primary: #00d2ff; --secondary: #9d50bb; --accent: #00ff41;
+            --bg: #030305; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.08);
+            --gold: #ffcc00; --silver: #e0e0e0; --bronze: #cd7f32;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--bg); color: #fff; padding: 60px 20px; text-align: center; }
-
-        /* HEADER WITHOUT ERROR-PRONE CSS */
-        header h1 { 
-            font-size: 50px; font-weight: 900; color: #fff;
-            text-shadow: 0 0 15px var(--primary); margin-bottom: 10px;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background: var(--bg); color: #fff; padding: 60px 20px; 
+            background-image: radial-gradient(circle at 50% -20%, #1a1a2e 0%, #030305 80%);
+            min-height: 100vh; overflow-x: hidden;
         }
-        header p { opacity: 0.5; letter-spacing: 4px; font-size: 12px; margin-bottom: 50px; }
 
-        /* PREMIUM PODIUM */
-        .podium { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 20px; align-items: flex-end; max-width: 900px; margin: 0 auto 50px; }
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: -1; opacity: 0.1;
+        }
+
+        header h1 { font-size: 56px; font-weight: 800; letter-spacing: -2px; text-align: center; }
+        header p { opacity: 0.4; letter-spacing: 6px; font-size: 11px; margin: 15px 0 60px; font-weight: 600; text-align: center; }
+
+        .podium { 
+            display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 25px; 
+            align-items: flex-end; max-width: 1000px; margin: 0 auto 60px; 
+        }
+        
         .p-card {
-            background: var(--glass); border: 1px solid var(--border); border-radius: 30px;
-            padding: 40px 20px; backdrop-filter: blur(10px); transition: 0.4s;
+            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 40px;
+            padding: 40px 20px; backdrop-filter: blur(20px); transition: all 0.4s ease;
+            position: relative; text-align: center;
         }
-        .rank-1 { height: 320px; border-color: #FFD700; box-shadow: 0 0 30px rgba(255,215,0,0.2); }
-        .rank-2 { height: 250px; border-color: #C0C0C0; }
-        .rank-3 { height: 220px; border-color: #CD7F32; }
 
-        .medal { font-size: 30px; display: block; margin-bottom: 15px; }
-        .p-name { font-size: 24px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; }
-        .p-score { font-size: 45px; font-weight: 900; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        /* Fixed Gradient Text Logic */
+        .p-score { 
+            font-size: 52px; 
+            font-weight: 900; 
+            background: linear-gradient(to bottom, #fff, var(--primary));
+            display: inline-block;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--primary); /* Fallback for old browsers */
+        }
 
-        /* UNIQUE LIST */
-        .list-container { max-width: 850px; margin: 0 auto; background: var(--glass); border-radius: 25px; overflow: hidden; }
+        .rank-1 { height: 420px; border-color: rgba(255, 215, 0, 0.3); box-shadow: 0 20px 50px rgba(255,215,0,0.05); }
+        .rank-2 { height: 340px; border-color: rgba(192, 192, 192, 0.3); }
+        .rank-3 { height: 310px; border-color: rgba(205, 127, 50, 0.3); }
+
+        .p-avatar {
+            width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(45deg, var(--primary), var(--secondary));
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; font-weight: 800; border: 4px solid rgba(255,255,255,0.1);
+        }
+
+        .medal-badge {
+            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+            width: 45px; height: 45px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .rank-1 .medal-badge { background: var(--gold); color: #000; }
+        .rank-2 .medal-badge { background: var(--silver); color: #000; }
+        .rank-3 .medal-badge { background: var(--bronze); color: #fff; }
+
+        .p-name { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 5px; display: block; }
+        .p-sub-stats { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 15px; font-weight: 600; }
+
+        .list-container { 
+            max-width: 900px; margin: 0 auto; background: var(--glass); 
+            border-radius: 35px; border: 1px solid var(--border); overflow: hidden;
+        }
+        
         .list-item {
-            display: flex; align-items: center; padding: 25px 40px; border-bottom: 1px solid var(--border);
-            transition: 0.3s;
+            display: flex; align-items: center; padding: 20px 40px; 
+            border-bottom: 1px solid var(--border); transition: 0.3s;
         }
-        .list-item:hover { background: rgba(255,255,255,0.08); transform: scale(1.02); }
-        .l-rank { width: 60px; font-weight: 900; font-size: 20px; opacity: 0.3; }
+        .list-item:hover { background: rgba(255,255,255,0.04); }
+        
+        .l-rank { width: 50px; font-weight: 800; font-size: 14px; color: var(--primary); opacity: 0.6; }
+        .l-avatar { width: 40px; height: 40px; border-radius: 12px; background: var(--border); margin-right: 20px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
         .l-info { flex-grow: 1; text-align: left; }
-        .l-name { font-weight: 700; font-size: 18px; }
-        .l-cat { font-size: 11px; color: var(--accent); font-weight: 800; }
-        .l-score { font-size: 26px; font-weight: 900; color: var(--primary); }
+        .l-name { font-weight: 700; font-size: 17px; color: #eee; }
+        .l-breakdown { font-size: 10px; font-weight: 700; opacity: 0.5; text-transform: uppercase; margin-top: 3px; }
+        
+        .l-score { text-align: right; font-size: 24px; font-weight: 800; color: var(--primary); }
 
+        .btn-footer { text-align: center; margin-top: 50px; }
         .btn-back {
-            display: inline-block; margin-top: 50px; padding: 18px 50px; background: #fff;
-            color: #000; text-decoration: none; border-radius: 50px; font-weight: 900; transition: 0.3s;
+            display: inline-block; padding: 16px 45px; 
+            background: #fff; color: #000;
+            text-decoration: none; border-radius: 20px; font-weight: 700; 
+            transition: 0.3s; font-size: 13px;
         }
-        .btn-back:hover { box-shadow: 0 0 20px #fff; transform: translateY(-5px); }
+        .btn-back:hover { box-shadow: 0 10px 30px rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+        @media (max-width: 768px) {
+            .podium { grid-template-columns: 1fr; }
+            .rank-1 { order: 1; height: auto; }
+            .rank-2 { order: 2; height: auto; }
+            .rank-3 { order: 3; height: auto; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Global <span style="color: var(--primary);">Hall of Fame</span></h1>
-    <p>NEURAL INTELLIGENCE RANKINGS</p>
+    <h1>Global <span style="color: var(--primary);">Leaderboard</span></h1>
+    <p>RANKING THE WORLD'S SHARPEST MINDS</p>
 </header>
 
-<div id="podium" class="podium"></div>
-<div id="list" class="list-container"></div>
+<div id="podium" class="podium">
+    </div>
 
-<a href="dashboard.html" class="btn-back">BACK TO COMMAND CENTER</a>
+<div class="list-container">
+    <div id="list"></div>
+</div>
+
+<div class="btn-footer">
+    <a href="dashboard.html" class="btn-back">RETURN TO COMMAND CENTER</a>
+</div>
 
 <script>
     async function init() {
         try {
-            const res = await fetch('http://127.0.0.1:5000/api/global-leaderboard');
+            const res = await fetch('http://localhost:5000/api/global-leaderboard');
             const data = await res.json();
             
             const podium = document.getElementById('podium');
             const list = document.getElementById('list');
 
+            if (!data || data.length === 0) {
+                podium.innerHTML = `<div style="grid-column: span 3; padding: 50px; text-align:center;">NO DATA SYNCED YET</div>`;
+                return;
+            }
+
             // Top 3 Rendering
             const t = data.slice(0, 3);
             podium.innerHTML = `
                 <div class="p-card rank-2">
-                    <span class="medal">🥈</span>
+                    <div class="medal-badge">🥈</div>
+                    <div class="p-avatar">${t[1]?.username.charAt(0) || '?'}</div>
                     <span class="p-name">${t[1]?.username || '---'}</span>
-                    <span class="p-score">${t[1]?.score || 0}</span>
+                    <div class="p-sub-stats">🧠 KNOWLEDGE BASE ACTIVE</div>
+                    <span class="p-score">${t[1]?.overallTotal || 0}</span>
                 </div>
                 <div class="p-card rank-1">
-                    <span class="medal">🥇</span>
+                    <div class="medal-badge">🥇</div>
+                    <div class="p-avatar" style="background: linear-gradient(45deg, #FFD700, #FFA500); color:#000;">${t[0]?.username.charAt(0) || '?'}</div>
                     <span class="p-name">${t[0]?.username || '---'}</span>
-                    <span class="p-score">${t[0]?.score || 0}</span>
+                    <div class="p-sub-stats">⚡ MAXIMUM POTENTIAL REACHED</div>
+                    <span class="p-score">${t[0]?.overallTotal || 0}</span>
                 </div>
                 <div class="p-card rank-3">
-                    <span class="medal">🥉</span>
+                    <div class="medal-badge">🥉</div>
+                    <div class="p-avatar">${t[2]?.username.charAt(0) || '?'}</div>
                     <span class="p-name">${t[2]?.username || '---'}</span>
-                    <span class="p-score">${t[2]?.score || 0}</span>
+                    <div class="p-sub-stats">📈 EVOLVING INTELLIGENCE</div>
+                    <span class="p-score">${t[2]?.overallTotal || 0}</span>
                 </div>
             `;
 
-            // Others
+            // List Rendering
             list.innerHTML = data.slice(3).map((u, i) => `
                 <div class="list-item">
                     <div class="l-rank">#${i+4}</div>
+                    <div class="l-avatar">${u.username.charAt(0)}</div>
                     <div class="l-info">
                         <div class="l-name">${u.username}</div>
-                        <div class="l-cat">AGENT • ${u.category}</div>
+                        <div class="l-breakdown">Quiz: ${u.totalQuizScore} • Games: ${u.totalGameScore}</div>
                     </div>
-                    <div class="l-score">${u.score}</div>
+                    <div class="l-score">${u.overallTotal}</div>
                 </div>
             `).join('');
-        } catch(e) { console.log("DB Offline"); }
+
+        } catch(e) { 
+            document.getElementById('podium').innerHTML = `<div style="grid-column: span 3; text-align:center; color: var(--accent);">⚠️ SYSTEM OFFLINE: START SERVER.JS</div>`;
+        }
     }
     window.onload = init;
 </script>
+
 </body>
 </html>

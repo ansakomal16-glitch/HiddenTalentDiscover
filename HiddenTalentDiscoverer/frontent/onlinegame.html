@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiddenTalent Discovery Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        body { background: #020617; color: #f8fafc; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        
+        .talent-card { 
+            background: linear-gradient(145deg, #0f172a, #1e293b); 
+            border: 1px solid #334155; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .talent-card:hover { 
+            border-color: #38bdf8; 
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.15); 
+            transform: translateY(-10px); 
+        }
+
+        .game-overlay { background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(25px); }
+        
+        #game-canvas { 
+            height: 480px; 
+            border: 2px solid #1e293b; 
+            background: radial-gradient(circle at center, #0f172a, #020617); 
+            border-radius: 32px; 
+            position: relative; 
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .node { width: 70px; height: 70px; border-radius: 16px; cursor: pointer; position: absolute; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.1s; }
+        
+        /* Floating Animation */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        .float-anim { animation: float 3s ease-in-out infinite; }
+
+        .matrix-btn { width: 80px; height: 80px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; font-size: 24px; font-weight: bold; transition: 0.2s; }
+        .matrix-btn:hover { background: #38bdf8; color: #000; transform: scale(0.95); }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row justify-between items-center bg-slate-900/50 p-8 rounded-[2.5rem] border border-slate-800 shadow-2xl">
+        <div class="mb-4 md:mb-0">
+            <h1 class="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-500 tracking-tighter">TALENT DISCOVERY LAB</h1>
+            <p class="text-slate-400 font-light mt-1 text-lg">Uncovering hidden cognitive potentials through neural stress tests.</p>
+        </div>
+        <div class="text-center md:text-right bg-slate-800/50 p-4 rounded-2xl border border-slate-700">
+            <span class="text-[10px] uppercase tracking-[0.3em] text-sky-500 font-bold">Authorized Subject</span>
+            <p id="player-name" class="text-2xl font-bold text-white tracking-tight">Guest User</p>
+        </div>
+    </header>
+
+    <div id="games-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        
+        <div onclick="openGame('Logic', 'Pattern Master')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
+            <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500/20 transition">
+                <i class="fas fa-brain text-sky-400 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Pattern Master</h3>
+            <p class="text-sm text-slate-500 leading-relaxed italic">Tests logical sequence deduction & abstract reasoning.</p>
+        </div>
+
+        <div onclick="openGame('Math', 'Neural Math')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
+            <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500/20 transition">
+                <i class="fas fa-calculator text-emerald-400 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Neural Math</h3>
+            <p class="text-sm text-slate-500 leading-relaxed italic">Measures quantitative speed and accuracy.</p>
+        </div>
+
+        <div onclick="openGame('Reflex', 'Reflex Sync')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
+            <div class="w-16 h-16 bg-rose-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-500/20 transition">
+                <i class="fas fa-bolt text-rose-400 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Reflex Sync</h3>
+            <p class="text-sm text-slate-500 leading-relaxed italic">Analyzes neuromuscular response latency.</p>
+        </div>
+
+        <div onclick="openGame('Memory', 'Digit Span')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
+            <div class="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500/20 transition">
+                <i class="fas fa-microchip text-amber-400 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Digit Span</h3>
+            <p class="text-sm text-slate-500 leading-relaxed italic">Evaluates short-term working memory capacity.</p>
+        </div>
+
+        <div onclick="openGame('Focus', 'Focus Matrix')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
+            <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition">
+                <i class="fas fa-eye text-purple-400 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Focus Matrix</h3>
+            <p class="text-sm text-slate-500 leading-relaxed italic">Calculates visual search and focus endurance.</p>
+        </div>
+
+    </div>
+
+    <div id="game-overlay" class="fixed inset-0 hidden game-overlay z-50 flex flex-col items-center justify-center p-4">
+        <div class="max-w-4xl w-full bg-slate-900 border border-slate-700 p-8 rounded-[3rem] shadow-2xl relative overflow-hidden">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 relative z-10">
+                <div>
+                    <h2 id="active-game-title" class="text-4xl font-black text-white tracking-tighter uppercase">Game Title</h2>
+                    <p id="game-status-text" class="text-sky-500 font-bold text-xs tracking-widest uppercase mt-1">Status: Experiment in Progress</p>
+                </div>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <div class="bg-slate-800/80 px-6 py-3 rounded-2xl border border-slate-700 text-center">
+                        <p class="text-[10px] text-slate-500 uppercase font-bold">Neural Index</p>
+                        <p id="live-score" class="text-3xl font-bold text-white">0</p>
+                    </div>
+                    <div class="bg-slate-800/80 px-6 py-3 rounded-2xl border border-slate-700 text-center min-w-[100px]">
+                        <p class="text-[10px] text-slate-500 uppercase font-bold">Time Window</p>
+                        <p id="timer" class="text-3xl font-bold text-rose-500">20s</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-canvas">
+                </div>
+
+            <div class="flex justify-between mt-8 relative z-10">
+                <button onclick="closeGame()" class="px-6 py-2 bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-500 rounded-xl transition font-bold text-sm">TERMINATE</button>
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
+                    <p class="text-slate-600 text-[10px] uppercase tracking-[0.2em]">Live Data Uplink Active</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userEmail = localStorage.getItem('userEmail');
+        const userName = localStorage.getItem('userName') || "Guest";
+        document.getElementById('player-name').innerText = userName;
+
+        let currentScore = 0;
+        let timeLeft = 20;
+        let gameInterval;
+        let gameType = "";
+
+        function openGame(category, title) {
+            if(!userEmail) {
+                alert("Please access the Command Center (Login) first.");
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('game-overlay').classList.remove('hidden');
+            document.getElementById('active-game-title').innerText = title;
+            gameType = title;
+            currentScore = 0;
+            timeLeft = 20;
+            document.getElementById('live-score').innerText = "0";
+            
+            // Logic selection
+            if(category === 'Math') startMathChallenge();
+            else if(category === 'Reflex') startReflexChallenge();
+            else if(category === 'Memory') startMemoryChallenge();
+            else if(category === 'Focus') startFocusChallenge();
+            else if(category === 'Logic') startLogicChallenge();
+
+            gameInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft + "s";
+                if(timeLeft <= 0) endGame();
+            }, 1000);
+        }
+
+        function closeGame() {
+            clearInterval(gameInterval);
+            document.getElementById('game-overlay').classList.add('hidden');
+        }
+
+        async function endGame() {
+            clearInterval(gameInterval);
+            document.getElementById('game-canvas').innerHTML = `
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-white mb-2">TEST COMPLETE</h2>
+                    <p class="text-sky-400 animate-pulse uppercase tracking-widest text-sm">Syncing Data to Neural Cloud...</p>
+                </div>`;
+
+            const payload = { email: userEmail, username: userName, score: currentScore, gameName: gameType };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/save-game', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (result.success) window.location.href = 'dashboard.html';
+            } catch (err) {
+                window.location.href = 'dashboard.html';
+            }
+        }
+
+        // --- 1. NEURAL MATH ---
+        function startMathChallenge() {
+            const canvas = document.getElementById('game-canvas');
+            const n1 = Math.floor(Math.random() * 90) + 10;
+            const n2 = Math.floor(Math.random() * 90) + 10;
+            const sum = n1 + n2;
+            canvas.innerHTML = `
+                <div class="text-center">
+                    <h1 class="text-8xl font-black mb-8 text-white tracking-tighter">${n1}+${n2}</h1>
+                    <input type="number" id="ans" class="bg-slate-800/50 border-b-8 border-emerald-500 text-7xl p-4 w-64 text-center focus:outline-none font-black text-emerald-400 rounded-t-3xl" autofocus>
+                </div>`;
+            const input = document.getElementById('ans');
+            input.focus();
+            input.oninput = () => {
+                if(input.value == sum) {
+                    currentScore += 5;
+                    document.getElementById('live-score').innerText = currentScore;
+                    startMathChallenge();
+                }
+            };
+        }
+
+        // --- 2. REFLEX SYNC ---
+        function startReflexChallenge() {
+            const canvas = document.getElementById('game-canvas');
+            canvas.innerHTML = '';
+            const node = document.createElement('div');
+            node.className = 'node bg-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.6)] hover:scale-110 active:scale-90';
+            node.style.left = Math.random() * (canvas.clientWidth - 100) + 'px';
+            node.style.top = Math.random() * (canvas.clientHeight - 100) + 'px';
+            node.onclick = () => {
+                currentScore += 2;
+                document.getElementById('live-score').innerText = currentScore;
+                startReflexChallenge();
+            };
+            canvas.appendChild(node);
+        }
+
+        // --- 3. DIGIT SPAN (Memory) ---
+        function startMemoryChallenge() {
+            const canvas = document.getElementById('game-canvas');
+            const length = 3 + Math.floor(currentScore / 200);
+            let target = "";
+            for(let i=0; i<length; i++) target += Math.floor(Math.random()*10);
+            
+            canvas.innerHTML = `<h1 class="text-8xl font-black text-amber-400 tracking-[0.2em]">${target}</h1>`;
+            
+            setTimeout(() => {
+                canvas.innerHTML = `
+                    <div class="text-center">
+                        <p class="mb-6 text-slate-400 uppercase tracking-widest font-bold">Recall the sequence</p>
+                        <input type="number" id="ans" class="bg-slate-800/50 border-b-8 border-amber-500 text-7xl p-4 w-80 text-center focus:outline-none font-black text-amber-400 rounded-t-3xl" autofocus>
+                    </div>`;
+                const input = document.getElementById('ans');
+                input.focus();
+                input.oninput = () => {
+                    if(input.value === target) {
+                        currentScore += 4;
+                        document.getElementById('live-score').innerText = currentScore;
+                        startMemoryChallenge();
+                    }
+                };
+            }, 1200);
+        }
+
+        // --- 4. FOCUS MATRIX ---
+        function startFocusChallenge() {
+            const canvas = document.getElementById('game-canvas');
+            canvas.innerHTML = '<div id="matrix-grid" class="grid grid-cols-3 gap-4"></div>';
+            const grid = document.getElementById('matrix-grid');
+            const target = Math.floor(Math.random() * 9) + 1;
+            
+            for(let i=1; i<=9; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'matrix-btn';
+                btn.innerText = i;
+                btn.onclick = () => {
+                    if(i === target) {
+                        currentScore += 3;
+                        document.getElementById('live-score').innerText = currentScore;
+                        startFocusChallenge();
+                    }
+                };
+                grid.appendChild(btn);
+            }
+            canvas.prepend(Object.assign(document.createElement('p'), {
+                innerText: `Find: ${target}`,
+                className: 'absolute top-10 text-xl font-bold text-purple-400 uppercase'
+            }));
+        }
+
+        // --- 5. PATTERN MASTER (Logic) ---
+        function startLogicChallenge() {
+            const canvas = document.getElementById('game-canvas');
+            const patterns = [
+                {q: "2, 4, 8, 16, ?", a: "32"},
+                {q: "1, 4, 9, 16, ?", a: "25"},
+                {q: "10, 20, 30, ?", a: "40"},
+                {q: "Z, Y, X, W, ?", a: "V"},
+                {q: "5, 11, 23, ?", a: "47"}
+            ];
+            const p = patterns[Math.floor(Math.random()*patterns.length)];
+            canvas.innerHTML = `
+                <div class="text-center">
+                    <p class="text-slate-500 mb-4 uppercase tracking-widest">Complete the logic</p>
+                    <h1 class="text-7xl font-black mb-8 text-white">${p.q}</h1>
+                    <input type="text" id="ans" class="bg-slate-800/50 border-b-8 border-sky-500 text-6xl p-4 w-64 text-center focus:outline-none font-black text-sky-400 rounded-t-3xl" autofocus>
+                </div>`;
+            const input = document.getElementById('ans');
+            input.focus();
+            input.oninput = () => {
+                if(input.value.toUpperCase() === p.a) {
+                    currentScore += 2;
+                    document.getElementById('live-score').innerText = currentScore;
+                    startLogicChallenge();
+                }
+            };
+        }
+    </script>
+</body>
+</html>

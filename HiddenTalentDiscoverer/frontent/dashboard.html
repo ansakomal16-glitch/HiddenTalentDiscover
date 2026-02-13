@@ -3,32 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural OS | Intelligence Dashboard</title>
+    <title>Neural OS | Master Intelligence Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary: #00d2ff; --secondary: #9d50bb; --accent: #00ff41;
             --bg: #050508; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.07);
+            --quiz-color: #10b981; --game-color: #3b82f6;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); color: #fff; min-height: 100vh; padding: 30px; }
+        body { background: var(--bg); color: #fff; min-height: 100vh; padding: 30px; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; }
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
         .glass-card { background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 25px; backdrop-filter: blur(15px); margin-bottom: 20px; }
         .stat-val { font-size: 32px; font-weight: 800; color: var(--primary); }
         .stat-label { font-size: 11px; text-transform: uppercase; opacity: 0.5; }
-        .chart-container { height: 250px; position: relative; }
+        
+        .charts-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
+        .chart-container { height: 220px; position: relative; }
+        
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th { text-align: left; padding: 12px; font-size: 11px; opacity: 0.4; border-bottom: 1px solid var(--border); }
         td { padding: 15px 12px; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.02); }
-        .badge { padding: 4px 10px; border-radius: 6px; font-size: 10px; background: rgba(0, 210, 255, 0.1); color: var(--primary); font-weight: bold; }
-        .rank-icon { width: 60px; height: 60px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border-radius: 50%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
-        .btn-action { background: #fff; color: #000; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 13px; transition: 0.3s; }
-        .btn-action:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
         
-        @media (max-width: 850px) { .grid-main { grid-template-columns: 1fr; } }
+        .badge-quiz { padding: 4px 10px; border-radius: 6px; font-size: 10px; background: rgba(16, 185, 129, 0.1); color: var(--quiz-color); font-weight: bold; }
+        .badge-game { padding: 4px 10px; border-radius: 6px; font-size: 10px; background: rgba(59, 130, 246, 0.1); color: var(--game-color); font-weight: bold; }
+        
+        .rank-icon { width: 80px; height: 80px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border-radius: 50%; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); }
+        .btn-action { background: #fff; color: #000; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 13px; transition: 0.3s; cursor: pointer; border:none; display: inline-block; }
+        .btn-action:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,210,255,0.2); }
+        
+        /* NEW: Career Section Styles */
+        .career-path { border-left: 2px solid var(--primary); padding-left: 15px; margin-top: 15px; }
+        .career-link { display: inline-block; margin-top: 10px; color: var(--primary); text-decoration: none; font-size: 12px; font-weight: 600; }
+        .career-link:hover { text-decoration: underline; }
+
+        @media (max-width: 850px) { .grid-main, .charts-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -36,39 +48,68 @@
 <div class="container">
     <header>
         <div>
-            <p style="font-size: 12px; opacity: 0.5;">INTELLIGENCE STATUS: ACTIVE</p>
-            <h1 id="user-display">Agent: Loading...</h1>
+            <p style="font-size: 12px; opacity: 0.5; letter-spacing: 2px;">NEURAL INTERFACE v4.0</p>
+            <h1 id="user-display">Agent: Connecting...</h1>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <a href="quizonline.html" class="btn-action">NEW ASSESSMENT</a>
-            <button onclick="localStorage.clear(); window.location.href='login.html'" class="btn-action" style="background: rgba(255,0,0,0.1); color: #ff4b2b;">LOGOUT</button>
+        <div style="display: flex; gap: 12px;">
+            <a href="quizonline.html" class="btn-action">START QUIZ</a>
+            <a href="onlinegame.html" class="btn-action" style="background: var(--game-color); color: white;">PLAY GAMES</a>
+            <button onclick="logout()" class="btn-action" style="background: rgba(255,75,43,0.1); color: #ff4b2b;">LOGOUT</button>
         </div>
     </header>
 
     <div class="grid-main">
         <div class="main-column">
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                <div class="glass-card"><p class="stat-label">IQ Score (Avg)</p><p id="iq-avg" class="stat-val">0%</p></div>
-                <div class="glass-card"><p class="stat-label">Total Tests</p><p id="total-tests" class="stat-val">0</p></div>
-                <div class="glass-card"><p class="stat-label">Status</p><p id="rank-status" class="stat-val" style="font-size: 18px; margin-top:15px; color: var(--accent);">STABLE</p></div>
-            </div>
-
-            <div class="glass-card">
-                <p class="stat-label" style="margin-bottom: 20px;">Performance Analytics</p>
-                <div class="chart-container">
-                    <canvas id="scoreChart"></canvas>
+                <div class="glass-card">
+                    <p class="stat-label">Total Neural Index</p>
+                    <p id="total-combined" class="stat-val">0</p>
+                </div>
+                <div class="glass-card">
+                    <p class="stat-label">Knowledge Pts</p>
+                    <p id="quiz-pts" class="stat-val" style="color: var(--quiz-color);">0</p>
+                </div>
+                <div class="glass-card">
+                    <p class="stat-label">Reflex Pts</p>
+                    <p id="game-pts" class="stat-val" style="color: var(--game-color);">0</p>
                 </div>
             </div>
 
             <div class="glass-card">
-                <p class="stat-label">Recent Intelligence Logs</p>
-                <div style="max-height: 300px; overflow-y: auto;">
+                <p class="stat-label" style="margin-bottom: 25px;">Intelligence distribution & Progress Trend</p>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="typeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="border-top: 2px solid var(--secondary);">
+                <p class="stat-label">AI Career Path Optimization</p>
+                <div id="career-analysis" style="margin-top: 15px;">
+                    <h2 id="suggested-role" style="font-size: 20px; color: #fff;">Analyzing Potential...</h2>
+                    <div class="career-path">
+                        <p id="career-desc" style="font-size: 13px; opacity: 0.7; line-height: 1.6;">Finish more assessments to unlock personalized career paths.</p>
+                        <div style="margin-top: 15px; display: flex; gap: 15px;">
+                            <a id="linkedin-btn" href="#" target="_blank" class="career-link">LinkedIn Jobs ↗</a>
+                            <a id="fiverr-btn" href="#" target="_blank" class="career-link" style="color:var(--accent)">Fiverr Gigs ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <p class="stat-label">Synchronized Neural Logs</p>
+                <div style="max-height: 300px; overflow-y: auto; margin-top: 15px;">
                     <table>
                         <thead>
-                            <tr><th>Domain</th><th>Score</th><th>Date</th></tr>
+                            <tr><th>TYPE</th><th>DOMAIN</th><th>SCORE</th><th>DATE</th></tr>
                         </thead>
-                        <tbody id="table-body">
-                            <tr><td colspan="3" style="text-align:center; padding:20px; opacity:0.5;">Connecting to Neural Cloud...</td></tr>
+                        <tbody id="activity-body">
+                            <tr><td colspan="4" style="text-align:center; padding:40px; opacity:0.3;">Fetching from Cloud...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -77,134 +118,200 @@
 
         <div class="side-column">
             <div class="glass-card" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                <div class="rank-icon">💎</div>
-                <h3 id="rank-name">Scanning...</h3>
-                <p style="font-size: 11px; opacity: 0.5; margin-top: 5px;">CURRENT RANK LEVEL</p>
-                <div style="width:100%; height:8px; background:rgba(255,255,255,0.1); border-radius:10px; margin: 20px 0; overflow:hidden;">
-                    <div id="progress-bar" style="width: 0%; height:100%; background: linear-gradient(to right, var(--primary), var(--secondary)); transition: 1.5s ease-in-out;"></div>
+                <div id="rank-emoji" class="rank-icon">🐣</div>
+                <h3 id="rank-name" style="font-size: 22px; letter-spacing: -1px;">Scanning...</h3>
+                <p style="font-size: 10px; opacity: 0.5; margin-top: 5px; letter-spacing: 1px;">CURRENT EVOLUTION STAGE</p>
+                <div style="width:100%; height:8px; background:rgba(255,255,255,0.05); border-radius:10px; margin: 25px 0; overflow:hidden; border: 1px solid var(--border);">
+                    <div id="progress-bar" style="width: 0%; height:100%; background: linear-gradient(to right, var(--primary), var(--secondary)); transition: 2s cubic-bezier(0.4, 0, 0.2, 1);"></div>
                 </div>
-                <p id="rank-desc" style="font-size: 12px; opacity: 0.7;">Complete more tests to evolve.</p>
+                <p id="rank-desc" style="font-size: 12px; opacity: 0.6; line-height: 1.5;">Accumulate 500 points to reach Legend status.</p>
             </div>
 
+            <a href="leaderboard.html" class="glass-card" style="display: block; text-decoration: none; text-align: center; border-color: var(--primary); background: rgba(0,210,255,0.02);">
+                <p style="color: var(--primary); font-weight: 800; font-size: 14px;">GLOBAL LEADERBOARD →</p>
+                <p style="font-size: 10px; opacity: 0.4; margin-top: 4px;">Sync with other Agents</p>
+            </a>
+
             <div class="glass-card" style="font-size: 13px;">
-                <p class="stat-label" style="margin-bottom: 15px;">System Message</p>
-                <p id="server-status" style="color: var(--accent);">● Synchronizing...</p>
-                <p style="opacity: 0.5; margin-top: 10px; font-size: 11px;">Neural Server 3.0 Active</p>
+                <p class="stat-label" style="margin-bottom: 12px;">System Status</p>
+                <p id="server-status" style="color: #ffb300; display: flex; align-items: center; gap: 8px;">
+                    <span style="display:inline-block; width:8px; height:8px; background:currentColor; border-radius:50%; box-shadow: 0 0 10px currentColor;"></span>
+                    Attempting Sync...
+                </p>
+                <p style="opacity: 0.3; margin-top: 15px; font-size: 10px; font-family: monospace;">NODE_REF: DB-HT-v4.0<br>SECURE_SHELL: ACTIVE</p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    let myChart;
+    let trendChart, typeChart;
 
     async function initDashboard() {
         const email = localStorage.getItem('userEmail');
         const name = localStorage.getItem('userName');
-        
-        document.getElementById('user-display').innerText = name ? `Agent: ${name}` : "Agent: Neural Explorer";
         
         if(!email) {
             window.location.href = 'login.html';
             return;
         }
 
-        try {
-            const response = await fetch(`http://localhost:5000/api/user-stats/${email}`);
-            if(!response.ok) throw new Error("Offline");
+        document.getElementById('user-display').innerText = `Agent: ${name || 'Explorer'}`;
 
+        try {
+            const response = await fetch(`http://localhost:5000/api/user-profile/${email}`);
+            if (!response.ok) throw new Error("Sync Failed");
             const data = await response.json();
             
-            document.getElementById('server-status').innerText = "● Connected to Neural Cloud";
-            document.getElementById('server-status').style.color = "#00ff41";
+            const statusEl = document.getElementById('server-status');
+            statusEl.innerText = "● Neural Sync Active";
+            statusEl.style.color = "#00ff41";
 
-            if(data && data.length > 0) {
-                renderDashboard(data);
+            if (data.stats) {
+                updateStats(data.stats);
+                renderCharts(data.stats, data.quizHistory || [], data.gameHistory || []);
+                renderLogs(data.quizHistory || [], data.gameHistory || []);
+                generateCareerAdvice(data.stats, data.quizHistory); // NEW FUNCTION
             } else {
-                setEmptyState();
+                showEmptyState();
             }
+
         } catch (err) {
-            console.error("Connection Error:", err);
-            document.getElementById('server-status').innerText = "● Server Offline";
-            document.getElementById('server-status').style.color = "#ff4b2b";
-            document.getElementById('rank-name').innerText = "DISCONNECTED";
-            document.getElementById('table-body').innerHTML = `<tr><td colspan="3" style="text-align:center; padding:20px; color:#ff4b2b;">❌ Check if server.js is running!</td></tr>`;
+            const statusEl = document.getElementById('server-status');
+            statusEl.innerText = "● Connection Failed";
+            statusEl.style.color = "#ff4b2b";
         }
     }
 
-    function renderDashboard(data) {
-        const totalTests = data.length;
-        const totalScore = data.reduce((sum, item) => sum + item.score, 0);
-        const avgScore = Math.round(totalScore / totalTests);
+    // NEW FUNCTION: Career Suggestion Logic
+    function generateCareerAdvice(stats, quizzes) {
+        const roleEl = document.getElementById('suggested-role');
+        const descEl = document.getElementById('career-desc');
+        const lBtn = document.getElementById('linkedin-btn');
+        const fBtn = document.getElementById('fiverr-btn');
 
-        document.getElementById('total-tests').innerText = totalTests;
-        document.getElementById('iq-avg').innerText = avgScore + "%";
-        document.getElementById('progress-bar').style.width = avgScore + "%";
+        const qScore = stats.totalQuizScore || 0;
+        const gScore = stats.totalGameScore || 0;
 
-        // Fixed Rank Logic (Error free)
-        let rank = "Beginner Agent";
-        let rankColor = "#ffffff";
-        if(avgScore >= 50 && avgScore < 80) { 
-            rank = "Strategist"; 
-            rankColor = "#00d2ff"; 
-        } else if(avgScore >= 80) { 
-            rank = "Neural Master"; 
-            rankColor = "#00ff41"; 
-        }
+        let role = "General Analyst";
+        let desc = "Your profile shows balanced intelligence. Explore various domains to find your true calling.";
         
-        const rankEl = document.getElementById('rank-name');
-        rankEl.innerText = rank;
-        rankEl.style.color = rankColor;
+        // Logic based on ratio
+        if (qScore > gScore && qScore > 50) {
+            role = "AI Research Scientist";
+            desc = "Your high knowledge scores suggest a strong aptitude for Research and Deep Tech. Focus on AI and Machine Learning.";
+        } else if (gScore > qScore && gScore > 50) {
+            role = "UX/Front-end Architect";
+            desc = "Your reflex and spatial scores are excellent. You would excel in high-speed development or Interface Design.";
+        } else if (qScore > 200) {
+            role = "Cybersecurity Specialist";
+            desc = "Elite knowledge levels detected. You have the depth required for high-level security analysis.";
+        }
 
-        const tableBody = document.getElementById('table-body');
-        tableBody.innerHTML = data.map(log => `
+        roleEl.innerText = role;
+        descEl.innerText = desc;
+        lBtn.href = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(role)}`;
+        fBtn.href = `https://www.fiverr.com/search/gigs?query=${encodeURIComponent(role)}`;
+    }
+
+    function updateStats(stats) {
+        const total = stats.overallTotal || 0;
+        document.getElementById('total-combined').innerText = total;
+        document.getElementById('quiz-pts').innerText = stats.totalQuizScore || 0;
+        document.getElementById('game-pts').innerText = stats.totalGameScore || 0;
+        
+        let rank = "Novice Recruit";
+        let emoji = "🐣";
+        let progress = (total / 500) * 100;
+
+        if(total >= 100) { rank = "Elite Strategist"; emoji = "🛡️"; }
+        if(total >= 300) { rank = "Neural Master"; emoji = "💎"; }
+        if(total >= 500) { rank = "Cyber Legend"; emoji = "🌌"; progress = 100; }
+
+        document.getElementById('rank-name').innerText = rank;
+        document.getElementById('rank-emoji').innerText = emoji;
+        document.getElementById('progress-bar').style.width = Math.min(progress, 100) + "%";
+    }
+
+    function renderLogs(quizzes, games) {
+        const body = document.getElementById('activity-body');
+        const logs = [
+            ...quizzes.map(q => ({ ...q, type: 'QUIZ' })),
+            ...games.map(g => ({ ...g, type: 'GAME' }))
+        ].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if(logs.length === 0) {
+            body.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; opacity:0.4;">No logs found. Start a quiz or game!</td></tr>';
+            return;
+        }
+
+        body.innerHTML = logs.map(log => `
             <tr>
-                <td><span class="badge">${log.category || 'General'}</span></td>
-                <td style="font-weight: 800; color: ${log.score >= 50 ? '#00ff41' : '#ff4b2b'}">${log.score}</td>
-                <td style="opacity: 0.6;">${new Date(log.date).toLocaleDateString()}</td>
+                <td><span class="${log.type === 'QUIZ' ? 'badge-quiz' : 'badge-game'}">${log.type}</span></td>
+                <td>${log.category || log.gameName || 'General'}</td>
+                <td style="font-weight: 800; color: var(--primary);">+${log.score}</td>
+                <td style="opacity: 0.5; font-size: 11px;">${new Date(log.date).toLocaleDateString()}</td>
             </tr>
         `).join('');
-
-        createChart(data);
     }
 
-    function createChart(data) {
-        const ctx = document.getElementById('scoreChart').getContext('2d');
-        const reversedData = [...data].reverse();
-        const scores = reversedData.map(d => d.score);
-        const labels = reversedData.map(d => new Date(d.date).toLocaleDateString(undefined, {month: 'short', day: 'numeric'}));
+    function renderCharts(stats, quizzes, games) {
+        const ctxTrend = document.getElementById('trendChart').getContext('2d');
+        const ctxType = document.getElementById('typeChart').getContext('2d');
 
-        if(myChart) myChart.destroy();
+        if(typeChart) typeChart.destroy();
+        typeChart = new Chart(ctxType, {
+            type: 'doughnut',
+            data: {
+                labels: ['Quiz', 'Games'],
+                datasets: [{
+                    data: [stats.totalQuizScore || 1, stats.totalGameScore || 1],
+                    backgroundColor: ['#10b981', '#3b82f6'],
+                    borderWidth: 0,
+                }]
+            },
+            options: { 
+                cutout: '75%',
+                plugins: { legend: { position: 'bottom', labels: { color: 'rgba(255,255,255,0.5)', font: {size: 10}, padding: 20 } } }
+            }
+        });
 
-        myChart = new Chart(ctx, {
+        const history = [...quizzes, ...games].sort((a,b) => new Date(a.date) - new Date(b.date)).slice(-6);
+        if(trendChart) trendChart.destroy();
+        trendChart = new Chart(ctxTrend, {
             type: 'line',
             data: {
-                labels: labels,
+                labels: history.map(h => new Date(h.date).toLocaleDateString(undefined, {month:'short', day:'numeric'})),
                 datasets: [{
-                    data: scores,
+                    label: 'Score',
+                    data: history.map(h => h.score),
                     borderColor: '#00d2ff',
                     backgroundColor: 'rgba(0, 210, 255, 0.1)',
                     borderWidth: 3,
                     tension: 0.4,
                     fill: true,
+                    pointBackgroundColor: '#00d2ff',
                     pointRadius: 4
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
+            options: { 
+                responsive: true, maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, max: 100, ticks: { color: 'rgba(255,255,255,0.3)' } },
-                    x: { ticks: { color: 'rgba(255,255,255,0.3)' } }
-                }
+                scales: { 
+                    y: { display: false }, 
+                    x: { ticks: { color: 'rgba(255,255,255,0.3)', font: {size: 9} }, grid: { display: false } } 
+                } 
             }
         });
     }
 
-    function setEmptyState() {
-        document.getElementById('table-body').innerHTML = `<tr><td colspan="3" style="text-align:center; padding:30px; opacity:0.5;">No data found. Take a quiz!</td></tr>`;
-        document.getElementById('rank-name').innerText = "New Recruit";
+    function showEmptyState() {
+        document.getElementById('activity-body').innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; opacity:0.3;">Welcome Agent! Complete your first task to see analytics.</td></tr>';
+    }
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = 'login.html';
     }
 
     window.onload = initDashboard;
