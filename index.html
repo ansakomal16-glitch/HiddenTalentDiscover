@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Talent | Neon Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { 
+            --primary: #7839a2; 
+            --neon-green: #00ff41; 
+            --bg: #05020a; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #4d2fd1;
+        }
+
+        body { 
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 50% -20%, rgba(33, 32, 36, 0.875), transparent 70%);
+            color: var(--text-main); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .neon-divider {
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+            box-shadow: 0 0 20px var(--neon-green);
+            position: fixed;
+            top: 70px;
+            z-index: 1001;
+        }
+
+        .navbar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 5%; 
+            height: 70px;
+            background: rgba(5, 2, 10, 0.85);
+            backdrop-filter: blur(15px);
+            position: sticky; 
+            top: 0; 
+            z-index: 1100;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo { 
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            letter-spacing: -1px; 
+            text-transform: uppercase;
+        }
+        .logo span { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
+
+        .navbar-row {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .navbar-row a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .navbar-row a:hover {
+            color: var(--neon-green);
+            transform: translateY(-2px);
+        }
+
+        .locked-content { filter: blur(30px); opacity: 0.3; pointer-events: none; transition: 1.5s ease; }
+        .unlocked { filter: blur(0); opacity: 1; pointer-events: auto; }
+
+        /* Hero Image + Cards */
+        .hero { text-align: center; padding: 60px 20px 40px 20px; max-width: 1200px; margin: 0 auto; }
+        
+
+        
+        
+        .card { 
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 45px 30px; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .card:hover { 
+            transform: translateY(-12px) scale(1.02); 
+            border-color: var(--neon-green);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .card h3, .card p { color: #fff; }
+
+        .icon-box {
+            width: 70px; height: 70px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 22px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 1.8rem; color: #fff;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        #authOverlay { 
+            position: fixed; inset: 0; background: rgba(5, 2, 10, 0.96); 
+            display: flex; justify-content: center; align-items: center; z-index: 2000; 
+            backdrop-filter: blur(15px);
+        }
+        .auth-box { 
+            background: rgba(20, 10, 40, 0.8); padding: 60px 40px; border-radius: 40px; 
+            text-align: center; border: 1px solid var(--primary); 
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.2);
+            max-width: 380px; 
+        }
+
+        .btn-main { 
+            background: var(--neon-green); color: #000; padding: 14px 35px; 
+            border-radius: 15px; text-decoration: none; display: inline-block; 
+            font-weight: 800; transition: 0.3s; border: none; cursor: pointer;
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 35px var(--neon-green); }
+
+        .hidden { display: none !important; }
+
+        .status-pill {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+      
+
+/* Adjust spacing between hero image and buttons */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 0 20px 40px 20px;
+    margin-top: 50px;
+}.hero-text .main-title {
+    font-size: clamp(1.8rem, 5vw, 3rem); 
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+}
+/* Hero subtext styling */
+.hero-subtext {
+    margin: 20px 0 30px 0; /* top 20px, bottom 30px space */
+    text-align: center;
+}
+
+.hero-subtext .line1 {
+    font-size: 1.2rem;      /* first line slightly bigger */
+    font-weight: 600;
+    color: var(--neon-green); /* neon green */
+    margin-bottom: 8px;
+}
+
+.hero-subtext .line2 {
+    font-size: 1rem;        /* second line smaller */
+    font-weight: 400;
+    color: #ffffff;          /* white color */
+    line-height: 1.5;
+}.hero {
+    position: relative;
+    width: 100%;
+    height: 400px; /* adjust as per need */
+    overflow: hidden;
+}
+
+
+
+.search-bar {
+    padding: 12px 20px;
+    width: 300px;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    font-size: 16px;
+    background-color: #9e97beb6; /* green color */
+    color: white;
+    margin-bottom: 15px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.hero-btn {
+    text-decoration: none;
+    padding: 2px 5px;
+     background-color: #f8f9fa; /* thoda light white *
+    color: black; /* text black */
+    border-radius: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.hero-btn:hover {
+    background-color: #c2e5ca; /* dark green on hover */
+}
+/* ===== HUGE WELCOME USER TEXT ===== */
+.welcome-title {
+    font-size: clamp(4rem, 12vw, 10rem); 
+    font-weight: 900;
+    text-align: center;
+    color: var(--neon-green);
+    margin-top: 30px;
+    margin-bottom: 80px;
+    text-shadow: 0 0 40px var(--neon-green);
+    line-height: 1;
+}
+
+/* ===== HERO IMAGE FULL WIDTH ROW ===== */
+.hero-img-container {
+    width: 100%;
+    height: 70vh;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    
+}
+
+.hero-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-title {
+    font-size: 60px;
+    font-weight: 800;
+    text-align: center;
+    color: var(--neon-green);
+    text-shadow: 0 0 50px var(--neon-green);
+}
+.hero-overlay {
+    position: absolute;
+    top: 65%;          /* upar se thoda neeche start */
+    left: 30%;         /* center horizontally */
+    transform: translate(-50%, -50%); /* perfectly center */
+    text-align: center;
+}
+#hidden-talents {
+  padding: 60px 20px;
+  background-color: #0f0e0e;
+  text-align: center;
+}
+
+#hidden-talents h2 {
+  font-size: 2rem;
+  margin-bottom: 50px;
+  font-family: 'Arial', sans-serif;
+  color: #7adaad;
+}
+
+.stories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+
+.story-card {
+  display: flex;
+  width: 350px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Left column picture full height */
+.story-photo {
+  width: 120px;        /* ya apni design width */
+  height: 100%;        /* poori card height cover kare */
+  object-fit: cover;   /* picture ko crop / fit kar de */
+  border-right: 1px solid #ddd;
+}
+.story-text {
+  padding: 15px;
+  text-align: left;
+}
+
+.story-text h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.2rem;
+}
+
+.story-text p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.badge {
+  background: #ffb400;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+/* Fade-in animation when scrolled into view */
+.story-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#how-it-works {
+  display: flex;
+  flex-direction: column; /* Heading upar, boxes niche */
+  justify-content: center; /* Vertical center */
+  align-items: center;     /* Horizontal center */
+  min-height: 60vh;        /* Section ki height, adjust as needed */
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center inside container */
+  gap: 40px;               /* space between boxes */
+  flex-wrap: wrap;         /* responsive */
+  margin-top: 30px;
+}
+
+#how-it-works h2 {
+  font-size: 4.2rem;
+  margin-bottom: 15px;
+   font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+#how-it-works .subtitle {
+  margin-bottom: 50px;
+  font-size: 1.1rem;
+  color: #6dd489;
+}
+
+.steps-grid {
+  display: flex;
+  justify-content: center; /* Center the line of boxes */
+  gap: 40px; /* Space between each box */
+  flex-wrap: wrap; /* Wrap on smaller screens */
+}
+
+.step-card {
+  background: white;
+  border-radius: 50%; /* Circular */
+  width: 220px;   /* Bigger size */
+  height: 220px;  /* Bigger size */
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+  transform: translateY(30px);
+  text-align: center;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.step-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.step-card h3 {
+  margin: 5px 0;
+  font-size: 1.2rem;
+}
+
+.step-card p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.3;
+}
+
+/* Scroll fade-in */
+.step-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .steps-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-card {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+}
+/* ABOUT US SECTION */
+#about-us {
+  background: #000;
+  color: #6ede8a;
+  padding: 70px 30px;
+  font-family: sans-serif;
+}
+
+.about-title {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.about-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 40px;
+}
+
+.about-row {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 380px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.about-content {
+  max-width: 500px;
+}
+
+.about-content h3 {
+  margin-top: 15px;
+  font-size: 1.4rem;
+}
+
+.about-content p {
+  color: #ddd;
+  line-height: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.features-box {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;  /* same height cards */
+}
+
+.feature-card {
+  background: #111;
+  border: 1px solid #222;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  transition: 0.3s;
+  height: 100%; /* force equal height */
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255,255,255,0.15);
+}
+
+.feature-card h4 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.feature-card ul li {
+  color: #ccc;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.feature-card p {
+  color: #ccc;
+  margin-bottom: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-row {
+    text-align: center;
+  }
+  .about-content {
+    text-align: center;
+  }
+}
+    </style>
+</head>
+<body>
+
+    <div class="neon-divider"></div>
+
+    <nav class="navbar">
+        <div class="logo">HIDDEN <span>TALENT</span>DISCOVERER</div>
+        
+        <div class="navbar-row">
+            <a href="index.html">Home</a>
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="recomendation.html">Recommendations</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html">Profile</a>
+            <a href="badges.html">Badges</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div id="userSection" style="display:none; gap: 15px; align-items: center;">
+            <div style="text-align: right;">
+                
+                <span class="status-pill">Online</span>
+            </div>
+            <button onclick="logout()" style="background:rgba(255,68,68,0.1); border: 1px solid #ff4444; color:#ff4444; padding:6px 14px; border-radius:10px; cursor:pointer; font-size: 0.7rem; font-weight: 800;">EXIT</button>
+        </div>
+        
+        <div id="guestSection">
+            <a href="login.html" class="btn-main" style="padding: 10px 25px;">Initialize</a>
+        </div>
+    </nav>
+
+    <div id="authOverlay" class="hidden">
+        <div class="auth-box">
+            <div class="icon-box" style="border-color: var(--neon-green); background: rgba(0,255,65,0.05);">
+                <i class="fas fa-fingerprint" style="color: var(--neon-green);"></i>
+            </div>
+            <h2 style="font-size: 1.8rem; margin-bottom: 10px; font-weight: 800;">Identity Required</h2>
+            <p style="color: #b0a3c4; font-size: 0.95rem; margin-bottom: 30px;">Accessing the Neural Interface requires secure biometric authorization.</p>
+            <a href="login.html" class="btn-main">Authorize Access</a>
+        </div>
+    </div>
+
+    <main id="mainBody" class="locked-content">
+
+        <!-- ===== NEW HERO SECTION WITH IMAGE + BUTTONS ===== -->
+        <!-- ===== HERO SECTION ===== -->
+<section class="hero">
+    <h1 id="hero-text" class="hero-title">Discover your potential</h1>
+
+    
+    </div>
+
+    <div class="hero-img-container">
+        <img src="https://as2.ftcdn.net/v2/jpg/05/27/60/87/1000_F_527608759_YJONX8ZmishBwqFc614F3cygZURMVoqk.jpg" class="hero-img">
+        
+        <div class="hero-overlay">
+            <input type="text" id="search-bar" placeholder="Search..." class="search-bar">
+
+            <div class="hero-buttons">
+                <a href="quiz.html" class="hero-btn">Quiz</a>
+                <a href="dashboard.html" class="hero-btn">Dashboard</a>
+                <a href="games.html" class="hero-btn">Games</a>
+                <a href="profile.html" class="hero-btn">Profile</a>
+                <a href="about.html" class="hero-btn">About</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+            </div>
+         
+
+<!-- <<< Paste yeh text section yahan >>> -->
+<div class="hero-subtext">
+    <p class="line1">Unlocking potential through Gamified Assessment..</p>
+    <p class="line2">We don't just list talent, we discover it through quizzes, games, Chatbot AI</p>
+</div>
+
+<div class="card-container">
+    <!-- Existing cards here -->
+
+            <div class="card-container">
+                <div class="card" onclick="location.href='quiz.html'" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD_gCMqDJVWwo-rphClSrTDvLQ9JLtTzIkjA&s'); background-size: cover; background-position: center;">
+                    <div class="icon-box"><i class="fas fa-brain"></i></div>
+                    <h3>Neural Quiz</h3>
+                    <p>Map your dominant brain archetypes through cognitive logic.</p>
+                </div>
+
+                <div class="card" onclick="location.href='games.html'" style="background-image: url('https://d3nwecxvwq3b5n.cloudfront.net/AcuCustom/Sitename/DAM/054/ai_skills_at_work_21_Main.jpg'); background-size: cover; background-position: center;">
+                    <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                    <h3>Skill Forge</h3>
+                    <p>Benchmark your logical reflexes and neural processing speed.</p>
+                </div>
+
+                <div class="card" onclick="location.href='onlinegame.html'" style="background-image: url('https://assets.clevelandclinic.org/transform/LargeFeatureImage/3bb5a433-c1fa-47aa-ae4d-5611643b6537/esports'); background-size: cover; background-position: center;">
+                    <div class="icon-box" style="border-color: #00d2ff;"><i class="fas fa-network-wired" style="color: #00d2ff;"></i></div>
+                    <h3>Online Games</h3>
+                    <p>Synchronize and compete in the global skill arena.</p>
+                </div>
+
+                <div class="card" onclick="location.href='quizonline.html'" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkBzoYgut8odTFuV52RwBc1xmY5o9Rox6kAw&s'); background-size: cover; background-position: center;">
+                    <div class="icon-box" style="border-color: #ff00ff;"><i class="fas fa-microchip" style="color: #ff00ff;"></i></div>
+                    <h3>Online Quiz</h3>
+                    <p>Test your intelligence against live global parameters.</p>
+                </div>
+
+                <div class="card" onclick="location.href='chatbot.html'" style="background-image: url('https://static.liveperson.com/static-assets/2023/08/31151914/Blog_Conversational-AI_BotHoldingWorld.jpg'); background-size: cover; background-position: center;">
+                    <div class="icon-box" style="border-color: var(--neon-green);"><i class="fas fa-robot" style="color: var(--neon-green);"></i></div>
+                    <h3>AI Mentor</h3>
+                    <p>Receive real-time career guidance from the Discovery AI.</p>
+                   
+      </div>
+    </div>
+  
+      </div>
+    </div>
+
+  </div>
+  
+</section>
+
+  </div>
+</section>
+
+
+
+ <section id="hidden-talents">
+  <h2> 🎀  𝐻𝒾𝒹𝒹𝑒𝓃 𝒯𝒶𝓁𝑒𝓃𝓉𝓈 𝒯𝒽𝒶𝓉 𝒞𝒽𝒶𝓃𝑔𝑒𝒹 𝓉𝒽𝑒 𝒲o𝓇𝓁𝒹  🎀  </h2>
+  <div class="stories-container">
+
+    <!-- Card 1 -->
+    <div class="story-card">
+      <img src="https://media.wired.com/photos/649c76576279e36472844646/master/w_2560%2Cc_limit/Elon-Musk-Vivatech-Business-1499013102.jpg" alt="Elon Musk" class="story-photo">
+      <div class="story-text">
+        <h3>Elon Musk</h3>
+        <p>"Elon didn’t realize his knack for engineering until he started building computers as a teen. Later he used it to create Tesla & SpaceX."</p>
+        <span class="badge">Innovator</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="story-card">
+      <img src="https://www.instyle.com/thmb/jDUjuuR49E0mPvpOyCmICFl5BTA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-105749827-3d4238316f5d493b816588f6686460a4.jpg" alt="Oprah Winfrey" class="story-photo">
+      <div class="story-text">
+        <h3>Oprah Winfrey</h3>
+        <p>"Oprah discovered her gift for storytelling on her first TV shows, which later made her a media mogul."</p>
+        <span class="badge">Media Star</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="story-card">
+      <img src="https://theblast.prod.media.wordpress.mattersmedia.io/brand-img/123/0x0/2022/03/MEGA843074_002-scaled-e1649153378638.jpg?" alt="J.K. Rowling" class="story-photo">
+      <div class="story-text">
+        <h3>J.K. Rowling</h3>
+        <p>"Rowling didn’t know she had the talent for writing until she started the Harry Potter series, overcoming multiple rejections."</p>
+        <span class="badge">Storyteller</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="story-card">
+      <img src="https://imgcdn.stablediffusionweb.com/2024/5/15/78675da3-e396-499a-b3cd-dc2415454365.jpg" alt="Steve Jobs" class="story-photo">
+      <div class="story-text">
+        <h3>Steve Jobs</h3>
+        <p>"Jobs’ unique sense of design was hidden until he co-founded Apple and used it to revolutionize tech."</p>
+        <span class="badge">Tech Genius</span>
+                </div>
+            </div>
+        </section>
+        <section id="how-it-works">
+         <h2>░H░o░w░ ░i░t░ ░w░o░r░k░s░
+</h2>
+  <p class="subtitle">Discover   your hidden talents in 4 easy steps</p>
+  
+  <div class="steps-container">
+
+    <!-- Step 1 -->
+    <div class="step-card">
+      <img src="https://i.pinimg.com/736x/34/c3/33/34c3332cb8eb6c448bb4544cd7df4bcd.jpg" alt="Log In" class="step-img">
+      <div class="step-text">
+        <h3>1. Log In</h3>
+        <p>Sign in to start your journey and access quizzes & games</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card">
+      <img src="https://static.vecteezy.com/system/resources/previews/027/765/346/non_2x/quiz-sign-mark-free-free-png.png" alt="Take Quiz" class="step-img">
+      <div class="step-text">
+        <h3>2. Take Quiz</h3>
+        <p>Complete fun quizzes to uncover your hidden skills</p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card">
+      <img src="https://i.pinimg.com/736x/ca/3b/bc/ca3bbcd71d89a69e2e57a4afab0fa5b4.jpg" alt="Play Games" class="step-img">
+      <div class="step-text">
+        <h3>3. Play Games</h3>
+        <p>Interactive games to discover strengths in a playful way</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-card">
+      <img src="https://static.vecteezy.com/system/resources/previews/027/505/800/large_2x/talent-acquisition-icon-can-be-used-for-uiux-etc-vector.jpg" alt="Discover Talent" class="step-img">
+      <div class="step-text">
+        <h3>4. Discover Talent</h3>
+        <p>See your results and unlock your hidden talents</p>
+
+
+        </section>
+        <section>
+            <section id="about-us">
+  <h2 class="about-title">🎀  𝒜bo𝓊𝓉 𝐻𝒾𝒹𝒹𝑒𝓃 𝒯𝒶𝓁𝑒𝓃𝓉  🎀</h2>
+  <p class="about-subtitle">
+    Empowering youth to discover skills they never knew they had.
+  </p>
+
+  <div class="about-row">
+
+    <div class="about-image">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.q_9igNow6bIM8JB7FAv7JgHaDK?pid=Api&h=220&P=0" alt="About Image">
+    </div>
+
+    <div class="about-content">
+      <h3>Who We Are</h3>
+      <p>
+        Hidden Talent aik modern digital platform hai jo logon ko unke hidden skills 
+        aur real abilities discover karne me help karta hai — quizzes, games aur 
+        AI-based analysis ke through.
+      </p>
+
+      <h3>Our Mission</h3>
+      <p>
+        Har user apne andar chupi hui skills ko pehchane aur apni life me grow kare. 
+        Hum youth ko smart decisions aur confidence dene ka aim rakhte hain.
+      </p>
+
+      <h3>Our Vision</h3>
+      <p>
+        Hum ek aisi digital duniya create kar rahe hain jahan har insan apna hidden 
+        talent easily discover kar sake — no matter their background.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="features-box">
+
+    <div class="feature-card">
+      <h4>What We Offer</h4>
+      <ul>
+        <li>🎯 Talent Discovering Quizzes</li>
+        <li>🎮 Interactive Skill Games</li>
+        <li>📊 AI-Based Suggestions</li>
+        <li>🧠 Personality Insights</li>
+        <li>🌟 Progress Tracking</li>
+      </ul>
+    </div>
+
+    <div class="feature-card">
+      <h4>Why Choose Us?</h4>
+      <ul>
+        <li>✓ Modern & clean interface</li>
+        <li>✓ Easy-to-use platform</li>
+        <li>✓ Free learning + fun experience</li>
+        <li>✓ AI-powered analytics</li>
+        <li>✓ Accurate skill evaluation</li>
+      </ul>
+    </div>
+
+    <div class="feature-card">
+      <h4>Contact Us</h4>
+      <p>📧 support@hiddentalent.com</p>
+      <p>📞 +92 300 0000000</p>
+      <p>🌐 www.hiddentalent.com</p>
+      <p>📍 Pakistan</p>
+    </div>
+
+  </div>
+</section>
+        </section>
+    </main>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", () => {
+        // User login info
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const userName = localStorage.getItem("userName");
+
+        // Not logged in → redirect to login
+        if (isLoggedIn !== "true") {
+            window.location.href = "login.html";
+            return; // stop rest of script
+        }
+
+        // Logged in → show content
+        const heroText = document.getElementById("hero-text");
+        const userNameBox = document.getElementById("userName");
+        const guestSection = document.getElementById("guestSection");
+        const userSection = document.getElementById("userSection");
+        const overlay = document.getElementById("authOverlay");
+        const mainBody = document.getElementById("mainBody");
+
+        if (heroText) heroText.textContent = `Welcome ${userName || "Explorer"}`;
+        if (userNameBox) userNameBox.innerText = userName || "Explorer";
+
+        if (guestSection) guestSection.classList.add("hidden");
+        if (userSection) userSection.style.display = "flex";
+        if (overlay) overlay.classList.add("hidden");
+        if (mainBody) {
+            mainBody.classList.remove("locked-content");
+            mainBody.classList.add("unlocked");
+        }
+    });
+
+    // Logout function
+    function logout() {
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
+
+   
+    // ---- SEARCH BAR ----
+    const searchBar = document.getElementById("search-bar");
+
+    searchBar.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            const q = searchBar.value.trim().toLowerCase();
+
+            if (q === "quiz") window.location.href = "quiz.html";
+            else if (q === "dashboard") window.location.href = "dashboard.html";
+            else if (q === "games") window.location.href = "games.html";
+            else if (q === "profile") window.location.href = "profile.html";
+            else if (q === "about") window.location.href = "about.html";
+            else alert("Page Not Found");
+        }
+    });
+    const cards = document.querySelectorAll('.story-card');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.2 });
+
+cards.forEach(card => observer.observe(card));
+const steps = document.querySelectorAll('.step-card');
+
+const observerSteps = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.2 });
+
+steps.forEach(step => observerSteps.observe(step));
+</script>
+</body>
+</html>
