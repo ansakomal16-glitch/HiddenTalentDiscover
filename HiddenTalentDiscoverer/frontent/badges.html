@@ -3,167 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hall of Fame | Hidden Talent</title>
+    <title>Hall of Fame | Elite Achievements</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --neon-blue: #00d2ff;
-            --locked-gray: #1a1a1a;
-            --glass: rgba(255, 255, 255, 0.03);
+            --primary: #4f46e5;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+            --locked: #94a3b8;
         }
 
-        body {
-            background: #050505;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            padding-bottom: 50px;
+        body { 
+            background-color: var(--bg); 
+            color: #0f172a; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.01em;
         }
 
-        /* --- Header Glow --- */
-        .header-section { padding: 60px 20px; }
-        .header-section h1 { 
-            font-size: 50px; 
-            font-weight: 800; 
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        /* --- Decorative Background Elements --- */
+        .bg-blur {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: rgba(79, 70, 229, 0.05);
+            filter: blur(100px);
+            z-index: -1;
+            border-radius: 50%;
         }
 
-        /* --- Badge Grid --- */
-        .badge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* --- Badge Card Base --- */
+        /* --- Badge Card Styling --- */
         .badge-card {
-            background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px 25px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 35px;
+            padding: 45px 30px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
-            transition: all 0.4s ease;
-            cursor: default;
+            overflow: hidden;
+            text-align: center;
         }
 
-        /* --- Unlocked Effect --- */
+        /* --- Unlocked Styling --- */
         .unlocked {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.1);
-            background: rgba(0, 210, 255, 0.02);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
         }
 
         .unlocked:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 210, 255, 0.25);
-            border-color: #fff;
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 40px 70px -15px rgba(79, 70, 229, 0.15);
+            border-color: var(--primary);
         }
 
-        /* --- Locked Effect --- */
+        .unlocked .icon-container {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            width: 100px;
+            height: 100px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 45px;
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.1);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* --- Locked Styling --- */
         .locked {
-            filter: grayscale(1);
-            opacity: 0.5;
+            background: #f1f5f9;
+            opacity: 0.7;
+            border-style: dashed;
         }
 
-        .locked::after {
-            content: '🔒';
+        .locked .icon-container {
+            background: #e2e8f0;
+            width: 100px;
+            height: 100px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 45px;
+            filter: grayscale(1);
+        }
+
+        .lock-tag {
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 18px;
-        }
-
-        /* --- Badge Content --- */
-        .badge-img {
-            font-size: 60px;
-            margin-bottom: 20px;
-            display: inline-block;
-            transition: 0.3s;
-        }
-
-        .unlocked .badge-img {
-            filter: drop-shadow(0 0 10px var(--neon-blue));
-            animation: float 3s ease-in-out infinite;
+            background: #ffffff;
+            color: var(--locked);
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(2deg); }
         }
 
-        .status-pill {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
+        .badge-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .badge-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .status-badge {
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.1em;
+            padding: 5px 15px;
+            border-radius: 100px;
             margin-bottom: 15px;
+            display: inline-block;
         }
-
-        .unlocked .status-pill { background: var(--neon-blue); color: #000; }
-        .locked .status-pill { background: #333; color: #888; }
-
-        h3 { margin-bottom: 10px; font-size: 20px; }
-        p { color: #888; font-size: 13px; line-height: 1.5; }
-
     </style>
 </head>
-<body>
+<body class="p-6 md:p-12">
 
-    <div class="header-section">
-        <h1>Hall of Fame</h1>
-        <p style="color: #666;">Your journey to mastery, immortalized in badges.</p>
-    </div>
+    <div class="bg-blur" style="top: -100px; left: -100px;"></div>
+    <div class="bg-blur" style="bottom: -100px; right: -100px; background: rgba(99, 102, 241, 0.05);"></div>
 
-    <div class="badge-grid" id="badgesContainer">
+    <header class="max-w-7xl mx-auto mb-16 text-center">
+        <div class="inline-flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full mb-6">
+            <i class="fas fa-award text-indigo-600 text-xs"></i>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Achievement System v3.0</span>
         </div>
+        <h1 class="text-5xl font-black text-slate-900 tracking-tight mb-4">Hall of <span class="text-indigo-600">Fame</span></h1>
+        <p class="text-slate-500 max-w-xl mx-auto text-lg font-medium">Your cognitive milestones and professional victories, immortalized in the digital archive.</p>
+    </header>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="badgesContainer">
+        </div>
+
+    <div class="mt-20 text-center">
+        <a href="dashboard.html" class="text-slate-400 hover:text-indigo-600 font-bold text-sm transition-all flex items-center justify-center gap-2">
+            <i class="fas fa-arrow-left"></i>
+            RETURN TO COMMAND CENTER
+        </a>
+    </div>
 
     <script>
         function renderBadges() {
-            const user = JSON.parse(localStorage.getItem("currentUser"));
-            const lastScoreRaw = localStorage.getItem("lastQuizResult") || "Score: 0";
-            const lastScore = parseInt(lastScoreRaw.split(": ")[1]) || 0;
+            // Humne localStorage se data liya
+            const user = localStorage.getItem("userEmail");
+            const lastScore = parseInt(localStorage.getItem("lastGameScore")) || 0;
+            const roadmapProgress = parseInt(localStorage.getItem("roadmapProgress")) || 1;
             
-            // Badges Data with Conditions
             const badges = [
                 {
                     title: "Early Pioneer",
-                    desc: "Awarded for creating an account and joining the elite.",
+                    desc: "Awarded for initializing your neural profile and joining the lab.",
                     icon: "🚀",
-                    isUnlocked: user ? true : false
+                    isUnlocked: user ? true : false,
+                    tag: "Legacy"
                 },
                 {
-                    title: "Smart Brain",
-                    desc: "Score more than 70% in any talent discovery quiz.",
+                    title: "Neural Titan",
+                    desc: "Exceeding 50+ points in a single high-stress cognitive experiment.",
                     icon: "🧠",
-                    isUnlocked: lastScore >= 7
+                    isUnlocked: lastScore >= 50,
+                    tag: "Skill"
                 },
                 {
                     title: "Path Finder",
-                    desc: "Complete your first personalized roadmap stage.",
-                    icon: "🗺️",
-                    isUnlocked: false // Logic can be added later
+                    desc: "Successfully completing the first phase of your career roadmap.",
+                    icon: "🧭",
+                    isUnlocked: roadmapProgress > 1,
+                    tag: "Progress"
                 },
                 {
-                    title: "Top Contender",
-                    desc: "Achieve a rank in the Global Top 3.",
+                    title: "Global Elite",
+                    desc: "Maintain a top 1% performance index across all test categories.",
                     icon: "🏆",
-                    isUnlocked: false 
+                    isUnlocked: false, // Future logic
+                    tag: "Prestige"
                 }
             ];
 
             const container = document.getElementById('badgesContainer');
             container.innerHTML = badges.map(badge => `
                 <div class="badge-card ${badge.isUnlocked ? 'unlocked' : 'locked'}">
-                    <span class="status-pill">${badge.isUnlocked ? 'Unlocked' : 'Locked'}</span>
-                    <div class="badge-img">${badge.icon}</div>
-                    <h3>${badge.title}</h3>
-                    <p>${badge.desc}</p>
+                    ${!badge.isUnlocked ? '<div class="lock-tag"><i class="fas fa-lock"></i></div>' : ''}
+                    <span class="status-badge ${badge.isUnlocked ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-200 text-slate-500'}">
+                        ${badge.tag}
+                    </span>
+                    <div class="icon-container">
+                        ${badge.icon}
+                    </div>
+                    <h3 class="badge-title">${badge.title}</h3>
+                    <p class="badge-desc">${badge.desc}</p>
+                    ${badge.isUnlocked ? `
+                        <div class="mt-6 pt-6 border-t border-slate-50 flex items-center justify-center gap-2">
+                            <i class="fas fa-circle-check text-indigo-500 text-[10px]"></i>
+                            <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest">Verified Achievement</span>
+                        </div>
+                    ` : `
+                        <div class="mt-6 pt-6 border-t border-dashed border-slate-200">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Locked Objective</span>
+                        </div>
+                    `}
                 </div>
             `).join('');
         }

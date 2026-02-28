@@ -1,37 +1,37 @@
 body {
-            background: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg") no-repeat center/cover;
-            height: 100vh;
-            margin: 0;
-            color: white;
-            text-align: center;
-        }
+    background: #f8fafc; /* Light premium background */
+    height: 100vh;
+    margin: 0;
+    color: #1e293b; /* Dark slate text */
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
 
-        .hidden { display: none; }
+.hidden { display: none; }
 
-        #start-screen button,
-        #nextBtn {
-            padding: 12px 25px;
-            border-radius: 30px;
-            background: linear-gradient(45deg, #7570ce, #af9dcd);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
+#start-screen button,
+#nextBtn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #6366f1, #a855f7); /* Indigo gradient */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    margin-top: 20px;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+}
 
-        #nextBtn:hover {
-            scale: 1.05;
-            box-shadow: 0 0 15px #907bb6;
-        }
+#nextBtn:hover {
+    scale: 1.05;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
 
-       /* QUESTION BOX */
-        /* QUESTION BOX → neon frame + dark gradient */
+/* QUESTION BOX */
+/* QUESTION BOX → white frame + soft shadow */
 
-          /* QUESTION BOX — only question inside */
-
-
+/* QUESTION BOX — only question inside */
 
 .options {
     margin-top: 5px;
@@ -41,58 +41,66 @@ body {
     width: 50%;
     margin: 10px auto;
     padding: 12px 20px;
-    background: rgba(0,0,0,0.4);
-    border: 2px solid white;
-    border-radius: 10px;
+    background: #ffffff; /* Pure white option */
+    border: 2px solid #e2e8f0; /* Soft border */
+    border-radius: 15px;
     text-align: center;
     font-size: 18px;
-    color: white;
+    color: #475569; /* Soft dark text */
     cursor: pointer;
     transition: 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .option:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: #6366f1; /* Highlight on hover */
+    color: white;
     transform: scale(1.03);
+    border-color: #6366f1;
 }
 
+.circle-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-        .circle-box {
-            width: 100%;
-             display: flex;
-            justify-content: center;
-             margin-top: 20px;
-        }
+.circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 8px solid #6366f1; /* Solid Indigo border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    color: #1e293b;
+    background: white;
+}
 
-        .circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 8px solid #caa6ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.7rem;
-        }#resultChart {
-            background: white;
-    color: black;
+#resultChart {
+    background: #ffffff;
+    color: #1e293b;
     width: 320px !important;
-
     height: 220px !important;
     margin: 0 auto;
     display: block;
     padding: 25px;
     border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Soft shadow for chart */
+    border: 1px solid #f1f5f9;
 }
+
 #result-box {
     background: white !important;
-    color: black;
+    color: #1e293b;
     width: 85%;
     margin: 30px auto;
     padding: 25px;
     border-radius: 20px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* Professional depth shadow */
     position: relative;
     z-index: 10;
+    border: 1px solid #f1f5f9;
 }

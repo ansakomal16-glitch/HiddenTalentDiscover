@@ -2,86 +2,177 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Development Quiz</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
+        /* ==== ELEGANT WHITE THEME SETTINGS ==== */
         body {
-            background: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg") no-repeat center/cover;
+            background: #f8fafc !important; /* Premium Off-White */
             height: 100vh;
             margin: 0;
-            color: white;
+            color: #1e293b; /* Dark Slate Text */
             text-align: center;
+            font-family: 'Poppins', sans-serif;
         }
-        .hidden { display: none; }
-        #start-screen button,
-        #nextBtn {
-            padding: 12px 25px;
-            border-radius: 30px;
-            background: linear-gradient(45deg, #a09dda, #af9dcd);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            margin-top: 20px;
-            transition: 0.3s;
+
+        /* NAVBAR RE-DESIGN */
+        header {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+            padding: 10px 0 !important;
         }
-        .question-box {
-            width: 80%;
-            margin: auto;
-            margin-top: 30px;
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
-        .option {
-            margin: 10px;
-            padding: 12px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
-            cursor: pointer;
-        }
-        .circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 8px solid #caa6ff;
+
+        .navbar-row {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.7rem;
+            gap: 20px;
         }
-        .circle-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
 
-.circle {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 8px solid #a57bff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 0 10px #b889ff;
-    box-shadow: 0 0 20px rgba(165, 123, 255, 0.6);
-}
+        .navbar-row a {
+            color: #475569 !important;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .navbar-row a:hover {
+            color: #6366f1 !important;
+        }
+
+        .navbar-login {
+            border: 1px solid #e2e8f0 !important;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .navbar-signup {
+            background: #6366f1;
+            color: white !important;
+            padding: 6px 18px;
+            border-radius: 20px;
+        }
+
+        .hidden { display: none; }
+
+        /* BUTTONS */
+        #start-screen button,
+        #nextBtn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        #nextBtn:hover, #startBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* QUESTION BOX */
+        .question-box {
+            width: 85%;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        .option {
+            display: block;
+            width: 90%;
+            margin: 12px auto;
+            padding: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #475569;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .option:hover {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+            transform: translateX(5px);
+        }
+
+        /* RESULT BOX */
+        #result-box {
+            background: white !important;
+            color: #1e293b;
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
+        }
+
+        /* CIRCLE */
+        .circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 8px solid #6366f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
 
         #resultChart {
-    width: 300px !important;
-    height: 200px !important;
-    display: block;
-    margin: 15px auto;
-}
+            width: 320px !important;
+            height: 220px !important;
+            background: #ffffff;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 15px;
+        }
 
+        /* LIST LINKS */
+        li {
+            list-style: none;
+            margin: 10px 0;
+            text-align: left;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 5px solid #6366f1;
+        }
+
+        li a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        li a:hover { color: #6366f1; }
+
+        h1, h2, h3 { color: #0f172a; font-weight: 800; }
     </style>
 </head>
 
@@ -101,66 +192,48 @@
     </div>
 </header>
 
-<!-- Start Screen -->
 <div id="start-screen">
-    <h1>Web Development Quiz</h1>
+    <h1 style="margin-top: 60px;">Web Development Quiz</h1>
+    <p style="color: #64748b;">Identify your skills in Modern Web Stack</p>
     <button id="startBtn">Start Quiz</button>
 </div>
 
-<!-- Quiz Screen -->
 <div id="quiz-screen" class="hidden">
     <h2>Question</h2>
     <div id="questions-container"></div>
     <button id="nextBtn" class="hidden">Next</button>
 </div>
 
-<!-- Result Screen -->
 <div id="result-box" class="hidden">
-    <h2>Your Result</h2>
-    <p id="scoreText"></p>
+    <h2>Your Quiz Analysis</h2>
+    <p id="scoreText" style="color: #64748b;"></p>
 
     <div class="circle">
         <span id="percentValue">0%</span>
     </div>
 
-    <canvas id="resultChart" width="300" height="200"></canvas>
+    <canvas id="resultChart"></canvas>
 
     <h3 id="careerTitle"></h3>
-    <p id="careerMessage"></p>
+    <p id="careerMessage" style="color: #475569; line-height: 1.6;"></p>
 
     <div id="improveBox"></div>
 
-    <h3>📚 Recommended Courses</h3>
-    <li>
-  <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp/" 
-     target="_blank">💻 Complete Web Development Bootcamp – Udemy</a>
-</li>
-<li>
-  <a href="https://www.freecodecamp.org/learn" 
-     target="_blank">🔥 FreeCodeCamp – Free Full Web Dev Course</a>
-</li>
-<li>
-  <a href="https://www.coursera.org/professional-certificates/meta-front-end-developer" 
-     target="_blank">🌟 Meta Front-End Developer – Coursera</a>
-</li>
-<li>
-  <a href="https://www.coursera.org/specializations/web-design" 
-     target="_blank">🎨 Web Design Specialization – Coursera</a>
-</li>
-
-    <ul id="courseList"></ul>
-
-    <h3>💼 Jobs</h3>
-    <ul id="jobList"></ul>
-    <li>
-  <a href="https://www.linkedin.com/jobs/search/?keywords=Junior%20Front%20End%20Developer" 
-     target="_blank">💼 Junior Front-End Developer Jobs – LinkedIn</a>
-</li>
-<li>
-  <a href="https://www.glassdoor.com/Job/junior-web-developer-jobs-SRCH_KO0,21.htm" 
-     target="_blank">🔧 Junior Web Developer Jobs – Glassdoor</a>
-</li>
-
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-top: 30px;">
+        <div>
+            <h3>📚 Recommended Courses</h3>
+            <li><a href="https://www.udemy.com/course/the-complete-web-development-bootcamp/" target="_blank">💻 Web Development Bootcamp</a></li>
+            <li><a href="https://www.freecodecamp.org/learn" target="_blank">🔥 FreeCodeCamp Full Course</a></li>
+            <li><a href="https://www.coursera.org/professional-certificates/meta-front-end-developer" target="_blank">🌟 Meta Front-End Cert</a></li>
+            <ul id="courseList"></ul>
+        </div>
+        <div>
+            <h3>💼 Job Opportunities</h3>
+            <li><a href="https://www.linkedin.com/jobs/search/?keywords=Junior%20Front%20End%20Developer" target="_blank">💼 Front-End Jobs</a></li>
+            <li><a href="https://www.glassdoor.com/Job/junior-web-developer-jobs-SRCH_KO0,21.htm" target="_blank">🔧 Web Developer Jobs</a></li>
+            <ul id="jobList"></ul>
+        </div>
+    </div>
 </div>
 
 <script src="wedev.js"></script>

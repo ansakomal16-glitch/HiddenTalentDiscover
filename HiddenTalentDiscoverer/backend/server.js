@@ -14,13 +14,17 @@ mongoose.connect(uri)
     .then(() => console.log("🔥 Neural Server: Connected & Ready!"))
     .catch(err => console.error("❌ DB Connection Error:", err.message));
 
-// --- 1. MODELS ---
+// --- 1. MODELS (Updated for High-Class Features) ---
 
-const User = mongoose.model('User', new mongoose.Schema({ 
-    username: String, 
-    email: { type: String, unique: true }, 
-    password: String 
-}));
+const userSchema = new mongoose.Schema({ 
+    username: { type: String, required: true }, 
+    email: { type: String, unique: true, required: true }, 
+    password: { type: String, required: true },
+    contact: String,   // Naya field
+    dob: String,       // Naya field
+    district: String   // Naya field
+});
+const User = mongoose.model('User', userSchema);
 
 const QuizResult = mongoose.model('QuizResult', new mongoose.Schema({
     username: String, email: String, score: Number, category: String, date: { type: Date, default: Date.now }
@@ -36,6 +40,7 @@ const Leaderboard = mongoose.model('Leaderboard', new mongoose.Schema({
     totalQuizScore: { type: Number, default: 0 },
     totalGameScore: { type: Number, default: 0 },
     overallTotal: { type: Number, default: 0 },
+    level: { type: Number, default: 1 }, // Added for Dashboard compatibility
     lastUpdated: { type: Date, default: Date.now }
 }));
 
@@ -56,6 +61,57 @@ async function syncLeaderboard(email, username, score, type) {
 }
 
 // --- 3. ROUTES ---
+
+// AUTH: Signup (Updated with all new fields)
+app.post('/api/signup', async (req, res) => {
+    try {
+        const { username, email, password, contact, dob, district } = req.body;
+
+        // 1. Check if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ success: false, error: "Email already registered." });
+        }
+
+        // 2. Create User with high-class details
+        const newUser = new User({ username, email, password, contact, dob, district });
+        await newUser.save();
+        
+        // 3. Initialize Leaderboard to prevent dashboard crashes
+        const initialLeaderboard = new Leaderboard({ 
+            username, 
+            email,
+            totalQuizScore: 0,
+            totalGameScore: 0,
+            overallTotal: 0,
+            level: 1 
+        });
+        await initialLeaderboard.save();
+        
+        res.json({ 
+            success: true, 
+            message: "Identity Initialized Successfully",
+            user: { name: username, email: email } 
+        });
+
+    } catch (err) { 
+        console.error("Signup Error:", err);
+        res.status(500).json({ success: false, error: "Neural Link Failed: System Error" }); 
+    }
+});
+
+// AUTH: Login
+app.post('/api/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email, password });
+        if (user) {
+            res.json({ success: true, user: { name: user.username, email: user.email } });
+        } else {
+            res.status(401).json({ success: false, message: "Invalid Credentials" });
+        }
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
 
 // SAVE QUIZ
 app.post('/api/save-quiz', async (req, res) => {
@@ -79,16 +135,14 @@ app.post('/api/save-game', async (req, res) => {
     } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// GET USER PROFILE (For Dashboard)
+// GET USER PROFILE
 app.get('/api/user-profile/:email', async (req, res) => {
     try {
         const email = req.params.email;
-        // Pehle Leaderboard se stats nikalein
         let stats = await Leaderboard.findOne({ email: email });
         
-        // Agar naya user hai jisne abhi kuch nahi khela, toh default stats bhejein
         if (!stats) {
-            stats = { totalQuizScore: 0, totalGameScore: 0, overallTotal: 0 };
+            stats = { totalQuizScore: 0, totalGameScore: 0, overallTotal: 0, level: 1 };
         }
 
         const quizHistory = await QuizResult.find({ email }).sort({ date: -1 }).limit(5);
@@ -100,40 +154,12 @@ app.get('/api/user-profile/:email', async (req, res) => {
     }
 });
 
-// GET GLOBAL LEADERBOARD
+// GLOBAL LEADERBOARD
 app.get('/api/global-leaderboard', async (req, res) => {
     try {
         const data = await Leaderboard.find().sort({ overallTotal: -1 }).limit(10);
         res.json(data);
     } catch (err) { res.status(500).json({ error: "Ranking Load Error" }); }
-});
-
-// AUTH: Login
-app.post('/api/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email, password });
-        if (user) {
-            res.json({ success: true, user: { name: user.username, email: user.email } });
-        } else {
-            res.status(401).json({ success: false, message: "Invalid Credentials" });
-        }
-    } catch (err) { res.status(500).json({ error: err.message }); }
-});
-
-// AUTH: Signup
-app.post('/api/signup', async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
-        const newUser = new User({ username, email, password });
-        await newUser.save();
-        
-        // Signup ke waqt hi leaderboard entry bana den taake dashboard crash na ho
-        const initialLeaderboard = new Leaderboard({ username, email });
-        await initialLeaderboard.save();
-        
-        res.json({ success: true });
-    } catch (err) { res.status(400).json({ error: "Email already exists" }); }
 });
 
 const PORT = 5000;

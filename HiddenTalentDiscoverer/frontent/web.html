@@ -2,152 +2,198 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Development Quiz</title>
-    <link rel="stylesheet" href="ai.html">
+    <link rel="stylesheet" href="ai.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
+        /* ==== ELEGANT WHITE THEME SETTINGS ==== */
         body {
-            background: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg") no-repeat center/cover;
+            background: #f8fafc !important; /* Premium light grey/white */
             height: 100vh;
             margin: 0;
-            color: white;
+            color: #1e293b; /* Dark slate text */
             text-align: center;
+            font-family: 'Poppins', sans-serif;
         }
 
         .hidden { display: none; }
 
+        /* BUTTONS */
         #start-screen button,
         #nextBtn {
-            padding: 12px 25px;
-            border-radius: 30px;
-            background: linear-gradient(45deg, #a09dda, #af9dcd);
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-top: 20px;
-            transition: 0.3s;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
         }
 
-        #nextBtn:hover {
-            scale: 1.05;
-            box-shadow: 0 0 15px #e4b5ff;
+        #nextBtn:hover, #startBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
         }
 
+        /* QUESTION BOX */
         .question-box {
-            width: 80%;
-            margin: auto;
-            margin-top: 30px;
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
+            width: 85%;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid #f1f5f9;
         }
 
+        .question-box h2 {
+            color: #0f172a;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+        }
+
+        /* OPTIONS */
         .option {
-            margin: 10px;
-            padding: 12px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
+            display: block;
+            width: 80%;
+            margin: 12px auto;
+            padding: 15px 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
             cursor: pointer;
-            transition: 0.3s;
+            color: #475569;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .option:hover {
-            background: rgba(255,255,255,0.35);
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+            transform: scale(1.02) translateX(5px);
         }
 
+        /* RESULT ELEMENTS */
         .circle-box {
              width: 100%;
              display: flex;
-            justify-content: center;
+             justify-content: center;
              margin-top: 20px;
         }
 
         .circle {
-            width: 120px;
-            height: 120px;
+            width: 125px;
+            height: 125px;
             border-radius: 50%;
-            border: 8px solid #caa6ff;
+            border: 8px solid #6366f1;
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.7rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e293b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-         #resultChart {
-            background: white;
-    color: black;
-    width: 320px !important;
 
-    height: 220px !important;
-    margin: 0 auto;
-    display: block;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255,255,255,0.3);
-}
-#result-box {
-    background: white !important;
-    color: black;
-    width: 85%;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 10;
-}
+        #resultChart {
+            background: #ffffff;
+            width: 100% !important;
+            max-width: 400px;
+            height: auto !important;
+            margin: 30px auto;
+            display: block;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        #result-box {
+            background: #ffffff !important;
+            color: #1e293b;
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
+        }
+
+        /* LISTS */
+        ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        li {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 5px solid #6366f1;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #475569;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        h1 { font-weight: 800; color: #0f172a; margin-top: 50px; }
+        h3 { margin-top: 30px; color: #334155; }
 
     </style>
 </head>
 <body>
 
-<!-- Start Screen -->
 <div id="start-screen">
-    <h1>Web Development Quiz</h1>
-    <button id="startBtn">Start Quiz</button>
+    <h1>Web Development Skill Quiz</h1>
+    <p style="color: #64748b;">Test your potential as a Full Stack Developer</p>
+    <button id="startBtn">Start Quiz Now</button>
 </div>
 
-<!-- Quiz Screen -->
 <div id="quiz-screen" class="hidden">
-    <h2>Question</h2>
-
-    <!-- 20 QUESTIONS -->
     <div id="questions-container"></div>
-
-    <button id="nextBtn" class="hidden">Next</button>
+    <button id="nextBtn" class="hidden">Next Question</button>
 </div>
 
-<!-- Result Screen -->
 <div id="result-box" class="hidden">
+    <h2>Quiz Analysis</h2>
+    <p id="scoreText" style="color: #64748b; font-size: 1.1rem;"></p>
 
-    <h2>Your Result</h2>
-    <p id="scoreText"></p>
-
-    <!-- Circle Percentage -->
     <div class="circle-box">
         <div class="circle">
             <span id="percentValue">0%</span>
         </div>
     </div>
 
-    <!-- Graph -->
-    <canvas id="resultChart" width="300" height="200"></canvas>
+    <canvas id="resultChart"></canvas>
 
-    <!-- AI Recommendation -->
     <h3 id="careerTitle"></h3>
-    <p id="careerMessage"></p>
+    <p id="careerMessage" style="color: #475569; line-height: 1.6;"></p>
 
     <div id="improveBox"></div>
 
-    <h3>📚 Recommended Courses</h3>
-    <ul id="courseList"></ul>
+    <div style="margin-top: 40px;">
+        <h3>📚 Recommended Roadmap</h3>
+        <ul id="courseList"></ul>
 
-    <h3>💼 Jobs</h3>
-    <ul id="jobList"></ul>
-
+        <h3>💼 Career Opportunities</h3>
+        <ul id="jobList"></ul>
+    </div>
 </div>
 
 <script src="wedev.js"></script>

@@ -2,7 +2,135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science - FIELD</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==== GLOBAL WHITE ELEGANT THEME ==== */
+        body {
+            background: #f8fafc !important; /* Premium Off-White */
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            color: #1e293b;
+        }
+
+        /* NAVBAR RE-DESIGN */
+        header {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+            padding: 10px 0 !important;
+            text-align: center;
+        }
+
+        .navbar-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            padding: 10px 0;
+        }
+
+        .navbar-row a {
+            color: #475569 !important;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .navbar-row a:hover {
+            color: #6366f1 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Title inside Header */
+        .title-typing {
+            font-size: 2.5rem;
+            color: #6366f1;
+            margin: 10px 0;
+            font-weight: 800;
+        }
+
+        /* Buttons in Navbar */
+        .navbar-login {
+            border: 2px solid #e2e8f0 !important;
+            padding: 6px 18px !important;
+            border-radius: 20px;
+        }
+
+        .navbar-signup {
+            background: linear-gradient(135deg, #6366f1, #a855f7) !important;
+            color: white !important;
+            padding: 8px 22px !important;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        /* CONTAINER */
+        .cs-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #0f172a;
+            font-weight: 800;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        /* BUTTONS DESIGN */
+        .cs-btn, .field-btn {
+            display: block;
+            width: 450px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateX(-40px);
+            animation: showBtns 1s ease forwards;
+        }
+
+        /* Button Hover Effect */
+        .cs-btn:hover, .field-btn:hover {
+            transform: scale(1.03) translateY(-5px);
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Animation Show */
+        @keyframes showBtns {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Delay for each button */
+        .cs-btn:nth-child(1), .field-btn:nth-child(1) { animation-delay: 0.2s; }
+        .cs-btn:nth-child(2) { animation-delay: 0.4s; }
+        .cs-btn:nth-child(3) { animation-delay: 0.6s; }
+        .cs-btn:nth-child(4) { animation-delay: 0.8s; }
+
+    </style>
+</head>
+<body>
+
+<header>
     <div class="navbar-row">
         <a href="index.html">Home</a>
         <a href="leaderboard.html">Leaderboard</a>
@@ -15,103 +143,27 @@
         <a href="login.html" class="navbar-login">Login</a>
         <a href="signup.html" class="navbar-signup">Sign Up</a>
     </div>
-                 <h1 class="title-typing">𝓣-𝓠𝓾𝓲𝔃
-
-</h1>
-
+    <h1 class="title-typing">T-Quiz</h1>
 </header>
-
-    <title>Computer science - FIELD</title>
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        body {
-            background: url("https://4kwallpapers.com/images/wallpapers/purple-light-geometric-glowing-lines-minimalist-5k-3840x2160-6724.jpg") no-repeat center/cover;
-            height: 100vh;
-            margin: 0;
-            overflow-x: hidden;
-        }
-
-        .cs-container {
-            width: 100%;
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: white;
-            text-shadow: 0 0 15px #a57bff;
-            margin-bottom: 40px;
-        }
-
-        /* Smooth fade + slide animation */
-        .cs-btn {
-            display: block;
-            width: 50%;
-            margin: 15px auto;
-            padding: 18px;
-            border-radius: 50px;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: white;
-            border: none;
-            cursor: pointer;
-            background: linear-gradient(45deg, #a09dda, #af9dcd);
-            box-shadow: 0 0 25px rgba(255,255,255,0.2);
-            transition: 0.5s;
-            opacity: 0;
-            transform: translateX(-40px);
-            animation: showBtns 1.3s ease forwards;
-        }
-
-        .cs-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px #ff7ce9;
-        }
-
-        /* Delay for each button */
-        .cs-btn:nth-child(2) { animation-delay: 0.2s; }
-        .cs-btn:nth-child(3) { animation-delay: 0.4s; }
-        .cs-btn:nth-child(4) { animation-delay: 0.6s; }
-        .cs-btn:nth-child(5) { animation-delay: 0.8s; }
-        .cs-btn:nth-child(6) { animation-delay: 1.0s; }
-        .cs-btn:nth-child(7) { animation-delay: 1.2s; }
-        .cs-btn:nth-child(8) { animation-delay: 1.4s; }
-        .cs-btn:nth-child(9) { animation-delay: 1.6s; }
-
-        @keyframes showBtns {
-            0% {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-    </style>
-</head>
-<body>
 
 <div class="cs-container">
     <h1>Computer Science Fields</h1>
 
-   <button class="field-btn" onclick="window.location.href='ai.html';">
-    AI / Machine Learning
-</button>
+    <button class="field-btn" onclick="window.location.href='ai.html';">
+        AI / Machine Learning
+    </button>
 
-   <button class="cs-btn" onclick="window.location.href='webdev.html';">Web Development</button>
-
+    <button class="cs-btn" onclick="window.location.href='webdev.html';">
+        Web Development
+    </button>
 
     <button class="cs-btn" onclick="window.location.href='software.html';">
-    Software Engineering
-</button>
+        Software Engineering
+    </button>
 
     <button class="cs-btn" onclick="window.location.href='uiux.html';">
-    UI / UX Design
-</button>
-
+        UI / UX Design
+    </button>
 </div>
 
 </body>

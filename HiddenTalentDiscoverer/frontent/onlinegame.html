@@ -3,138 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiddenTalent Discovery Lab</title>
+    <title>Discovery Lab | Neural OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
-        body { background: #020617; color: #f8fafc; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
-        
-        .talent-card { 
-            background: linear-gradient(145deg, #0f172a, #1e293b); 
-            border: 1px solid #334155; 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
-        .talent-card:hover { 
-            border-color: #38bdf8; 
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.15); 
-            transform: translateY(-10px); 
+        :root {
+            --primary: #4f46e5;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
         }
 
-        .game-overlay { background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(25px); }
+        body { 
+            background: var(--bg-light); 
+            color: var(--text-dark); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        
+        /* Premium Card Styling */
+        .talent-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .talent-card:hover { 
+            border-color: var(--primary); 
+            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.1); 
+            transform: translateY(-8px); 
+        }
+
+        /* Game Overlay - White Glassmorphism */
+        .game-overlay { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+        }
         
         #game-canvas { 
-            height: 480px; 
-            border: 2px solid #1e293b; 
-            background: radial-gradient(circle at center, #0f172a, #020617); 
+            height: 450px; 
+            background: #ffffff;
+            border: 2px dashed #cbd5e1;
             border-radius: 32px; 
             position: relative; 
             overflow: hidden; 
             display: flex; 
             align-items: center; 
-            justify-content: center; 
+            justify-content: center;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
         }
 
-        .node { width: 70px; height: 70px; border-radius: 16px; cursor: pointer; position: absolute; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.1s; }
-        
-        /* Floating Animation */
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-        .float-anim { animation: float 3s ease-in-out infinite; }
+        /* Node Styling for Reflex Game */
+        .node { 
+            width: 70px; height: 70px; border-radius: 20px; cursor: pointer; 
+            position: absolute; display: flex; align-items: center; 
+            justify-content: center; font-weight: bold; transition: 0.15s;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
 
-        .matrix-btn { width: 80px; height: 80px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; font-size: 24px; font-weight: bold; transition: 0.2s; }
-        .matrix-btn:hover { background: #38bdf8; color: #000; transform: scale(0.95); }
+        /* Matrix Button Styling */
+        .matrix-btn { 
+            width: 85px; height: 85px; background: #f1f5f9; 
+            border: 1px solid var(--border); border-radius: 18px; 
+            font-size: 24px; font-weight: 800; transition: 0.2s; 
+            color: var(--text-dark);
+        }
+        .matrix-btn:hover { background: var(--primary); color: white; transform: scale(0.95); border-color: var(--primary); }
+
+        /* Custom Input for Math/Logic */
+        .game-input {
+            background: transparent;
+            border-bottom: 6px solid var(--primary);
+            text-align: center;
+            font-weight: 900;
+            color: var(--primary);
+            outline: none;
+            width: 280px;
+        }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-10">
 
-    <header class="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row justify-between items-center bg-slate-900/50 p-8 rounded-[2.5rem] border border-slate-800 shadow-2xl">
-        <div class="mb-4 md:mb-0">
-            <h1 class="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-500 tracking-tighter">TALENT DISCOVERY LAB</h1>
-            <p class="text-slate-400 font-light mt-1 text-lg">Uncovering hidden cognitive potentials through neural stress tests.</p>
+    <header class="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row justify-between items-center bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
+        <div>
+            <div class="flex items-center gap-3 mb-1">
+                <div class="w-3 h-3 bg-indigo-600 rounded-full animate-pulse"></div>
+                <span class="text-xs font-bold tracking-[0.2em] text-indigo-600 uppercase">System Active</span>
+            </div>
+            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Discovery <span class="text-indigo-600">Lab</span></h1>
+            <p class="text-slate-500 font-medium mt-1">Measuring neural performance and cognitive speed.</p>
         </div>
-        <div class="text-center md:text-right bg-slate-800/50 p-4 rounded-2xl border border-slate-700">
-            <span class="text-[10px] uppercase tracking-[0.3em] text-sky-500 font-bold">Authorized Subject</span>
-            <p id="player-name" class="text-2xl font-bold text-white tracking-tight">Guest User</p>
+        <div class="mt-6 md:mt-0 flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                <i class="fas fa-user-tie text-indigo-600"></i>
+            </div>
+            <div>
+                <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Authorized Subject</span>
+                <p id="player-name" class="text-lg font-bold text-slate-900">Guest User</p>
+            </div>
         </div>
     </header>
 
-    <div id="games-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+    <div id="games-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
         
-        <div onclick="openGame('Logic', 'Pattern Master')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
-            <div class="w-16 h-16 bg-sky-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500/20 transition">
-                <i class="fas fa-brain text-sky-400 text-3xl"></i>
+        <div onclick="openGame('Logic', 'Pattern Master')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
+            <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-all duration-300">
+                <i class="fas fa-brain text-indigo-600 text-2xl group-hover:text-white"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Pattern Master</h3>
-            <p class="text-sm text-slate-500 leading-relaxed italic">Tests logical sequence deduction & abstract reasoning.</p>
+            <h3 class="text-lg font-bold text-slate-900">Pattern Master</h3>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Abstract reasoning & sequence deduction.</p>
         </div>
 
-        <div onclick="openGame('Math', 'Neural Math')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
-            <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500/20 transition">
-                <i class="fas fa-calculator text-emerald-400 text-3xl"></i>
+        <div onclick="openGame('Math', 'Neural Math')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
+            <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 transition-all duration-300">
+                <i class="fas fa-calculator text-emerald-600 text-2xl group-hover:text-white"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Neural Math</h3>
-            <p class="text-sm text-slate-500 leading-relaxed italic">Measures quantitative speed and accuracy.</p>
+            <h3 class="text-lg font-bold text-slate-900">Neural Math</h3>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Quantitative speed and mental arithmetic.</p>
         </div>
 
-        <div onclick="openGame('Reflex', 'Reflex Sync')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
-            <div class="w-16 h-16 bg-rose-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-500/20 transition">
-                <i class="fas fa-bolt text-rose-400 text-3xl"></i>
+        <div onclick="openGame('Reflex', 'Reflex Sync')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
+            <div class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-600 transition-all duration-300">
+                <i class="fas fa-bolt text-rose-600 text-2xl group-hover:text-white"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Reflex Sync</h3>
-            <p class="text-sm text-slate-500 leading-relaxed italic">Analyzes neuromuscular response latency.</p>
+            <h3 class="text-lg font-bold text-slate-900">Reflex Sync</h3>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Neuromuscular response latency test.</p>
         </div>
 
-        <div onclick="openGame('Memory', 'Digit Span')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
-            <div class="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500/20 transition">
-                <i class="fas fa-microchip text-amber-400 text-3xl"></i>
+        <div onclick="openGame('Memory', 'Digit Span')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
+            <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-600 transition-all duration-300">
+                <i class="fas fa-microchip text-amber-600 text-2xl group-hover:text-white"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Digit Span</h3>
-            <p class="text-sm text-slate-500 leading-relaxed italic">Evaluates short-term working memory capacity.</p>
+            <h3 class="text-lg font-bold text-slate-900">Digit Span</h3>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Short-term working memory capacity.</p>
         </div>
 
-        <div onclick="openGame('Focus', 'Focus Matrix')" class="talent-card p-8 rounded-[2rem] cursor-pointer group">
-            <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition">
-                <i class="fas fa-eye text-purple-400 text-3xl"></i>
+        <div onclick="openGame('Focus', 'Focus Matrix')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
+            <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-600 transition-all duration-300">
+                <i class="fas fa-eye text-purple-600 text-2xl group-hover:text-white"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Focus Matrix</h3>
-            <p class="text-sm text-slate-500 leading-relaxed italic">Calculates visual search and focus endurance.</p>
+            <h3 class="text-lg font-bold text-slate-900">Focus Matrix</h3>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Visual search and focus endurance.</p>
         </div>
 
     </div>
 
     <div id="game-overlay" class="fixed inset-0 hidden game-overlay z-50 flex flex-col items-center justify-center p-4">
-        <div class="max-w-4xl w-full bg-slate-900 border border-slate-700 p-8 rounded-[3rem] shadow-2xl relative overflow-hidden">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 relative z-10">
+        <div class="max-w-4xl w-full bg-white border border-slate-200 p-10 rounded-[3.5rem] shadow-2xl relative">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <div>
-                    <h2 id="active-game-title" class="text-4xl font-black text-white tracking-tighter uppercase">Game Title</h2>
-                    <p id="game-status-text" class="text-sky-500 font-bold text-xs tracking-widest uppercase mt-1">Status: Experiment in Progress</p>
-                </div>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <div class="bg-slate-800/80 px-6 py-3 rounded-2xl border border-slate-700 text-center">
-                        <p class="text-[10px] text-slate-500 uppercase font-bold">Neural Index</p>
-                        <p id="live-score" class="text-3xl font-bold text-white">0</p>
+                    <h2 id="active-game-title" class="text-3xl font-black text-slate-900 tracking-tight uppercase">Game Title</h2>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="w-2 h-2 bg-indigo-600 rounded-full"></span>
+                        <p id="game-status-text" class="text-indigo-600 font-bold text-[10px] tracking-widest uppercase">Session Active</p>
                     </div>
-                    <div class="bg-slate-800/80 px-6 py-3 rounded-2xl border border-slate-700 text-center min-w-[100px]">
-                        <p class="text-[10px] text-slate-500 uppercase font-bold">Time Window</p>
-                        <p id="timer" class="text-3xl font-bold text-rose-500">20s</p>
+                </div>
+                <div class="flex gap-4 mt-6 md:mt-0">
+                    <div class="bg-slate-50 px-8 py-3 rounded-2xl border border-slate-100 text-center">
+                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Score</p>
+                        <p id="live-score" class="text-3xl font-black text-indigo-600">0</p>
+                    </div>
+                    <div class="bg-slate-900 px-8 py-3 rounded-2xl text-center min-w-[120px]">
+                        <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Time Left</p>
+                        <p id="timer" class="text-3xl font-black text-white">20s</p>
                     </div>
                 </div>
             </div>
 
-            <div id="game-canvas">
-                </div>
+            <div id="game-canvas"></div>
 
-            <div class="flex justify-between mt-8 relative z-10">
-                <button onclick="closeGame()" class="px-6 py-2 bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-500 rounded-xl transition font-bold text-sm">TERMINATE</button>
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
-                    <p class="text-slate-600 text-[10px] uppercase tracking-[0.2em]">Live Data Uplink Active</p>
+            <div class="flex justify-between items-center mt-10">
+                <button onclick="closeGame()" class="px-8 py-3 bg-white border border-slate-200 hover:border-rose-500 hover:text-rose-500 text-slate-400 rounded-2xl transition-all font-bold text-xs uppercase tracking-widest">Abort Mission</button>
+                <div class="text-slate-300 text-[10px] font-bold uppercase tracking-widest flex items-center gap-3">
+                    <i class="fas fa-shield-halved"></i>
+                    Encrypted Data Uplink
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        // ... (Baaki JavaScript Logic Same Rahegi) ...
         const userEmail = localStorage.getItem('userEmail');
         const userName = localStorage.getItem('userName') || "Guest";
         document.getElementById('player-name').innerText = userName;
@@ -146,7 +197,7 @@
 
         function openGame(category, title) {
             if(!userEmail) {
-                alert("Please access the Command Center (Login) first.");
+                alert("Please Login first.");
                 window.location.href = 'login.html';
                 return;
             }
@@ -157,7 +208,6 @@
             timeLeft = 20;
             document.getElementById('live-score').innerText = "0";
             
-            // Logic selection
             if(category === 'Math') startMathChallenge();
             else if(category === 'Reflex') startReflexChallenge();
             else if(category === 'Memory') startMemoryChallenge();
@@ -180,8 +230,11 @@
             clearInterval(gameInterval);
             document.getElementById('game-canvas').innerHTML = `
                 <div class="text-center">
-                    <h2 class="text-4xl font-bold text-white mb-2">TEST COMPLETE</h2>
-                    <p class="text-sky-400 animate-pulse uppercase tracking-widest text-sm">Syncing Data to Neural Cloud...</p>
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-black text-slate-900 mb-2">SESSION COMPLETE</h2>
+                    <p class="text-slate-400 uppercase tracking-widest text-xs font-bold">Synchronizing with Neural Cloud...</p>
                 </div>`;
 
             const payload = { email: userEmail, username: userName, score: currentScore, gameName: gameType };
@@ -192,23 +245,23 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                const result = await response.json();
-                if (result.success) window.location.href = 'dashboard.html';
+                if (response.ok) setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
             } catch (err) {
-                window.location.href = 'dashboard.html';
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
             }
         }
 
-        // --- 1. NEURAL MATH ---
+        // --- GAME LOGICS (Updated Colors for White Theme) ---
+
         function startMathChallenge() {
             const canvas = document.getElementById('game-canvas');
-            const n1 = Math.floor(Math.random() * 90) + 10;
-            const n2 = Math.floor(Math.random() * 90) + 10;
+            const n1 = Math.floor(Math.random() * 50) + 10;
+            const n2 = Math.floor(Math.random() * 50) + 10;
             const sum = n1 + n2;
             canvas.innerHTML = `
                 <div class="text-center">
-                    <h1 class="text-8xl font-black mb-8 text-white tracking-tighter">${n1}+${n2}</h1>
-                    <input type="number" id="ans" class="bg-slate-800/50 border-b-8 border-emerald-500 text-7xl p-4 w-64 text-center focus:outline-none font-black text-emerald-400 rounded-t-3xl" autofocus>
+                    <h1 class="text-8xl font-black mb-6 text-slate-900 tracking-tighter">${n1}+${n2}</h1>
+                    <input type="number" id="ans" class="game-input text-6xl p-4" autofocus>
                 </div>`;
             const input = document.getElementById('ans');
             input.focus();
@@ -221,12 +274,12 @@
             };
         }
 
-        // --- 2. REFLEX SYNC ---
         function startReflexChallenge() {
             const canvas = document.getElementById('game-canvas');
             canvas.innerHTML = '';
             const node = document.createElement('div');
-            node.className = 'node bg-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.6)] hover:scale-110 active:scale-90';
+            node.className = 'node bg-indigo-600 text-white';
+            node.innerHTML = '<i class="fas fa-fingerprint"></i>';
             node.style.left = Math.random() * (canvas.clientWidth - 100) + 'px';
             node.style.top = Math.random() * (canvas.clientHeight - 100) + 'px';
             node.onclick = () => {
@@ -237,34 +290,31 @@
             canvas.appendChild(node);
         }
 
-        // --- 3. DIGIT SPAN (Memory) ---
         function startMemoryChallenge() {
             const canvas = document.getElementById('game-canvas');
-            const length = 3 + Math.floor(currentScore / 200);
             let target = "";
-            for(let i=0; i<length; i++) target += Math.floor(Math.random()*10);
+            for(let i=0; i<4; i++) target += Math.floor(Math.random()*10);
             
-            canvas.innerHTML = `<h1 class="text-8xl font-black text-amber-400 tracking-[0.2em]">${target}</h1>`;
+            canvas.innerHTML = `<h1 class="text-8xl font-black text-indigo-600 tracking-[0.3em]">${target}</h1>`;
             
             setTimeout(() => {
                 canvas.innerHTML = `
                     <div class="text-center">
-                        <p class="mb-6 text-slate-400 uppercase tracking-widest font-bold">Recall the sequence</p>
-                        <input type="number" id="ans" class="bg-slate-800/50 border-b-8 border-amber-500 text-7xl p-4 w-80 text-center focus:outline-none font-black text-amber-400 rounded-t-3xl" autofocus>
+                        <p class="mb-4 text-slate-400 uppercase tracking-widest font-bold text-xs">Recall sequence</p>
+                        <input type="number" id="ans" class="game-input text-6xl p-4" autofocus>
                     </div>`;
                 const input = document.getElementById('ans');
                 input.focus();
                 input.oninput = () => {
                     if(input.value === target) {
-                        currentScore += 4;
+                        currentScore += 10;
                         document.getElementById('live-score').innerText = currentScore;
                         startMemoryChallenge();
                     }
                 };
-            }, 1200);
+            }, 1000);
         }
 
-        // --- 4. FOCUS MATRIX ---
         function startFocusChallenge() {
             const canvas = document.getElementById('game-canvas');
             canvas.innerHTML = '<div id="matrix-grid" class="grid grid-cols-3 gap-4"></div>';
@@ -285,33 +335,30 @@
                 grid.appendChild(btn);
             }
             canvas.prepend(Object.assign(document.createElement('p'), {
-                innerText: `Find: ${target}`,
-                className: 'absolute top-10 text-xl font-bold text-purple-400 uppercase'
+                innerText: `Find Node: ${target}`,
+                className: 'absolute top-10 text-sm font-black text-indigo-600 uppercase tracking-widest'
             }));
         }
 
-        // --- 5. PATTERN MASTER (Logic) ---
         function startLogicChallenge() {
             const canvas = document.getElementById('game-canvas');
             const patterns = [
                 {q: "2, 4, 8, 16, ?", a: "32"},
                 {q: "1, 4, 9, 16, ?", a: "25"},
-                {q: "10, 20, 30, ?", a: "40"},
-                {q: "Z, Y, X, W, ?", a: "V"},
-                {q: "5, 11, 23, ?", a: "47"}
+                {q: "Z, Y, X, ?", a: "W"}
             ];
             const p = patterns[Math.floor(Math.random()*patterns.length)];
             canvas.innerHTML = `
                 <div class="text-center">
-                    <p class="text-slate-500 mb-4 uppercase tracking-widest">Complete the logic</p>
-                    <h1 class="text-7xl font-black mb-8 text-white">${p.q}</h1>
-                    <input type="text" id="ans" class="bg-slate-800/50 border-b-8 border-sky-500 text-6xl p-4 w-64 text-center focus:outline-none font-black text-sky-400 rounded-t-3xl" autofocus>
+                    <p class="text-slate-400 mb-4 uppercase tracking-widest text-xs font-bold">Logic Pattern</p>
+                    <h1 class="text-7xl font-black mb-6 text-slate-900">${p.q}</h1>
+                    <input type="text" id="ans" class="game-input text-6xl p-4" autofocus>
                 </div>`;
             const input = document.getElementById('ans');
             input.focus();
             input.oninput = () => {
                 if(input.value.toUpperCase() === p.a) {
-                    currentScore += 2;
+                    currentScore += 5;
                     document.getElementById('live-score').innerText = currentScore;
                     startLogicChallenge();
                 }

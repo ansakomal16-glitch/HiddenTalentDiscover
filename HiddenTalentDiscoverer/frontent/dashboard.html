@@ -3,142 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural OS | Master Intelligence Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Neural OS | Executive Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #00d2ff; --secondary: #9d50bb; --accent: #00ff41;
-            --bg: #050508; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.07);
-            --quiz-color: #10b981; --game-color: #3b82f6;
+            --primary: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #10b981;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.04);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); color: #fff; min-height: 100vh; padding: 30px; overflow-x: hidden; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
-        .glass-card { background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 25px; backdrop-filter: blur(15px); margin-bottom: 20px; }
-        .stat-val { font-size: 32px; font-weight: 800; color: var(--primary); }
-        .stat-label { font-size: 11px; text-transform: uppercase; opacity: 0.5; }
-        
-        .charts-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
-        .chart-container { height: 220px; position: relative; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th { text-align: left; padding: 12px; font-size: 11px; opacity: 0.4; border-bottom: 1px solid var(--border); }
-        td { padding: 15px 12px; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.02); }
-        
-        .badge-quiz { padding: 4px 10px; border-radius: 6px; font-size: 10px; background: rgba(16, 185, 129, 0.1); color: var(--quiz-color); font-weight: bold; }
-        .badge-game { padding: 4px 10px; border-radius: 6px; font-size: 10px; background: rgba(59, 130, 246, 0.1); color: var(--game-color); font-weight: bold; }
-        
-        .rank-icon { width: 80px; height: 80px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border-radius: 50%; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); }
-        .btn-action { background: #fff; color: #000; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 13px; transition: 0.3s; cursor: pointer; border:none; display: inline-block; }
-        .btn-action:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,210,255,0.2); }
-        
-        /* NEW: Career Section Styles */
-        .career-path { border-left: 2px solid var(--primary); padding-left: 15px; margin-top: 15px; }
-        .career-link { display: inline-block; margin-top: 10px; color: var(--primary); text-decoration: none; font-size: 12px; font-weight: 600; }
-        .career-link:hover { text-decoration: underline; }
 
-        @media (max-width: 850px) { .grid-main, .charts-grid { grid-template-columns: 1fr; } }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* --- Executive Navbar --- */
+        nav {
+            height: 80px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo { font-family: 'Outfit'; font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+
+        .nav-actions { display: flex; gap: 15px; align-items: center; }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 4%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* --- Premium Cards --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 25px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover { box-shadow: var(--shadow-lg); border-color: var(--primary); }
+
+        .stat-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .stat-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        .stat-val { font-family: 'Outfit'; font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
+
+        /* --- Stats Row --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .stat-card-mini { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 25px; }
+
+        /* --- Charts Area --- */
+        .charts-flex { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; margin-top: 20px; }
+        .chart-box { height: 250px; position: relative; }
+
+        /* --- Career Path UI --- */
+        .career-highlight {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            overflow: hidden;
+            position: relative;
+        }
+        .career-highlight::after {
+            content: ''; position: absolute; top: -50%; right: -10%; width: 250px; height: 250px;
+            background: rgba(255,255,255,0.1); border-radius: 50%;
+        }
+
+        /* --- Table Styling --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { text-align: left; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; padding: 15px; border-bottom: 1px solid var(--border); }
+        td { padding: 18px 15px; font-size: 0.9rem; border-bottom: 1px solid #f1f5f9; font-weight: 500; }
+
+        .badge { padding: 6px 12px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+        .badge-quiz { background: #ecfdf5; color: #059669; }
+        .badge-game { background: #eff6ff; color: #2563eb; }
+
+        /* --- Buttons --- */
+        .btn {
+            padding: 12px 24px; border-radius: 14px; font-weight: 700; font-size: 0.85rem;
+            cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .btn-primary { background: var(--text-main); color: #fff; border: none; }
+        .btn-primary:hover { background: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2); }
+
+        .logout-btn { color: #ef4444; font-weight: 700; font-size: 0.85rem; background: none; border: none; cursor: pointer; }
+
+        /* --- Sidebar Rank --- */
+        .rank-circle {
+            width: 100px; height: 100px; border-radius: 50%; background: #f1f5f9;
+            display: flex; align-items: center; justify-content: center; font-size: 2.5rem;
+            margin-bottom: 20px; border: 4px solid #fff; box-shadow: var(--shadow-sm);
+        }
+
+        @media (max-width: 1000px) {
+            .container { grid-template-columns: 1fr; }
+            .charts-flex { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
+<nav>
+    <div class="logo">NEURAL<span>OS.</span></div>
+    <div class="nav-actions">
+        <a href="quizonline.html" class="btn btn-primary">Start Quiz</a>
+        <a href="onlinegame.html" class="btn" style="background: #eff6ff; color: #2563eb;">Play Arena</a>
+        <div style="width: 1px; height: 25px; background: var(--border); margin: 0 10px;"></div>
+        <button onclick="logout()" class="logout-btn">Log Out</button>
+    </div>
+</nav>
+
 <div class="container">
-    <header>
-        <div>
-            <p style="font-size: 12px; opacity: 0.5; letter-spacing: 2px;">NEURAL INTERFACE v4.0</p>
-            <h1 id="user-display">Agent: Connecting...</h1>
+    <div class="main-content">
+        <div style="margin-bottom: 30px;">
+            <p id="user-display" style="font-weight: 800; font-size: 1.8rem; letter-spacing: -1px;">Agent: Initializing...</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Intelligence distribution across neural nodes.</p>
         </div>
-        <div style="display: flex; gap: 12px;">
-            <a href="quizonline.html" class="btn-action">START QUIZ</a>
-            <a href="onlinegame.html" class="btn-action" style="background: var(--game-color); color: white;">PLAY GAMES</a>
-            <button onclick="logout()" class="btn-action" style="background: rgba(255,75,43,0.1); color: #ff4b2b;">LOGOUT</button>
-        </div>
-    </header>
 
-    <div class="grid-main">
-        <div class="main-column">
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                <div class="glass-card">
-                    <p class="stat-label">Total Neural Index</p>
-                    <p id="total-combined" class="stat-val">0</p>
-                </div>
-                <div class="glass-card">
-                    <p class="stat-label">Knowledge Pts</p>
-                    <p id="quiz-pts" class="stat-val" style="color: var(--quiz-color);">0</p>
-                </div>
-                <div class="glass-card">
-                    <p class="stat-label">Reflex Pts</p>
-                    <p id="game-pts" class="stat-val" style="color: var(--game-color);">0</p>
-                </div>
+        <div class="stats-grid">
+            <div class="stat-card-mini">
+                <p class="stat-label">Total Index</p>
+                <p id="total-combined" class="stat-val">0</p>
             </div>
-
-            <div class="glass-card">
-                <p class="stat-label" style="margin-bottom: 25px;">Intelligence distribution & Progress Trend</p>
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <canvas id="trendChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="typeChart"></canvas>
-                    </div>
-                </div>
+            <div class="stat-card-mini">
+                <p class="stat-label" style="color: var(--accent);">Knowledge</p>
+                <p id="quiz-pts" class="stat-val">0</p>
             </div>
-
-            <div class="glass-card" style="border-top: 2px solid var(--secondary);">
-                <p class="stat-label">AI Career Path Optimization</p>
-                <div id="career-analysis" style="margin-top: 15px;">
-                    <h2 id="suggested-role" style="font-size: 20px; color: #fff;">Analyzing Potential...</h2>
-                    <div class="career-path">
-                        <p id="career-desc" style="font-size: 13px; opacity: 0.7; line-height: 1.6;">Finish more assessments to unlock personalized career paths.</p>
-                        <div style="margin-top: 15px; display: flex; gap: 15px;">
-                            <a id="linkedin-btn" href="#" target="_blank" class="career-link">LinkedIn Jobs ↗</a>
-                            <a id="fiverr-btn" href="#" target="_blank" class="career-link" style="color:var(--accent)">Fiverr Gigs ↗</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-card">
-                <p class="stat-label">Synchronized Neural Logs</p>
-                <div style="max-height: 300px; overflow-y: auto; margin-top: 15px;">
-                    <table>
-                        <thead>
-                            <tr><th>TYPE</th><th>DOMAIN</th><th>SCORE</th><th>DATE</th></tr>
-                        </thead>
-                        <tbody id="activity-body">
-                            <tr><td colspan="4" style="text-align:center; padding:40px; opacity:0.3;">Fetching from Cloud...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="stat-card-mini">
+                <p class="stat-label" style="color: var(--primary);">Reflex</p>
+                <p id="game-pts" class="stat-val">0</p>
             </div>
         </div>
 
-        <div class="side-column">
-            <div class="glass-card" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                <div id="rank-emoji" class="rank-icon">🐣</div>
-                <h3 id="rank-name" style="font-size: 22px; letter-spacing: -1px;">Scanning...</h3>
-                <p style="font-size: 10px; opacity: 0.5; margin-top: 5px; letter-spacing: 1px;">CURRENT EVOLUTION STAGE</p>
-                <div style="width:100%; height:8px; background:rgba(255,255,255,0.05); border-radius:10px; margin: 25px 0; overflow:hidden; border: 1px solid var(--border);">
-                    <div id="progress-bar" style="width: 0%; height:100%; background: linear-gradient(to right, var(--primary), var(--secondary)); transition: 2s cubic-bezier(0.4, 0, 0.2, 1);"></div>
-                </div>
-                <p id="rank-desc" style="font-size: 12px; opacity: 0.6; line-height: 1.5;">Accumulate 500 points to reach Legend status.</p>
+        <div class="card" style="margin-top: 25px;">
+            <p class="stat-label">Analytics Overview</p>
+            <div class="charts-flex">
+                <div class="chart-box"><canvas id="trendChart"></canvas></div>
+                <div class="chart-box"><canvas id="typeChart"></canvas></div>
             </div>
+        </div>
 
-            <a href="leaderboard.html" class="glass-card" style="display: block; text-decoration: none; text-align: center; border-color: var(--primary); background: rgba(0,210,255,0.02);">
-                <p style="color: var(--primary); font-weight: 800; font-size: 14px;">GLOBAL LEADERBOARD →</p>
-                <p style="font-size: 10px; opacity: 0.4; margin-top: 4px;">Sync with other Agents</p>
-            </a>
+        <div class="card career-highlight">
+            <p class="stat-label" style="color: rgba(255,255,255,0.8);">Career Prediction</p>
+            <h2 id="suggested-role" style="font-size: 1.8rem; margin: 10px 0; font-family: 'Outfit';">Scanning Metrics...</h2>
+            <p id="career-desc" style="opacity: 0.9; font-size: 0.9rem; max-width: 80%; line-height: 1.6;">Your neural signature is being mapped to global industry standards.</p>
+            <div style="margin-top: 25px; display: flex; gap: 15px;">
+                <a id="linkedin-btn" href="#" class="btn" style="background: #fff; color: #000; font-size: 0.7rem;">LINKEDIN JOBS ↗</a>
+                <a id="fiverr-btn" href="#" class="btn" style="background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3); font-size: 0.7rem;">FIVERR GIGS ↗</a>
+            </div>
+        </div>
 
-            <div class="glass-card" style="font-size: 13px;">
-                <p class="stat-label" style="margin-bottom: 12px;">System Status</p>
-                <p id="server-status" style="color: #ffb300; display: flex; align-items: center; gap: 8px;">
-                    <span style="display:inline-block; width:8px; height:8px; background:currentColor; border-radius:50%; box-shadow: 0 0 10px currentColor;"></span>
-                    Attempting Sync...
-                </p>
-                <p style="opacity: 0.3; margin-top: 15px; font-size: 10px; font-family: monospace;">NODE_REF: DB-HT-v4.0<br>SECURE_SHELL: ACTIVE</p>
+        <div class="card">
+            <p class="stat-label">Activity Logs</p>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead><tr><th>Source</th><th>Domain</th><th>Score</th><th>Date</th></tr></thead>
+                    <tbody id="activity-body">
+                        <tr><td colspan="4" style="text-align:center; padding:40px; color: var(--text-muted);">Fetching cloud data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="card" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div id="rank-emoji" class="rank-circle">🐣</div>
+            <p class="stat-label">Current Tier</p>
+            <h3 id="rank-name" style="font-family: 'Outfit'; font-size: 1.5rem; margin-top: 5px;">Analyzing...</h3>
+            
+            <div style="width:100%; height:8px; background:#f1f5f9; border-radius:10px; margin: 25px 0; overflow:hidden;">
+                <div id="progress-bar" style="width: 0%; height:100%; background: var(--primary); transition: 1.5s ease-in-out;"></div>
+            </div>
+            <p id="rank-desc" style="font-size: 0.8rem; color: var(--text-muted);">Points needed for next evolution tier.</p>
+        </div>
+
+        <a href="leaderboard.html" class="card" style="display: block; text-decoration: none; background: #fafafa;">
+            <p style="color: var(--primary); font-weight: 800; font-size: 0.9rem;">Global Leaderboard</p>
+            <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">See how you rank against the top 1%.</p>
+        </a>
+
+        <div class="card">
+            <p class="stat-label">Neural Status</p>
+            <p id="server-status" style="margin-top: 15px; font-size: 0.85rem; font-weight: 700; color: #f59e0b;">
+                <i class="fas fa-circle-notch fa-spin"></i> Syncing...
+            </p>
+            <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 12px; font-family: monospace; font-size: 10px; color: var(--text-muted);">
+                NODE_REF: HT-ENTERPRISE-v4<br>
+                SECURE_GATEWAY: ACTIVE
             </div>
         </div>
     </div>
@@ -151,67 +231,50 @@
         const email = localStorage.getItem('userEmail');
         const name = localStorage.getItem('userName');
         
-        if(!email) {
-            window.location.href = 'login.html';
-            return;
-        }
+        if(!email) { window.location.href = 'login.html'; return; }
 
         document.getElementById('user-display').innerText = `Agent: ${name || 'Explorer'}`;
 
         try {
             const response = await fetch(`http://localhost:5000/api/user-profile/${email}`);
-            if (!response.ok) throw new Error("Sync Failed");
             const data = await response.json();
             
             const statusEl = document.getElementById('server-status');
-            statusEl.innerText = "● Neural Sync Active";
-            statusEl.style.color = "#00ff41";
+            statusEl.innerHTML = '<i class="fas fa-check-circle"></i> Operational';
+            statusEl.style.color = "#10b981";
 
             if (data.stats) {
                 updateStats(data.stats);
                 renderCharts(data.stats, data.quizHistory || [], data.gameHistory || []);
                 renderLogs(data.quizHistory || [], data.gameHistory || []);
-                generateCareerAdvice(data.stats, data.quizHistory); // NEW FUNCTION
-            } else {
-                showEmptyState();
+                generateCareerAdvice(data.stats);
             }
-
         } catch (err) {
-            const statusEl = document.getElementById('server-status');
-            statusEl.innerText = "● Connection Failed";
-            statusEl.style.color = "#ff4b2b";
+            document.getElementById('server-status').innerText = "Sync Failed";
         }
     }
 
-    // NEW FUNCTION: Career Suggestion Logic
-    function generateCareerAdvice(stats, quizzes) {
+    function generateCareerAdvice(stats) {
         const roleEl = document.getElementById('suggested-role');
         const descEl = document.getElementById('career-desc');
-        const lBtn = document.getElementById('linkedin-btn');
-        const fBtn = document.getElementById('fiverr-btn');
-
         const qScore = stats.totalQuizScore || 0;
         const gScore = stats.totalGameScore || 0;
 
-        let role = "General Analyst";
-        let desc = "Your profile shows balanced intelligence. Explore various domains to find your true calling.";
-        
-        // Logic based on ratio
+        let role = "Product Analyst";
+        let desc = "You show balanced cognitive skills suitable for high-growth product roles.";
+
         if (qScore > gScore && qScore > 50) {
-            role = "AI Research Scientist";
-            desc = "Your high knowledge scores suggest a strong aptitude for Research and Deep Tech. Focus on AI and Machine Learning.";
+            role = "AI Solutions Architect";
+            desc = "Your deep knowledge index indicates a perfect fit for complex AI implementation and architecture.";
         } else if (gScore > qScore && gScore > 50) {
-            role = "UX/Front-end Architect";
-            desc = "Your reflex and spatial scores are excellent. You would excel in high-speed development or Interface Design.";
-        } else if (qScore > 200) {
-            role = "Cybersecurity Specialist";
-            desc = "Elite knowledge levels detected. You have the depth required for high-level security analysis.";
+            role = "Creative Technologist";
+            desc = "Exceptional reflex scores detected. You excel in fast-paced, high-innovation creative environments.";
         }
 
         roleEl.innerText = role;
         descEl.innerText = desc;
-        lBtn.href = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(role)}`;
-        fBtn.href = `https://www.fiverr.com/search/gigs?query=${encodeURIComponent(role)}`;
+        document.getElementById('linkedin-btn').href = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(role)}`;
+        document.getElementById('fiverr-btn').href = `https://www.fiverr.com/search/gigs?query=${encodeURIComponent(role)}`;
     }
 
     function updateStats(stats) {
@@ -220,13 +283,10 @@
         document.getElementById('quiz-pts').innerText = stats.totalQuizScore || 0;
         document.getElementById('game-pts').innerText = stats.totalGameScore || 0;
         
-        let rank = "Novice Recruit";
-        let emoji = "🐣";
-        let progress = (total / 500) * 100;
-
-        if(total >= 100) { rank = "Elite Strategist"; emoji = "🛡️"; }
-        if(total >= 300) { rank = "Neural Master"; emoji = "💎"; }
-        if(total >= 500) { rank = "Cyber Legend"; emoji = "🌌"; progress = 100; }
+        let rank = "Novice"; let emoji = "🐣"; let progress = (total / 500) * 100;
+        if(total >= 100) { rank = "Strategist"; emoji = "⚔️"; }
+        if(total >= 300) { rank = "Executive"; emoji = "💼"; }
+        if(total >= 500) { rank = "Visionary"; emoji = "👑"; progress = 100; }
 
         document.getElementById('rank-name').innerText = rank;
         document.getElementById('rank-emoji').innerText = emoji;
@@ -235,22 +295,14 @@
 
     function renderLogs(quizzes, games) {
         const body = document.getElementById('activity-body');
-        const logs = [
-            ...quizzes.map(q => ({ ...q, type: 'QUIZ' })),
-            ...games.map(g => ({ ...g, type: 'GAME' }))
-        ].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        if(logs.length === 0) {
-            body.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; opacity:0.4;">No logs found. Start a quiz or game!</td></tr>';
-            return;
-        }
+        const logs = [...quizzes.map(q => ({...q, type:'QUIZ'})), ...games.map(g => ({...g, type:'GAME'}))].sort((a,b) => new Date(b.date) - new Date(a.date));
 
         body.innerHTML = logs.map(log => `
             <tr>
-                <td><span class="${log.type === 'QUIZ' ? 'badge-quiz' : 'badge-game'}">${log.type}</span></td>
-                <td>${log.category || log.gameName || 'General'}</td>
-                <td style="font-weight: 800; color: var(--primary);">+${log.score}</td>
-                <td style="opacity: 0.5; font-size: 11px;">${new Date(log.date).toLocaleDateString()}</td>
+                <td><span class="badge ${log.type === 'QUIZ' ? 'badge-quiz' : 'badge-game'}">${log.type}</span></td>
+                <td>${log.category || log.gameName}</td>
+                <td style="color:var(--primary); font-weight:bold;">+${log.score}</td>
+                <td style="color:var(--text-muted); font-size: 0.75rem;">${new Date(log.date).toLocaleDateString()}</td>
             </tr>
         `).join('');
     }
@@ -259,61 +311,44 @@
         const ctxTrend = document.getElementById('trendChart').getContext('2d');
         const ctxType = document.getElementById('typeChart').getContext('2d');
 
-        if(typeChart) typeChart.destroy();
-        typeChart = new Chart(ctxType, {
+        new Chart(ctxType, {
             type: 'doughnut',
             data: {
                 labels: ['Quiz', 'Games'],
                 datasets: [{
                     data: [stats.totalQuizScore || 1, stats.totalGameScore || 1],
-                    backgroundColor: ['#10b981', '#3b82f6'],
+                    backgroundColor: ['#10b981', '#4f46e5'],
                     borderWidth: 0,
+                    hoverOffset: 4
                 }]
             },
-            options: { 
-                cutout: '75%',
-                plugins: { legend: { position: 'bottom', labels: { color: 'rgba(255,255,255,0.5)', font: {size: 10}, padding: 20 } } }
-            }
+            options: { cutout: '80%', plugins: { legend: { position: 'bottom', labels: { font: {size: 10} } } } }
         });
 
         const history = [...quizzes, ...games].sort((a,b) => new Date(a.date) - new Date(b.date)).slice(-6);
-        if(trendChart) trendChart.destroy();
-        trendChart = new Chart(ctxTrend, {
+        new Chart(ctxTrend, {
             type: 'line',
             data: {
                 labels: history.map(h => new Date(h.date).toLocaleDateString(undefined, {month:'short', day:'numeric'})),
                 datasets: [{
-                    label: 'Score',
+                    label: 'Index',
                     data: history.map(h => h.score),
-                    borderColor: '#00d2ff',
-                    backgroundColor: 'rgba(0, 210, 255, 0.1)',
+                    borderColor: '#4f46e5',
+                    backgroundColor: 'rgba(79, 70, 229, 0.05)',
                     borderWidth: 3,
                     tension: 0.4,
-                    fill: true,
-                    pointBackgroundColor: '#00d2ff',
-                    pointRadius: 4
+                    fill: true
                 }]
             },
             options: { 
                 responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: { 
-                    y: { display: false }, 
-                    x: { ticks: { color: 'rgba(255,255,255,0.3)', font: {size: 9} }, grid: { display: false } } 
-                } 
+                scales: { y: { display: false }, x: { grid: { display: false }, ticks: { font: {size: 9} } } },
+                plugins: { legend: { display: false } }
             }
         });
     }
 
-    function showEmptyState() {
-        document.getElementById('activity-body').innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px; opacity:0.3;">Welcome Agent! Complete your first task to see analytics.</td></tr>';
-    }
-
-    function logout() {
-        localStorage.clear();
-        window.location.href = 'login.html';
-    }
-
+    function logout() { localStorage.clear(); window.location.href = 'login.html'; }
     window.onload = initDashboard;
 </script>
 </body>

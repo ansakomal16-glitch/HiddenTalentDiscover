@@ -5,96 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Philosophy | Hidden Talent Finder</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #00d2ff;
-            --secondary: #9d50bb;
-            --bg-dark: #020205;
-            --surface: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
-            --text-muted: #888891;
+            /* Pure White Professional Palette */
+            --primary: #4f46e5;         /* Indigo */
+            --primary-soft: #f5f3ff;
+            --bg-body: #ffffff;         /* Pure White */
+            --bg-subtle: #f8fafc;       /* Slate 50 */
+            --text-main: #0f172a;       /* Slate 900 */
+            --text-muted: #64748b;      /* Slate 500 */
+            --border: #e2e8f0;          /* Slate 200 */
+            --card-shadow: 0 10px 30px -10px rgba(0,0,0,0.04);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(0, 210, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(157, 80, 187, 0.08) 0%, transparent 40%);
-            color: #ffffff;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* --- Elite Navbar --- */
+        /* --- Minimalist Navbar --- */
         header {
-            padding: 20px 60px;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(2, 2, 5, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             position: sticky; top: 0; z-index: 1000;
         }
 
-        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); text-decoration: none; }
         .logo span { color: var(--primary); }
 
         nav a {
             color: var(--text-muted);
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 13px;
-            font-weight: 500;
+            margin-left: 35px;
+            font-size: 14px;
+            font-weight: 600;
             transition: 0.3s;
         }
 
-        nav a:hover { color: #fff; }
+        nav a:hover { color: var(--primary); }
 
         .nav-cta {
-            background: #fff;
-            color: #000;
-            padding: 10px 22px;
-            border-radius: 100px;
+            background: var(--text-main);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 14px;
             font-weight: 700;
             text-decoration: none;
-            font-size: 13px;
-            transition: 0.3s;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
 
-        .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* --- Hero Section --- */
+        /* --- Modern Hero Section --- */
         .hero {
-            padding: 120px 20px 60px;
+            padding: 120px 20px 80px;
             text-align: center;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: clamp(45px, 7vw, 85px);
+            font-size: clamp(40px, 8vw, 75px);
             font-weight: 800;
-            letter-spacing: -4px;
-            line-height: 0.95;
+            letter-spacing: -3px;
+            line-height: 1.1;
             margin-bottom: 30px;
+            color: var(--text-main);
         }
 
         .hero p {
             color: var(--text-muted);
-            font-size: 20px;
-            max-width: 700px;
+            font-size: 22px;
+            max-width: 800px;
             margin: 0 auto;
-            font-weight: 300;
+            font-weight: 400;
         }
 
-        /* --- Bento Grid Content --- */
+        /* --- Bento Grid Layout --- */
         .container {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: 0 auto;
-            padding: 40px 20px 100px;
+            padding: 0 20px 100px;
         }
 
         .bento-grid {
@@ -104,110 +107,130 @@
         }
 
         .bento-card {
-            background: var(--surface);
+            background: var(--bg-subtle);
             border: 1px solid var(--border);
-            border-radius: 35px;
-            padding: 45px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 50px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
         }
 
         .bento-card:hover {
-            border-color: rgba(255,255,255,0.2);
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.05);
+            background: #ffffff;
+            border-color: var(--primary);
+            box-shadow: var(--card-shadow);
+            transform: translateY(-8px);
         }
 
         .large { grid-column: span 2; }
 
         .bento-card h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 18px;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
             letter-spacing: -1px;
+            color: var(--text-main);
         }
 
         .bento-card p {
             color: var(--text-muted);
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 400;
+            line-height: 1.7;
         }
 
         .highlight-text {
             color: var(--primary);
-            font-weight: 600;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-soft);
         }
 
-        /* --- Feature Icons --- */
+        /* --- Feature Tags --- */
         .feature-list {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 12px;
+            margin-top: 35px;
             flex-wrap: wrap;
         }
 
         .feature-tag {
-            padding: 8px 18px;
-            background: rgba(0, 210, 255, 0.1);
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            color: var(--primary);
+            padding: 10px 22px;
+            background: #fff;
+            border: 1px solid var(--border);
+            color: var(--text-main);
             border-radius: 100px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        /* Visual Element */
+        .bento-card::after {
+            content: "";
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: var(--primary-soft);
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .bento-card h2, .bento-card p, .feature-list {
+            position: relative;
+            z-index: 1;
         }
 
         @media (max-width: 900px) {
             .bento-grid { grid-template-columns: 1fr; }
             .large { grid-column: span 1; }
-            header { padding: 20px; }
+            .hero { padding-top: 60px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Hidden<span>Talent.</span></div>
+    <a href="index.html" class="logo">Hidden<span>Talent.</span></a>
     <nav>
         <a href="index.html">Home</a>
         <a href="leaderboard.html">Rankings</a>
         <a href="dashboard.html">Insight</a>
-        <a href="profile.html">Profile</a>
     </nav>
     <a href="signup.html" class="nav-cta">Get Started</a>
 </header>
 
 <section class="hero">
-    <h1>Redefining <span style="color: var(--primary)">Human</span> Potential.</h1>
-    <p>We leverage cognitive assessment and gamification to identify the skills that traditional education overlooks.</p>
+    <h1>Unlock Your <span style="color: var(--primary)">True</span> Potential.</h1>
+    <p>We use advanced cognitive modeling to discover the genius within you that traditional systems often ignore.</p>
 </section>
 
 <div class="container">
     <div class="bento-grid">
         <div class="bento-card large">
-            <h2>The Mission</h2>
-            <p>Our goal is to bridge the gap between innate curiosity and professional mastery. We believe that every individual possesses a <span class="highlight-text">"Hidden Talent"</span>—a unique cognitive signature that, when properly identified through our AI-driven assessments, can lead to a world-class career in technology, science, or business.</p>
+            <h2>Our Core Mission</h2>
+            <p>Traditional education focuses on memorization. We focus on <span class="highlight-text">Cognitive Intelligence</span>. By analyzing how you solve problems, react to stress, and process patterns, we identify your "Hidden Talent"—whether you're a future SpaceX engineer or a world-class strategist.</p>
             <div class="feature-list">
-                <span class="feature-tag">AI Quizzes</span>
-                <span class="feature-tag">Mini-Games</span>
-                <span class="feature-tag">Logic Testing</span>
+                <div class="feature-tag"><i class="fas fa-brain" style="margin-right:8px; color:var(--primary)"></i> Neural Testing</div>
+                <div class="feature-tag"><i class="fas fa-gamepad" style="margin-right:8px; color:var(--primary)"></i> Game Logic</div>
+                <div class="feature-tag"><i class="fas fa-chart-line" style="margin-right:8px; color:var(--primary)"></i> Skill Mapping</div>
             </div>
         </div>
 
         <div class="bento-card">
-            <h2>Why Us?</h2>
-            <p>Static testing is obsolete. We utilize <span class="highlight-text">dynamic challenges</span> that adapt to your intelligence level in real-time.</p>
+            <h2>Adaptive AI</h2>
+            <p>Static tests are boring. Our system <span class="highlight-text">evolves with you</span>, getting sharper as you reveal your true strengths.</p>
         </div>
 
         <div class="bento-card">
-            <h2>Modern Stack</h2>
-            <p>Our curriculum spans across the frontiers of <span class="highlight-text">Artificial Intelligence</span>, System Architecture, and Physics.</p>
+            <h2>Future Tech</h2>
+            <p>Mastering AI, Quantum Computing, and System Design through <span class="highlight-text">intuitive learning</span> models.</p>
         </div>
 
         <div class="bento-card large">
-            <h2>Strategic Career Guidance</h2>
-            <p>We don't just provide scores; we provide pathways. By analyzing your performance across 20+ fields, our neural engine recommends the <span class="highlight-text">Exact Industry</span> where you are destined to lead. Experience a clean, futuristic interface designed for the leaders of tomorrow.</p>
+            <h2>Data-Driven Destiny</h2>
+            <p>We don't just give you a score. We map your results to <span class="highlight-text">20+ emerging industries</span>. Our neural engine predicts where you will thrive, providing a direct roadmap from raw potential to professional mastery. It's time to stop guessing and start leading.</p>
         </div>
     </div>
 </div>

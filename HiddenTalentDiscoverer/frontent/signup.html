@@ -3,164 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Identity | Hidden Talent</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Create Identity | Neural OS Enterprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #00d2ff;
-            --secondary: #3a7bd5;
-            --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --bg-body: #f8fafc;
+            --border: #e2e8f0;
+            --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body {
-            background: var(--bg);
-            background-image: 
-                radial-gradient(circle at 80% 20%, rgba(0, 210, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(157, 80, 187, 0.1) 0%, transparent 40%);
-            height: 100vh;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            overflow: hidden;
+            padding: 40px 20px;
         }
 
-        .signup-card {
-            background: var(--glass);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 45px;
-            border-radius: 35px;
+        .signup-container {
+            background: var(--white);
             width: 100%;
-            max-width: 460px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
-            text-align: center;
-            position: relative;
-            transition: border-color 0.5s ease;
+            max-width: 850px;
+            display: flex;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid var(--border);
         }
 
-        h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
-        .subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
+        /* --- Left Side: Info Panel --- */
+        .info-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            padding: 50px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; padding-left: 5px; }
-
-        .input-field {
-            position: relative;
+        .info-panel h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .info-panel p { opacity: 0.9; line-height: 1.6; margin-bottom: 30px; font-size: 0.95rem; }
+        
+        .trust-badge {
             display: flex;
             align-items: center;
-        }
-
-        .input-field i {
-            position: absolute;
-            left: 15px;
-            color: #555;
-            font-size: 14px;
-        }
-
-        .input-field input {
-            width: 100%;
-            padding: 14px 15px 14px 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            color: #fff;
-            outline: none;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 14px;
-        }
-
-        .input-field input:focus {
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
-        }
-
-        button {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 15px;
-            color: #000;
-            font-size: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.3);
-            background: #fff;
-        }
-
-        button:disabled {
-            background: #222;
-            color: #555;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #status { 
-            font-size: 12px; 
-            margin-top: 20px; 
-            padding: 12px;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
             border-radius: 12px;
-            display: none; 
-            animation: slideUp 0.4s ease;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- Right Side: Form Panel --- */
+        .form-panel {
+            flex: 1.5;
+            padding: 50px;
+            background: var(--white);
+        }
 
-        .footer-text { margin-top: 25px; font-size: 14px; color: #666; }
-        .footer-text a { color: var(--primary); text-decoration: none; font-weight: 700; }
-        
+        .form-header { margin-bottom: 30px; }
+        .form-header h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .form-header p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* --- Grid System for Form --- */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .input-group { margin-bottom: 15px; }
+        .input-group label {
+            display: block; font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 6px; color: var(--text-muted);
+        }
+
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper i { position: absolute; left: 14px; color: #94a3b8; font-size: 0.9rem; }
+        .input-wrapper input, .input-wrapper select {
+            width: 100%; padding: 12px 14px 12px 42px; border-radius: 10px;
+            border: 1px solid var(--border); outline: none; font-size: 0.9rem;
+            transition: 0.3s; background: #fcfcfd;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--primary); background: white;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn-register {
+            width: 100%; padding: 15px; background: var(--text-main); color: white;
+            border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700;
+            cursor: pointer; transition: 0.3s; margin-top: 15px;
+        }
+
+        .btn-register:hover { background: var(--primary); transform: translateY(-1px); }
+
+        #status {
+            margin-top: 15px; padding: 12px; border-radius: 8px; font-size: 0.85rem;
+            text-align: center; display: none; font-weight: 600;
+        }
+
+        .login-footer { text-align: center; margin-top: 25px; font-size: 0.85rem; color: var(--text-muted); }
+        .login-footer a { color: var(--primary); text-decoration: none; font-weight: 700; }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .signup-container { flex-direction: column; }
+            .info-panel { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="signup-card" id="card">
-        <div style="font-size: 45px; margin-bottom: 15px; color: var(--primary);"><i class="fas fa-user-plus"></i></div>
-        <h2>Join Elite</h2>
-        <p class="subtitle">Initialize your profile and sync with our cloud.</p>
-        
-        <form onsubmit="handleSignup(event)">
-            <div class="input-group">
-                <label>Full Name</label>
-                <div class="input-field">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="username" placeholder="Areeba Akhtar" required>
-                </div>
+    <div class="signup-container">
+        <div class="info-panel">
+            <h2>Join the Intelligence Network.</h2>
+            <p>Create your unique neural identity to access global talent logs, real-time analytics, and secure collaboration tools.</p>
+            <div class="trust-badge">
+                <i class="fas fa-user-shield"></i>
+                Enterprise-grade security with 256-bit encryption.
             </div>
-            <div class="input-group">
-                <label>Email Endpoint</label>
-                <div class="input-field">
-                    <i class="fas fa-at"></i>
-                    <input type="email" id="email" placeholder="name@domain.com" required>
-                </div>
+            <div style="margin-top: auto; font-size: 0.75rem; opacity: 0.7;">
+                © 2026 Neural OS Global
             </div>
-            <div class="input-group">
-                <label>Security Key</label>
-                <div class="input-field">
-                    <i class="fas fa-shield-alt"></i>
-                    <input type="password" id="password" placeholder="••••••••" minlength="6" required>
-                </div>
-            </div>
-            
-            <button type="submit" id="submitBtn">Initialize Account</button>
-            <div id="status"></div>
-        </form>
+        </div>
 
-        <p class="footer-text">Already synced? <a href="login.html">Access Portal</a></p>
+        <div class="form-panel">
+            <div class="form-header">
+                <h3>Create Identity</h3>
+                <p>Register your official credentials below.</p>
+            </div>
+
+            <form onsubmit="handleSignup(event)">
+                <div class="form-grid">
+                    <div class="input-group full-width">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="fullname" placeholder="John Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="john@company.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Contact No</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="contact" placeholder="+92 300 0000000" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Date of Birth</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="date" id="dob" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>District / Region</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="district" placeholder="Karachi / Lahore" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Security Key</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" minlength="6" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Confirm Key</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-shield-check"></i>
+                            <input type="password" id="confirmPassword" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-register">Initialize Identity</button>
+                <div id="status"></div>
+            </form>
+
+            <p class="login-footer">
+                Already have an identity? <a href="login.html">Sign In</a>
+            </p>
+        </div>
     </div>
 
     <script>
@@ -169,59 +227,72 @@
             
             const btn = document.getElementById('submitBtn');
             const status = document.getElementById('status');
-            const card = document.getElementById('card');
             
-            const username = document.getElementById('username').value;
+            // Getting all values
+            const name = document.getElementById('fullname').value;
             const email = document.getElementById('email').value;
+            const contact = document.getElementById('contact').value;
+            const dob = document.getElementById('dob').value;
+            const district = document.getElementById('district').value;
             const password = document.getElementById('password').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
 
-            // UI State: Loading
+            // Basic Client-side check
+            if (password !== confirmPass) {
+                status.style.display = "block";
+                status.style.background = "#fef2f2";
+                status.style.color = "#ef4444";
+                status.innerText = "❌ Keys do not match!";
+                return;
+            }
+
+            // UI Loading State
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-sync fa-spin"></i> Syncing with Cloud...';
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
             status.style.display = "block";
-            status.style.background = "rgba(255,255,255,0.05)";
-            status.style.color = "#aaa";
-            status.innerText = "Querying MongoDB Cluster...";
+            status.style.background = "#f1f5f9";
+            status.style.color = "#64748b";
+            status.innerText = "Synchronizing with Neural Server...";
 
             try {
                 const response = await fetch('http://localhost:5000/api/signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, email, password })
+                    body: JSON.stringify({ 
+                        username: name, // Using fullname as username
+                        email, 
+                        password,
+                        contact,
+                        dob,
+                        district
+                    })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    // --- 🔑 AUTO-LOGIN LOGIC ---
-                    // Signup hote hi data save karlo taaki user seedha andar jaye
                     localStorage.setItem("isLoggedIn", "true");
-                    localStorage.setItem("userName", username);
+                    localStorage.setItem("userName", name);
                     localStorage.setItem("userEmail", email);
 
-                    // Success UI
-                    status.style.color = "#00ff88";
-                    status.style.background = "rgba(0, 255, 136, 0.1)";
-                    status.innerHTML = '✨ Account Secured! Unlocking Dashboard...';
-                    card.style.borderColor = "#00ff88";
-                    
-                    setTimeout(() => {
-                        window.location.href = "index.html"; 
-                    }, 2000);
-                    
+                    status.style.background = "#ecfdf5";
+                    status.style.color = "#10b981";
+                    status.innerText = "✨ Identity Verified! Redirecting...";
+
+                    setTimeout(() => { window.location.href = "index.html"; }, 1500);
                 } else {
-                    status.style.color = "#ff4b2b";
-                    status.style.background = "rgba(255, 75, 43, 0.1)";
-                    status.innerText = "❌ Registration Failed: " + (data.error || "System Error");
+                    status.style.background = "#fef2f2";
+                    status.style.color = "#ef4444";
+                    status.innerText = data.error || "System Error Occurred.";
                     btn.disabled = false;
-                    btn.innerText = "Initialize Account";
+                    btn.innerText = "Initialize Identity";
                 }
             } catch (error) {
-                status.style.color = "#ff9f43";
-                status.style.background = "rgba(255, 159, 67, 0.1)";
-                status.innerText = "⚠️ Backend Offline: Check Node.js Connection!";
+                status.style.background = "#fffbeb";
+                status.style.color = "#d97706";
+                status.innerText = "⚠️ Backend Unreachable. Check Node.js!";
                 btn.disabled = false;
-                btn.innerText = "Retry Sync";
+                btn.innerText = "Retry Initialization";
             }
         }
     </script>

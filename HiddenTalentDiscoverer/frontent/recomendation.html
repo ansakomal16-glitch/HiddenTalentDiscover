@@ -3,220 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathways | Elite Roadmap</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Pathways | Precision Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #00d2ff;
-            --secondary: #9d50bb;
-            --bg: #03030b;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --locked: rgba(255, 255, 255, 0.1);
+            --primary: #4f46e5;
+            --secondary: #6366f1;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --border: #e2e8f0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
-        body {
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(157, 80, 187, 0.08) 0%, transparent 50%);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
+        body { 
+            background-color: var(--bg); 
+            color: var(--text-main); 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.01em;
         }
 
-        /* 1. Glass Navbar */
+        /* 1. Ultra-Clean Navbar */
         header {
-            margin: 20px 5%;
-            padding: 15px 40px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
-            top: 20px;
+            top: 0;
             z-index: 1000;
         }
 
-        .logo { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: var(--primary); text-transform: uppercase; }
-
-        nav a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 13px;
+        .nav-link {
+            font-size: 0.85rem;
             font-weight: 600;
-            transition: 0.3s;
+            color: #64748b;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-link:hover { color: var(--primary); }
+        .nav-link.active { color: var(--primary); }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
         }
 
-        nav a:hover { color: var(--primary); }
-
-        /* 2. Hero & Progress Section */
-        .hero { text-align: center; padding: 80px 20px 40px; }
-
-        .hero h1 {
-            font-size: clamp(35px, 6vw, 60px);
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+        /* 2. Professional Hero Section */
+        .hero-section {
+            background: white;
+            padding: 80px 20px;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
         }
 
-        .progress-container {
-            max-width: 400px;
-            margin: 20px auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            height: 10px;
+        .progress-track {
+            max-width: 500px;
+            margin: 30px auto 10px;
+            background: #f1f5f9;
+            height: 8px;
+            border-radius: 100px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         #progressBar {
             width: 0%;
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: 1s ease;
+            transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* 3. Roadmap Grid */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px 100px; }
-
-        #recoBox {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        /* 4. Professional Cards */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 30px;
-            padding: 45px;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* 3. High-Class Step Cards */
+        .path-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
-        .card.locked {
-            opacity: 0.5;
-            filter: grayscale(1);
-            cursor: not-allowed !important;
-        }
-
-        .card:not(.locked):hover {
+        .path-card:not(.locked):hover {
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.08);
             transform: translateY(-10px);
             border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .card-num {
-            font-size: 11px;
+        .path-card.locked {
+            background: #f8fafc;
+            border-style: dashed;
+            opacity: 0.7;
+        }
+
+        .phase-badge {
+            font-size: 10px;
             font-weight: 800;
-            color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .card h3 { font-size: 24px; margin-bottom: 15px; }
-        .card p { color: #aaa; font-size: 15px; line-height: 1.7; margin-bottom: 25px; }
-
-        /* 5. Working Buttons */
-        .btn-start {
-            padding: 12px 25px;
-            background: var(--primary);
-            color: #000;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .btn-start:hover:not(.disabled) {
-            background: #fff;
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        .btn-start.completed {
-            background: transparent;
-            border: 1px solid var(--primary);
+            letter-spacing: 0.15em;
             color: var(--primary);
+            background: #eef2ff;
+            padding: 6px 14px;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
-        .lock-icon {
-            font-size: 24px;
-            margin-bottom: 10px;
+        .lock-overlay {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
         }
 
+        /* 4. Action Buttons */
+        .btn-action {
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-unlock {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+        }
+        .btn-unlock:hover { background: #4338ca; transform: scale(1.02); }
+
+        .btn-review {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+        .btn-review:hover { background: #f8fafc; border-color: var(--primary); }
+
+        .btn-locked {
+            background: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
     </style>
 </head>
-<body>
+<body class="bg-slate-50">
 
-<header>
-    <div class="logo">Talent.AI</div>
-    <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="recommendations.html" style="color: var(--primary)">Roadmap</a>
-        <a href="profile.html">Profile</a>
-        <a href="#" onclick="logout()" style="color: #ff4b2b">Logout</a>
+<header class="py-6 px-10 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+            <i class="fas fa-route text-white text-xs"></i>
+        </div>
+        <span class="text-xl font-extrabold tracking-tighter">Pathways.AI</span>
+    </div>
+    <nav class="hidden md:flex gap-10">
+        <a href="dashboard.html" class="nav-link">Overview</a>
+        <a href="recommendations.html" class="nav-link active">Roadmap</a>
+        <a href="profile.html" class="nav-link">Intelligence Profile</a>
     </nav>
+    <button onclick="logout()" class="text-xs font-bold text-rose-500 uppercase tracking-widest hover:opacity-70 transition">
+        Sign Out <i class="fas fa-sign-out-alt ml-1"></i>
+    </button>
 </header>
 
-<section class="hero">
-    <h1 id="userTitle">Career Roadmap</h1>
-    <p>Complete each stage to unlock the next level of your professional journey.</p>
-    <div class="progress-container">
-        <div id="progressBar"></div>
+<section class="hero-section">
+    <div class="max-w-3xl mx-auto">
+        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.3em] mb-4 block">Strategic Career Growth</span>
+        <h1 id="userTitle" class="text-5xl font-black text-slate-900 mb-4 tracking-tight">Your Precision Path</h1>
+        <p class="text-slate-500 text-lg">We've engineered a sequence of modules based on your cognitive profile.</p>
+        
+        <div class="progress-track">
+            <div id="progressBar"></div>
+        </div>
+        <div class="flex justify-between items-center max-w-[500px] mx-auto mt-3">
+            <span id="progressText" class="text-xs font-bold text-indigo-600">0% Mastery</span>
+            <span class="text-xs font-medium text-slate-400">Elite Status: Level 01</span>
+        </div>
     </div>
-    <small id="progressText" style="color: var(--primary)">0% Mastery</small>
 </section>
 
-<div class="container">
-    <div id="recoBox">
+<div class="container max-w-7xl mx-auto px-6 py-20">
+    <div id="recoBox" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         </div>
 </div>
 
 <script>
-    // 1. Data Structure with Resources
     const roadmapData = {
         CS: [
-            { id: 1, t: "Logic & Algorithms", d: "Master the fundamental building blocks of software engineering.", link: "https://roadmap.sh/computer-science" },
-            { id: 2, t: "System Architecture", d: "Learn how to design scalable and distributed systems for millions.", link: "https://roadmap.sh/backend" },
-            { id: 3, t: "Cloud Mastery", d: "Deploy and manage secure cloud infrastructures like a pro.", link: "https://roadmap.sh/devops" }
+            { t: "Logic & Algorithms", d: "Master the fundamental building blocks of software engineering with DSA.", link: "https://roadmap.sh/computer-science", icon: "fa-code-branch" },
+            { t: "System Architecture", d: "Learn to design scalable infrastructures for high-performance applications.", link: "https://roadmap.sh/backend", icon: "fa-layer-group" },
+            { t: "Cloud & DevOps", d: "Deploy, manage and scale applications using modern cloud clusters.", link: "https://roadmap.sh/devops", icon: "fa-cloud" }
         ],
         AI: [
-            { id: 1, t: "Data Science Math", d: "Linear algebra and statistics for neural networks.", link: "https://roadmap.sh/ai-data-scientist" },
-            { id: 2, t: "Deep Learning ML", d: "Building and training advanced machine learning models.", link: "https://roadmap.sh/ai-engineer" },
-            { id: 3, t: "Agentic AI Systems", d: "The future of AI: Building autonomous decision-making agents.", link: "https://applied-ai.org/" }
+            { t: "Foundational Math", d: "Linear algebra, calculus and statistics for neural networks.", link: "https://roadmap.sh/ai-data-scientist", icon: "fa-square-root-variable" },
+            { t: "Machine Learning", d: "Building and training predictive models using advanced algorithms.", link: "https://roadmap.sh/ai-engineer", icon: "fa-brain" },
+            { t: "Agentic AI", d: "Designing autonomous AI agents for complex decision making.", link: "https://applied-ai.org/", icon: "fa-robot" }
         ]
     };
 
     function loadContent() {
-        const name = localStorage.getItem("userName") || "Genius";
-        const email = localStorage.getItem("userEmail");
+        const name = localStorage.getItem("userName") || "Subject";
         const area = localStorage.getItem("talentArea") || "CS";
-        
-        // Progress track karre hain (localStorage se uthayenge)
         let currentStep = parseInt(localStorage.getItem("roadmapProgress")) || 1;
 
-        if (!email) { window.location.href = "login.html"; return; }
+        document.getElementById("userTitle").innerText = `${name}'s Roadmap`;
 
-        document.getElementById("userTitle").innerText = `${name}'s Path`;
-
-        const currentPath = roadmapData[area];
+        const currentPath = roadmapData[area] || roadmapData.CS;
         let html = "";
         
         currentPath.forEach((item, i) => {
@@ -225,15 +232,19 @@
             const isCompleted = stepNum < currentStep;
 
             html += `
-                <div class="card ${isLocked ? 'locked' : ''}">
-                    <span class="card-num">Phase 0${stepNum}</span>
-                    ${isLocked ? '<div class="lock-icon">🔒</div>' : ''}
-                    <h3>${item.t}</h3>
-                    <p>${item.d}</p>
+                <div class="path-card ${isLocked ? 'locked' : ''}">
+                    ${isLocked ? '<div class="lock-overlay"><i class="fas fa-lock text-sm"></i></div>' : ''}
+                    <span class="phase-badge">Phase 0${stepNum}</span>
+                    <div class="mb-6">
+                        <i class="fas ${item.icon} text-3xl ${isLocked ? 'text-slate-300' : 'text-indigo-600'}"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3">${item.t}</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-8">${item.d}</p>
+                    
                     ${isLocked ? 
-                        `<button class="btn-start" style="background:#333; cursor:not-allowed">Locked</button>` : 
-                        `<button onclick="handleStage(${stepNum}, '${item.link}')" class="btn-start ${isCompleted ? 'completed' : ''}">
-                            ${isCompleted ? 'Review Module ✓' : 'Unlock Now'}
+                        `<button class="btn-action btn-locked">Locked Module</button>` : 
+                        `<button onclick="handleStage(${stepNum}, '${item.link}')" class="btn-action ${isCompleted ? 'btn-review' : 'btn-unlock'}">
+                            ${isCompleted ? 'Review Content <i class="fas fa-arrow-right ml-2"></i>' : 'Unlock Module'}
                         </button>`
                     }
                 </div>
@@ -244,23 +255,17 @@
         updateProgressBar(currentStep, currentPath.length);
     }
 
-    // 2. Button Action: Progress Handle Karega
     function handleStage(step, url) {
         let currentProgress = parseInt(localStorage.getItem("roadmapProgress")) || 1;
-
         if (step === currentProgress) {
-            alert("🚀 Excellent! Unlocking resources and advancing your profile...");
-            // Progress bar barhayenge
             localStorage.setItem("roadmapProgress", currentProgress + 1);
             window.open(url, "_blank");
-            loadContent(); // Page refresh bina reload kiye
+            loadContent();
         } else {
-            // Agar pehle hi complete kar chuka hai toh sirf link kholo
             window.open(url, "_blank");
         }
     }
 
-    // 3. Progress Bar Logic
     function updateProgressBar(current, total) {
         const percentage = ((current - 1) / total) * 100;
         document.getElementById("progressBar").style.width = percentage + "%";
