@@ -75,32 +75,21 @@
 
         .likert-pill {
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
             transition:
-                background-color 260ms ease,
-                color 260ms ease,
-                box-shadow 260ms ease,
+                background-color 320ms ease,
+                color 320ms ease,
+                box-shadow 320ms ease,
                 transform 120ms ease-out;
         }
 
         .likert-pill:hover {
             transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(79, 70, 229, 0.16);
         }
 
         .likert-pill.is-active {
             background-color: #eef2ff;
-            color: #4f46e5;
-            box-shadow: 0 16px 40px rgba(79, 70, 229, 0.25);
-            font-weight: 700;
-        }
-
-        .likert-pill .check-icon {
-            display: none;
-        }
-
-        .likert-pill.is-active .check-icon {
-            display: inline-flex;
+            color: #312e81;
+            box-shadow: 0 16px 40px rgba(79, 70, 229, 0.35);
         }
 
         .glass-overlay {
@@ -251,13 +240,13 @@
     </div>
 
     <!-- Main content: hero + assessment -->
-    <main class="pt-24 pb-16 bg-white relative z-10 ml-[280px]">
+    <main class="pt-28 pb-24 bg-white relative z-10 ml-[280px]">
         <!-- Hero section -->
-        <section id="hero" class="max-w-4xl mx-auto px-6 mb-8 animate-fade-in-up">
+        <section id="hero" class="max-w-4xl mx-auto px-6 mb-16 animate-fade-in-up">
             <p class="text-xs font-medium tracking-[0.26em] uppercase text-slate-400 mb-3">
                 Neural Career Platform
             </p>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight text-slate-900 mb-4">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 mb-4">
                 Discover your <span class="text-indigo-600">cognitive edge.</span>
             </h1>
             <p class="text-sm sm:text-base text-slate-500 max-w-2xl mb-6">
@@ -291,57 +280,42 @@
 
                         <div
                             id="likertGroup"
-                            class="flex flex-wrap gap-5"
+                            class="grid grid-cols-5 gap-4"
                         >
                             <button
                                 type="button"
                                 data-value="1"
-                                class="likert-pill flex-1 min-h-[3.75rem] sm:min-h-[4.5rem] rounded-3xl bg-white text-slate-500 text-sm sm:text-base font-medium flex items-center justify-center gap-2 ring-1 ring-slate-100 hover:ring-indigo-200 shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(79,70,229,0.18)] transition-colors duration-300 px-4 text-center"
+                                class="likert-pill aspect-square rounded-full bg-white text-slate-500 text-lg font-medium flex items-center justify-center ring-1 ring-slate-200 transition-colors duration-300"
                             >
-                                <span class="check-icon h-5 w-5 inline-flex items-center justify-center rounded-full border border-indigo-300 text-[11px] text-indigo-600">
-                                    ✓
-                                </span>
-                                <span class="leading-snug">Strongly Disagree</span>
+                                1
                             </button>
                             <button
                                 type="button"
                                 data-value="2"
-                                class="likert-pill flex-1 min-h-[3.75rem] sm:min-h-[4.5rem] rounded-3xl bg-white text-slate-500 text-sm sm:text-base font-medium flex items-center justify-center gap-2 ring-1 ring-slate-100 hover:ring-indigo-200 shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(79,70,229,0.18)] transition-colors duration-300 px-4 text-center"
+                                class="likert-pill aspect-square rounded-full bg-white text-slate-500 text-lg font-medium flex items-center justify-center ring-1 ring-slate-200 transition-colors duration-300"
                             >
-                                <span class="check-icon h-5 w-5 inline-flex items-center justify-center rounded-full border border-indigo-300 text-[11px] text-indigo-600">
-                                    ✓
-                                </span>
-                                <span class="leading-snug">Disagree</span>
+                                2
                             </button>
                             <button
                                 type="button"
                                 data-value="3"
-                                class="likert-pill flex-1 min-h-[3.75rem] sm:min-h-[4.5rem] rounded-3xl bg-white text-slate-500 text-sm sm:text-base font-medium flex items-center justify-center gap-2 ring-1 ring-slate-100 hover:ring-indigo-200 shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(79,70,229,0.18)] transition-colors duration-300 px-4 text-center"
+                                class="likert-pill aspect-square rounded-full bg-white text-slate-500 text-lg font-medium flex items-center justify-center ring-1 ring-slate-200 transition-colors duration-300"
                             >
-                                <span class="check-icon h-5 w-5 inline-flex items-center justify-center rounded-full border border-indigo-300 text-[11px] text-indigo-600">
-                                    ✓
-                                </span>
-                                <span class="leading-snug">Neutral</span>
+                                3
                             </button>
                             <button
                                 type="button"
                                 data-value="4"
-                                class="likert-pill flex-1 min-h-[3.75rem] sm:min-h-[4.5rem] rounded-3xl bg-white text-slate-500 text-sm sm:text-base font-medium flex items-center justify-center gap-2 ring-1 ring-slate-100 hover:ring-indigo-200 shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(79,70,229,0.18)] transition-colors duration-300 px-4 text-center"
+                                class="likert-pill aspect-square rounded-full bg-white text-slate-500 text-lg font-medium flex items-center justify-center ring-1 ring-slate-200 transition-colors duration-300"
                             >
-                                <span class="check-icon h-5 w-5 inline-flex items-center justify-center rounded-full border border-indigo-300 text-[11px] text-indigo-600">
-                                    ✓
-                                </span>
-                                <span class="leading-snug">Agree</span>
+                                4
                             </button>
                             <button
                                 type="button"
                                 data-value="5"
-                                class="likert-pill flex-1 min-h-[3.75rem] sm:min-h-[4.5rem] rounded-3xl bg-white text-slate-500 text-sm sm:text-base font-medium flex items-center justify-center gap-2 ring-1 ring-slate-100 hover:ring-indigo-200 shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(79,70,229,0.18)] transition-colors duration-300 px-4 text-center"
+                                class="likert-pill aspect-square rounded-full bg-white text-slate-500 text-lg font-medium flex items-center justify-center ring-1 ring-slate-200 transition-colors duration-300"
                             >
-                                <span class="check-icon h-5 w-5 inline-flex items-center justify-center rounded-full border border-indigo-300 text-[11px] text-indigo-600">
-                                    ✓
-                                </span>
-                                <span class="leading-snug">Strongly Agree</span>
+                                5
                             </button>
                         </div>
                     </div>
@@ -374,7 +348,7 @@
     <!-- Results dashboard (full-spectrum bento) -->
     <section
         id="resultsView"
-        class="hidden min-h-screen pt-12 pb-16 bg-white ml-[280px]"
+        class="hidden min-h-screen pt-24 pb-20 bg-white ml-[280px]"
     >
         <div id="result-ui" class="relative max-w-5xl mx-auto px-6">
             <div class="mb-8 flex items-center justify-between gap-4">
@@ -605,11 +579,12 @@
                 radarChart: null,
                 salaryChart: null
             };
+           
+
 
             const els = {
                 quizView: document.getElementById("quizView"),
                 resultsView: document.getElementById("resultsView"),
-                hero: document.getElementById("hero"),
                 questionText: document.getElementById("questionText"),
                 questionShell: document.getElementById("questionShell"),
                 stepLabel: document.getElementById("stepLabel"),
@@ -771,47 +746,6 @@
 
                     const data = await response.json();
                     state.results = data;
-
-                    // After prediction, persist quiz prediction to Node backend
-                    try {
-                        const emailFromStorage = window.localStorage ? window.localStorage.getItem("userEmail") : null;
-                        if (!emailFromStorage) {
-                            alert("Error: User Email not found in LocalStorage!");
-                        }
-
-                        const predictedCareer =
-                            (data.predictions && data.predictions[0] && data.predictions[0].career) || null;
-                        const quizCategory = "Neural Career Quiz";
-
-                        const dataToSend = {
-                            email: emailFromStorage || null,
-                            category: quizCategory,
-                            prediction: predictedCareer
-                        };
-
-                        console.log("1. Fetch started for email:", emailFromStorage);
-                        console.log("2. Data being sent:", JSON.stringify(dataToSend));
-
-                        (async function () {
-                            try {
-                                const response = await fetch("http://localhost:5000/api/quiz-save", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                    body: JSON.stringify(dataToSend)
-                                });
-
-                                const respJson = await response.json().catch(function () { return null; });
-                                console.log("3. Server Response:", respJson);
-                            } catch (err) {
-                                console.error("Error saving quiz prediction:", err);
-                            }
-                        })();
-                    } catch (persistErr) {
-                        console.error("Persistence error:", persistErr);
-                    }
-
                     showOverlay(false);
                     showResultsDashboard();
                     confetti({
@@ -831,9 +765,6 @@
             function showResultsDashboard() {
                 els.quizView.classList.add("hidden");
                 els.resultsView.classList.remove("hidden");
-                if (els.hero) {
-                    els.hero.classList.add("hidden");
-                }
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 renderRadarChart();
                 renderSalaryChart();
