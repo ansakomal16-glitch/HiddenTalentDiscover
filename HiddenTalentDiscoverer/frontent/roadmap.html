@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural OS | Interactive Career Roadmap</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --accent: #10b981;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            --sidebar-width: 280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- Sidebar Navigation --- */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--card-bg);
+            border-right: 1px solid var(--border);
+            height: 100vh;
+            position: fixed;
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand {
+            font-family: 'Outfit';
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-link {
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* --- Main Content --- */
+        main {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 50px 80px;
+        }
+
+        .header-section {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-family: 'Outfit';
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .header-section p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- Roadmap Timeline Logic --- */
+        .roadmap-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Vertical Line */
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        .milestone {
+            width: 100%;
+            margin-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Circle on the line */
+        .milestone::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .milestone-card {
+            width: 42%;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .milestone:nth-child(even) { flex-direction: row-reverse; }
+
+        .m-tag {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .m-title {
+            font-family: 'Outfit';
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .m-desc {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .status-done {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* --- Footer CTA --- */
+        .roadmap-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: white;
+            border-radius: 30px;
+            border: 2px dashed var(--border);
+        }
+
+        .btn-roadmap {
+            background: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 800;
+            display: inline-block;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-roadmap:hover {
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div class="brand"><i class="fas fa-brain"></i> NEURAL OS</div>
+        <nav>
+            <a href="dashboard.html" class="nav-link"><i class="fas fa-grid-2"></i> Dashboard</a>
+            <a href="quizonline.html" class="nav-link"><i class="fas fa-bolt"></i> IQ Quiz</a>
+            <a href="roadmap.html" class="nav-link active"><i class="fas fa-map-location-dot"></i> Roadmap</a>
+            <a href="#" class="nav-link"><i class="fas fa-users"></i> Community</a>
+            <a href="#" class="nav-link"><i class="fas fa-gear"></i> Settings</a>
+        </nav>
+    </aside>
+
+    <main>
+        <div class="header-section">
+            <h1>Your Career Journey</h1>
+            <p>Based on your AI evaluation, here is your path to becoming a Senior Architect.</p>
+        </div>
+
+        <div class="roadmap-container">
+            <div class="milestone">
+                <div class="milestone-card">
+                    <i class="fas fa-circle-check status-done"></i>
+                    <span class="m-tag">STEP 01</span>
+                    <h3 class="m-title">Cognitive Baseline</h3>
+                    <p class="m-desc">Initial assessment completed. Your logic scores are in the top 15% of recruits globally.</p>
+                </div>
+            </div>
+
+            <div class="milestone">
+                <div class="milestone-card">
+                    <span class="m-tag">STEP 02</span>
+                    <h3 class="m-title">Skill Specialization</h3>
+                    <p class="m-desc">Focus on React, Node.js, and System Design. This is the foundation for your technical growth.</p>
+                </div>
+            </div>
+
+            <div class="milestone">
+                <div class="milestone-card" style="border-style: dashed; opacity: 0.7;">
+                    <span class="m-tag">LOCKED</span>
+                    <h3 class="m-title">Advanced Logic Lab</h3>
+                    <p class="m-desc">Complete 5 more high-level quizzes to unlock this module and face advanced algorithms.</p>
+                </div>
+            </div>
+
+            <div class="milestone">
+                <div class="milestone-card" style="border-style: dashed; opacity: 0.7;">
+                    <span class="m-tag">LOCKED</span>
+                    <h3 class="m-title">Lead Architect</h3>
+                    <p class="m-desc">Final tier achievement. Master distributed systems and lead your own virtual engineering team.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-footer">
+            <h3 style="font-family: 'Outfit'; font-size: 1.5rem;">Ready for the next challenge?</h3>
+            <p style="color: var(--text-muted);">Each completed quiz updates your roadmap in real-time.</p>
+            <a href="quizonline.html" class="btn-roadmap">Unlock Next Step</a>
+        </div>
+    </main>
+
+</body>
+</html>

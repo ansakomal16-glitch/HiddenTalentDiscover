@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural OS | System Settings</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-soft: #eef2ff;
+            --danger: #ef4444;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --sidebar-width: 280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- Main Sidebar --- */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--card-bg);
+            border-right: 1px solid var(--border);
+            height: 100vh;
+            position: fixed;
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand {
+            font-family: 'Outfit';
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-link {
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        /* --- Main Content --- */
+        main {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 60px 100px;
+        }
+
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 40px; }
+        .page-header h1 { font-family: 'Outfit'; font-size: 2.5rem; font-weight: 800; }
+        .page-header p { color: var(--text-muted); font-weight: 500; }
+
+        /* --- Settings Card --- */
+        .settings-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- Form Elements --- */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+            font-weight: 600;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px var(--primary-soft);
+        }
+
+        /* --- Toggle Switch --- */
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-row:last-child { border: none; }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px; width: 20px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        /* --- Buttons --- */
+        .btn-save {
+            background: var(--primary);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 15px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-save:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2); }
+
+        .danger-zone {
+            border-color: #fee2e2;
+            background: #fffafa;
+        }
+
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div class="brand"><i class="fas fa-brain"></i> NEURAL OS</div>
+        <nav>
+            <a href="dashboard.html" class="nav-link"><i class="fas fa-grid-2"></i> Dashboard</a>
+            <a href="quizonline.html" class="nav-link"><i class="fas fa-bolt"></i> IQ Quiz</a>
+            <a href="roadmap.html" class="nav-link"><i class="fas fa-map-location-dot"></i> Roadmap</a>
+            <a href="community.html" class="nav-link"><i class="fas fa-users"></i> Community</a>
+            <a href="settings.html" class="nav-link active"><i class="fas fa-gear"></i> Settings</a>
+        </nav>
+    </aside>
+
+    <main>
+        <div class="settings-container">
+            <div class="page-header">
+                <h1>System Preferences</h1>
+                <p>Manage your neural profile and application environment.</p>
+            </div>
+
+            <div class="settings-card">
+                <h3 class="section-title"><i class="fas fa-user-circle" style="color:var(--primary)"></i> Public Profile</h3>
+                <div class="form-group">
+                    <label>Display Name</label>
+                    <input type="text" id="set-name" placeholder="Agent Alpha">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="set-email" placeholder="agent@neuralos.com" readonly>
+                </div>
+                <button class="btn-save" onclick="saveSettings()">Update Profile</button>
+            </div>
+
+            <div class="settings-card">
+                <h3 class="section-title"><i class="fas fa-sliders" style="color:var(--primary)"></i> Experience Settings</h3>
+                
+                <div class="setting-row">
+                    <div>
+                        <p style="font-weight: 700;">Email Notifications</p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Get alerts for new community posts.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <p style="font-weight: 700;">Public Leaderboard</p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Show your rank to other neural agents.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <p style="font-weight: 700;">Two-Factor Auth</p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Add extra security to your brain node.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-card danger-zone">
+                <h3 class="section-title" style="color: var(--danger); border-color: #fee2e2;">
+                    <i class="fas fa-triangle-exclamation"></i> Danger Zone
+                </h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+                    Once you delete your account, all your neural progress and quiz history will be permanently erased.
+                </p>
+                <button style="background: var(--danger); color: white; border: none; padding: 12px 25px; border-radius: 12px; font-weight: 800; cursor: pointer;">
+                    Delete Brain Node
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            const name = localStorage.getItem('userName') || 'Agent Alpha';
+            const email = localStorage.getItem('userEmail') || 'not-synced@neural.com';
+            
+            document.getElementById('set-name').value = name;
+            document.getElementById('set-email').value = email;
+        }
+
+        function saveSettings() {
+            const newName = document.getElementById('set-name').value;
+            localStorage.setItem('userName', newName);
+            alert('Settings updated successfully! System rebooting...');
+            location.reload();
+        }
+    </script>
+</body>
+</html>

@@ -407,7 +407,75 @@
             border-color: var(--primary);
             transform: scale(1.1);
         }
+.stories-container {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        padding: 40px;
+        flex-wrap: wrap;
+        background: #f8fafc; /* Light background for contrast */
+    }
 
+    .story-card {
+        flex: 1;
+        min-width: 280px;
+        max-width: 340px;
+        background: #ffffff;
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .story-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        border-color: #4f46e5;
+    }
+
+    .story-photo {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        filter: grayscale(20%); /* Modern subtle effect */
+        transition: 0.3s;
+    }
+
+    .story-card:hover .story-photo {
+        filter: grayscale(0%);
+    }
+
+    .story-text {
+        padding: 24px;
+    }
+
+    .story-text h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.25rem;
+        color: #0f172a;
+        margin-bottom: 10px;
+        font-weight: 800;
+    }
+
+    .story-text p {
+        font-size: 0.85rem;
+        color: #64748b;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        height: 60px; /* Text alignment fix */
+        overflow: hidden;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
         /* ================================================================
         [9. PRICING ARCHITECTURE]
         ================================================================ */
@@ -504,7 +572,79 @@
             display: none;
             animation: fadeIn 0.5s;
         }
+/* Container for all cards */
+.stories-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
 
+/* Individual Card Design */
+.story-card {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden; /* Taake image ke corners bhi round rahein */
+    border: 1px solid #e2e8f0;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.story-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    border-color: #4f46e5; /* Hover par border primary color ka ho jaye */
+}
+
+/* Photo Styling */
+.story-photo {
+    width: 100%;
+    height: 220px;
+    object-fit: cover; /* Image stretch nahi hogi */
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Text Content Area */
+.story-text {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.story-text h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    color: #0f172a; /* Solid Dark Blue/Black */
+    font-weight: 800;
+}
+
+.story-text p {
+    font-size: 0.95rem;
+    color: #64748b; /* Muted slate color */
+    line-height: 1.6;
+    font-style: italic; /* Quote style */
+}
+
+/* Badge Styling (Solid Colors) */
+.badge {
+    align-self: flex-start;
+    background: #eef2ff; /* Light indigo background */
+    color: #4f46e5;      /* Solid Indigo text */
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+/* Specific Badge Colors if you want variety */
+.story-card:nth-child(2) .badge { background: #fdf2f8; color: #ec4899; } /* Oprah - Pink */
+.story-card:nth-child(3) .badge { background: #f0fdf4; color: #10b981; } /* Rowling - Green */
         /* ================================================================
         [13. NEWSLETTER & CALL TO ACTION]
         ================================================================ */
@@ -554,7 +694,84 @@
             color: var(--text-muted);
             font-size: 0.85rem;
         }
+/* Styling for Tiers - Paste this in your <style> tag */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
 
+.price-card {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    text-align: center;
+}
+
+.price-card:hover {
+    transform: translateY(-15px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.price-val {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 20px 0;
+}
+
+.price-val span {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.feature-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.feature-list li {
+    padding: 10px 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.popular-label {
+    background: var(--primary);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-lock {
+    background: #f1f5f9;
+    color: var(--text-muted);
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 800;
+    width: 100%;
+    cursor: not-allowed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
         /* ================================================================
         [15. ANIMATIONS & REVEALS]
         ================================================================ */
@@ -646,7 +863,7 @@
                             <div style="display:flex; gap:12px; align-items:center;">
                                 <div class="avatar-circle"><i class="fas fa-check"></i></div>
                                 <div>
-                                    <h6 style="font-size:0.9rem;">98.2% Accuracy</h6>
+                                    <h6 style="font-size:0.9rem;">70% Accuracy</h6>
                                     <p style="font-size:0.7rem; color:var(--text-muted); margin:0;">Neural Matching Rate</p>
                                 </div>
                             </div>
@@ -709,48 +926,9 @@
             </div>
         </section>
 
-        <section class="stories-root section-py">
-            <div class="container">
-                <div class="services-header reveal">
-                    <span class="badge-pill">Historical Context</span>
-                    <h2>Greatness Hidden in Plain Sight</h2>
-                    <p>Even the world's most successful leaders were once undiscovered. We provide the tools they never had.</p>
-                </div>
+       
 
-            <div class="stories-layout">
-    <div class="story-box reveal">
-        <div class="story-img-side">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Elon_Musk_Royal_Society_crop.jpg/400px-Elon_Musk_Royal_Society_crop.jpg" alt="Elon Musk">
-        </div>
-        <div class="story-content-side">
-            <h4>Elon Musk</h4>
-            <p>"Engineering brilliance was a latent trait until he started deconstructing software at 12."</p>
-            <span class="badge-pill" style="font-size:0.6rem; background: #6366f1; color: white; padding: 2px 8px; border-radius: 10px;">Master Logician</span>
-        </div>
-    </div>
-
-    <div class="story-box reveal">
-        <div class="story-img-side">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Oprah_Winfrey_at_the_2011_TCA.jpg/400px-Oprah_Winfrey_at_the_2011_TCA.jpg" alt="Oprah Winfrey">
-        </div>
-        <div class="story-content-side">
-            <h4>Oprah Winfrey</h4>
-            <p>"Her massive EQ and narrative power were hidden under social barriers until media discovery."</p>
-            <span class="badge-pill" style="font-size:0.6rem; background: #6366f1; color: white; padding: 2px 8px; border-radius: 10px;">Social Genius</span>
-        </div>
-    </div>
-
-    <div class="story-box reveal">
-        <div class="story-img-side">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Steve_Jobs_Headshot_2010-edit2.jpg/400px-Steve_Jobs_Headshot_2010-edit2.jpg" alt="Steve Jobs">
-        </div>
-        <div class="story-content-side">
-            <h4>Steve Jobs</h4>
-            <p>"Jobs' aesthetic vision was a 'hidden talent' in an era of monochrome computing."</p>
-            <span class="badge-pill" style="font-size:0.6rem; background: #6366f1; color: white; padding: 2px 8px; border-radius: 10px;">Aesthetic Visionary</span>
-        </div>
-    </div>
-</div>
+       
                 </div>
             </div>
         </section>
@@ -787,79 +965,63 @@
             </div>
         </section>
 
-        <section class="pricing-root section-py">
-            <div class="container">
-                <div class="services-header reveal">
-                    <span class="badge-pill">Membership Plans</span>
-                    <h2>Invest in Your Future</h2>
-                </div>
+      <section class="pricing-root section-py">
+    <div class="container">
+        <div class="services-header reveal">
+            <span class="badge-pill">Neural Tiers</span>
+            <h2 style="font-family: 'Outfit'; font-size: 2.5rem; margin-top: 10px;">Unlock Your Potential</h2>
+            <p style="color: var(--text-muted);">Points earned from quizzes unlock advanced AI features.</p>
+        </div>
 
-                <div class="pricing-grid">
-                    <div class="price-card reveal">
-                        <h4>Explorer</h4>
-                        <div class="price-val">$0<span>/forever</span></div>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> 1 Baseline Neural Test</li>
-                            <li><i class="fas fa-check"></i> Global Ranking Access</li>
-                            <li><i class="fas fa-times" style="color:var(--error)"></i> AI Career Roadmap</li>
-                            <li><i class="fas fa-times" style="color:var(--error)"></i> 1-on-1 Mentorship</li>
-                        </ul>
-                        <button class="btn-base btn-outline" style="width:100%">Join Free</button>
-                    </div>
+        <div class="pricing-grid">
+            <div class="price-card reveal">
+                <h4 style="font-family: 'Outfit';">Neural Recruit</h4>
+                <div class="price-val">0<span> XP</span></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Basic IQ Assessment</li>
+                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Public Community Access</li>
+                    <li><i class="fas fa-times" style="color:var(--text-muted)"></i> Detailed Career Path</li>
+                    <li><i class="fas fa-times" style="color:var(--text-muted)"></i> Priority Skill Support</li>
+                </ul>
+                <button class="btn-base btn-primary" style="width:100%">Current Tier</button>
+            </div>
 
-                    <div class="price-card featured reveal">
-                        <div class="popular-label">MOST POPULAR</div>
-                        <h4>Genius Pro</h4>
-                        <div class="price-val">$29<span>/month</span></div>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Unlimited Neural Tests</li>
-                            <li><i class="fas fa-check"></i> Comprehensive AI Roadmap</li>
-                            <li><i class="fas fa-check"></i> priority Skill Forge Access</li>
-                            <li><i class="fas fa-check"></i> Weekly Talent Insights</li>
-                        </ul>
-                        <button class="btn-base btn-primary" style="width:100%">Unlock Potential</button>
-                    </div>
+            <div class="price-card featured reveal">
+                <div class="popular-label">RECOMMENDED</div>
+                <h4 style="font-family: 'Outfit';">Elite Analyst</h4>
+                <div class="price-val">5,000<span> XP</span></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Advanced Neural Logic</li>
+                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Full AI Career Roadmap</li>
+                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Skill Forge Tools</li>
+                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Verified Badge</li>
+                </ul>
+                <button id="unlock-pro" class="btn-lock">
+                    <i class="fas fa-lock"></i> Earn XP to Unlock
+                </button>
+            </div>
 
-                    <div class="price-card reveal">
-                        <h4>Enterprise</h4>
-                        <div class="price-val">$99<span>/month</span></div>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Team Mapping Dashboard</li>
-                            <li><i class="fas fa-check"></i> Recruitment API</li>
-                            <li><i class="fas fa-check"></i> Dedicated Science Board</li>
-                            <li><i class="fas fa-check"></i> Custom Skill Games</li>
-                        </ul>
-                        <button class="btn-base btn-outline" style="width:100%">Contact Sales</button>
-                    </div>
-                </div>
+            <div class="price-card reveal">
+                <h4 style="font-family: 'Outfit';">Neural Architect</h4>
+                <div class="price-val">15,000<span> XP</span></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Custom Skill Games</li>
+                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Mentor Network Access</li>
+                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Beta Testing Rights</li>
+                    <li><i class="fas fa-check" style="color:var(--accent)"></i> System Prefs Control</li>
+                </ul>
+                <button class="btn-lock">
+                    <i class="fas fa-lock"></i> Locked Tier
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
             </div>
         </section>
 
-        <section class="testimonial-root section-py">
-            <div class="container">
-                <div class="services-header reveal"><h2>Trusted by Innovators</h2></div>
-                <div class="testimonial-grid reveal">
-                    <div class="testi-card">
-                        <p>"This platform identified a talent for systems logic that I didn't know I had. Now I'm a Senior Lead Engineer."</p>
-                        <div class="user-meta">
-                            <img src="https://i.pravatar.cc/150?u=1" alt="User">
-                            <div><strong>Sarah Jenkins</strong><br><small>Google Developer</small></div>
-                        </div>
-                    </div>
-                    <div class="testi-card">
-                        <p>"The AI Coach is surprisingly human. It guided me through a career pivot that saved me years of doubt."</p>
-                        <div class="user-meta">
-                            <img src="https://i.pravatar.cc/150?u=2" alt="User">
-                            <div><strong>David Chen</strong><br><small>Startup Founder</small></div>
-                        </div>
-                    </div>
-                    <div class="testi-card">
-                        <p>"Gamified assessments are the future. It doesn't feel like a test, but the results are incredibly deep."</p>
-                        <div class="user-meta">
-                            <img src="https://i.pravatar.cc/150?u=3" alt="User">
-                            <div><strong>Emily Blunt</strong><br><small>Creative Director</small></div>
-                        </div>
-                    </div>
+    
+
                 </div>
             </div>
         </section>
@@ -896,7 +1058,7 @@
                 <div class="footer-grid">
                     <div class="footer-col">
                         <a href="#" class="logo" style="margin-bottom:20px;">
-                            <i class="fas fa-compass"></i> HIDDEN<span>TALENT</span>
+                            <i class="fas fa-compass"></i> HIDDEN<span>TALENT DISCOVERER</span>
                         </a>
                         <p style="color:var(--text-muted); font-size:0.9rem;">The world's leading platform for AI-driven potential mapping. Founded in 2026 for the age of intelligence.</p>
                         <div style="display:flex; gap:15px; font-size:1.2rem; color:var(--primary); margin-top:20px;">
