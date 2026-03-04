@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Architect | Professional White Edition</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+        }
+
+        /* Pure White Card Styling */
+        .white-card {
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .white-card:hover {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+            border-color: #e2e8f0;
+        }
+
+        /* Professional Stepper line */
+        .step-line::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 40px;
+            bottom: 0;
+            width: 2px;
+            background: #f1f5f9;
+        }
+
+        /* Loading Skeleton */
+        .shimmer {
+            background: linear-gradient(90deg, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+        }
+    </style>
+</head>
+<body class="selection:bg-indigo-100">
+
+    <header class="py-16 px-6 text-center border-b border-slate-50">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 mb-6">
+                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Career Roadmap Engine 2.0</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+                Map Your Future with <span class="text-indigo-600">Precision.</span>
+            </h1>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                A data-driven approach to career planning. Select your current standing and target goal to generate a comprehensive professional trajectory.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <div class="space-y-3">
+                <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Current Qualification</label>
+                <select id="userQual" class="w-full bg-white border border-slate-200 px-6 py-4 rounded-2xl text-slate-700 font-semibold focus:ring-4 focus:ring-indigo-50 transition-all outline-none">
+                    <option value="" disabled selected>Select level...</option>
+                    <option value="matric">Matriculation / O-Levels</option>
+                    <option value="intermediate">Intermediate / A-Levels</option>
+                    <option value="bachelors">Bachelors Degree</option>
+                    <option value="masters">Masters Degree</option>
+                </select>
+            </div>
+            <div class="space-y-3">
+                <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Target Profession</label>
+                <select id="userGoal" class="w-full bg-white border border-slate-200 px-6 py-4 rounded-2xl text-slate-700 font-semibold focus:ring-4 focus:ring-indigo-50 transition-all outline-none">
+                    <option value="" disabled selected>Select career...</option>
+                    <optgroup label="Technology">
+                        <option value="software-eng">Software Engineer</option>
+                        <option value="data-scientist">Data Scientist</option>
+                        <option value="cyber-security">Cyber Security Analyst</option>
+                    </optgroup>
+                    <optgroup label="Healthcare">
+                        <option value="doctor">Medical Doctor</option>
+                        <option value="dentist">Dentist</option>
+                    </optgroup>
+                    <optgroup label="Finance & Management">
+                        <option value="ca">Chartered Accountant</option>
+                        <option value="pm">Product Manager</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="md:col-span-2 text-center pt-4">
+                <button onclick="generateMap()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-5 px-12 rounded-2xl transition-all shadow-xl shadow-indigo-100 transform hover:-translate-y-1 active:scale-95">
+                    Generate My Roadmap
+                </button>
+            </div>
+        </div>
+
+        <div id="resultContainer" class="min-h-[400px]">
+            <div id="placeholder" class="text-center py-20 border-2 border-dashed border-slate-100 rounded-[40px]">
+                <div class="text-slate-200 mb-4"><i class="fa-solid fa-map-location-dot text-6xl"></i></div>
+                <h3 class="text-xl font-bold text-slate-400">Ready to Visualize Your Path?</h3>
+                <p class="text-slate-300">Fill in the details above to start your career mapping.</p>
+            </div>
+
+            <div id="loader" class="hidden space-y-10">
+                <div class="shimmer h-12 w-1/2 rounded-xl"></div>
+                <div class="shimmer h-64 w-full rounded-[32px]"></div>
+            </div>
+
+            <div id="roadmapView" class="hidden fade-up space-y-12">
+                </div>
+        </div>
+    </main>
+
+    <footer class="py-20 text-center border-t border-slate-50 mt-20">
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">© 2026 Career Architect Intelligence. Minimal White Design.</p>
+    </footer>
+
+    <script>
+        const CAREER_DATABASE = {
+            "intermediate_software-eng": {
+                role: "Software Engineer",
+                duration: "4 Years",
+                salary: "$80k - $140k",
+                difficulty: "Hard",
+                steps: [
+                    { title: "Undergraduate Degree", desc: "Enroll in a BS in Computer Science. Focus on Object-Oriented Programming and Data Structures.", icon: "fa-graduation-cap" },
+                    { title: "Skill Specialization", desc: "Master a stack (MERN, Python/Django, or Swift for iOS). Contribute to open source projects.", icon: "fa-code" },
+                    { title: "Professional Networking", desc: "Optimize your LinkedIn and GitHub. Attend tech meetups and build a professional portfolio.", icon: "fa-users" },
+                    { title: "Internship & Placement", desc: "Secure a 3-month internship at a product firm. Prepare for coding interviews (LeetCode/DSA).", icon: "fa-briefcase" }
+                ],
+                skills: ["Problem Solving", "System Design", "Git", "Cloud Architecture"]
+            },
+            "intermediate_doctor": {
+                role: "Medical Specialist",
+                duration: "8 - 10 Years",
+                salary: "$150k - $350k",
+                difficulty: "Expert",
+                steps: [
+                    { title: "Medical Entrance", desc: "Clear MDCAT or relevant entrance exams with a high percentile.", icon: "fa-stethoscope" },
+                    { title: "MBBS Program", desc: "Complete 5 years of medical school with clinical rotations.", icon: "fa-hospital-user" },
+                    { title: "House Job", desc: "Mandatory 1-year clinical residency in a teaching hospital.", icon: "fa-hospital" },
+                    { title: "Specialization", desc: "Clear PG exams (FCPS/MRCP) in your chosen field like Surgery or Pediatrics.", icon: "fa-microscope" }
+                ],
+                skills: ["Clinical Diagnosis", "Patient Care", "Medical Ethics", "Surgery"]
+            }
+            // Logic generates fallback for any other combination
+        };
+
+        function generateMap() {
+            const qual = document.getElementById('userQual').value;
+            const goal = document.getElementById('userGoal').value;
+            const placeholder = document.getElementById('placeholder');
+            const loader = document.getElementById('loader');
+            const roadmapView = document.getElementById('roadmapView');
+
+            if (!qual || !goal) {
+                alert("Please select both fields.");
+                return;
+            }
+
+            // UI State Transition
+            placeholder.classList.add('hidden');
+            roadmapView.classList.add('hidden');
+            loader.classList.remove('hidden');
+
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                roadmapView.classList.remove('hidden');
+                
+                const key = `${qual}_${goal}`;
+                const data = CAREER_DATABASE[key] || generateGenericPath(goal);
+                renderRoadmap(data);
+                
+                window.scrollTo({ top: roadmapView.offsetTop - 100, behavior: 'smooth' });
+            }, 1000);
+        }
+
+        function generateGenericPath(goal) {
+            return {
+                role: goal.replace('-', ' ').toUpperCase(),
+                duration: "4 - 6 Years",
+                salary: "Market Competitive",
+                difficulty: "Moderate",
+                steps: [
+                    { title: "Academic Foundation", desc: "Pursue a specialized degree related to this field from a recognized institute.", icon: "fa-university" },
+                    { title: "Certifications", desc: "Get industry-standard certifications (Google, IBM, or PMP) to boost your CV.", icon: "fa-certificate" },
+                    { title: "Industry Exposure", desc: "Apply for entry-level roles or internships to understand the professional environment.", icon: "fa-arrow-trend-up" },
+                    { title: "Career Growth", desc: "Focus on soft skills and leadership to move into management roles.", icon: "fa-ranking-star" }
+                ],
+                skills: ["Leadership", "Communication", "Critical Thinking", "Adaptability"]
+            };
+        }
+
+        function renderRoadmap(data) {
+            const view = document.getElementById('roadmapView');
+            
+            let html = `
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-slate-100 pb-10">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">${data.role}</h2>
+                        <p class="text-slate-400 font-medium">Verified Industry Career Pathway</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="window.print()" class="px-5 py-3 border border-slate-200 rounded-xl text-sm font-bold hover:bg-slate-50 transition">Export PDF</button>
+                        <button class="px-8 py-3 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-100">Save Progress</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="white-card p-6">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Duration</span>
+                        <p class="text-xl font-bold text-slate-800">${data.duration}</p>
+                    </div>
+                    <div class="white-card p-6">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Avg. Salary</span>
+                        <p class="text-xl font-bold text-slate-800">${data.salary}</p>
+                    </div>
+                    <div class="white-card p-6">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Complexity</span>
+                        <p class="text-xl font-bold text-indigo-600">${data.difficulty}</p>
+                    </div>
+                </div>
+
+                <div class="relative step-line space-y-10 py-4">
+                    ${data.steps.map((step, i) => `
+                        <div class="relative pl-20 group">
+                            <div class="absolute left-0 top-0 w-14 h-14 bg-white border border-slate-200 rounded-2xl flex items-center justify-center z-10 group-hover:border-indigo-500 group-hover:shadow-md transition-all">
+                                <i class="fa-solid ${step.icon} text-slate-400 group-hover:text-indigo-600"></i>
+                            </div>
+                            <div class="white-card p-8">
+                                <span class="text-indigo-600 font-black text-[10px] uppercase tracking-widest mb-2 block">Phase 0${i+1}</span>
+                                <h4 class="text-xl font-extrabold text-slate-900 mb-2">${step.title}</h4>
+                                <p class="text-slate-500 leading-relaxed font-medium">${step.desc}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="bg-slate-900 rounded-[32px] p-10 text-white text-center">
+                    <h3 class="text-xl font-bold mb-8">Core Competencies to Acquire</h3>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        ${data.skills.map(skill => `
+                            <span class="px-6 py-2 bg-white/10 rounded-full text-xs font-bold border border-white/5 hover:bg-white/20 transition-colors">
+                                ${skill}
+                            </span>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            view.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

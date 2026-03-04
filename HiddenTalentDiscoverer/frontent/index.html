@@ -820,6 +820,7 @@
                   <li><a href="profile.html">Profile</a></li>
                    <li><a href="recomendation.html">Recommandation</a></li>
                 <li><a href="about.html">About Us</a></li>
+                 <li><a href="careermap.html">Career map</a></li>
                 <li><a href="signup.html">Signup</a></li>
             </ul>
 
@@ -913,6 +914,12 @@
                         <span class="card-num">03</span>
                         <div class="s-icon"><i class="fas fa-robot"></i></div>
                         <h3>AI Career Architect</h3>
+                        <p>24/7 access to an LLM-powered coach trained on 50 years of career success data.</p>
+                    </div>
+                    <div class="service-card reveal" onclick="location.href='onlinegame.html'">
+                        <span class="card-num">03</span>
+                        <div class="s-icon"><i class="fas fa-robot"></i></div>
+                        <h3>Cool Games</h3>
                         <p>24/7 access to an LLM-powered coach trained on 50 years of career success data.</p>
                     </div>
 
@@ -1072,6 +1079,7 @@
                             <li><a href="#">Skill Forge</a></li>
                             <li><a href="#">Global Arena</a></li>
                             <li><a href="#">AI Chatbot</a></li>
+                           
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -1107,110 +1115,128 @@
 
     <script>
         /**
-         * APPLICATION CORE ENGINE
-         * Handles Session, Scroll reveals, Search Intelligence, and UI toggles.
-         */
-        const AppEngine = {
-            state: {
-                isLoggedIn: false,
-                userName: "Explorer",
-                keywords: [
-                    { word: "quiz", path: "quiz.html" },
-                    { word: "game", path: "games.html" },
-                    { word: "rank", path: "leaderboard.html" },
-                    { word: "leaderboard", path: "leaderboard.html" },
-                    { word: "about", path: "about.html" },
-                    { word: "ai", path: "chatbot.html" },
-                    { word: "coach", path: "chatbot.html" }
-                ]
-            },
+       /**
+ * APPLICATION CORE ENGINE (Optimized & Secure)
+ * Handles Session, Security, Search Intelligence, and UI toggles.
+ */
+const AppEngine = {
+    state: {
+        isLoggedIn: false,
+        userName: "Explorer",
+        userEmail: null,
+        keywords: [
+            { word: "quiz", path: "quizonline.html" }, // Path match kar diya
+            { word: "game", path: "onlinegame.html" }, // Path match kar diya
+            { word: "rank", path: "leaderboard.html" },
+            { word: "dash", path: "dashboard.html" },
+            { word: "leaderboard", path: "leaderboard.html" },
+            { word: "about", path: "about.html" },
+            { word: "ai", path: "chatbot.html" }
+        ]
+    },
 
-            init() {
-                this.validateSession();
-                this.setupIntersectionObserver();
-                this.bindSearchEvent();
-                console.log("Hidden Talent Engine Online...");
-            },
+    init() {
+        // 1. Pehle security check karein
+        this.validateSession();
+        // 2. UI/UX Elements setup karein
+        this.setupIntersectionObserver();
+        this.bindSearchEvent();
+        console.log("🚀 Neural Core Online & Protected.");
+    },
 
-            validateSession() {
-                const status = localStorage.getItem("isLoggedIn") === "true";
-                const user = localStorage.getItem("userName") || "Explorer";
-                const root = document.getElementById("appBody");
-                const authUI = document.getElementById("authContent");
+    validateSession() {
+        // Dashboard aur Quiz ki tarah yahan bhi userEmail check karein
+        const email = localStorage.getItem("userEmail");
+        const user = localStorage.getItem("userName") || "Explorer";
+        
+        const root = document.getElementById("appBody");
+        const authUI = document.getElementById("authContent");
 
-                if (status) {
-                    this.state.isLoggedIn = true;
-                    this.state.userName = user;
-                    
-                    // Trigger Reveal
-                    root.classList.remove("locked-overlay");
-                    root.classList.add("unlocked-view");
-
-                    // Inject User Menu
-                    authUI.innerHTML = `
-                        <div class="user-auth-badge">
-                            <div class="avatar-circle">${user.charAt(0)}</div>
-                            <span style="font-weight:700; font-size:0.8rem;">${user}</span>
-                            <button onclick="AppEngine.handleLogout()" style="color:var(--error); font-weight:800; font-size:0.7rem; margin-left:10px;">EXIT</button>
-                        </div>
-                    `;
-                } else {
-                    authUI.innerHTML = `<a href="login.html" class="btn-base btn-primary">INITIALIZE</a>`;
-                    // window.location.href = "login.html"; // Redirect if necessary
-                }
-            },
-
-            bindSearchEvent() {
-                const searchBox = document.getElementById("aiSearch");
-                if(searchBox) {
-                    searchBox.addEventListener("keypress", (e) => {
-                        if(e.key === "Enter") {
-                            const val = searchBox.value.toLowerCase().trim();
-                            const match = this.state.keywords.find(k => val.includes(k.word));
-                            
-                            if(match) {
-                                window.location.href = match.path;
-                            } else {
-                                alert("No direct neural path for: " + val + ". Redirecting to global search.");
-                            }
-                        }
-                    });
-                }
-            },
-
-            setupIntersectionObserver() {
-                const options = { threshold: 0.15 };
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if(entry.isIntersecting) {
-                            entry.target.classList.add("active-reveal");
-                        }
-                    });
-                }, options);
-
-                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-            },
-
-            handleLogout() {
-                if(confirm("Securely terminate session?")) {
-                    localStorage.removeItem("isLoggedIn");
-                    window.location.reload();
-                }
-            }
-        };
-
-        // UI Helpers
-        function toggleFaq(el) {
-            const answer = el.nextElementSibling;
-            const icon = el.querySelector('i');
-            const isVisible = answer.style.display === "block";
+        if (email) {
+            this.state.isLoggedIn = true;
+            this.state.userEmail = email;
+            this.state.userName = user;
             
-            answer.style.display = isVisible ? "none" : "block";
-            icon.className = isVisible ? "fas fa-plus" : "fas fa-minus";
-        }
+            // Unblock the View
+            if(root) {
+                root.classList.remove("locked-overlay");
+                root.style.display = "block"; // Ensure content is visible
+            }
 
-        // Bootstrapping
-        document.addEventListener("DOMContentLoaded", () => AppEngine.init());
-    </script>
+            // Inject Premium User Badge
+            if(authUI) {
+                authUI.innerHTML = `
+                    <div class="user-auth-badge" style="display:flex; align-items:center; gap:10px; background:rgba(79,70,229,0.1); padding:5px 15px; border-radius:100px; border:1px solid var(--primary);">
+                        <div class="avatar-circle" style="width:25px; height:25px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem;">${user.charAt(0).toUpperCase()}</div>
+                        <span style="font-weight:700; font-size:0.8rem; color:var(--text-heading);">${user}</span>
+                        <button onclick="AppEngine.handleLogout()" style="background:none; border:none; color:#ef4444; font-weight:800; font-size:0.65rem; cursor:pointer; margin-left:5px; letter-spacing:1px;">EXIT</button>
+                    </div>
+                `;
+            }
+        } else {
+            // IF NOT LOGGED IN: Hard Redirect
+            console.warn("Unauthorized access detected. Redirecting to Login...");
+            window.location.href = "login.html";
+        }
+    },
+
+    bindSearchEvent() {
+        const searchBox = document.getElementById("aiSearch");
+        if(searchBox) {
+            searchBox.addEventListener("keypress", (e) => {
+                if(e.key === "Enter") {
+                    const val = searchBox.value.toLowerCase().trim();
+                    // Advanced match: check if keyword exists in input
+                    const match = this.state.keywords.find(k => val.includes(k.word));
+                    
+                    if(match) {
+                        window.location.href = match.path;
+                    } else {
+                        // Better feedback than alert
+                        searchBox.value = "";
+                        searchBox.placeholder = "Path not found. Try 'quiz' or 'game'...";
+                        searchBox.style.borderColor = "#ef4444";
+                    }
+                }
+            });
+        }
+    },
+
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add("active-reveal");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    },
+
+    handleLogout() {
+        if(confirm("Terminate neural session and clear local cache?")) {
+            // Pura local storage clear karein taake koi trace na rahe
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("userName");
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "login.html";
+        }
+    }
+};
+
+// UI Helpers (Standalone)
+function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const icon = el.querySelector('i');
+    const isVisible = answer.style.display === "block";
+    
+    answer.style.display = isVisible ? "none" : "block";
+    icon.className = isVisible ? "fas fa-plus" : "fas fa-minus";
+}
+
+// Initializing
+document.addEventListener("DOMContentLoaded", () => AppEngine.init());
+</script>
 </body>
 </html>

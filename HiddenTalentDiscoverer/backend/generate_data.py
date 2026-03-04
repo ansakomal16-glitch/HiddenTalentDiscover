@@ -77,5 +77,5 @@ for job in professions:
 df = pd.DataFrame(data_list)
 
 # CSV file save karein
-df.to_csv("expanded_career_dataset.csv", index=False)
+df.to_csv("Data_final.csv", index=False)
 print("Dataset generated successfully with 100 professions and 1000 rows!")
