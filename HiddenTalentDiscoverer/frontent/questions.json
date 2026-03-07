@@ -1,3009 +1,511 @@
 [
-  {
-    "id": 1,
-    "question": "I find it satisfying to organize large amounts of data or financial records.",
-    "category": "C_score",
-    "target_careers": ["Accountant", "Financial Analyst", "Data Analyst"]
-  },
-  {
-    "id": 2,
-    "question": "I am naturally drawn to understanding how mechanical systems or engines work.",
-    "category": "Technical",
-    "target_careers": ["Mechanical Engineer", "Industrial Engineer", "Automotive"]
-  },
-  {
-    "id": 3,
-    "question": "I can stay calm and focused even in high-pressure medical or emergency situations.",
-    "category": "N_score_inverse",
-    "target_careers": ["Nurse", "Physician", "Police Detective"]
-  },
-  {
-    "id": 4,
-    "question": "I enjoy sketching, designing, or creating visual concepts from scratch.",
-    "category": "O_score",
-    "target_careers": ["Graphic Designer", "Architect", "Fashion Designer"]
-  },
-  {
-    "id": 5,
-    "question": "I find it easy to persuade others to see my point of view or buy into an idea.",
-    "category": "E_score",
-    "target_careers": ["Salesperson", "Real Estate Agent", "Marketing Manager"]
-  },
-  {
-    "id": 6,
-    "question": "I am fascinated by biological processes and how living organisms function.",
-    "category": "Science",
-    "target_careers": ["Biologist", "Biotechnologist", "Zoologist"]
-  },
-  {
-    "id": 7,
-    "question": "I enjoy breaking down complex code or logic to solve a technical problem.",
-    "category": "Analytical",
-    "target_careers": ["Software Developer", "Data Analyst", "SQA Tester"]
-  },
-  {
-    "id": 8,
-    "question": "I feel a sense of fulfillment when I help others overcome personal or emotional challenges.",
-    "category": "A_score",
-    "target_careers": ["Psychologist", "Social Worker", "Speech Therapist"]
-  },
-  {
-    "id": 9,
-    "question": "I like to investigate small details that others might miss to solve a mystery.",
-    "category": "Investigation",
-    "target_careers": ["Forensic Scientist", "Police Detective", "Financial Auditor"]
-  },
-  {
-    "id": 10,
-    "question": "I enjoy explaining complex topics to people in a way that is easy to understand.",
-    "category": "Communication",
-    "target_careers": ["Teacher", "HR Recruiter", "Journalist"]
-  },
-
-
-  {
-    "id": 11,
-    "question": "I enjoy solving puzzles or mathematical problems for fun.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Data Scientist", "Software Engineer", "Economist"]
-  },
-  {
-    "id": 12,
-    "question": "I am curious about how the human body works and how diseases are cured.",
-    "category": "Science",
-    "target_careers": ["Physician", "Pharmacist", "Biomedical Engineer"]
-  },
-  {
-    "id": 13,
-    "question": "I like to lead a team and make important decisions during a project.",
-    "category": "E_score",
-    "target_careers": ["Project Manager", "CEO", "Business Consultant"]
-  },
-  {
-    "id": 14,
-    "question": "I often notice small details in documents or objects that others overlook.",
-    "category": "C_score",
-    "target_careers": ["Forensic Scientist", "Auditor", "Quality Analyst"]
-  },
-  {
-    "id": 15,
-    "question": "I feel comfortable expressing my emotions through music, dance, or writing.",
-    "category": "O_score",
-    "target_careers": ["Musician", "Content Writer", "Actor"]
-  },
-  {
-    "id": 16,
-    "question": "I prefer following a strict daily routine rather than being spontaneous.",
-    "category": "C_score",
-    "target_careers": ["Librarian", "Administrative Assistant", "Accountant"]
-  },
-  {
-    "id": 17,
-    "question": "I enjoy helping people resolve their personal conflicts or problems.",
-    "category": "A_score",
-    "target_careers": ["Psychologist", "Human Resources Manager", "Social Worker"]
-  },
-  {
-    "id": 18,
-    "question": "I can visualize 3D objects clearly in my mind just by looking at a 2D drawing.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Architect", "Civil Engineer", "Interior Designer"]
-  },
-  {
-    "id": 19,
-    "question": "I am interested in how laws are made and how the legal system works.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Lawyer", "Judge", "Political Consultant"]
-  },
-  {
-    "id": 20,
-    "question": "I enjoy working outdoors and being close to nature or animals.",
-    "category": "Realistic",
-    "target_careers": ["Zoologist", "Geologist", "Environmental Scientist"]
-  },
-  {
-    "id": 21,
-    "question": "I like to take risks if there is a chance of a big reward.",
-    "category": "Enterprising",
-    "target_careers": ["Stock Trader", "Entrepreneur", "Investment Banker"]
-  },
-  {
-    "id": 22,
-    "question": "I find it easy to spot grammatical errors or spelling mistakes in a text.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Editor", "Journalist", "Public Relations Officer"]
-  },
-  {
-    "id": 23,
-    "question": "I am fascinated by the universe, stars, and space exploration.",
-    "category": "O_score",
-    "target_careers": ["Astronomer", "Physicist", "Aerospace Engineer"]
-  },
-  {
-    "id": 24,
-    "question": "I enjoy cooking and experimenting with different ingredients and flavors.",
-    "category": "Artistic",
-    "target_careers": ["Chef", "Food Stylist", "Nutritionist"]
-  },
-  {
-    "id": 25,
-    "question": "I like to keep my workspace extremely clean and organized.",
-    "category": "C_score",
-    "target_careers": ["Office Manager", "Warehouse Supervisor", "Pharmacist"]
-  },
-  {
-    "id": 26,
-    "question": "I prefer working alone in a quiet room rather than in a busy group.",
-    "category": "Introversion",
-    "target_careers": ["Researcher", "Software Developer", "Artist"]
-  },
-  {
-    "id": 27,
-    "question": "I enjoy taking apart broken gadgets to see if I can fix them.",
-    "category": "Technical",
-    "target_careers": ["Electrician", "Mechanical Engineer", "Hardware Technician"]
-  },
-  {
-    "id": 28,
-    "question": "I am good at remembering faces and names of people I just met.",
-    "category": "Social_Intelligence",
-    "target_careers": ["Sales Manager", "Event Planner", "Receptionist"]
-  },
-  {
-    "id": 29,
-    "question": "I find it interesting to study how different cultures and societies develop.",
-    "category": "Investigative",
-    "target_careers": ["Anthropologist", "Sociologist", "Historian"]
-  },
-  {
-    "id": 30,
-    "question": "I am very patient when teaching someone a new skill.",
-    "category": "A_score",
-    "target_careers": ["Teacher", "Trainer", "Corporate Mentor"]
-  },
-  
-  {
-    "id": 31,
-    "question": "I enjoy exploring new features in software and mobile applications.",
-    "category": "Technical",
-    "target_careers": ["UX Designer", "Software Tester", "Product Manager"]
-  },
-  {
-    "id": 32,
-    "question": "I keep a very close eye on my personal expenses and budget.",
-    "category": "C_score",
-    "target_careers": ["Financial Planner", "Accountant", "Banker"]
-  },
-  {
-    "id": 33,
-    "question": "I love listening to people's problems and offering them sound advice.",
-    "category": "A_score",
-    "target_careers": ["Counselor", "Social Worker", "HR Specialist"]
-  },
-  {
-    "id": 34,
-    "question": "I am fascinated by history and the architecture of ancient buildings.",
-    "category": "Investigative",
-    "target_careers": ["Archaeologist", "Historian", "Museum Curator"]
-  },
-  {
-    "id": 35,
-    "question": "I enjoy making new friends and attending social gatherings.",
-    "category": "E_score",
-    "target_careers": ["Public Relations", "Event Manager", "Sales Representative"]
-  },
-  {
-    "id": 36,
-    "question": "I can solve complex mathematical equations with ease.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Actuary", "Statistician", "Physics Researcher"]
-  },
-  {
-    "id": 37,
-    "question": "I enjoy playing video games and understanding their underlying mechanics.",
-    "category": "Technical",
-    "target_careers": ["Game Developer", "Animator", "Streamer"]
-  },
-  {
-    "id": 38,
-    "question": "I present my arguments with strong logic and evidence during a debate.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Lawyer", "Journalist", "Politician"]
-  },
-  {
-    "id": 39,
-    "question": "I love playing with colors, textures, and visual designs.",
-    "category": "Artistic",
-    "target_careers": ["Interior Designer", "Graphic Artist", "Fashion Stylist"]
-  },
-  {
-    "id": 40,
-    "question": "I enjoy performing experiments in a laboratory and analyzing the results.",
-    "category": "Science",
-    "target_careers": ["Chemist", "Lab Technician", "Medical Researcher"]
-  },
-  {
-    "id": 41,
-    "question": "I can quickly understand a person's mood by their body language.",
-    "category": "Social_Intelligence",
-    "target_careers": ["Psychologist", "Detective", "HR Interviewer"]
-  },
-  {
-    "id": 42,
-    "question": "I enjoy photography and capturing beautiful landscapes.",
-    "category": "O_score",
-    "target_careers": ["Photographer", "Cinematographer", "Travel Blogger"]
-  },
-  {
-    "id": 43,
-    "question": "I stay calm and make rational decisions even during a crisis.",
-    "category": "N_score_inverse",
-    "target_careers": ["Surgeon", "Pilot", "Firefighter"]
-  },
-  {
-    "id": 44,
-    "question": "I follow stock market trends and business news regularly.",
-    "category": "Enterprising",
-    "target_careers": ["Stock Broker", "Business Analyst", "Entrepreneur"]
-  },
-  {
-    "id": 45,
-    "question": "I am interested in how Artificial Intelligence and robots function.",
-    "category": "Technical",
-    "target_careers": ["AI Engineer", "Robotics Specialist", "Data Scientist"]
-  },
-  {
-    "id": 46,
-    "question": "I always keep my belongings organized and in their proper place.",
-    "category": "C_score",
-    "target_careers": ["Organizer", "Warehouse Manager", "Librarian"]
-  },
-  {
-    "id": 47,
-    "question": "I enjoy teaching children and spending time with them.",
-    "category": "A_score",
-    "target_careers": ["Primary Teacher", "Nanny", "Pediatrician"]
-  },
-  {
-    "id": 48,
-    "question": "I can easily find my way using a map or GPS.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Civil Engineer", "Pilot", "Surveyor"]
-  },
-  {
-    "id": 49,
-    "question": "I love writing stories, blogs, or creative articles.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Author", "Copywriter", "Script Writer"]
-  },
-  {
-    "id": 50,
-    "question": "I care about animals and want to learn about their health.",
-    "category": "Realistic",
-    "target_careers": ["Veterinary Doctor", "Zoologist", "Animal Trainer"]
-  },
-  {
-    "id": 51,
-    "question": "I get bored easily if my work doesn't involve constant novelty.",
-    "category": "O_score",
-    "target_careers": ["Event Planner", "News Reporter", "Actor"]
-  },
-  {
-    "id": 52,
-    "question": "I like assembling computer hardware components like RAM or CPUs.",
-    "category": "Technical",
-    "target_careers": ["Computer Technician", "Hardware Engineer", "IT Support"]
-  },
-  {
-    "id": 53,
-    "question": "I am always looking for new ways to save and invest money.",
-    "category": "C_score",
-    "target_careers": ["Investment Advisor", "Auditor", "Economist"]
-  },
-  {
-    "id": 54,
-    "question": "I feel energized when giving a speech on a stage.",
-    "category": "E_score",
-    "target_careers": ["Motivational Speaker", "Lawyer", "Politician"]
-  },
-  {
-    "id": 55,
-    "question": "I enjoy mixing chemicals to observe different reactions.",
-    "category": "Science",
-    "target_careers": ["Pharmacist", "Chemical Engineer", "Forensic Expert"]
-  },
-  {
-    "id": 56,
-    "question": "I am willing to help others even if it costs me my time.",
-    "category": "A_score",
-    "target_careers": ["Philanthropist", "Volunteer", "Nurse"]
-  },
-  {
-    "id": 57,
-    "question": "Looking at stars and planets through a telescope fascinates me.",
-    "category": "O_score",
-    "target_careers": ["Astronomer", "Space Scientist", "Astrophysicist"]
-  },
-  {
-    "id": 58,
-    "question": "I prefer fixing broken appliances myself rather than calling a pro.",
-    "category": "Realistic",
-    "target_careers": ["Mechanical Engineer", "Technician", "Plumber"]
-  },
-  {
-    "id": 59,
-    "question": "I believe in strictly following rules and regulations.",
-    "category": "C_score",
-    "target_careers": ["Police Officer", "Compliance Officer", "Security Manager"]
-  },
-  {
-    "id": 60,
-    "question": "I love experimenting with new recipes and cooking for others.",
-    "category": "Artistic",
-    "target_careers": ["Chef", "Restaurant Owner", "Food Critic"]
-  },
-  {
-    "id": 61,
-    "question": "I enjoy restoring old objects to make them look new again.",
-    "category": "Realistic",
-    "target_careers": ["Restoration Artist", "Civil Engineer", "Mechanical Technician"]
-  },
-  {
-    "id": 62,
-    "question": "I can spot patterns and trends in data very quickly.",
-    "category": "Analytical",
-    "target_careers": ["Data Analyst", "Market Researcher", "Cryptographer"]
-  },
-  {
-    "id": 63,
-    "question": "I find it easy to motivate people and boost their morale.",
-    "category": "E_score",
-    "target_careers": ["Life Coach", "Motivational Speaker", "Manager"]
-  },
-  {
-    "id": 64,
-    "question": "I analyze every aspect of a problem before making a decision.",
-    "category": "Investigative",
-    "target_careers": ["Philosopher", "Detective", "Policy Analyst"]
-  },
-  {
-    "id": 65,
-    "question": "I enjoy using design software like Photoshop or Illustrator.",
-    "category": "Technical",
-    "target_careers": ["UI/UX Designer", "Digital Artist", "Architect"]
-  },
-  {
-    "id": 66,
-    "question": "I create a checklist for my daily tasks every morning.",
-    "category": "C_score",
-    "target_careers": ["Project Coordinator", "Secretary", "Logistician"]
-  },
-  {
-    "id": 67,
-    "question": "I am passionate about saving lives and medical healthcare.",
-    "category": "Science",
-    "target_careers": ["Emergency Surgeon", "Nurse", "Paramedic"]
-  },
-  {
-    "id": 68,
-    "question": "I am curious about the cultures and traditions of different countries.",
-    "category": "O_score",
-    "target_careers": ["Travel Guide", "Anthropologist", "Diplomat"]
-  },
-  {
-    "id": 69,
-    "question": "I can perform complex mental math calculations rapidly.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Math Teacher", "Quant Trader", "Physicist"]
-  },
-  {
-    "id": 70,
-    "question": "I enjoy analyzing social media trends and viral content.",
-    "category": "Enterprising",
-    "target_careers": ["Social Media Manager", "Content Creator", "Marketing Expert"]
-  },
-  {
-    "id": 71,
-    "question": "I find gardening and taking care of plants very relaxing.",
-    "category": "Realistic",
-    "target_careers": ["Botanist", "Landscape Designer", "Agriculturist"]
-  },
-  {
-    "id": 72,
-    "question": "I can easily resolve conflicts between two people.",
-    "category": "A_score",
-    "target_careers": ["Mediator", "Lawyer", "HR Manager"]
-  },
-  {
-    "id": 73,
-    "question": "I love working with electronics and building circuits.",
-    "category": "Technical",
-    "target_careers": ["Electrical Engineer", "Hardware Specialist", "Robotics Technician"]
-  },
-  {
-    "id": 74,
-    "question": "I can learn new languages and vocabularies very quickly.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Translator", "Linguist", "Foreign Service Officer"]
-  },
-  {
-    "id": 75,
-    "question": "I like to experiment, even if there is a high chance of failure.",
-    "category": "O_score",
-    "target_careers": ["Research Scientist", "Entrepreneur", "Inventor"]
-  },
-  {
-    "id": 76,
-    "question": "I keep organized records of my documents from years ago.",
-    "category": "C_score",
-    "target_careers": ["Archivist", "Librarian", "Accountant"]
-  },
-  {
-    "id": 77,
-    "question": "I enjoy designing clothes or working with fashion textiles.",
-    "category": "Artistic",
-    "target_careers": ["Fashion Designer", "Tailor", "Textile Engineer"]
-  },
-  {
-    "id": 78,
-    "question": "I can focus on my work even in a noisy or crowded environment.",
-    "category": "N_score_inverse",
-    "target_careers": ["Air Traffic Controller", "Stock Trader", "Journalist"]
-  },
-  {
-    "id": 79,
-    "question": "I enjoy handling banking transactions and financial paperwork.",
-    "category": "C_score",
-    "target_careers": ["Bank Manager", "Cashier", "Financial Auditor"]
-  },
-  {
-    "id": 80,
-    "question": "I am fascinated by observing animal behavior in the wild.",
-    "category": "Science",
-    "target_careers": ["Zoologist", "Veterinary Surgeon", "Wildlife Photographer"]
-  },
-  {
-    "id": 81,
-    "question": "I prefer helping people improve rather than criticizing their mistakes.",
-    "category": "A_score",
-    "target_careers": ["Mentor", "Teacher", "Nurse"]
-  },
-  {
-    "id": 82,
-    "question": "I am interested in how airplanes and aviation systems work.",
-    "category": "Technical",
-    "target_careers": ["Aeronautical Engineer", "Pilot", "Aircraft Mechanic"]
-  },
-  {
-    "id": 83,
-    "question": "I can predict the plot or ending of a story very early on.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Script Writer", "Editor", "Psychologist"]
-  },
-  {
-    "id": 84,
-    "question": "I love brainstorming new business ideas and startups.",
-    "category": "Enterprising",
-    "target_careers": ["Entrepreneur", "Startup Founder", "Business Developer"]
-  },
-  {
-    "id": 85,
-    "question": "I can easily interpret information presented in maps and graphs.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Cartographer", "Data Visualizer", "Urban Planner"]
-  },
-  {
-    "id": 86,
-    "question": "I find reading and understanding legal documents interesting.",
-    "category": "Investigative",
-    "target_careers": ["Lawyer", "Paralegal", "Corporate Secretary"]
-  },
-  {
-    "id": 87,
-    "question": "I enjoy doing makeup or helping people with their personal styling.",
-    "category": "Artistic",
-    "target_careers": ["Make-up Artist", "Stylist", "Cosmetologist"]
-  },
-  {
-    "id": 88,
-    "question": "I can tell what's wrong with a machine just by hearing it run.",
-    "category": "Realistic",
-    "target_careers": ["Auto Mechanic", "Sound Engineer", "Industrial Technician"]
-  },
-  {
-    "id": 89,
-    "question": "I love coaching or teaching new sports skills to children.",
-    "category": "A_score",
-    "target_careers": ["Physical Education Teacher", "Coach", "School Counselor"]
-  },
-  {
-    "id": 90,
-    "question": "I always fact-check information before believing a news story.",
-    "category": "Investigative",
-    "target_careers": ["Journalist", "Forensic Auditor", "Researcher"]
-  },
-  {
-    "id": 91,
-    "question": "I enjoy woodworking or designing custom furniture.",
-    "category": "Realistic",
-    "target_careers": ["Carpenter", "Product Designer", "Sculptor"]
-  },
-  {
-    "id": 92,
-    "question": "I feel confident performing in front of a large audience.",
-    "category": "E_score",
-    "target_careers": ["Actor", "Singer", "Public Speaker"]
-  },
-  {
-    "id": 93,
-    "question": "I am interested in microbiology and how viruses work.",
-    "category": "Science",
-    "target_careers": ["Microbiologist", "Virologist", "Epidemiologist"]
-  },
-  {
-    "id": 94,
-    "question": "I am the one who usually plans the travel itinerary for my friends.",
-    "category": "C_score",
-    "target_careers": ["Travel Agent", "Tour Operator", "Project Manager"]
-  },
-  {
-    "id": 95,
-    "question": "I love the smell of old books and spending time in libraries.",
-    "category": "O_score",
-    "target_careers": ["Librarian", "Historian", "Writer"]
-  },
-  {
-    "id": 96,
-    "question": "I can make people laugh even in stressful situations.",
-    "category": "E_score",
-    "target_careers": ["Comedian", "Public Relations Officer", "Salesman"]
-  },
-  {
-    "id": 97,
-    "question": "I enjoy finding the most efficient routes on a map.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Geographer", "Navigator", "Delivery Optimizer"]
-  },
-  {
-    "id": 98,
-    "question": "I feel a deep sense of empathy for people who are suffering.",
-    "category": "A_score",
-    "target_careers": ["Therapist", "Social Worker", "Nurse"]
-  },
-  {
-    "id": 99,
-    "question": "I enjoy giving commands to a computer through programming.",
-    "category": "Technical",
-    "target_careers": ["Programmer", "Software Architect", "AI Developer"]
-  },
-  {
-    "id": 100,
-    "question": "I always have a 5-year plan ready for my future goals.",
-    "category": "C_score",
-    "target_careers": ["Strategic Planner", "Investment Banker", "Executive"]
-  },
-
-{
-    "id": 101,
-    "question": "I am curious about how the internet works and how data travels globally.",
-    "category": "Technical",
-    "target_careers": ["Network Engineer", "Cybersecurity Analyst", "Cloud Architect"]
-  },
-  {
-    "id": 102,
-    "question": "I enjoy using technology to solve daily life problems for others.",
-    "category": "O_score",
-    "target_careers": ["Assistive Tech Specialist", "Industrial Designer", "Bio-Engineer"]
-  },
-  {
-    "id": 103,
-    "question": "I am interested in criminal psychology and why people commit crimes.",
-    "category": "Investigative",
-    "target_careers": ["Criminologist", "Forensic Psychologist", "Private Investigator"]
-  },
-  {
-    "id": 104,
-    "question": "I can spot tiny errors in lengthy legal or financial documents.",
-    "category": "C_score",
-    "target_careers": ["Proofreader", "Legal Advisor", "Compliance Officer"]
-  },
-  {
-    "id": 105,
-    "question": "I love organizing large-scale events like weddings or corporate galas.",
-    "category": "E_score",
-    "target_careers": ["Event Planner", "Public Relations Executive", "Hotel Manager"]
-  },
-  {
-    "id": 106,
-    "question": "I can visualize how furniture should be arranged in an empty room easily.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Interior Designer", "Graphic Designer", "Civil Engineer"]
-  },
-  {
-    "id": 107,
-    "question": "I enjoy debating current laws and how they impact society.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Lawyer", "Judge", "Social Activist"]
-  },
-  {
-    "id": 108,
-    "question": "I have the patience to understand the intricate mechanics of a machine.",
-    "category": "Realistic",
-    "target_careers": ["Watchmaker", "Optical Technician", "Mechanical Engineer"]
-  },
-  {
-    "id": 109,
-    "question": "I enjoy managing investment portfolios and watching capital grow.",
-    "category": "Enterprising",
-    "target_careers": ["Investment Banker", "Financial Planner", "Portfolio Manager"]
-  },
-  {
-    "id": 110,
-    "question": "I find it rewarding to motivate people to improve their physical health.",
-    "category": "A_score",
-    "target_careers": ["Fitness Trainer", "Nutritionist", "Health Coach"]
-  },
-  {
-    "id": 111,
-    "question": "I am fascinated by the concepts of DNA, heredity, and genetics.",
-    "category": "Science",
-    "target_careers": ["Geneticist", "Biotechnologist", "Forensic Scientist"]
-  },
-  {
-    "id": 112,
-    "question": "I can spend hours lost in a painting or a creative design project.",
-    "category": "Artistic",
-    "target_careers": ["Fine Artist", "Illustrator", "Concept Designer"]
-  },
-  {
-    "id": 113,
-    "question": "I enjoy fostering teamwork and resolving internal group conflicts.",
-    "category": "E_score",
-    "target_careers": ["Team Lead", "HR Manager", "Project Manager"]
-  },
-  {
-    "id": 114,
-    "question": "I quickly grasp the story that financial numbers are telling me.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Market Analyst", "Business Intelligence", "Economist"]
-  },
-  {
-    "id": 115,
-    "question": "I love learning about archaeological digs and ancient artifacts.",
-    "category": "Investigative",
-    "target_careers": ["Archaeologist", "Museum Curator", "Historian"]
-  },
-  {
-    "id": 116,
-    "question": "I always list 'Pros and Cons' before making any significant decision.",
-    "category": "C_score",
-    "target_careers": ["Risk Analyst", "Management Consultant", "Judge"]
-  },
-  {
-    "id": 117,
-    "question": "I am interested in participating in or writing scripts for stage plays.",
-    "category": "O_score",
-    "target_careers": ["Playwright", "Actor", "Director"]
-  },
-  {
-    "id": 118,
-    "question": "I am very strict about quality standards in products I use or make.",
-    "category": "C_score",
-    "target_careers": ["Quality Control Inspector", "Software QA", "Auditor"]
-  },
-  {
-    "id": 119,
-    "question": "I am passionate about finding solutions to poverty and education gaps.",
-    "category": "A_score",
-    "target_careers": ["Social Worker", "NGO Director", "Public Policy Expert"]
-  },
-  {
-    "id": 120,
-    "question": "I enjoy assembling complex 3D models or puzzles.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Architect", "3D Modeler", "Civil Engineer"]
-  },
-  {
-    "id": 121,
-    "question": "I am fascinated by the psychological impact of colors on people.",
-    "category": "Artistic",
-    "target_careers": ["Marketing Copywriter", "Graphic Designer", "Stylist"]
-  },
-  {
-    "id": 122,
-    "question": "I like investigating the root cause of technical glitches in computers.",
-    "category": "Technical",
-    "target_careers": ["IT Support Specialist", "Software Developer", "Network Admin"]
-  },
-  {
-    "id": 123,
-    "question": "I find it easy to remember and apply complex grammatical rules.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Editor", "Translator", "Speech Therapist"]
-  },
-  {
-    "id": 124,
-    "question": "I enjoy the challenge of negotiating a better deal in business.",
-    "category": "Enterprising",
-    "target_careers": ["Salesperson", "Real Estate Agent", "Procurement Manager"]
-  },
-  {
-    "id": 125,
-    "question": "I am comfortable working with needles, blood, or medical instruments.",
-    "category": "Science",
-    "target_careers": ["Nurse", "Physician", "Phlebotomist"]
-  },
-  {
-    "id": 126,
-    "question": "I often think about how to automate repetitive tasks using code.",
-    "category": "Technical",
-    "target_careers": ["Software Developer", "Data Scientist", "System Analyst"]
-  },
-  {
-    "id": 127,
-    "question": "I am excellent at managing my time and sticking to a tight schedule.",
-    "category": "C_score",
-    "target_careers": ["Executive Assistant", "Logistician", "Project Manager"]
-  },
-  {
-    "id": 128,
-    "question": "I enjoy studying how different chemical compounds interact with the body.",
-    "category": "Science",
-    "target_careers": ["Pharmacist", "Pharmacologist", "Biochemist"]
-  },
-  {
-    "id": 129,
-    "question": "I love the idea of leading a large corporation or a big team.",
-    "category": "E_score",
-    "target_careers": ["CEO", "Marketing Manager", "HR Director"]
-  },
-  {
-    "id": 130,
-    "question": "I am fascinated by the way light and shadow work in photography.",
-    "category": "Artistic",
-    "target_careers": ["Event Photographer", "Cinematographer", "Lighting Designer"]
-  },
-  {
-    "id": 131,
-    "question": "I enjoy explaining scientific theories to people who aren't scientists.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Teacher", "Science Journalist", "Technical Writer"]
-  },
-  {
-    "id": 132,
-    "question": "I am very good at assembling flat-pack furniture without help.",
-    "category": "Realistic",
-    "target_careers": ["Industrial Engineer", "Mechanical Engineer", "Technician"]
-  },
-  {
-    "id": 133,
-    "question": "I enjoy keeping an eye on the latest fashion trends and styles.",
-    "category": "O_score",
-    "target_careers": ["Fashion Designer", "Retail Buyer", "Fashion Stylist"]
-  },
-  {
-    "id": 134,
-    "question": "I am interested in how the stock exchange works and how shares are traded.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Financial Analyst", "Stock Broker", "Economist"]
-  },
-  {
-    "id": 135,
-    "question": "I find it easy to empathize with people from different backgrounds.",
-    "category": "A_score",
-    "target_careers": ["HR Recruiter", "Sociologist", "Social Worker"]
-  },
-  {
-    "id": 136,
-    "question": "I enjoy the feeling of completing a complex mathematical proof.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Math Professor", "Actuary", "Research Scientist"]
-  },
-  {
-    "id": 137,
-    "question": "I am interested in how the brain controls human movement and speech.",
-    "category": "Science",
-    "target_careers": ["Speech Therapist", "Neurologist", "Biomedical Engineer"]
-  },
-  {
-    "id": 138,
-    "question": "I enjoy creating animations or digital effects on a computer.",
-    "category": "Technical",
-    "target_careers": ["Animator", "Game Designer", "Video Editor"]
-  },
-  {
-    "id": 139,
-    "question": "I like to take charge of group projects to ensure they succeed.",
-    "category": "E_score",
-    "target_careers": ["Project Manager", "Construction Manager", "Team Lead"]
-  },
-  {
-    "id": 140,
-    "question": "I am hightly disciplined about my fitness and diet routines.",
-    "category": "C_score",
-    "target_careers": ["Nutritionist", "Professional Athlete", "Physical Therapist"]
-  },
-  {
-    "id": 141,
-    "question": "I enjoy analyzing how laws vary across different countries and cultures.",
-    "category": "Investigative",
-    "target_careers": ["International Lawyer", "Diplomat", "Political Scientist"]
-  },
-  {
-    "id": 142,
-    "question": "I am fascinated by how renewable energy like solar and wind power works.",
-    "category": "Science",
-    "target_careers": ["Environmental Engineer", "Sustainability Consultant", "Physicist"]
-  },
-  {
-    "id": 143,
-    "question": "I enjoy the process of editing videos to tell a compelling story.",
-    "category": "Technical",
-    "target_careers": ["Video Editor", "Film Director", "Content Creator"]
-  },
-  {
-    "id": 144,
-    "question": "I find it easy to spot logical fallacies in someone's argument.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Judge", "Philosopher", "Debate Coach"]
-  },
-  {
-    "id": 145,
-    "question": "I enjoy the challenge of selling a product to a skeptical customer.",
-    "category": "E_score",
-    "target_careers": ["Sales Manager", "Marketing Executive", "Entrepreneur"]
-  },
-  {
-    "id": 146,
-    "question": "I am interested in how urban spaces can be designed to be more eco-friendly.",
-    "category": "O_score",
-    "target_careers": ["Urban Planner", "Architect", "Landscape Designer"]
-  },
-  {
-    "id": 147,
-    "question": "I am very meticulous when it comes to financial record-keeping.",
-    "category": "C_score",
-    "target_careers": ["Financial Auditor", "Tax Accountant", "Bookkeeper"]
-  },
-  {
-    "id": 148,
-    "question": "I enjoy studying the chemical composition of different food products.",
-    "category": "Science",
-    "target_careers": ["Food Scientist", "Nutritionist", "Chemist"]
-  },
-  {
-    "id": 149,
-    "question": "I find it rewarding to help people with speech or language disorders.",
-    "category": "A_score",
-    "target_careers": ["Speech Therapist", "Special Education Teacher", "Audiologist"]
-  },
-  {
-    "id": 150,
-    "question": "I like to understand the internal structure and hardware of smartphones.",
-    "category": "Technical",
-    "target_careers": ["Hardware Engineer", "Mobile Technician", "Electronics Engineer"]
-  },
-  {
-    "id": 151,
-    "question": "I am comfortable handling complex data sets to find hidden patterns.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Data Scientist", "Statistician", "Market Researcher"]
-  },
-  {
-    "id": 152,
-    "question": "I enjoy the creative process of naming a new brand or product.",
-    "category": "Artistic",
-    "target_careers": ["Copywriter", "Branding Specialist", "Marketing Manager"]
-  },
-  {
-    "id": 153,
-    "question": "I feel a sense of duty to protect the rights of the underprivileged.",
-    "category": "A_score",
-    "target_careers": ["Human Rights Lawyer", "Social Worker", "Public Defender"]
-  },
-  {
-    "id": 154,
-    "question": "I am interested in how global markets react to political news.",
-    "category": "Enterprising",
-    "target_careers": ["Financial Analyst", "Economist", "Investment Banker"]
-  },
-  {
-    "id": 155,
-    "question": "I like to keep a detailed log or diary of my professional progress.",
-    "category": "C_score",
-    "target_careers": ["Project Manager", "Journalist", "Archivist"]
-  },
-  {
-    "id": 156,
-    "question": "I enjoy sketching 3D prototypes for new inventions.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Product Designer", "Industrial Engineer", "Mechanical Engineer"]
-  },
-  {
-    "id": 157,
-    "question": "I am fascinated by how vaccines are developed and tested.",
-    "category": "Science",
-    "target_careers": ["Virologist", "Pharmacologist", "Biotechnologist"]
-  },
-  {
-    "id": 158,
-    "question": "I enjoy the thrill of public performance, such as acting or dancing.",
-    "category": "E_score",
-    "target_careers": ["Actor", "Dancer", "Performer"]
-  },
-  {
-    "id": 159,
-    "question": "I find it easy to simplify difficult technical concepts for a child.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Science Teacher", "Technical Writer", "Museum Educator"]
-  },
-  {
-    "id": 160,
-    "question": "I am interested in forensics and solving crimes using DNA evidence.",
-    "category": "Investigative",
-    "target_careers": ["Forensic Scientist", "Police Detective", "Criminologist"]
-  },
-  {
-    "id": 161,
-    "question": "I enjoy planning the logistical movement of goods across borders.",
-    "category": "C_score",
-    "target_careers": ["Logistics Manager", "Supply Chain Analyst", "Import-Export Specialist"]
-  },
-  {
-    "id": 162,
-    "question": "I find the study of rocks, minerals, and the Earth's crust exciting.",
-    "category": "Realistic",
-    "target_careers": ["Geologist", "Mining Engineer", "Environmental Scientist"]
-  },
-  {
-    "id": 163,
-    "question": "I enjoy managing social media communities and online engagement.",
-    "category": "Enterprising",
-    "target_careers": ["Social Media Manager", "Community Lead", "Digital Marketer"]
-  },
-  {
-    "id": 164,
-    "question": "I am interested in how different psychological therapies work.",
-    "category": "A_score",
-    "target_careers": ["Psychologist", "Psychiatrist", "Counselor"]
-  },
-  {
-    "id": 165,
-    "question": "I like to experiment with different digital painting brushes and styles.",
-    "category": "Artistic",
-    "target_careers": ["Digital Artist", "Game Illustrator", "Graphic Designer"]
-  },
-  {
-    "id": 166,
-    "question": "I enjoy the technical challenge of building a high-performance PC.",
-    "category": "Technical",
-    "target_careers": ["System Integrator", "Hardware Engineer", "IT Consultant"]
-  },
-  {
-    "id": 167,
-    "question": "I can easily spot inconsistencies in a person's testimony or story.",
-    "category": "Investigative",
-    "target_careers": ["Police Detective", "Private Investigator", "Lawyer"]
-  },
-  {
-    "id": 168,
-    "question": "I enjoy teaching adults new professional skills or software tools.",
-    "category": "A_score",
-    "target_careers": ["Corporate Trainer", "Software Instructor", "HR Specialist"]
-  },
-  {
-    "id": 169,
-    "question": "I am fascinated by how airplanes navigate through bad weather.",
-    "category": "Technical",
-    "target_careers": ["Pilot", "Air Traffic Controller", "Aviation Engineer"]
-  },
-  {
-    "id": 170,
-    "question": "I like to organize information into clear, scannable spreadsheets.",
-    "category": "C_score",
-    "target_careers": ["Data Entry Specialist", "Administrative Assistant", "Data Analyst"]
-  },
-  {
-    "id": 171,
-    "question": "I am interested in the ethical implications of Artificial Intelligence.",
-    "category": "O_score",
-    "target_careers": ["AI Ethicist", "Tech Journalist", "Philosopher"]
-  },
-  {
-    "id": 172,
-    "question": "I enjoy the physical labor of building something with my own hands.",
-    "category": "Realistic",
-    "target_careers": ["Construction Engineer", "Carpenter", "Civil Engineer"]
-  },
-  {
-    "id": 173,
-    "question": "I find it easy to calculate discounts and tax percentages in my head.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Retail Manager", "Accountant", "Salesperson"]
-  },
-  {
-    "id": 174,
-    "question": "I enjoy investigating how different medications affect the human brain.",
-    "category": "Science",
-    "target_careers": ["Pharmacologist", "Psychiatrist", "Medical Researcher"]
-  },
-  {
-    "id": 175,
-    "question": "I am interested in the history and evolution of different languages.",
-    "category": "Investigative",
-    "target_careers": ["Linguist", "Etymologist", "Translator"]
-  },
-  {
-    "id": 176,
-    "question": "I like to lead brainstorming sessions to solve complex team problems.",
-    "category": "E_score",
-    "target_careers": ["Creative Director", "Manager", "Product Owner"]
-  },
-  {
-    "id": 177,
-    "question": "I am fascinated by how large ships are built and navigated.",
-    "category": "Technical",
-    "target_careers": ["Marine Engineer", "Ship Captain", "Logistics Officer"]
-  },
-  {
-    "id": 178,
-    "question": "I enjoy writing deep, investigative news articles.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Journalist", "Editor", "Investigative Reporter"]
-  },
-  {
-    "id": 179,
-    "question": "I find it easy to understand and follow complex safety protocols.",
-    "category": "C_score",
-    "target_careers": ["Health & Safety Officer", "Security Manager", "Nurse"]
-  },
-  {
-    "id": 180,
-    "question": "I enjoy the process of mixing and mastering music tracks.",
-    "category": "Artistic",
-    "target_careers": ["Sound Engineer", "Music Producer", "DJ"]
-  },
-  {
-    "id": 181,
-    "question": "I am curious about how plants can be genetically modified for better yield.",
-    "category": "Science",
-    "target_careers": ["Agricultural Scientist", "Geneticist", "Biotechnologist"]
-  },
-  {
-    "id": 182,
-    "question": "I enjoy the challenge of learning and performing a new instrument.",
-    "category": "O_score",
-    "target_careers": ["Musician", "Music Teacher", "Composer"]
-  },
-  {
-    "id": 183,
-    "question": "I am interested in how the economy of a country is managed.",
-    "category": "Investigative",
-    "target_careers": ["Economist", "Financial Advisor", "Public Policy Expert"]
-  },
-  {
-    "id": 184,
-    "question": "I like to design characters and worlds for video games.",
-    "category": "Artistic",
-    "target_careers": ["Concept Artist", "Game Designer", "Creative Writer"]
-  },
-  {
-    "id": 185,
-    "question": "I enjoy assisting surgeons during complex operations.",
-    "category": "Science",
-    "target_careers": ["Surgical Nurse", "Surgeon", "Medical Assistant"]
-  },
-  {
-    "id": 186,
-    "question": "I am excellent at spotting fake news or online misinformation.",
-    "category": "Investigative",
-    "target_careers": ["Journalist", "Fact-Checker", "Social Media Analyst"]
-  },
-  {
-    "id": 187,
-    "question": "I enjoy the technical work of maintaining large databases.",
-    "category": "Technical",
-    "target_careers": ["Database Administrator", "Data Engineer", "Backend Developer"]
-  },
-  {
-    "id": 188,
-    "question": "I find it easy to explain career paths to students based on their skills.",
-    "category": "A_score",
-    "target_careers": ["Career Counselor", "Teacher", "HR Recruiter"]
-  },
-  {
-    "id": 189,
-    "question": "I am interested in how consumer psychology drives buying behavior.",
-    "category": "Enterprising",
-    "target_careers": ["Marketing Researcher", "Brand Strategist", "Business Analyst"]
-  },
-  {
-    "id": 190,
-    "question": "I enjoy the process of prototyping apps on paper or digital tools.",
-    "category": "Technical",
-    "target_careers": ["UX Designer", "Product Designer", "App Developer"]
-  },
-  {
-    "id": 191,
-    "question": "I like to follow strict protocols when handling sensitive financial data.",
-    "category": "C_score",
-    "target_careers": ["Compliance Officer", "Financial Auditor", "Cybersecurity Analyst"]
-  },
-  {
-    "id": 192,
-    "question": "I am interested in how oceans impact the global climate.",
-    "category": "Science",
-    "target_careers": ["Oceanographer", "Marine Biologist", "Environmentalist"]
-  },
-  {
-    "id": 193,
-    "question": "I enjoy the social dynamics of working in a busy restaurant or cafe.",
-    "category": "E_score",
-    "target_careers": ["Chef", "Restaurant Manager", "Customer Service"]
-  },
-  {
-    "id": 194,
-    "question": "I find it easy to remember technical terms and their meanings.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Technical Writer", "Medical Secretary", "Linguist"]
-  },
-  {
-    "id": 195,
-    "question": "I am fascinated by the mechanical work behind high-speed trains.",
-    "category": "Technical",
-    "target_careers": ["Railway Engineer", "Mechanical Engineer", "Transport Planner"]
-  },
-  {
-    "id": 196,
-    "question": "I enjoy the process of writing code to solve a logic puzzle.",
-    "category": "Analytical",
-    "target_careers": ["Software Developer", "Algorithm Engineer", "Data Scientist"]
-  },
-  {
-    "id": 197,
-    "question": "I am interested in how charities manage their funds and volunteers.",
-    "category": "A_score",
-    "target_careers": ["NGO Manager", "Fundraising Officer", "Social Worker"]
-  },
-  {
-    "id": 198,
-    "question": "I like to design layouts for magazines or digital publications.",
-    "category": "Artistic",
-    "target_careers": ["Graphic Designer", "Editor", "Art Director"]
-  },
-  {
-    "id": 199,
-    "question": "I enjoy the challenge of predicting weather patterns using data.",
-    "category": "Science",
-    "target_careers": ["Meteorologist", "Data Analyst", "Environmental Scientist"]
-  },
-  {
-    "id": 200,
-    "question": "I am very organized when planning for unexpected emergencies.",
-    "category": "C_score",
-    "target_careers": ["Emergency Coordinator", "Risk Manager", "Police Officer"]
-  },
-  {
-    "id": 201,
-    "question": "I enjoy researching how global trade policies affect local businesses.",
-    "category": "Investigative",
-    "target_careers": ["Economist", "International Trade Specialist", "Business Consultant"]
-  },
-  {
-    "id": 202,
-    "question": "I am fascinated by the process of creating special effects (VFX) for movies.",
-    "category": "Technical",
-    "target_careers": ["VFX Artist", "Video Editor", "Multimedia Designer"]
-  },
-  {
-    "id": 203,
-    "question": "I find it easy to calm down an angry customer and solve their problem.",
-    "category": "A_score",
-    "target_careers": ["Customer Success Manager", "Public Relations", "Hotel Manager"]
-  },
-  {
-    "id": 204,
-    "question": "I enjoy studying how different soil types affect crop production.",
-    "category": "Science",
-    "target_careers": ["Agricultural Scientist", "Geologist", "Environmentalist"]
-  },
-  {
-    "id": 205,
-    "question": "I like to stay updated on the latest cybersecurity threats and hacking methods.",
-    "category": "Technical",
-    "target_careers": ["Cybersecurity Analyst", "Ethical Hacker", "IT Auditor"]
-  },
-  {
-    "id": 206,
-    "question": "I enjoy the challenge of translating complex poetry from one language to another.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Translator", "Author", "Linguist"]
-  },
-  {
-    "id": 207,
-    "question": "I am interested in how hormones regulate human behavior and emotions.",
-    "category": "Science",
-    "target_careers": ["Endocrinologist", "Psychiatrist", "Medical Researcher"]
-  },
-  {
-    "id": 208,
-    "question": "I enjoy managing the logistics of a large warehouse or shipping center.",
-    "category": "C_score",
-    "target_careers": ["Warehouse Manager", "Supply Chain Planner", "Operations Manager"]
-  },
-  {
-    "id": 209,
-    "question": "I find it exciting to pitch a new idea to a group of investors.",
-    "category": "E_score",
-    "target_careers": ["Entrepreneur", "Startup Founder", "Investment Banker"]
-  },
-  {
-    "id": 210,
-    "question": "I am fascinated by the structural engineering of bridges and skyscrapers.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Civil Engineer", "Architect", "Structural Analyst"]
-  },
-  {
-    "id": 211,
-    "question": "I enjoy teaching people how to use new computer software or hardware.",
-    "category": "A_score",
-    "target_careers": ["IT Trainer", "Technical Support Specialist", "Teacher"]
-  },
-  {
-    "id": 212,
-    "question": "I like to analyze the nutritional content of the food I eat very carefully.",
-    "category": "C_score",
-    "target_careers": ["Nutritionist", "Dietician", "Food Scientist"]
-  },
-  {
-    "id": 213,
-    "question": "I enjoy the process of writing clean and efficient code for mobile apps.",
-    "category": "Technical",
-    "target_careers": ["App Developer", "Software Engineer", "Frontend Developer"]
-  },
-  {
-    "id": 214,
-    "question": "I am interested in how ancient civilizations managed their water systems.",
-    "category": "Investigative",
-    "target_careers": ["Archaeologist", "Civil Engineer", "Historian"]
-  },
-  {
-    "id": 215,
-    "question": "I enjoy the creative challenge of interior lighting and room ambiance.",
-    "category": "Artistic",
-    "target_careers": ["Interior Designer", "Lighting Technician", "Set Designer"]
-  },
-  {
-    "id": 216,
-    "question": "I find it easy to explain complex medical diagnoses in simple terms.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Physician", "Nurse", "Health Educator"]
-  },
-  {
-    "id": 217,
-    "question": "I am comfortable working in high-risk environments like oil rigs or mines.",
-    "category": "Realistic",
-    "target_careers": ["Petroleum Engineer", "Mining Engineer", "Safety Officer"]
-  },
-  {
-    "id": 218,
-    "question": "I enjoy the process of auditing financial statements to find fraud.",
-    "category": "C_score",
-    "target_careers": ["Financial Auditor", "Forensic Accountant", "Tax Inspector"]
-  },
-  {
-    "id": 219,
-    "question": "I like to participate in community service and volunteer work regularly.",
-    "category": "A_score",
-    "target_careers": ["Social Worker", "NGO Manager", "Volunteer Coordinator"]
-  },
-  {
-    "id": 220,
-    "question": "I am fascinated by the physics of sound and how it travels in different spaces.",
-    "category": "Science",
-    "target_careers": ["Acoustical Engineer", "Sound Designer", "Physicist"]
-  },
-  {
-    "id": 221,
-    "question": "I enjoy the challenge of managing a crisis communication plan for a company.",
-    "category": "E_score",
-    "target_careers": ["Public Relations Manager", "Corporate Spokesperson", "Marketing Director"]
-  },
-  {
-    "id": 222,
-    "question": "I find it easy to visualize how a 2D logo will look on a 3D product package.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Graphic Designer", "Package Designer", "Brand Identity Specialist"]
-  },
-  {
-    "id": 223,
-    "question": "I enjoy the technical work of configuring server networks and firewalls.",
-    "category": "Technical",
-    "target_careers": ["Network Administrator", "Systems Engineer", "Security Architect"]
-  },
-  {
-    "id": 224,
-    "question": "I am interested in how the human brain processes different languages.",
-    "category": "Investigative",
-    "target_careers": ["Neurolinguist", "Psychologist", "Speech Pathologist"]
-  },
-  {
-    "id": 225,
-    "question": "I like to organize and categorize my digital files into a perfect system.",
-    "category": "C_score",
-    "target_careers": ["Digital Librarian", "Data Manager", "Administrative Assistant"]
-  },
-  {
-    "id": 226,
-    "question": "I enjoy the physical aspect of doing repairs on heavy machinery.",
-    "category": "Realistic",
-    "target_careers": ["Industrial Mechanic", "Mechanical Engineer", "Technician"]
-  },
-  {
-    "id": 227,
-    "question": "I am fascinated by the use of chemistry in creating new cosmetics.",
-    "category": "Science",
-    "target_careers": ["Cosmetic Chemist", "Chemical Engineer", "Product Developer"]
-  },
-  {
-    "id": 228,
-    "question": "I enjoy the process of writing detailed scripts for educational videos.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Technical Writer", "Content Strategist", "Educational Consultant"]
-  },
-  {
-    "id": 229,
-    "question": "I find it easy to lead a group of people through a difficult hike or trip.",
-    "category": "E_score",
-    "target_careers": ["Travel Guide", "Outdoor Instructor", "Team Lead"]
-  },
-  {
-    "id": 230,
-    "question": "I am interested in the legalities of property and real estate ownership.",
-    "category": "Investigative",
-    "target_careers": ["Real Estate Lawyer", "Property Manager", "Real Estate Agent"]
-  },
-  {
-    "id": 231,
-    "question": "I enjoy the process of designing levels or maps for video games.",
-    "category": "Artistic",
-    "target_careers": ["Level Designer", "Game Architect", "3D Artist"]
-  },
-  {
-    "id": 232,
-    "question": "I find it rewarding to help students overcome learning disabilities.",
-    "category": "A_score",
-    "target_careers": ["Special Education Teacher", "Psychologist", "School Counselor"]
-  },
-  {
-    "id": 233,
-    "question": "I like to study the data patterns of how users interact with a website.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["UX Researcher", "Data Analyst", "Web Analyst"]
-  },
-  {
-    "id": 234,
-    "question": "I am fascinated by the biology of marine life and ocean ecosystems.",
-    "category": "Science",
-    "target_careers": ["Marine Biologist", "Oceanographer", "Zoologist"]
-  },
-  {
-    "id": 235,
-    "question": "I enjoy the technical precision required for surgical dental work.",
-    "category": "Realistic",
-    "target_careers": ["Dentist", "Dental Surgeon", "Orthodontist"]
-  },
-  {
-    "id": 236,
-    "question": "I find it easy to remember and use technical keyboard shortcuts.",
-    "category": "Technical",
-    "target_careers": ["Software Tester", "Editor", "Graphic Artist"]
-  },
-  {
-    "id": 237,
-    "question": "I am interested in the ethics of how news is reported in the digital age.",
-    "category": "O_score",
-    "target_careers": ["Journalist", "Media Critic", "Social Scientist"]
-  },
-  {
-    "id": 238,
-    "question": "I enjoy the process of organizing and managing an online community.",
-    "category": "E_score",
-    "target_careers": ["Community Manager", "Social Media Strategist", "HR Recruiter"]
-  },
-  {
-    "id": 239,
-    "question": "I find it rewarding to assist elderly people with their daily medical needs.",
-    "category": "A_score",
-    "target_careers": ["Nurse", "Geriatric Caregiver", "Physical Therapist"]
-  },
-  {
-    "id": 240,
-    "question": "I like to analyze the aerodynamics of cars and airplanes.",
-    "category": "Technical",
-    "target_careers": ["Aerospace Engineer", "Automotive Engineer", "Physicist"]
-  },
-  {
-    "id": 241,
-    "question": "I enjoy the challenge of predicting future trends in the fashion industry.",
-    "category": "O_score",
-    "target_careers": ["Fashion Trend Forecaster", "Retail Buyer", "Stylist"]
-  },
-  {
-    "id": 242,
-    "question": "I find it easy to spot inconsistencies in a company's financial records.",
-    "category": "C_score",
-    "target_careers": ["Auditor", "Financial Analyst", "Accountant"]
-  },
-  {
-    "id": 243,
-    "question": "I am interested in how vaccines are distributed in developing countries.",
-    "category": "Investigative",
-    "target_careers": ["Public Health Official", "NGO Manager", "Pharmacist"]
-  },
-  {
-    "id": 244,
-    "question": "I enjoy the creative process of designing unique jewelry pieces.",
-    "category": "Artistic",
-    "target_careers": ["Jewelry Designer", "Fine Artist", "Product Designer"]
-  },
-  {
-    "id": 245,
-    "question": "I find it rewarding to mentor junior staff in their professional growth.",
-    "category": "A_score",
-    "target_careers": ["Corporate Trainer", "HR Manager", "Senior Lead"]
-  },
-  {
-    "id": 246,
-    "question": "I am fascinated by the use of lasers in modern medical surgeries.",
-    "category": "Science",
-    "target_careers": ["Surgeon", "Medical Physicist", "Biomedical Engineer"]
-  },
-  {
-    "id": 247,
-    "question": "I enjoy the technical process of optimizing a website for search engines.",
-    "category": "Technical",
-    "target_careers": ["SEO Specialist", "Digital Marketer", "Web Developer"]
-  },
-  {
-    "id": 248,
-    "question": "I find it easy to explain legal rights to someone who is not a lawyer.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Legal Aid Worker", "Lawyer", "Paralegal"]
-  },
-  {
-    "id": 249,
-    "question": "I am interested in the engineering behind electric vehicle batteries.",
-    "category": "Technical",
-    "target_careers": ["Electrical Engineer", "Automotive Engineer", "Chemical Researcher"]
-  },
-  {
-    "id": 250,
-    "question": "I enjoy the process of writing detailed reports on market competition.",
-    "category": "C_score",
-    "target_careers": ["Market Research Analyst", "Business Analyst", "Marketing Strategist"]
-  },
-  {
-    "id": 251,
-    "question": "I find it exciting to organize a charity fundraiser from scratch.",
-    "category": "E_score",
-    "target_careers": ["Fundraising Manager", "Event Planner", "Social Entrepreneur"]
-  },
-  {
-    "id": 252,
-    "question": "I am fascinated by how different sounds can affect a person's mood.",
-    "category": "Investigative",
-    "target_careers": ["Psychologist", "Music Therapist", "Sound Engineer"]
-  },
-  {
-    "id": 253,
-    "question": "I enjoy the technical challenge of repairing high-end cameras or lenses.",
-    "category": "Realistic",
-    "target_careers": ["Camera Technician", "Optician", "Hardware Engineer"]
-  },
-  {
-    "id": 254,
-    "question": "I find it easy to spot grammatical errors in a foreign language I am learning.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Translator", "Language Teacher", "Linguist"]
-  },
-  {
-    "id": 255,
-    "question": "I am interested in how the architecture of a school can affect learning.",
-    "category": "O_score",
-    "target_careers": ["Architect", "Educational Consultant", "Urban Planner"]
-  },
-  {
-    "id": 256,
-    "question": "I enjoy the process of conducting deep background checks for hiring.",
-    "category": "C_score",
-    "target_careers": ["HR Recruiter", "Private Investigator", "Compliance Officer"]
-  },
-  {
-    "id": 257,
-    "question": "I find it rewarding to help families manage their personal finances.",
-    "category": "A_score",
-    "target_careers": ["Financial Planner", "Bank Manager", "Accountant"]
-  },
-  {
-    "id": 258,
-    "question": "I am fascinated by the technology used in space telescopes like James Webb.",
-    "category": "Science",
-    "target_careers": ["Astronomer", "Aerospace Engineer", "Physicist"]
-  },
-  {
-    "id": 259,
-    "question": "I enjoy the creative process of designing stage sets for theatre.",
-    "category": "Artistic",
-    "target_careers": ["Set Designer", "Art Director", "Interior Designer"]
-  },
-  {
-    "id": 260,
-    "question": "I find it easy to lead a brainstorming session for a new marketing campaign.",
-    "category": "E_score",
-    "target_careers": ["Marketing Manager", "Creative Director", "Advertising Executive"]
-  },
-  {
-    "id": 261,
-    "question": "I am interested in how the human skeletal system heals after a fracture.",
-    "category": "Science",
-    "target_careers": ["Orthopedic Surgeon", "Radiologist", "Physiotherapist"]
-  },
-  {
-    "id": 262,
-    "question": "I enjoy the technical work of coding automated trading bots.",
-    "category": "Technical",
-    "target_careers": ["Fintech Developer", "Data Scientist", "Quant Analyst"]
-  },
-  {
-    "id": 263,
-    "question": "I find it rewarding to teach English as a second language to refugees.",
-    "category": "A_score",
-    "target_careers": ["ESL Teacher", "Social Worker", "Linguist"]
-  },
-  {
-    "id": 264,
-    "question": "I am fascinated by how different cultures have different musical scales.",
-    "category": "Investigative",
-    "target_careers": ["Ethnomusicologist", "Anthropologist", "Musician"]
-  },
-  {
-    "id": 265,
-    "question": "I enjoy the process of writing detailed technical documentation for APIs.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Technical Writer", "Software Engineer", "Systems Analyst"]
-  },
-  {
-    "id": 266,
-    "question": "I find it easy to manage a team's tasks using software like Jira or Trello.",
-    "category": "C_score",
-    "target_careers": ["Project Manager", "Operations Lead", "Administrative Assistant"]
-  },
-  {
-    "id": 267,
-    "question": "I am interested in how global warming affects the migration of birds.",
-    "category": "Science",
-    "target_careers": ["Zoologist", "Environmental Scientist", "Meteorologist"]
-  },
-  {
-    "id": 268,
-    "question": "I enjoy the creative challenge of mixing fashion styles from different eras.",
-    "category": "Artistic",
-    "target_careers": ["Fashion Designer", "Costume Designer", "Stylist"]
-  },
-  {
-    "id": 269,
-    "question": "I find it exciting to negotiate the terms of a big business merger.",
-    "category": "E_score",
-    "target_careers": ["CEO", "Business Lawyer", "Investment Banker"]
-  },
-  {
-    "id": 270,
-    "question": "I am fascinated by the engineering of high-speed fiber optic cables.",
-    "category": "Technical",
-    "target_careers": ["Network Engineer", "Telecommunications Specialist", "Electrical Engineer"]
-  },
-  {
-    "id": 271,
-    "question": "I enjoy the process of conducting lab tests on water quality samples.",
-    "category": "Science",
-    "target_careers": ["Environmental Scientist", "Lab Technician", "Chemist"]
-  },
-  {
-    "id": 272,
-    "question": "I find it easy to explain the concept of compound interest to a child.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Math Teacher", "Financial Planner", "Banker"]
-  },
-  {
-    "id": 273,
-    "question": "I am interested in the psychology behind why people follow fashion trends.",
-    "category": "Investigative",
-    "target_careers": ["Sociologist", "Marketing Analyst", "Psychologist"]
-  },
-  {
-    "id": 274,
-    "question": "I enjoy the creative challenge of designing a user interface for an elderly audience.",
-    "category": "Artistic",
-    "target_careers": ["UX Designer", "Product Designer", "Graphic Designer"]
-  },
-  {
-    "id": 275,
-    "question": "I find it rewarding to help patients recover their speech after a stroke.",
-    "category": "A_score",
-    "target_careers": ["Speech Therapist", "Neurologist", "Nurse"]
-  },
-  {
-    "id": 276,
-    "question": "I am fascinated by the use of drones in agricultural monitoring.",
-    "category": "Technical",
-    "target_careers": ["Agri-Tech Specialist", "Geologist", "Data Analyst"]
-  },
-  {
-    "id": 277,
-    "question": "I enjoy the process of writing investigative articles about political corruption.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Journalist", "Investigative Reporter", "Author"]
-  },
-  {
-    "id": 278,
-    "question": "I find it easy to organize a large library of medical research papers.",
-    "category": "C_score",
-    "target_careers": ["Medical Librarian", "Researcher", "Administrative Assistant"]
-  },
-  {
-    "id": 279,
-    "question": "I am interested in how different cities manage their waste recycling systems.",
-    "category": "Investigative",
-    "target_careers": ["Urban Planner", "Environmental Engineer", "Sustainability Consultant"]
-  },
-  {
-    "id": 280,
-    "question": "I enjoy the technical process of calibrating audio equipment for a concert.",
-    "category": "Realistic",
-    "target_careers": ["Sound Engineer", "Event Technician", "Electrical Engineer"]
-  },
-  {
-    "id": 281,
-    "question": "I find it rewarding to help students choose the right college based on their interests.",
-    "category": "A_score",
-    "target_careers": ["Career Counselor", "Teacher", "HR Specialist"]
-  },
-  {
-    "id": 282,
-    "question": "I am fascinated by how different scents can be combined to make perfumes.",
-    "category": "Science",
-    "target_careers": ["Cosmetic Chemist", "Perfumer", "Product Developer"]
-  },
-  {
-    "id": 283,
-    "question": "I enjoy the process of conducting background research for historical movies.",
-    "category": "Investigative",
-    "target_careers": ["Historian", "Script Writer", "Researcher"]
-  },
-  {
-    "id": 284,
-    "question": "I find it easy to lead a small team in a software development sprint.",
-    "category": "E_score",
-    "target_careers": ["Software Project Manager", "Team Lead", "Scrum Master"]
-  },
-  {
-    "id": 285,
-    "question": "I am interested in how 3D printing is used to create prosthetic limbs.",
-    "category": "Technical",
-    "target_careers": ["Biomedical Engineer", "Product Designer", "Prosthetist"]
-  },
-  {
-    "id": 286,
-    "question": "I enjoy the creative process of editing a podcast with sound effects.",
-    "category": "Artistic",
-    "target_careers": ["Audio Editor", "Podcaster", "Content Creator"]
-  },
-  {
-    "id": 287,
-    "question": "I find it rewarding to assist people in filing their tax returns correctly.",
-    "category": "A_score",
-    "target_careers": ["Tax Accountant", "Financial Advisor", "Public Servant"]
-  },
-  {
-    "id": 288,
-    "question": "I am fascinated by how different architectural styles evolved over centuries.",
-    "category": "Investigative",
-    "target_careers": ["Architect", "Art Historian", "Historian"]
-  },
-  {
-    "id": 289,
-    "question": "I enjoy the technical work of testing a new app for bugs and security flaws.",
-    "category": "Technical",
-    "target_careers": ["SQA Tester", "Cybersecurity Analyst", "Software Engineer"]
-  },
-  {
-    "id": 290,
-    "question": "I find it easy to explain the basics of a healthy diet to a group of athletes.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Sports Nutritionist", "Coach", "Health Educator"]
-  },
-  {
-    "id": 291,
-    "question": "I am interested in how the stock market react to changes in interest rates.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Economist", "Financial Analyst", "Stock Broker"]
-  },
-  {
-    "id": 292,
-    "question": "I enjoy the process of designing a visually appealing menu for a restaurant.",
-    "category": "Artistic",
-    "target_careers": ["Graphic Designer", "Chef", "Marketing Executive"]
-  },
-  {
-    "id": 293,
-    "question": "I find it rewarding to help patients manage chronic pain through therapy.",
-    "category": "A_score",
-    "target_careers": ["Physiotherapist", "Psychologist", "Nurse"]
-  },
-  {
-    "id": 294,
-    "question": "I am fascinated by the engineering behind high-performance solar panels.",
-    "category": "Technical",
-    "target_careers": ["Environmental Engineer", "Electrical Engineer", "Physicist"]
-  },
-  {
-    "id": 295,
-    "question": "I enjoy the process of writing persuasive copy for social media ads.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Copywriter", "Digital Marketer", "Advertising Strategist"]
-  },
-  {
-    "id": 296,
-    "question": "I find it easy to organize a team's travel and accommodation for a conference.",
-    "category": "C_score",
-    "target_careers": ["Executive Assistant", "Travel Planner", "Project Manager"]
-  },
-  {
-    "id": 297,
-    "question": "I am interested in how different types of music affect brain concentration.",
-    "category": "Investigative",
-    "target_careers": ["Psychologist", "Researcher", "Educational Consultant"]
-  },
-  {
-    "id": 298,
-    "question": "I enjoy the creative process of creating a brand identity from scratch.",
-    "category": "Artistic",
-    "target_careers": ["Brand Designer", "Marketing Manager", "Art Director"]
-  },
-  {
-    "id": 299,
-    "question": "I find it exciting to pitch a new software product to potential clients.",
-    "category": "E_score",
-    "target_careers": ["Sales Executive", "Entrepreneur", "Product Manager"]
-  },
-  {
-    "id": 300,
-    "question": "I am fascinated by how different weather patterns affect global aviation routes.",
-    "category": "Science",
-    "target_careers": ["Meteorologist", "Pilot", "Aviation Planner"]
-  },
-
-{
-    "id": 301,
-    "question": "I enjoy researching the impact of artificial intelligence on future job markets.",
-    "category": "Investigative",
-    "target_careers": ["Data Scientist", "Economist", "Sociologist"]
-  },
-  {
-    "id": 302,
-    "question": "I am fascinated by the design and aerodynamics of high-speed racing cars.",
-    "category": "Technical",
-    "target_careers": ["Automotive Engineer", "Mechanical Engineer", "Industrial Designer"]
-  },
-  {
-    "id": 303,
-    "question": "I find it easy to explain complex insurance policies to first-time buyers.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Insurance Agent", "Financial Advisor", "Customer Success"]
-  },
-  {
-    "id": 304,
-    "question": "I enjoy studying the chemical reactions that occur during industrial manufacturing.",
-    "category": "Science",
-    "target_careers": ["Chemical Engineer", "Industrial Chemist", "Quality Analyst"]
-  },
-  {
-    "id": 305,
-    "question": "I am interested in how blockchain technology can secure voting systems.",
-    "category": "Technical",
-    "target_careers": ["Blockchain Developer", "Cybersecurity Expert", "Policy Analyst"]
-  },
-  {
-    "id": 306,
-    "question": "I enjoy the challenge of managing a large-scale construction project timeline.",
-    "category": "C_score",
-    "target_careers": ["Construction Manager", "Civil Engineer", "Project Manager"]
-  },
-  {
-    "id": 307,
-    "question": "I find it rewarding to help patients regain movement through specialized exercise.",
-    "category": "A_score",
-    "target_careers": ["Physiotherapist", "Occupational Therapist", "Sports Coach"]
-  },
-  {
-    "id": 308,
-    "question": "I am fascinated by how different lighting affects the mood in cinematography.",
-    "category": "Artistic",
-    "target_careers": ["Cinematographer", "Video Editor", "Set Designer"]
-  },
-  {
-    "id": 309,
-    "question": "I enjoy the technical process of analyzing soil samples for pollutants.",
-    "category": "Science",
-    "target_careers": ["Environmental Scientist", "Geologist", "Lab Technician"]
-  },
-  {
-    "id": 310,
-    "question": "I find it easy to identify the most cost-effective materials for a product.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Procurement Manager", "Cost Accountant", "Industrial Engineer"]
-  },
-  {
-    "id": 311,
-    "question": "I am interested in how social media algorithms influence public opinion.",
-    "category": "Investigative",
-    "target_careers": ["Data Analyst", "Digital Marketer", "Social Scientist"]
-  },
-  {
-    "id": 312,
-    "question": "I enjoy the creative process of designing accessible websites for the blind.",
-    "category": "Technical",
-    "target_careers": ["UX Designer", "Web Developer", "Product Designer"]
-  },
-  {
-    "id": 313,
-    "question": "I find it rewarding to assist people in resolving their legal disputes out of court.",
-    "category": "A_score",
-    "target_careers": ["Mediator", "Arbitrator", "Lawyer"]
-  },
-  {
-    "id": 314,
-    "question": "I am fascinated by the evolution of musical instruments across different centuries.",
-    "category": "Investigative",
-    "target_careers": ["Historian", "Musician", "Museum Curator"]
-  },
-  {
-    "id": 315,
-    "question": "I enjoy the technical challenge of optimizing a computer's cooling system.",
-    "category": "Realistic",
-    "target_careers": ["Hardware Engineer", "Thermal Engineer", "Technician"]
-  },
-  {
-    "id": 316,
-    "question": "I find it easy to create a professional-looking layout for a business report.",
-    "category": "Artistic",
-    "target_careers": ["Graphic Designer", "Administrative Assistant", "Marketing Executive"]
-  },
-  {
-    "id": 317,
-    "question": "I am interested in how global logistics networks handle fragile medical supplies.",
-    "category": "C_score",
-    "target_careers": ["Supply Chain Manager", "Logistics Specialist", "Pharmacist"]
-  },
-  {
-    "id": 318,
-    "question": "I enjoy the process of conducting long-term studies on climate change patterns.",
-    "category": "Science",
-    "target_careers": ["Meteorologist", "Environmental Researcher", "Statistician"]
-  },
-  {
-    "id": 319,
-    "question": "I find it rewarding to help startups develop their first business plan.",
-    "category": "E_score",
-    "target_careers": ["Business Consultant", "Entrepreneur", "Financial Advisor"]
-  },
-  {
-    "id": 320,
-    "question": "I am fascinated by the use of satellite imagery in modern urban planning.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Urban Planner", "Geographer", "Civil Engineer"]
-  },
-  {
-    "id": 321,
-    "question": "I enjoy the technical work of configuring cloud storage for large companies.",
-    "category": "Technical",
-    "target_careers": ["Cloud Engineer", "Systems Architect", "IT Manager"]
-  },
-  {
-    "id": 322,
-    "question": "I find it easy to explain the risks of self-medication to a patient.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Pharmacist", "Doctor", "Nurse"]
-  },
-  {
-    "id": 323,
-    "question": "I am interested in how international laws protect the rights of children.",
-    "category": "Investigative",
-    "target_careers": ["Human Rights Lawyer", "Diplomat", "Social Worker"]
-  },
-  {
-    "id": 324,
-    "question": "I enjoy the process of sketching floor plans for commercial buildings.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Architect", "Draftsman", "Construction Engineer"]
-  },
-  {
-    "id": 325,
-    "question": "I find it rewarding to help small businesses manage their monthly bookkeeping.",
-    "category": "A_score",
-    "target_careers": ["Accountant", "Bookkeeper", "Financial Planner"]
-  },
-  {
-    "id": 326,
-    "question": "I am fascinated by the biology of deep-sea creatures and their survival.",
-    "category": "Science",
-    "target_careers": ["Marine Biologist", "Zoologist", "Research Scientist"]
-  },
-  {
-    "id": 327,
-    "question": "I enjoy the challenge of writing code that works across multiple operating systems.",
-    "category": "Technical",
-    "target_careers": ["Software Developer", "System Analyst", "Full Stack Engineer"]
-  },
-  {
-    "id": 328,
-    "question": "I find it easy to lead a guided tour through a historic city or monument.",
-    "category": "E_score",
-    "target_careers": ["Travel Guide", "Museum Educator", "Event Manager"]
-  },
-  {
-    "id": 329,
-    "question": "I am interested in how the human ear processes complex sound frequencies.",
-    "category": "Investigative",
-    "target_careers": ["Audiologist", "Sound Engineer", "Speech Therapist"]
-  },
-  {
-    "id": 330,
-    "question": "I enjoy the process of designing a new logo for a technology brand.",
-    "category": "Artistic",
-    "target_careers": ["Graphic Designer", "Marketing Executive", "Art Director"]
-  },
-  {
-    "id": 331,
-    "question": "I find it rewarding to teach senior citizens how to use smartphones and apps.",
-    "category": "A_score",
-    "target_careers": ["IT Support", "Teacher", "Social Volunteer"]
-  },
-  {
-    "id": 332,
-    "question": "I am fascinated by the use of fiber optics in modern medical diagnosis.",
-    "category": "Science",
-    "target_careers": ["Medical Technician", "Biomedical Engineer", "Surgeon"]
-  },
-  {
-    "id": 333,
-    "question": "I enjoy the challenge of negotiating lower prices with international vendors.",
-    "category": "E_score",
-    "target_careers": ["Procurement Officer", "Sales Manager", "Entrepreneur"]
-  },
-  {
-    "id": 334,
-    "question": "I find it easy to memorize the specific laws related to property and land.",
-    "category": "C_score",
-    "target_careers": ["Real Estate Lawyer", "Paralegal", "Property Manager"]
-  },
-  {
-    "id": 335,
-    "question": "I am interested in how 3D printing can be used to build affordable housing.",
-    "category": "Technical",
-    "target_careers": ["Civil Engineer", "Architect", "Materials Scientist"]
-  },
-  {
-    "id": 336,
-    "question": "I enjoy the process of organizing a multi-day music festival schedule.",
-    "category": "E_score",
-    "target_careers": ["Event Planner", "Project Manager", "Public Relations"]
-  },
-  {
-    "id": 337,
-    "question": "I find it rewarding to help patients choose the right prosthetic limb.",
-    "category": "A_score",
-    "target_careers": ["Prosthetist", "Orthopedic Surgeon", "Physiotherapist"]
-  },
-  {
-    "id": 338,
-    "question": "I am fascinated by how different paint pigments are made from chemicals.",
-    "category": "Science",
-    "target_careers": ["Chemist", "Fine Artist", "Product Developer"]
-  },
-  {
-    "id": 339,
-    "question": "I enjoy the technical process of setting up a podcasting studio.",
-    "category": "Realistic",
-    "target_careers": ["Sound Engineer", "Broadcast Technician", "IT Consultant"]
-  },
-  {
-    "id": 340,
-    "question": "I find it easy to explain the benefits of different bank accounts to customers.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Bank Manager", "Financial Advisor", "Customer Service"]
-  },
-  {
-    "id": 341,
-    "question": "I am interested in how the evolution of plants can predict climate changes.",
-    "category": "Investigative",
-    "target_careers": ["Botanist", "Environmental Scientist", "Geologist"]
-  },
-  {
-    "id": 342,
-    "question": "I enjoy the creative process of editing a professional marketing video.",
-    "category": "Technical",
-    "target_careers": ["Video Editor", "Content Creator", "Marketing Specialist"]
-  },
-  {
-    "id": 343,
-    "question": "I find it rewarding to assist people in filling out their citizenship forms.",
-    "category": "A_score",
-    "target_careers": ["Immigration Lawyer", "Social Worker", "Public Servant"]
-  },
-  {
-    "id": 344,
-    "question": "I am fascinated by the mechanical work behind automated manufacturing robots.",
-    "category": "Technical",
-    "target_careers": ["Robotics Engineer", "Industrial Engineer", "Technician"]
-  },
-  {
-    "id": 345,
-    "question": "I enjoy the process of writing detailed biographies of historical figures.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Historian", "Author", "Biographer"]
-  },
-  {
-    "id": 346,
-    "question": "I find it easy to manage a company's inventory using digital databases.",
-    "category": "C_score",
-    "target_careers": ["Inventory Manager", "Data Analyst", "Logistician"]
-  },
-  {
-    "id": 347,
-    "question": "I am interested in how psychology can be used to improve employee morale.",
-    "category": "Investigative",
-    "target_careers": ["HR Manager", "Organizational Psychologist", "Counselor"]
-  },
-  {
-    "id": 348,
-    "question": "I enjoy the creative challenge of designing sets for science fiction films.",
-    "category": "Artistic",
-    "target_careers": ["Set Designer", "Concept Artist", "Architect"]
-  },
-  {
-    "id": 349,
-    "question": "I find it rewarding to help people recover their voice after a throat surgery.",
-    "category": "A_score",
-    "target_careers": ["Speech Pathologist", "Nurse", "Surgeon"]
-  },
-  {
-    "id": 350,
-    "question": "I am fascinated by the use of drones for inspecting high-voltage power lines.",
-    "category": "Technical",
-    "target_careers": ["Electrical Engineer", "Drone Pilot", "Safety Inspector"]
-  },
-  {
-    "id": 351,
-    "question": "I enjoy researching how global trade routes have shifted over the last decade.",
-    "category": "Investigative",
-    "target_careers": ["Economist", "Geographer", "Business Analyst"]
-  },
-  {
-    "id": 352,
-    "question": "I find it exciting to pitch a new renewable energy project to a city council.",
-    "category": "E_score",
-    "target_careers": ["Environmental Consultant", "Public Relations", "Entrepreneur"]
-  },
-  {
-    "id": 353,
-    "question": "I am interested in how DNA sequencing is used to solve cold criminal cases.",
-    "category": "Science",
-    "target_careers": ["Forensic Scientist", "Geneticist", "Police Detective"]
-  },
-  {
-    "id": 354,
-    "question": "I enjoy the process of designing ergonomic chairs for office workers.",
-    "category": "Artistic",
-    "target_careers": ["Product Designer", "Industrial Engineer", "Physiotherapist"]
-  },
-  {
-    "id": 355,
-    "question": "I find it rewarding to mentor children in learning basic computer coding.",
-    "category": "A_score",
-    "target_careers": ["Computer Science Teacher", "Software Developer", "Volunteer"]
-  },
-  {
-    "id": 356,
-    "question": "I am fascinated by the use of chemistry in creating new types of glass.",
-    "category": "Science",
-    "target_careers": ["Materials Scientist", "Chemical Engineer", "Industrial Designer"]
-  },
-  {
-    "id": 357,
-    "question": "I enjoy the technical work of testing website performance under high traffic.",
-    "category": "Technical",
-    "target_careers": ["Software Tester", "Backend Developer", "System Admin"]
-  },
-  {
-    "id": 358,
-    "question": "I find it easy to explain the importance of a will to someone planning for the future.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Lawyer", "Financial Planner", "Banker"]
-  },
-  {
-    "id": 359,
-    "question": "I am interested in how the architecture of a hospital can improve patient recovery.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Architect", "Healthcare Planner", "Psychologist"]
-  },
-  {
-    "id": 360,
-    "question": "I enjoy the process of writing code that automates boring financial tasks.",
-    "category": "Analytical",
-    "target_careers": ["Fintech Developer", "Accountant", "Data Engineer"]
-  },
-  {
-    "id": 361,
-    "question": "I find it rewarding to help patients choose the right glasses for their vision.",
-    "category": "A_score",
-    "target_careers": ["Optometrist", "Ophthalmologist", "Salesperson"]
-  },
-  {
-    "id": 362,
-    "question": "I am fascinated by how different countries handle their central bank systems.",
-    "category": "Investigative",
-    "target_careers": ["Economist", "Financial Analyst", "Politician"]
-  },
-  {
-    "id": 363,
-    "question": "I enjoy the creative process of directing a short documentary film.",
-    "category": "O_score",
-    "target_careers": ["Director", "Journalist", "Content Creator"]
-  },
-  {
-    "id": 364,
-    "question": "I find it easy to manage a team's budget for a year-long project.",
-    "category": "C_score",
-    "target_careers": ["Project Manager", "Accountant", "Financial Controller"]
-  },
-  {
-    "id": 365,
-    "question": "I am interested in how the human brain adapts to living in space.",
-    "category": "Science",
-    "target_careers": ["Space Scientist", "Neurologist", "Psychologist"]
-  },
-  {
-    "id": 366,
-    "question": "I enjoy the technical work of repairing high-voltage transformers.",
-    "category": "Realistic",
-    "target_careers": ["Electrical Engineer", "Technician", "Safety Inspector"]
-  },
-  {
-    "id": 367,
-    "question": "I find it rewarding to help people overcome their fear of public speaking.",
-    "category": "A_score",
-    "target_careers": ["Speech Coach", "Psychologist", "Teacher"]
-  },
-  {
-    "id": 368,
-    "question": "I am fascinated by the use of math in creating secure encryption codes.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Cryptographer", "Data Scientist", "Software Engineer"]
-  },
-  {
-    "id": 369,
-    "question": "I enjoy the process of organizing a charity auction for an NGO.",
-    "category": "E_score",
-    "target_careers": ["Fundraising Manager", "Event Planner", "Public Relations"]
-  },
-  {
-    "id": 370,
-    "question": "I find it easy to explain complex tax laws to a small business owner.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Tax Accountant", "Lawyer", "Business Consultant"]
-  },
-  {
-    "id": 371,
-    "question": "I am interested in how different types of soil affect building foundations.",
-    "category": "Science",
-    "target_careers": ["Civil Engineer", "Geologist", "Architect"]
-  },
-  {
-    "id": 372,
-    "question": "I enjoy the creative challenge of designing a user-friendly hospital app.",
-    "category": "Artistic",
-    "target_careers": ["UX Designer", "Product Designer", "Health Informatics"]
-  },
-  {
-    "id": 373,
-    "question": "I find it rewarding to help patients understand their medical prescriptions.",
-    "category": "A_score",
-    "target_careers": ["Pharmacist", "Nurse", "Physician"]
-  },
-  {
-    "id": 374,
-    "question": "I am fascinated by the use of Artificial Intelligence in spotting forest fires.",
-    "category": "Technical",
-    "target_careers": ["Data Scientist", "Environmental Scientist", "AI Engineer"]
-  },
-  {
-    "id": 375,
-    "question": "I enjoy the process of writing investigative articles on environmental crimes.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Environmental Journalist", "Lawyer", "Social Activist"]
-  },
-  {
-    "id": 376,
-    "question": "I find it easy to organize a large collection of rare coins or stamps.",
-    "category": "C_score",
-    "target_careers": ["Museum Curator", "Archivist", "Librarian"]
-  },
-  {
-    "id": 377,
-    "question": "I am interested in how different cultures manage their elderly care systems.",
-    "category": "Investigative",
-    "target_careers": ["Sociologist", "Social Worker", "Healthcare Planner"]
-  },
-  {
-    "id": 378,
-    "question": "I enjoy the technical process of calibrating laser equipment for eye surgery.",
-    "category": "Realistic",
-    "target_careers": ["Medical Technician", "Biomedical Engineer", "Physicist"]
-  },
-  {
-    "id": 379,
-    "question": "I find it rewarding to help students apply for international scholarships.",
-    "category": "A_score",
-    "target_careers": ["Education Consultant", "Career Counselor", "Teacher"]
-  },
-  {
-    "id": 380,
-    "question": "I am fascinated by how different essential oils are extracted for perfumes.",
-    "category": "Science",
-    "target_careers": ["Chemical Engineer", "Perfumer", "Cosmetic Scientist"]
-  },
-  {
-    "id": 381,
-    "question": "I enjoy the process of researching the history of ancient military tactics.",
-    "category": "Investigative",
-    "target_careers": ["Historian", "Strategic Planner", "Author"]
-  },
-  {
-    "id": 382,
-    "question": "I find it easy to lead a brainstorming session for a new tech product.",
-    "category": "E_score",
-    "target_careers": ["Product Manager", "Team Lead", "Entrepreneur"]
-  },
-  {
-    "id": 383,
-    "question": "I am interested in how 3D printing is used to create artificial skin.",
-    "category": "Technical",
-    "target_careers": ["Biomedical Engineer", "Geneticist", "Surgeon"]
-  },
-  {
-    "id": 384,
-    "question": "I enjoy the creative process of editing a professional nature documentary.",
-    "category": "Artistic",
-    "target_careers": ["Video Editor", "Wildlife Photographer", "Director"]
-  },
-  {
-    "id": 385,
-    "question": "I find it rewarding to help people resolve their issues with bank loans.",
-    "category": "A_score",
-    "target_careers": ["Banker", "Financial Advisor", "Customer Service"]
-  },
-  {
-    "id": 386,
-    "question": "I am fascinated by the use of math to calculate the trajectory of rockets.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Aerospace Engineer", "Physicist", "Mathematician"]
-  },
-  {
-    "id": 387,
-    "question": "I enjoy the technical work of maintaining a large-scale server farm.",
-    "category": "Technical",
-    "target_careers": ["IT Manager", "Network Administrator", "Systems Engineer"]
-  },
-  {
-    "id": 388,
-    "question": "I find it easy to explain the concept of diversification to a new investor.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Investment Advisor", "Stock Broker", "Financial Planner"]
-  },
-  {
-    "id": 389,
-    "question": "I am interested in how the architecture of a jail can affect inmate behavior.",
-    "category": "Investigative",
-    "target_careers": ["Criminologist", "Architect", "Psychologist"]
-  },
-  {
-    "id": 390,
-    "question": "I enjoy the process of designing a visually stunning website for a luxury brand.",
-    "category": "Artistic",
-    "target_careers": ["Web Designer", "Graphic Artist", "Brand Manager"]
-  },
-  {
-    "id": 391,
-    "question": "I find it rewarding to help patients manage their diabetes through diet.",
-    "category": "A_score",
-    "target_careers": ["Nutritionist", "Doctor", "Nurse"]
-  },
-  {
-    "id": 392,
-    "question": "I am fascinated by how different types of light affect plant growth indoors.",
-    "category": "Science",
-    "target_careers": ["Botanist", "Agricultural Scientist", "Environmentalist"]
-  },
-  {
-    "id": 393,
-    "question": "I enjoy the process of writing code that makes a website load faster.",
-    "category": "Technical",
-    "target_careers": ["Frontend Developer", "Software Engineer", "Systems Analyst"]
-  },
-  {
-    "id": 394,
-    "question": "I find it rewarding to help people understand their basic human rights.",
-    "category": "A_score",
-    "target_careers": ["Human Rights Lawyer", "Social Worker", "Activist"]
-  },
-  {
-    "id": 395,
-    "question": "I am interested in how the acoustics of a concert hall are designed.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Acoustical Engineer", "Architect", "Musician"]
-  },
-  {
-    "id": 396,
-    "question": "I enjoy the process of designing a new board game with complex rules.",
-    "category": "Artistic",
-    "target_careers": ["Game Designer", "Creative Writer", "Product Manager"]
-  },
-  {
-    "id": 397,
-    "question": "I find it exciting to pitch a new marketing strategy to a big company.",
-    "category": "E_score",
-    "target_careers": ["Marketing Executive", "Public Relations", "Advertising Strategist"]
-  },
-  {
-    "id": 398,
-    "question": "I am fascinated by how different types of cloud formations predict weather.",
-    "category": "Science",
-    "target_careers": ["Meteorologist", "Pilot", "Environmental Scientist"]
-  },
-  {
-    "id": 399,
-    "question": "I enjoy the process of writing investigative blogs on the health of oceans.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Science Writer", "Marine Biologist", "Blogger"]
-  },
-  {
-    "id": 400,
-    "question": "I find it easy to organize a large-scale medical supply delivery during a disaster.",
-    "category": "C_score",
-    "target_careers": ["Logistics Manager", "Emergency Responder", "Nurse"]
-  },
-
-{
-    "id": 401,
-    "question": "I enjoy analyzing how different interest rates affect the housing market.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Real Estate Analyst", "Economist", "Banker"]
-  },
-  {
-    "id": 402,
-    "question": "I am fascinated by how airplanes are tested for structural integrity.",
-    "category": "Technical",
-    "target_careers": ["Aerospace Engineer", "Safety Inspector", "Materials Scientist"]
-  },
-  {
-    "id": 403,
-    "question": "I find it easy to spot a forged signature or document.",
-    "category": "Investigative",
-    "target_careers": ["Forensic Expert", "Bank Auditor", "Private Investigator"]
-  },
-  {
-    "id": 404,
-    "question": "I enjoy studying how different light frequencies affect skin health.",
-    "category": "Science",
-    "target_careers": ["Dermatologist", "Biophysicist", "Medical Technician"]
-  },
-  {
-    "id": 405,
-    "question": "I am interested in how social credit systems function in different countries.",
-    "category": "Investigative",
-    "target_careers": ["Sociologist", "Policy Analyst", "Political Scientist"]
-  },
-  {
-    "id": 406,
-    "question": "I enjoy the challenge of managing the technical backend of a massive e-commerce site.",
-    "category": "Technical",
-    "target_careers": ["Backend Developer", "Systems Architect", "Data Engineer"]
-  },
-  {
-    "id": 407,
-    "question": "I find it rewarding to help people recover from sports-related injuries.",
-    "category": "A_score",
-    "target_careers": ["Sports Therapist", "Physiotherapist", "Athletic Trainer"]
-  },
-  {
-    "id": 408,
-    "question": "I am fascinated by how soundproofing materials work in recording studios.",
-    "category": "Realistic",
-    "target_careers": ["Acoustical Engineer", "Architect", "Sound Engineer"]
-  },
-  {
-    "id": 409,
-    "question": "I enjoy the technical process of testing the purity of pharmaceutical drugs.",
-    "category": "Science",
-    "target_careers": ["Pharmacist", "Quality Control Chemist", "Lab Technician"]
-  },
-  {
-    "id": 410,
-    "question": "I find it easy to organize a complex filing system for a law firm.",
-    "category": "C_score",
-    "target_careers": ["Legal Secretary", "Paralegal", "Archivist"]
-  },
-  {
-    "id": 411,
-    "question": "I am interested in how psychology is used in hostage negotiations.",
-    "category": "Investigative",
-    "target_careers": ["Forensic Psychologist", "Police Negotiator", "Criminologist"]
-  },
-  {
-    "id": 412,
-    "question": "I enjoy the creative process of designing fashion accessories from recycled materials.",
-    "category": "Artistic",
-    "target_careers": ["Fashion Designer", "Sustainability Consultant", "Artist"]
-  },
-  {
-    "id": 413,
-    "question": "I find it rewarding to help immigrants navigate the local school system.",
-    "category": "A_score",
-    "target_careers": ["Social Worker", "Education Consultant", "Community Lead"]
-  },
-  {
-    "id": 414,
-    "question": "I am fascinated by the use of mathematics in professional sports analytics.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Data Analyst", "Sports Manager", "Statistician"]
-  },
-  {
-    "id": 415,
-    "question": "I enjoy the technical challenge of repairing high-end watches.",
-    "category": "Realistic",
-    "target_careers": ["Watchmaker", "Precision Engineer", "Technician"]
-  },
-  {
-    "id": 416,
-    "question": "I find it easy to create a professional presentation for a board of directors.",
-    "category": "E_score",
-    "target_careers": ["Executive Assistant", "Marketing Manager", "Corporate Trainer"]
-  },
-  {
-    "id": 417,
-    "question": "I am interested in how global shipping routes impact the price of oil.",
-    "category": "Investigative",
-    "target_careers": ["Economist", "Supply Chain Analyst", "Petroleum Consultant"]
-  },
-  {
-    "id": 418,
-    "question": "I enjoy the process of writing long-form analytical essays on philosophy.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Author", "Professor", "Researcher"]
-  },
-  {
-    "id": 419,
-    "question": "I find it rewarding to help patients choose the right hearing aid.",
-    "category": "A_score",
-    "target_careers": ["Audiologist", "Sales Representative", "Medical Assistant"]
-  },
-  {
-    "id": 420,
-    "question": "I am fascinated by the use of VR (Virtual Reality) in medical training.",
-    "category": "Technical",
-    "target_careers": ["VR Developer", "Biomedical Engineer", "Medical Educator"]
-  },
-  {
-    "id": 421,
-    "question": "I enjoy researching how ancient trade routes shaped modern language.",
-    "category": "Investigative",
-    "target_careers": ["Linguist", "Historian", "Anthropologist"]
-  },
-  {
-    "id": 422,
-    "question": "I find it exciting to organize a political campaign strategy.",
-    "category": "E_score",
-    "target_careers": ["Political Strategist", "Public Relations", "Campaign Manager"]
-  },
-  {
-    "id": 423,
-    "question": "I am interested in how forensic entomology (insects) helps solve crimes.",
-    "category": "Science",
-    "target_careers": ["Forensic Scientist", "Entomologist", "Detective"]
-  },
-  {
-    "id": 424,
-    "question": "I enjoy the creative process of designing eco-friendly product packaging.",
-    "category": "Artistic",
-    "target_careers": ["Package Designer", "Graphic Designer", "Sustainability Expert"]
-  },
-  {
-    "id": 425,
-    "question": "I find it rewarding to assist people in recovering lost digital data.",
-    "category": "Technical",
-    "target_careers": ["Data Recovery Specialist", "IT Support", "Cybersecurity Expert"]
-  },
-  {
-    "id": 426,
-    "question": "I am fascinated by the chemistry involved in developing new lithium batteries.",
-    "category": "Science",
-    "target_careers": ["Chemical Engineer", "Materials Scientist", "Energy Researcher"]
-  },
-  {
-    "id": 427,
-    "question": "I enjoy the technical process of debugging a complex software application.",
-    "category": "Technical",
-    "target_careers": ["Software Developer", "QA Engineer", "Systems Analyst"]
-  },
-  {
-    "id": 428,
-    "question": "I find it easy to explain the concept of insurance deductibles to a client.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Insurance Agent", "Financial Planner", "Customer Support"]
-  },
-  {
-    "id": 429,
-    "question": "I am interested in how urban architecture can reduce city noise pollution.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Urban Planner", "Architect", "Acoustical Engineer"]
-  },
-  {
-    "id": 430,
-    "question": "I enjoy the process of writing code that secures a mobile banking app.",
-    "category": "Technical",
-    "target_careers": ["Cybersecurity Developer", "Fintech Engineer", "App Developer"]
-  },
-  {
-    "id": 431,
-    "question": "I find it rewarding to help patients manage their mental health through art.",
-    "category": "A_score",
-    "target_careers": ["Art Therapist", "Psychologist", "Counselor"]
-  },
-  {
-    "id": 432,
-    "question": "I am fascinated by the use of radar technology in modern weather tracking.",
-    "category": "Science",
-    "target_careers": ["Meteorologist", "Aviation Engineer", "Physicist"]
-  },
-  {
-    "id": 433,
-    "question": "I enjoy the challenge of negotiating a sponsorship deal for a celebrity.",
-    "category": "E_score",
-    "target_careers": ["Talent Agent", "Marketing Manager", "PR Specialist"]
-  },
-  {
-    "id": 434,
-    "question": "I find it easy to memorize the technical specifications of different cameras.",
-    "category": "C_score",
-    "target_careers": ["Camera Salesperson", "Cinematographer", "Technical Writer"]
-  },
-  {
-    "id": 435,
-    "question": "I am interested in how hydro-electric dams generate power sustainably.",
-    "category": "Technical",
-    "target_careers": ["Civil Engineer", "Electrical Engineer", "Environmentalist"]
-  },
-  {
-    "id": 436,
-    "question": "I enjoy the process of organizing a large-scale career fair for students.",
-    "category": "E_score",
-    "target_careers": ["Event Coordinator", "Career Counselor", "HR Manager"]
-  },
-  {
-    "id": 437,
-    "question": "I find it rewarding to help people choose the right legal path for divorce.",
-    "category": "A_score",
-    "target_careers": ["Family Lawyer", "Mediator", "Social Worker"]
-  },
-  {
-    "id": 438,
-    "question": "I am fascinated by how different food preservatives affect long-term health.",
-    "category": "Science",
-    "target_careers": ["Food Scientist", "Nutritionist", "Medical Researcher"]
-  },
-  {
-    "id": 439,
-    "question": "I enjoy the technical process of installing home theater systems.",
-    "category": "Realistic",
-    "target_careers": ["AV Technician", "Electrical Engineer", "IT Support"]
-  },
-  {
-    "id": 440,
-    "question": "I find it easy to explain the value of a stock to a potential investor.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Stock Broker", "Financial Advisor", "Business Analyst"]
-  },
-  {
-    "id": 441,
-    "question": "I am interested in how the study of fossils helps us understand evolution.",
-    "category": "Investigative",
-    "target_careers": ["Paleontologist", "Geologist", "Historian"]
-  },
-  {
-    "id": 442,
-    "question": "I enjoy the creative process of designing an album cover for a musician.",
-    "category": "Artistic",
-    "target_careers": ["Graphic Designer", "Illustrator", "Art Director"]
-  },
-  {
-    "id": 443,
-    "question": "I find it rewarding to assist people in learning how to use a library's digital archives.",
-    "category": "A_score",
-    "target_careers": ["Librarian", "Archivist", "IT Trainer"]
-  },
-  {
-    "id": 444,
-    "question": "I am fascinated by the mechanical work behind automated car washes.",
-    "category": "Technical",
-    "target_careers": ["Mechanical Technician", "Industrial Engineer", "Electrician"]
-  },
-  {
-    "id": 445,
-    "question": "I enjoy the process of writing detailed reviews for high-tech gadgets.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Tech Journalist", "Content Creator", "Product Tester"]
-  },
-  {
-    "id": 446,
-    "question": "I find it easy to manage a project's inventory using Excel or specialized software.",
-    "category": "C_score",
-    "target_careers": ["Inventory Controller", "Operations Manager", "Data Analyst"]
-  },
-  {
-    "id": 447,
-    "question": "I am interested in how cognitive therapy can help people with anxiety.",
-    "category": "Investigative",
-    "target_careers": ["Psychologist", "Therapist", "Researcher"]
-  },
-  {
-    "id": 448,
-    "question": "I enjoy the creative challenge of designing a costume for a period movie.",
-    "category": "Artistic",
-    "target_careers": ["Costume Designer", "Fashion Designer", "Stylist"]
-  },
-  {
-    "id": 449,
-    "question": "I find it rewarding to help patients regain their balance through inner-ear therapy.",
-    "category": "A_score",
-    "target_careers": ["Audiologist", "Physiotherapist", "Doctor"]
-  },
-  {
-    "id": 450,
-    "question": "I am fascinated by the use of laser sensors in self-driving cars.",
-    "category": "Technical",
-    "target_careers": ["AI Engineer", "Robotics Developer", "Automotive Engineer"]
-  },
-  {
-    "id": 451,
-    "question": "I enjoy researching the economic impact of global pandemics.",
-    "category": "Investigative",
-    "target_careers": ["Economist", "Public Health Analyst", "Data Scientist"]
-  },
-  {
-    "id": 452,
-    "question": "I find it exciting to pitch a new video game concept to a studio.",
-    "category": "E_score",
-    "target_careers": ["Game Producer", "Creative Director", "Entrepreneur"]
-  },
-  {
-    "id": 453,
-    "question": "I am interested in how toxic chemicals are removed from industrial waste.",
-    "category": "Science",
-    "target_careers": ["Environmental Engineer", "Chemist", "Safety Officer"]
-  },
-  {
-    "id": 454,
-    "question": "I enjoy the process of designing a functional kitchen layout for a chef.",
-    "category": "Artistic",
-    "target_careers": ["Interior Designer", "Architect", "Product Designer"]
-  },
-  {
-    "id": 455,
-    "question": "I find it rewarding to help kids learn about environmental conservation.",
-    "category": "A_score",
-    "target_careers": ["Environmental Educator", "Teacher", "Volunteer"]
-  },
-  {
-    "id": 456,
-    "question": "I am fascinated by the chemistry of how non-stick coatings are made.",
-    "category": "Science",
-    "target_careers": ["Materials Chemist", "Chemical Engineer", "Industrial Designer"]
-  },
-  {
-    "id": 457,
-    "question": "I enjoy the technical work of maintaining a company's cybersecurity firewall.",
-    "category": "Technical",
-    "target_careers": ["Cybersecurity Analyst", "Network Admin", "IT Manager"]
-  },
-  {
-    "id": 458,
-    "question": "I find it easy to explain the benefits of a life insurance policy to a family.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Insurance Consultant", "Financial Planner", "Banker"]
-  },
-  {
-    "id": 459,
-    "question": "I am interested in how the design of an office can increase productivity.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Architect", "Interior Designer", "HR Manager"]
-  },
-  {
-    "id": 460,
-    "question": "I enjoy the process of writing code that makes a database more secure.",
-    "category": "Analytical",
-    "target_careers": ["Database Developer", "Cybersecurity Expert", "Software Engineer"]
-  },
-  {
-    "id": 461,
-    "question": "I find it rewarding to help patients choose the right contact lenses.",
-    "category": "A_score",
-    "target_careers": ["Optometrist", "Ophthalmologist", "Medical Assistant"]
-  },
-  {
-    "id": 462,
-    "question": "I am fascinated by how different countries manage their gold reserves.",
-    "category": "Investigative",
-    "target_careers": ["Financial Analyst", "Economist", "Banker"]
-  },
-  {
-    "id": 463,
-    "question": "I enjoy the creative process of editing a travel vlog for YouTube.",
-    "category": "O_score",
-    "target_careers": ["Content Creator", "Video Editor", "Social Media Manager"]
-  },
-  {
-    "id": 464,
-    "question": "I find it easy to manage a company's payroll using digital tools.",
-    "category": "C_score",
-    "target_careers": ["Payroll Manager", "Accountant", "HR Administrator"]
-  },
-  {
-    "id": 465,
-    "question": "I am interested in how different types of plants can clean indoor air.",
-    "category": "Science",
-    "target_careers": ["Botanist", "Environmentalist", "Landscape Designer"]
-  },
-  {
-    "id": 466,
-    "question": "I enjoy the technical work of repairing high-end espresso machines.",
-    "category": "Realistic",
-    "target_careers": ["Technician", "Mechanical Engineer", "Maintenance Specialist"]
-  },
-  {
-    "id": 467,
-    "question": "I find it rewarding to help people overcome their fear of spiders or heights.",
-    "category": "A_score",
-    "target_careers": ["Psychologist", "Counselor", "Mental Health Coach"]
-  },
-  {
-    "id": 468,
-    "question": "I am fascinated by the use of complex math to predict stock market crashes.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Quant Analyst", "Financial Risk Manager", "Mathematician"]
-  },
-  {
-    "id": 469,
-    "question": "I enjoy the process of organizing a city-wide marathon event.",
-    "category": "E_score",
-    "target_careers": ["Event Planner", "Project Manager", "Public Relations"]
-  },
-  {
-    "id": 470,
-    "question": "I find it easy to explain the importance of a pre-nuptial agreement.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Family Lawyer", "Mediator", "Legal Advisor"]
-  },
-  {
-    "id": 471,
-    "question": "I am interested in how different types of sand are used in making glass.",
-    "category": "Science",
-    "target_careers": ["Materials Scientist", "Geologist", "Industrial Designer"]
-  },
-  {
-    "id": 472,
-    "question": "I enjoy the creative challenge of designing a user-friendly fitness app.",
-    "category": "Artistic",
-    "target_careers": ["UX Designer", "Product Designer", "App Developer"]
-  },
-  {
-    "id": 473,
-    "question": "I find it rewarding to help patients understand their lab results.",
-    "category": "A_score",
-    "target_careers": ["Medical Lab Tech", "Nurse", "Doctor"]
-  },
-  {
-    "id": 474,
-    "question": "I am fascinated by the use of satellite data to track illegal fishing.",
-    "category": "Technical",
-    "target_careers": ["Marine Conservationist", "Data Analyst", "Environmental Officer"]
-  },
-  {
-    "id": 475,
-    "question": "I enjoy the process of writing investigative reports on factory safety.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Safety Inspector", "Journalist", "Policy Researcher"]
-  },
-  {
-    "id": 476,
-    "question": "I find it easy to organize a large digital photo library into tagged categories.",
-    "category": "C_score",
-    "target_careers": ["Digital Librarian", "Content Manager", "Archivist"]
-  },
-  {
-    "id": 477,
-    "question": "I am interested in how different cultures manage their national holidays.",
-    "category": "Investigative",
-    "target_careers": ["Anthropologist", "Sociologist", "Event Planner"]
-  },
-  {
-    "id": 478,
-    "question": "I enjoy the technical process of calibrating a telescope for star-gazing.",
-    "category": "Realistic",
-    "target_careers": ["Astronomer", "Optician", "Physicist"]
-  },
-  {
-    "id": 479,
-    "question": "I find it rewarding to help students apply for specialized art colleges.",
-    "category": "A_score",
-    "target_careers": ["Art Teacher", "Career Counselor", "Artist"]
-  },
-  {
-    "id": 480,
-    "question": "I am fascinated by how different chemical dyes are used in clothing.",
-    "category": "Science",
-    "target_careers": ["Textile Chemist", "Fashion Designer", "Chemical Engineer"]
-  },
-  {
-    "id": 481,
-    "question": "I enjoy the process of researching the history of urban slang.",
-    "category": "Investigative",
-    "target_careers": ["Linguist", "Sociologist", "Author"]
-  },
-  {
-    "id": 482,
-    "question": "I find it easy to lead a brainstorming session for a new social media feature.",
-    "category": "E_score",
-    "target_careers": ["Product Manager", "Social Media Strategist", "Team Lead"]
-  },
-  {
-    "id": 483,
-    "question": "I am interested in how 3D printing can be used to repair ancient artifacts.",
-    "category": "Technical",
-    "target_careers": ["Museum Curator", "Archaeologist", "Materials Scientist"]
-  },
-  {
-    "id": 484,
-    "question": "I enjoy the creative process of editing a professional sports highlight reel.",
-    "category": "Artistic",
-    "target_careers": ["Video Editor", "Sports Journalist", "Content Creator"]
-  },
-  {
-    "id": 485,
-    "question": "I find it rewarding to help people resolve their problems with airline tickets.",
-    "category": "A_score",
-    "target_careers": ["Customer Service", "Travel Agent", "Public Relations"]
-  },
-  {
-    "id": 486,
-    "question": "I am fascinated by the use of geometry in building dome-shaped structures.",
-    "category": "Numerical_Aptitude",
-    "target_careers": ["Architect", "Structural Engineer", "Mathematician"]
-  },
-  {
-    "id": 487,
-    "question": "I enjoy the technical work of maintaining a company's VoIP phone system.",
-    "category": "Technical",
-    "target_careers": ["Network Engineer", "IT Support", "Telecommunications Tech"]
-  },
-  {
-    "id": 488,
-    "question": "I find it easy to explain the concept of credit scores to a teenager.",
-    "category": "Verbal_Reasoning",
-    "target_careers": ["Financial Educator", "Banker", "Teacher"]
-  },
-  {
-    "id": 489,
-    "question": "I am interested in how the design of a subway station affects crowd flow.",
-    "category": "Investigative",
-    "target_careers": ["Urban Planner", "Civil Engineer", "Psychologist"]
-  },
-  {
-    "id": 490,
-    "question": "I enjoy the process of designing a visually impactful movie poster.",
-    "category": "Artistic",
-    "target_careers": ["Graphic Designer", "Marketing Manager", "Art Director"]
-  },
-  {
-    "id": 491,
-    "question": "I find it rewarding to help patients manage their asthma through breathing exercises.",
-    "category": "A_score",
-    "target_careers": ["Respiratory Therapist", "Nurse", "Physiotherapist"]
-  },
-  {
-    "id": 492,
-    "question": "I am fascinated by how different light intensities affect sleep cycles.",
-    "category": "Science",
-    "target_careers": ["Biophysicist", "Doctor", "Sleep Consultant"]
-  },
-  {
-    "id": 493,
-    "question": "I enjoy the process of writing code that creates a search bar for a website.",
-    "category": "Technical",
-    "target_careers": ["Web Developer", "Software Engineer", "Systems Analyst"]
-  },
-  {
-    "id": 494,
-    "question": "I find it rewarding to help people understand their consumer protection rights.",
-    "category": "A_score",
-    "target_careers": ["Consumer Advocate", "Lawyer", "Social Worker"]
-  },
-  {
-    "id": 495,
-    "question": "I am interested in how the design of a library affects quiet concentration.",
-    "category": "Spatial_Aptitude",
-    "target_careers": ["Architect", "Interior Designer", "Librarian"]
-  },
-  {
-    "id": 496,
-    "question": "I enjoy the process of designing a new card game with trading mechanics.",
-    "category": "Artistic",
-    "target_careers": ["Game Designer", "Product Developer", "Marketing Manager"]
-  },
-  {
-    "id": 497,
-    "question": "I find it exciting to pitch a new podcast idea to a network.",
-    "category": "E_score",
-    "target_careers": ["Producer", "Podcaster", "Public Relations"]
-  },
-  {
-    "id": 498,
-    "question": "I am fascinated by how different types of ocean waves predict storm intensity.",
-    "category": "Science",
-    "target_careers": ["Oceanographer", "Meteorologist", "Geologist"]
-  },
-  {
-    "id": 499,
-    "question": "I enjoy the process of writing investigative blogs on the health of rainforests.",
-    "category": "Verbal_Aptitude",
-    "target_careers": ["Environmental Blogger", "Journalist", "Social Activist"]
-  },
-  {
-    "id": 500,
-    "question": "I find it easy to organize a large-scale student graduation ceremony.",
-    "category": "C_score",
-    "target_careers": ["Event Planner", "School Administrator", "Project Manager"]
-  }
+  {"id": 1, "question": "I find it easy to come up with new and creative ideas.", "category": "O_score", "target_careers": ["Architect", "Graphic Designer"]},
+  {"id": 2, "question": "I am curious about how complex machines or nature works.", "category": "O_score", "target_careers": ["Research Scientist", "Biologist"]},
+  {"id": 3, "question": "I enjoy thinking about abstract or philosophical concepts.", "category": "O_score", "target_careers": ["Writer", "Journalist"]},
+  {"id": 4, "question": "I love visiting art galleries and exploring visual designs.", "category": "O_score", "target_careers": ["Artist", "Interior Designer"]},
+  {"id": 5, "question": "I prefer variety and new experiences over a fixed routine.", "category": "O_score", "target_careers": ["Film Director", "Event Planner"]},
+  {"id": 6, "question": "I often imagine future possibilities that others haven't thought of.", "category": "O_score", "target_careers": ["Entrepreneur", "Astronomer"]},
+  {"id": 7, "question": "I enjoy learning about different cultures and global traditions.", "category": "O_score", "target_careers": ["Diplomat", "Foreign Service Officer"]},
+  {"id": 8, "question": "I am open to changing my perspective when presented with new facts.", "category": "O_score", "target_careers": ["Analyst", "Consultant"]},
+  {"id": 9, "question": "I like to spend time daydreaming about creative projects.", "category": "O_score", "target_careers": ["Creative Director", "Fashion Designer"]},
+  {"id": 10, "question": "I appreciate complex and sophisticated music or literature.", "category": "O_score", "target_careers": ["Musician", "Editor"]},
+  {"id": 11, "question": "I am interested in how the universe began.", "category": "O_score", "target_careers": ["Astronomer", "Physicist"]},
+  {"id": 12, "question": "I like to experiment with new ways of doing things.", "category": "O_score", "target_careers": ["Software Developer", "Chef"]},
+  {"id": 13, "question": "I enjoy visiting historical sites to learn about the past.", "category": "O_score", "target_careers": ["Historian", "Archaeologist"]},
+  {"id": 14, "question": "I find beauty in things that others might find strange.", "category": "O_score", "target_careers": ["Artist", "Photographer"]},
+  {"id": 15, "question": "I am always looking for deep meaning in books and movies.", "category": "O_score", "target_careers": ["Critic", "Philosopher"]},
+  {"id": 16, "question": "I like to try food from different parts of the world.", "category": "O_score", "target_careers": ["Food Critic", "Chef"]},
+  {"id": 17, "question": "I enjoy solving problems using out-of-the-box thinking.", "category": "O_score", "target_careers": ["Solution Architect", "Engineer"]},
+  {"id": 18, "question": "I am fascinated by how different languages are structured.", "category": "O_score", "target_careers": ["Linguist", "Translator"]},
+  {"id": 19, "question": "I love to explore new places without a map.", "category": "O_score", "target_careers": ["Explorer", "Travel Writer"]},
+  {"id": 20, "question": "I think it is important to question traditional rules.", "category": "O_score", "target_careers": ["Social Reformer", "Lawyer"]},
+  {"id": 21, "question": "I enjoy poetry and fine literature.", "category": "O_score", "target_careers": ["Author", "Editor"]},
+  {"id": 22, "question": "I find it easy to understand modern art.", "category": "O_score", "target_careers": ["Art Critic"]},
+  {"id": 23, "question": "I am interested in theoretical physics.", "category": "O_score", "target_careers": ["Scientist"]},
+  {"id": 24, "question": "I like to attend cultural festivals.", "category": "O_score", "target_careers": ["Anthropologist"]},
+  {"id": 25, "question": "I often think about the meaning of life.", "category": "O_score", "target_careers": ["Philosopher"]},
+  {"id": 26, "question": "I enjoy brainstorming sessions for new projects.", "category": "O_score", "target_careers": ["Marketing Manager"]},
+  {"id": 27, "question": "I find it easy to imagine alternate realities.", "category": "O_score", "target_careers": ["Game Designer"]},
+  {"id": 28, "question": "I appreciate different points of view.", "category": "O_score", "target_careers": ["Counselor"]},
+  {"id": 29, "question": "I love to learn about space exploration.", "category": "O_score", "target_careers": ["Aerospace Engineer"]},
+  {"id": 30, "question": "I am a very imaginative person.", "category": "O_score", "target_careers": ["Writer"]},
+  {"id": 31, "question": "I enjoy watching documentaries about the universe.", "category": "O_score", "target_careers": ["Astronomer"]},
+  {"id": 32, "question": "I like to redesign my living space frequently.", "category": "O_score", "target_careers": ["Interior Designer"]},
+  {"id": 33, "question": "I find classical music very inspiring.", "category": "O_score", "target_careers": ["Musician"]},
+  {"id": 34, "question": "I am open to trying unconventional methods.", "category": "O_score", "target_careers": ["Researcher"]},
+  {"id": 35, "question": "I enjoy reading science fiction novels.", "category": "O_score", "target_careers": ["Game Developer"]},
+  {"id": 36, "question": "I like to analyze the symbolism in films.", "category": "O_score", "target_careers": ["Film Critic"]},
+  {"id": 37, "question": "I find ancient history very fascinating.", "category": "O_score", "target_careers": ["Historian"]},
+  {"id": 38, "question": "I am always looking for new hobbies to start.", "category": "O_score", "target_careers": ["Entrepreneur"]},
+  {"id": 39, "question": "I enjoy sketching in my free time.", "category": "O_score", "target_careers": ["Illustrator"]},
+  {"id": 40, "question": "I like to think about future technology.", "category": "O_score", "target_careers": ["Tech Consultant"]},
+  {"id": 41, "question": "I find world politics very interesting.", "category": "O_score", "target_careers": ["Diplomat"]},
+  {"id": 42, "question": "I am attracted to complex challenges.", "category": "O_score", "target_careers": ["Software Architect"]},
+  {"id": 43, "question": "I enjoy writing short stories.", "category": "O_score", "target_careers": ["Author"]},
+  {"id": 44, "question": "I am curious about how the human mind works.", "category": "O_score", "target_careers": ["Psychologist"]},
+  {"id": 45, "question": "I find nature's patterns to be beautiful.", "category": "O_score", "target_careers": ["Biologist"]},
+  {"id": 46, "question": "I like to explore abandoned buildings for their history.", "category": "O_score", "target_careers": ["Photographer"]},
+  {"id": 47, "question": "I enjoy learning about mythological stories.", "category": "O_score", "target_careers": ["Anthropologist"]},
+  {"id": 48, "question": "I am open to shifting my career path for a new passion.", "category": "O_score", "target_careers": ["Independent Contractor"]},
+  {"id": 49, "question": "I like to visit science museums.", "category": "O_score", "target_careers": ["Researcher"]},
+  {"id": 50, "question": "I am constantly seeking new intellectual challenges.", "category": "O_score", "target_careers": ["Professor", "Researcher"]}
+,
+  {"id": 51, "question": "I always make sure my work is organized and error-free.", "category": "C_score", "target_careers": ["Accountant", "Financial Auditor"]},
+  {"id": 52, "question": "I follow a strict schedule to complete my daily tasks.", "category": "C_score", "target_careers": ["IT Project Manager", "Administrative Officer"]},
+  {"id": 53, "question": "I pay great attention to small details in my assignments.", "category": "C_score", "target_careers": ["Software Quality Assurance Tester", "Pharmacist"]},
+  {"id": 54, "question": "I am always punctual and value being on time.", "category": "C_score", "target_careers": ["Airline Pilot", "Logistician"]},
+  {"id": 55, "question": "I keep my workspace clean and systematically arranged.", "category": "C_score", "target_careers": ["Lab Technician", "Office Manager"]},
+  {"id": 56, "question": "I prefer to finish my work well before the deadline.", "category": "C_score", "target_careers": ["Executive Assistant", "Planner"]},
+  {"id": 57, "question": "I double-check every calculation for accuracy.", "category": "C_score", "target_careers": ["Tax Accountant", "Banker"]},
+  {"id": 58, "question": "I find it hard to relax until all my chores are done.", "category": "C_score", "target_careers": ["Nurse", "Coordinator"]},
+  {"id": 59, "question": "I am known for being a very reliable and steady worker.", "category": "C_score", "target_careers": ["Civil Engineer", "Officer"]},
+  {"id": 60, "question": "I create a checklist for everything I need to do.", "category": "C_score", "target_careers": ["Project Manager", "Operations Manager"]},
+  {"id": 61, "question": "I follow safety protocols strictly without shortcuts.", "category": "C_score", "target_careers": ["Safety Inspector", "Physician"]},
+  {"id": 62, "question": "I keep my digital files properly named and sorted.", "category": "C_score", "target_careers": ["Database Administrator", "Analyst"]},
+  {"id": 63, "question": "I am very persistent when facing a difficult task.", "category": "C_score", "target_careers": ["Mechanical Engineer", "Biologist"]},
+  {"id": 64, "question": "I take full responsibility for my mistakes.", "category": "C_score", "target_careers": ["Human Resources Manager", "Lawyer"]},
+  {"id": 65, "question": "I believe that hard work is the only way to success.", "category": "C_score", "target_careers": ["Entrepreneur", "Executive"]},
+  {"id": 66, "question": "I avoid making impulsive decisions at work.", "category": "C_score", "target_careers": ["Investment Banker", "Risk Analyst"]},
+  {"id": 67, "question": "I always prepare for a meeting in advance.", "category": "C_score", "target_careers": ["Diplomat", "Teacher"]},
+  {"id": 68, "question": "I value high-quality results over finishing quickly.", "category": "C_score", "target_careers": ["Architect", "Editor"]},
+  {"id": 69, "question": "I stay focused on one task at a time until it's finished.", "category": "C_score", "target_careers": ["Software Developer", "Researcher"]},
+  {"id": 70, "question": "I enjoy creating long-term plans for my life.", "category": "C_score", "target_careers": ["Strategist", "Financial Planner"]},
+  {"id": 71, "question": "I am very disciplined about my health and fitness.", "category": "C_score", "target_careers": ["Nutritionist"]},
+  {"id": 72, "question": "I dislike leaving things half-finished.", "category": "C_score", "target_careers": ["Project Coordinator"]},
+  {"id": 73, "question": "I always read the fine print in contracts.", "category": "C_score", "target_careers": ["Lawyer"]},
+  {"id": 74, "question": "I am very careful with my spending.", "category": "C_score", "target_careers": ["Budget Analyst"]},
+  {"id": 75, "question": "I prefer to follow proven methods.", "category": "C_score", "target_careers": ["Standardization Officer"]},
+  {"id": 76, "question": "I keep my promises no matter what.", "category": "C_score", "target_careers": ["Reliability Engineer"]},
+  {"id": 77, "question": "I am good at prioritizing my work.", "category": "C_score", "target_careers": ["Office Manager"]},
+  {"id": 78, "question": "I always double-check the lock on the door.", "category": "C_score", "target_careers": ["Security Manager"]},
+  {"id": 79, "question": "I am very cautious in my professional life.", "category": "C_score", "target_careers": ["Safety Officer"]},
+  {"id": 80, "question": "I enjoy creating order out of chaos.", "category": "C_score", "target_careers": ["Operations Manager"]},
+  {"id": 81, "question": "I am a very methodical thinker.", "category": "C_score", "target_careers": ["System Administrator"]},
+  {"id": 82, "question": "I rarely forget important dates.", "category": "C_score", "target_careers": ["Executive Assistant"]},
+  {"id": 83, "question": "I maintain a high level of professionalism.", "category": "C_score", "target_careers": ["Manager"]},
+  {"id": 84, "question": "I am very focused during work hours.", "category": "C_score", "target_careers": ["Researcher"]},
+  {"id": 85, "question": "I believe in rules and regulations.", "category": "C_score", "target_careers": ["Compliance Officer"]},
+  {"id": 86, "question": "I am an expert at time management.", "category": "C_score", "target_careers": ["Consultant"]},
+  {"id": 87, "question": "I always keep my tools in good condition.", "category": "C_score", "target_careers": ["Technician"]},
+  {"id": 88, "question": "I am very persistent with long-term projects.", "category": "C_score", "target_careers": ["PhD Researcher"]},
+  {"id": 89, "question": "I follow through on every commitment.", "category": "C_score", "target_careers": ["Business Partner"]},
+  {"id": 90, "question": "I am very careful not to make careless errors.", "category": "C_score", "target_careers": ["Data Entry Specialist"]},
+  {"id": 91, "question": "I prefer a structured environment.", "category": "C_score", "target_careers": ["Clerk"]},
+  {"id": 92, "question": "I am very thorough in my research.", "category": "C_score", "target_careers": ["Journalist"]},
+  {"id": 93, "question": "I always save my work frequently.", "category": "C_score", "target_careers": ["Software Developer"]},
+  {"id": 94, "question": "I follow a budget strictly.", "category": "C_score", "target_careers": ["Financial Advisor"]},
+  {"id": 95, "question": "I am very reliable in a team setting.", "category": "C_score", "target_careers": ["Team Lead"]},
+  {"id": 96, "question": "I always double-check my sources.", "category": "C_score", "target_careers": ["Fact Checker"]},
+  {"id": 97, "question": "I prefer to plan for the unexpected.", "category": "C_score", "target_careers": ["Risk Manager"]},
+  {"id": 98, "question": "I am very organized with my physical records.", "category": "C_score", "target_careers": ["Archivist"]},
+  {"id": 99, "question": "I am a very disciplined student/worker.", "category": "C_score", "target_careers": ["Professional"]},
+  {"id": 100, "question": "I am committed to excellence in every project I handle.", "category": "C_score", "target_careers": ["Quality Control Inspector", "Project Lead"]}
+,
+  {"id": 101, "question": "I feel energized after spending time with a large group of people.", "category": "E_score", "target_careers": ["Salesperson", "Event Planner"]},
+  {"id": 102, "question": "I find it easy to start a conversation with strangers.", "category": "E_score", "target_careers": ["HR Recruiter", "Real Estate Agent"]},
+  {"id": 103, "question": "I enjoy being in the spotlight during social events.", "category": "E_score", "target_careers": ["Actor", "Public Relations Specialist"]},
+  {"id": 104, "question": "I prefer working in a collaborative team rather than alone.", "category": "E_score", "target_careers": ["Marketing Coordinator", "Sports Coach"]},
+  {"id": 105, "question": "I am very expressive and talkative about my ideas.", "category": "E_score", "target_careers": ["Journalist", "Advertising Executive"]},
+  {"id": 106, "question": "I am often the first to introduce myself at meetings.", "category": "E_score", "target_careers": ["Business Consultant", "Manager"]},
+  {"id": 107, "question": "I enjoy hosting parties or social gatherings.", "category": "E_score", "target_careers": ["Hotel Manager", "Event Coordinator"]},
+  {"id": 108, "question": "I feel comfortable leading a discussion or a presentation.", "category": "E_score", "target_careers": ["Motivational Speaker", "CEO"]},
+  {"id": 109, "question": "I seek out excitement and fast-paced environments.", "category": "E_score", "target_careers": ["Stock Trader", "Police Officer"]},
+  {"id": 110, "question": "I find it easy to influence other people's opinions.", "category": "E_score", "target_careers": ["Lawyer", "Politician"]},
+  {"id": 111, "question": "I am usually very active and full of energy.", "category": "E_score", "target_careers": ["Fitness Trainer", "Tour Guide"]},
+  {"id": 112, "question": "I enjoy meeting new people every single day.", "category": "E_score", "target_careers": ["Customer Success Manager"]},
+  {"id": 113, "question": "I prefer group brainstorming over individual thinking.", "category": "E_score", "target_careers": ["Creative Director"]},
+  {"id": 114, "question": "I am quick to voice my concerns in a group setting.", "category": "E_score", "target_careers": ["Human Resources Manager"]},
+  {"id": 115, "question": "I feel bored when I am alone for long periods.", "category": "E_score", "target_careers": ["Social Media Manager"]},
+  {"id": 116, "question": "I find it easy to build a network of professional contacts.", "category": "E_score", "target_careers": ["Recruiter", "Marketer"]},
+  {"id": 117, "question": "I enjoy the noise and bustle of a busy office.", "category": "E_score", "target_careers": ["Office Administrator"]},
+  {"id": 118, "question": "I am very enthusiastic about starting new social projects.", "category": "E_score", "target_careers": ["Project Lead"]},
+  {"id": 119, "question": "I like to talk more than I like to listen.", "category": "E_score", "target_careers": ["Radio Host", "Podcaster"]},
+  {"id": 120, "question": "I feel confident when walking into a room full of people.", "category": "E_score", "target_careers": ["Executive"]},
+  {"id": 121, "question": "I am often called the 'life of the party'.", "category": "E_score", "target_careers": ["Entertainer"]},
+  {"id": 122, "question": "I find it easy to cheer people up with my energy.", "category": "E_score", "target_careers": ["Coach", "Therapist"]},
+  {"id": 123, "question": "I love participating in group activities and sports.", "category": "E_score", "target_careers": ["Team Captain"]},
+  {"id": 124, "question": "I prefer to spend my weekends out with friends.", "category": "E_score", "target_careers": ["Travel Agent"]},
+  {"id": 125, "question": "I am very expressive with my body language.", "category": "E_score", "target_careers": ["Actor", "Dancer"]},
+  {"id": 126, "question": "I find it easy to pitch ideas to a large audience.", "category": "E_score", "target_careers": ["Startup Founder"]},
+  {"id": 127, "question": "I enjoy working in customer-facing roles.", "category": "E_score", "target_careers": ["Receptionist", "Sales"]},
+  {"id": 128, "question": "I am naturally good at making people laugh.", "category": "E_score", "target_careers": ["Public Speaker"]},
+  {"id": 129, "question": "I feel most alive in crowded places like festivals.", "category": "E_score", "target_careers": ["Photographer"]},
+  {"id": 130, "question": "I enjoy high-energy environments like a newsroom.", "category": "E_score", "target_careers": ["Journalist"]},
+  {"id": 131, "question": "I find it natural to take the lead in any situation.", "category": "E_score", "target_careers": ["Director"]},
+  {"id": 132, "question": "I am comfortable asking for help from strangers.", "category": "E_score", "target_careers": ["Volunteer"]},
+  {"id": 133, "question": "I enjoy debating topics even with people I just met.", "category": "E_score", "target_careers": ["Legal Professional"]},
+  {"id": 134, "question": "I find small talk to be quite enjoyable.", "category": "E_score", "target_careers": ["Hospitality Staff"]},
+  {"id": 135, "question": "I prefer working in open-plan offices.", "category": "E_score", "target_careers": ["Team Member"]},
+  {"id": 136, "question": "I am very good at keeping a conversation going.", "category": "E_score", "target_careers": ["Interviewer"]},
+  {"id": 137, "question": "I love the thrill of live performances.", "category": "E_score", "target_careers": ["Musician"]},
+  {"id": 138, "question": "I am often the one who organizes group outings.", "category": "E_score", "target_careers": ["Coordinator"]},
+  {"id": 139, "question": "I find it easy to adapt to different social circles.", "category": "E_score", "target_careers": ["Diplomat"]},
+  {"id": 140, "question": "I am highly competitive in social games.", "category": "E_score", "target_careers": ["Athlete"]},
+  {"id": 141, "question": "I enjoy being surrounded by people while I work.", "category": "E_score", "target_careers": ["Social Worker"]},
+  {"id": 142, "question": "I find it easy to express my enthusiasm openly.", "category": "E_score", "target_careers": ["Brand Ambassador"]},
+  {"id": 143, "question": "I am always looking for new social opportunities.", "category": "E_score", "target_careers": ["Community Manager"]},
+  {"id": 144, "question": "I prefer talking on the phone over sending a text.", "category": "E_score", "target_careers": ["Call Center Agent"]},
+  {"id": 145, "question": "I find it easy to work under the public eye.", "category": "E_score", "target_careers": ["Politician"]},
+  {"id": 146, "question": "I love to hear stories from different people's lives.", "category": "E_score", "target_careers": ["Biographer"]},
+  {"id": 147, "question": "I am usually the one who breaks the ice in a room.", "category": "E_score", "target_careers": ["Facilitator"]},
+  {"id": 148, "question": "I enjoy high-stakes social interactions.", "category": "E_score", "target_careers": ["Negotiator"]},
+  {"id": 149, "question": "I find it easy to keep a positive mood in groups.", "category": "E_score", "target_careers": ["Team Leader"]},
+  {"id": 150, "question": "I feel at my best when I am socially active.", "category": "E_score", "target_careers": ["Public Figure"]}
+,
+  {"id": 151, "question": "I am always ready to help others and forgive their mistakes.", "category": "A_score", "target_careers": ["Teacher", "Nurse"]},
+  {"id": 152, "question": "I believe that most people have good intentions.", "category": "A_score", "target_careers": ["Social Worker", "Genetic Counselor"]},
+  {"id": 153, "question": "I try to avoid conflicts and maintain harmony in a group.", "category": "A_score", "target_careers": ["Human Resources Manager", "Marriage Counselor"]},
+  {"id": 154, "question": "I am sensitive to the feelings and needs of others.", "category": "A_score", "target_careers": ["Psychologist", "Pediatrician"]},
+  {"id": 155, "question": "I enjoy volunteering for charitable or community causes.", "category": "A_score", "target_careers": ["Rehabilitation Counselor", "Public Health Analyst"]},
+  {"id": 156, "question": "I find it easy to trust people and cooperate with them.", "category": "A_score", "target_careers": ["Team Player", "Customer Service"]},
+  {"id": 157, "question": "I am a good listener when someone wants to share their problems.", "category": "A_score", "target_careers": ["Life Coach", "Therapist"]},
+  {"id": 158, "question": "I value teamwork more than individual competition.", "category": "A_score", "target_careers": ["Project Coordinator", "Coach"]},
+  {"id": 159, "question": "I tend to be soft-hearted and sympathetic toward others.", "category": "A_score", "target_careers": ["Veterinarian", "Support Specialist"]},
+  {"id": 160, "question": "I am willing to compromise to reach a group decision.", "category": "A_score", "target_careers": ["Diplomat", "Office Assistant"]},
+  {"id": 161, "question": "I am genuinely interested in other people's well-being.", "category": "A_score", "target_careers": ["Caregiver"]},
+  {"id": 162, "question": "I avoid making people feel uncomfortable or judged.", "category": "A_score", "target_careers": ["Counselor"]},
+  {"id": 163, "question": "I find it easy to see things from another person's perspective.", "category": "A_score", "target_careers": ["Mediator"]},
+  {"id": 164, "question": "I believe in being honest but also very kind.", "category": "A_score", "target_careers": ["Ethics Officer"]},
+  {"id": 165, "question": "I am known for being a very patient person.", "category": "A_score", "target_careers": ["Elementary School Teacher"]},
+  {"id": 166, "question": "I find it rewarding to help someone achieve their goals.", "category": "A_score", "target_careers": ["Mentor"]},
+  {"id": 167, "question": "I rarely hold grudges against my coworkers.", "category": "A_score", "target_careers": ["Department Head"]},
+  {"id": 168, "question": "I enjoy working in environments that prioritize peace.", "category": "A_score", "target_careers": ["Librarian"]},
+  {"id": 169, "question": "I am always polite, even to difficult people.", "category": "A_score", "target_careers": ["Receptionist"]},
+  {"id": 170, "question": "I find it easy to get along with diverse groups of people.", "category": "A_score", "target_careers": ["Diversity Officer"]},
+  {"id": 171, "question": "I feel happy when I can make someone else's day better.", "category": "A_score", "target_careers": ["Hospitality Staff"]},
+  {"id": 172, "question": "I believe that kindness is more important than being right.", "category": "A_score", "target_careers": ["Non-profit Worker"]},
+  {"id": 173, "question": "I am very supportive of my friends' and family's dreams.", "category": "A_score", "target_careers": ["Career Advisor"]},
+  {"id": 174, "question": "I find it easy to offer a sincere apology.", "category": "A_score", "target_careers": ["PR Manager"]},
+  {"id": 175, "question": "I prefer to resolve issues through calm conversation.", "category": "A_score", "target_careers": ["Ombudsman"]},
+  {"id": 176, "question": "I am considerate of how my actions affect others.", "category": "A_score", "target_careers": ["Safety Manager"]},
+  {"id": 177, "question": "I enjoy mentoring new students or employees.", "category": "A_score", "target_careers": ["Tutor"]},
+  {"id": 178, "question": "I am naturally inclined to trust a person until they give me a reason not to.", "category": "A_score", "target_careers": ["Community Lead"]},
+  {"id": 179, "question": "I find it easy to praise others for their hard work.", "category": "A_score", "target_careers": ["Team Manager"]},
+  {"id": 180, "question": "I am very protective of those who are vulnerable.", "category": "A_score", "target_careers": ["Human Rights Lawyer"]},
+  {"id": 181, "question": "I believe that everyone deserves a second chance.", "category": "A_score", "target_careers": ["Parole Officer"]},
+  {"id": 182, "question": "I enjoy creating a welcoming atmosphere for others.", "category": "A_score", "target_careers": ["Host/Hostess"]},
+  {"id": 183, "question": "I am very humble about my own achievements.", "category": "A_score", "target_careers": ["Scientist"]},
+  {"id": 184, "question": "I find it easy to express my gratitude to others.", "category": "A_score", "target_careers": ["Philanthropist"]},
+  {"id": 185, "question": "I am always willing to share my resources with others.", "category": "A_score", "target_careers": ["Charity Organizer"]},
+  {"id": 186, "question": "I avoid talking behind people's backs.", "category": "A_score", "target_careers": ["Ethicist"]},
+  {"id": 187, "question": "I find it natural to put others' needs before my own.", "category": "A_score", "target_careers": ["Parenting Coach"]},
+  {"id": 188, "question": "I am very loyal to my team and organization.", "category": "A_score", "target_careers": ["Company Executive"]},
+  {"id": 189, "question": "I find it easy to keep a secret when asked.", "category": "A_score", "target_careers": ["Counselor"]},
+  {"id": 190, "question": "I am a peaceful person by nature.", "category": "A_score", "target_careers": ["Yoga Instructor"]},
+  {"id": 191, "question": "I enjoy listening to people's life stories.", "category": "A_score", "target_careers": ["Biographer"]},
+  {"id": 192, "question": "I am very respectful of elderly people and their wisdom.", "category": "A_score", "target_careers": ["Geriatric Nurse"]},
+  {"id": 193, "question": "I find it easy to comfort someone who is upset.", "category": "A_score", "target_careers": ["Crisis Counselor"]},
+  {"id": 194, "question": "I believe in the power of empathy to change the world.", "category": "A_score", "target_careers": ["Social Activist"]},
+  {"id": 195, "question": "I am always looking for ways to contribute to the greater good.", "category": "A_score", "target_careers": ["Public Servant"]},
+  {"id": 196, "question": "I find it easy to trust a group's collective decision.", "category": "A_score", "target_careers": ["Juror"]},
+  {"id": 197, "question": "I am very thoughtful when it comes to people's birthdays or special events.", "category": "A_score", "target_careers": ["Event Planner"]},
+  {"id": 198, "question": "I believe that every person has something valuable to offer.", "category": "A_score", "target_careers": ["Recruiter"]},
+  {"id": 199, "question": "I am very patient with people who learn slowly.", "category": "A_score", "target_careers": ["Special Education Teacher"]},
+  {"id": 200, "question": "I feel at peace when I am helping others.", "category": "A_score", "target_careers": ["Missionary"]}
+,
+  {"id": 201, "question": "I often feel overwhelmed or stressed in high-pressure situations.", "category": "N_score", "target_careers": ["Librarian", "Researcher"]},
+  {"id": 202, "question": "I worry about things that might go wrong in the future.", "category": "N_score", "target_careers": ["Insurance Underwriter", "Data Analyst"]},
+  {"id": 203, "question": "I find it difficult to handle sudden changes in my plans.", "category": "N_score", "target_careers": ["Administrative Officer", "Tax Collector"]},
+  {"id": 204, "question": "I get upset easily when I make a mistake at work.", "category": "N_score", "target_careers": ["Proofreader", "Quality Control Inspector"]},
+  {"id": 205, "question": "I am very sensitive to criticism from others.", "category": "N_score", "target_careers": ["Writer", "Artist"]},
+  {"id": 206, "question": "I often feel anxious even when everything is going fine.", "category": "N_score", "target_careers": ["Technician", "Archivist"]},
+  {"id": 207, "question": "I find it hard to calm down after a stressful meeting.", "category": "N_score", "target_careers": ["Accountant", "Mechanical Designer"]},
+  {"id": 208, "question": "I am easily distracted by my own worries and thoughts.", "category": "N_score", "target_careers": ["Creative Writer", "Historian"]},
+  {"id": 209, "question": "I feel self-conscious when I have to speak in front of people.", "category": "N_score", "target_careers": ["Software Developer", "Database Analyst"]},
+  {"id": 210, "question": "I often experience mood swings throughout the day.", "category": "N_score", "target_careers": ["Musician", "Independent Contractor"]},
+  {"id": 211, "question": "I tend to expect the worst-case scenario in most situations.", "category": "N_score", "target_careers": ["Risk Analyst"]},
+  {"id": 212, "question": "I feel panicky when I have to meet a very tight deadline.", "category": "N_score", "target_careers": ["Librarian"]},
+  {"id": 213, "question": "I am easily bothered by loud or chaotic environments.", "category": "N_score", "target_careers": ["Forestry Technician"]},
+  {"id": 214, "question": "I often feel that I am not good enough for my job.", "category": "N_score", "target_careers": ["Technical Writer"]},
+  {"id": 215, "question": "I find it hard to bounce back after a professional failure.", "category": "N_score", "target_careers": ["Researcher"]},
+  {"id": 216, "question": "I often overthink simple decisions for a long time.", "category": "N_score", "target_careers": ["Database Administrator"]},
+  {"id": 217, "question": "I feel physically tired when I am mentally stressed.", "category": "N_score", "target_careers": ["Archivist"]},
+  {"id": 218, "question": "I am prone to worrying about my health or safety.", "category": "N_score", "target_careers": ["Safety Officer"]},
+  {"id": 219, "question": "I find it difficult to maintain a positive outlook during crises.", "category": "N_score", "target_careers": ["Clerk"]},
+  {"id": 220, "question": "I feel shy when meeting people who are very successful.", "category": "N_score", "target_careers": ["Entry-level Staff"]},
+  {"id": 221, "question": "I get frustrated when things don't go exactly as planned.", "category": "N_score", "target_careers": ["Data Entry Specialist"]},
+  {"id": 222, "question": "I often feel like I am under a lot of pressure.", "category": "N_score", "target_careers": ["Assistant"]},
+  {"id": 223, "question": "I am very sensitive to the tone of voice people use with me.", "category": "N_score", "target_careers": ["Editor"]},
+  {"id": 224, "question": "I find it hard to stay motivated when I feel discouraged.", "category": "N_score", "target_careers": ["Independent Artist"]},
+  {"id": 225, "question": "I often feel regret about things I said in the past.", "category": "N_score", "target_careers": ["Writer"]},
+  {"id": 226, "question": "I feel nervous when I am the center of attention.", "category": "N_score", "target_careers": ["Web Developer"]},
+  {"id": 227, "question": "I am easily discouraged by minor setbacks.", "category": "N_score", "target_careers": ["Office Assistant"]},
+  {"id": 228, "question": "I often feel tense or on edge during work hours.", "category": "N_score", "target_careers": ["Clerk"]},
+  {"id": 229, "question": "I find it difficult to stop worrying about my work at night.", "category": "N_score", "target_careers": ["Librarian"]},
+  {"id": 230, "question": "I am very cautious about taking any kind of risk.", "category": "N_score", "target_careers": ["Bank Auditor"]},
+  {"id": 231, "question": "I feel overwhelmed when I have to learn new software quickly.", "category": "N_score", "target_careers": ["Data Entry"]},
+  {"id": 232, "question": "I often feel left out in social or professional groups.", "category": "N_score", "target_careers": ["Archivist"]},
+  {"id": 233, "question": "I am prone to feeling guilty even when it's not my fault.", "category": "N_score", "target_careers": ["Support Staff"]},
+  {"id": 234, "question": "I find it hard to assert myself in difficult conversations.", "category": "N_score", "target_careers": ["Researcher"]},
+  {"id": 235, "question": "I feel anxious when I don't know what is coming next.", "category": "N_score", "target_careers": ["Administrative Assistant"]},
+  {"id": 236, "question": "I am easily intimidated by people in positions of power.", "category": "N_score", "target_careers": ["Junior Analyst"]},
+  {"id": 237, "question": "I often feel that others are more capable than me.", "category": "N_score", "target_careers": ["Technician"]},
+  {"id": 238, "question": "I find it difficult to keep my emotions in check at work.", "category": "N_score", "target_careers": ["Artist"]},
+  {"id": 239, "question": "I feel a lot of anxiety about making public speeches.", "category": "N_score", "target_careers": ["Programmer"]},
+  {"id": 240, "question": "I am very sensitive to changes in the workplace atmosphere.", "category": "N_score", "target_careers": ["Librarian"]},
+  {"id": 241, "question": "I often feel like I have too many responsibilities.", "category": "N_score", "target_careers": ["Clerk"]},
+  {"id": 242, "question": "I find it hard to relax even on my days off.", "category": "N_score", "target_careers": ["Researcher"]},
+  {"id": 243, "question": "I get nervous when I have to perform a task while being watched.", "category": "N_score", "target_careers": ["Technician"]},
+  {"id": 244, "question": "I often worry about what my colleagues think of me.", "category": "N_score", "target_careers": ["Administrative Officer"]},
+  {"id": 245, "question": "I find it difficult to stay calm during an argument.", "category": "N_score", "target_careers": ["Independent Worker"]},
+  {"id": 246, "question": "I am prone to feeling sad or lonely at times.", "category": "N_score", "target_careers": ["Writer"]},
+  {"id": 247, "question": "I feel a high level of stress when I am in a new environment.", "category": "N_score", "target_careers": ["Archivist"]},
+  {"id": 248, "question": "I often feel that life is too complicated.", "category": "N_score", "target_careers": ["Historian"]},
+  {"id": 249, "question": "I get anxious when I have to wait for important news.", "category": "N_score", "target_careers": ["Analyst"]},
+  {"id": 250, "question": "I find it hard to maintain my focus when I am worried.", "category": "N_score", "target_careers": ["Technical Writer"]}
+,
+  {"id": 251, "question": "I can solve complex mathematical equations with ease.", "category": "Numerical Aptitude", "target_careers": ["Financial Analyst", "Accountant"]},
+  {"id": 252, "question": "I enjoy working with financial spreadsheets and data tables.", "category": "Numerical Aptitude", "target_careers": ["Investment Banker", "Tax Accountant"]},
+  {"id": 253, "question": "I can calculate percentages and discounts quickly in my head.", "category": "Numerical Aptitude", "target_careers": ["Financial Planner", "Banker"]},
+  {"id": 254, "question": "I find it easy to spot trends in numerical data sets.", "category": "Numerical Aptitude", "target_careers": ["Market Researcher", "Data Analyst"]},
+  {"id": 255, "question": "I prefer solving math problems over writing descriptive essays.", "category": "Numerical Aptitude", "target_careers": ["Aerospace Engineer", "Physicist"]},
+  {"id": 256, "question": "I am good at estimating the cost of a large project accurately.", "category": "Numerical Aptitude", "target_careers": ["Civil Engineer", "Construction Manager"]},
+  {"id": 257, "question": "I enjoy analyzing statistical reports and probability graphs.", "category": "Numerical Aptitude", "target_careers": ["Biostatistician", "Market Analyst"]},
+  {"id": 258, "question": "I can easily understand and apply mathematical formulas to real life.", "category": "Numerical Aptitude", "target_careers": ["Mechanical Engineer", "Economist"]},
+  {"id": 259, "question": "I find balancing budgets to be a satisfying and easy task.", "category": "Numerical Aptitude", "target_careers": ["Financial Advisor", "Accountant"]},
+  {"id": 260, "question": "I am quick at performing mental arithmetic during a conversation.", "category": "Numerical Aptitude", "target_careers": ["Stock Trader", "Real Estate Agent"]},
+  {"id": 261, "question": "I find it easy to understand compound interest calculations.", "category": "Numerical Aptitude", "target_careers": ["Financial Advisor"]},
+  {"id": 262, "question": "I enjoy solving algebraic puzzles in my spare time.", "category": "Numerical Aptitude", "target_careers": ["Mathematics Teacher"]},
+  {"id": 263, "question": "I am very good at recognizing patterns in sequences of numbers.", "category": "Numerical Aptitude", "target_careers": ["Cryptographer", "Data Scientist"]},
+  {"id": 264, "question": "I can quickly determine if a financial statement is balanced.", "category": "Numerical Aptitude", "target_careers": ["Auditor"]},
+  {"id": 265, "question": "I find it easy to calculate ratios and proportions.", "category": "Numerical Aptitude", "target_careers": ["Biomedical Engineer"]},
+  {"id": 266, "question": "I enjoy creating charts and graphs to represent data.", "category": "Numerical Aptitude", "target_careers": ["Data Analyst"]},
+  {"id": 267, "question": "I am good at using logic to solve word-based math problems.", "category": "Numerical Aptitude", "target_careers": ["Software Developer"]},
+  {"id": 268, "question": "I find it easy to work with different units of measurement.", "category": "Numerical Aptitude", "target_careers": ["Industrial Engineer"]},
+  {"id": 269, "question": "I enjoy learning about advanced mathematical theories.", "category": "Numerical Aptitude", "target_careers": ["Theoretical Physicist"]},
+  {"id": 270, "question": "I am quick to identify errors in a column of numbers.", "category": "Numerical Aptitude", "target_careers": ["Tax Collector"]},
+  {"id": 271, "question": "I find it easy to calculate the area and volume of shapes.", "category": "Numerical Aptitude", "target_careers": ["Civil Engineer"]},
+  {"id": 272, "question": "I enjoy working with logic gates and binary numbers.", "category": "Numerical Aptitude", "target_careers": ["Electronics Design Engineer"]},
+  {"id": 273, "question": "I can accurately forecast future trends using historical data.", "category": "Numerical Aptitude", "target_careers": ["Market Research Analyst"]},
+  {"id": 274, "question": "I find it easy to understand the concept of probability.", "category": "Numerical Aptitude", "target_careers": ["Risk Manager"]},
+  {"id": 275, "question": "I am good at using formulas to solve physics problems.", "category": "Numerical Aptitude", "target_careers": ["Aerospace Engineer"]},
+  {"id": 276, "question": "I enjoy comparing different financial investment options.", "category": "Numerical Aptitude", "target_careers": ["Investment Banker"]},
+  {"id": 277, "question": "I find it easy to perform long division without a calculator.", "category": "Numerical Aptitude", "target_careers": ["Teacher"]},
+  {"id": 278, "question": "I am quick to understand how a change in variables affects a formula.", "category": "Numerical Aptitude", "target_careers": ["Economist"]},
+  {"id": 279, "question": "I enjoy creating complex algorithms to solve data problems.", "category": "Numerical Aptitude", "target_careers": ["Software Developer"]},
+  {"id": 280, "question": "I find it easy to interpret data from a pie chart.", "category": "Numerical Aptitude", "target_careers": ["Marketing Analyst"]},
+  {"id": 281, "question": "I am good at calculating distances on a map using a scale.", "category": "Numerical Aptitude", "target_careers": ["Urban Planner"]},
+  {"id": 282, "question": "I enjoy the challenge of a difficult calculus problem.", "category": "Numerical Aptitude", "target_careers": ["Engineer"]},
+  {"id": 283, "question": "I find it easy to convert between fractions, decimals, and percentages.", "category": "Numerical Aptitude", "target_careers": ["Accountant"]},
+  {"id": 284, "question": "I am quick to spot a mathematical inconsistency in a report.", "category": "Numerical Aptitude", "target_careers": ["Financial Auditor"]},
+  {"id": 285, "question": "I enjoy learning about the history of mathematics.", "category": "Numerical Aptitude", "target_careers": ["Professor"]},
+  {"id": 286, "question": "I find it easy to calculate the mean, median, and mode of a data set.", "category": "Numerical Aptitude", "target_careers": ["Statistician"]},
+  {"id": 287, "question": "I am good at using mental shortcuts for large calculations.", "category": "Numerical Aptitude", "target_careers": ["Stock Trader"]},
+  {"id": 288, "question": "I enjoy working with scientific notation for very large numbers.", "category": "Numerical Aptitude", "target_careers": ["Astronomer"]},
+  {"id": 289, "question": "I find it easy to solve geometry problems involving angles.", "category": "Numerical Aptitude", "target_careers": ["Architect"]},
+  {"id": 290, "question": "I am quick to understand how to use a scientific calculator.", "category": "Numerical Aptitude", "target_careers": ["Technician"]},
+  {"id": 291, "question": "I enjoy using spreadsheets to track my own personal expenses.", "category": "Numerical Aptitude", "target_careers": ["Financial Planner"]},
+  {"id": 292, "question": "I find it easy to understand the logic of a proof.", "category": "Numerical Aptitude", "target_careers": ["Mathematician"]},
+  {"id": 293, "question": "I am good at interpreting complex technical drawings with dimensions.", "category": "Numerical Aptitude", "target_careers": ["Mechanical Designer"]},
+  {"id": 294, "question": "I enjoy the precision that mathematics provides.", "category": "Numerical Aptitude", "target_careers": ["Pharmacist"]},
+  {"id": 295, "question": "I find it easy to solve problems involving rates of change.", "category": "Numerical Aptitude", "target_careers": ["Industrial Engineer"]},
+  {"id": 296, "question": "I am quick to calculate tax amounts on a purchase.", "category": "Numerical Aptitude", "target_careers": ["Tax Accountant"]},
+  {"id": 297, "question": "I enjoy creating mathematical models for real-world scenarios.", "category": "Numerical Aptitude", "target_careers": ["Data Scientist"]},
+  {"id": 298, "question": "I find it easy to work with negative numbers.", "category": "Numerical Aptitude", "target_careers": ["Accountant"]},
+  {"id": 299, "question": "I am good at estimating the square root of a number.", "category": "Numerical Aptitude", "target_careers": ["Engineer"]},
+  {"id": 300, "question": "I feel confident when I am working with large amounts of numerical data.", "category": "Numerical Aptitude", "target_careers": ["Database Analyst"]}
+,
+  {"id": 301, "question": "I can easily visualize how a 2D drawing would look in 3D.", "category": "Spatial Aptitude", "target_careers": ["Architect", "Mechanical Engineer"]},
+  {"id": 302, "question": "I am good at reading maps and finding directions in new places.", "category": "Spatial Aptitude", "target_careers": ["Pilot", "Geologist"]},
+  {"id": 303, "question": "I can assemble complex furniture just by looking at the diagram.", "category": "Spatial Aptitude", "target_careers": ["Construction Engineer", "Product Designer"]},
+  {"id": 304, "question": "I can accurately judge the distance between two objects.", "category": "Spatial Aptitude", "target_careers": ["Civil Engineer", "Airline Pilot"]},
+  {"id": 305, "question": "I enjoy playing games that involve rotating shapes like Tetris.", "category": "Spatial Aptitude", "target_careers": ["Game Developer", "Animator"]},
+  {"id": 306, "question": "I can mentally rotate objects to see them from different angles.", "category": "Spatial Aptitude", "target_careers": ["Mechanical Designer", "Robotics Engineer"]},
+  {"id": 307, "question": "I am good at packing a car trunk to fit as many things as possible.", "category": "Spatial Aptitude", "target_careers": ["Logistics Specialist", "Warehouse Manager"]},
+  {"id": 308, "question": "I can easily sketch a floor plan of a room I just visited.", "category": "Spatial Aptitude", "target_careers": ["Interior Designer", "Urban Planner"]},
+  {"id": 309, "question": "I enjoy solving jigsaw puzzles or building complex construction sets.", "category": "Spatial Aptitude", "target_careers": ["Structural Engineer", "Architect"]},
+  {"id": 310, "question": "I can visualize the internal structure of complex machines easily.", "category": "Spatial Aptitude", "target_careers": ["Aerospace Engineer", "Electronics Design Engineer"]},
+  {"id": 311, "question": "I find it easy to remember the layout of a building I've only visited once.", "category": "Spatial Aptitude", "target_careers": ["Interior Designer"]},
+  {"id": 312, "question": "I am good at imagining how a piece of paper would look after being folded and cut.", "category": "Spatial Aptitude", "target_careers": ["Fashion Designer"]},
+  {"id": 313, "question": "I can easily spot the shortest route on a complex city map.", "category": "Spatial Aptitude", "target_careers": ["Urban Planner"]},
+  {"id": 314, "question": "I enjoy activities that require precise hand-eye coordination.", "category": "Spatial Aptitude", "target_careers": ["Surgeon", "Dentist"]},
+  {"id": 315, "question": "I can accurately guess the height of a building by looking at it.", "category": "Spatial Aptitude", "target_careers": ["Civil Engineer"]},
+  {"id": 316, "question": "I find it easy to navigate through a 3D environment in a video game.", "category": "Spatial Aptitude", "target_careers": ["Video Game Tester"]},
+  {"id": 317, "question": "I am good at visualizing how light and shadow fall on an object.", "category": "Spatial Aptitude", "target_careers": ["Event Photographer", "Artist"]},
+  {"id": 318, "question": "I can easily imagine the cross-section of a 3D object.", "category": "Spatial Aptitude", "target_careers": ["Biomedical Engineer"]},
+  {"id": 319, "question": "I enjoy designing layouts for websites or magazines.", "category": "Spatial Aptitude", "target_careers": ["Graphic Designer"]},
+  {"id": 320, "question": "I am quick to notice if something is not symmetrical.", "category": "Spatial Aptitude", "target_careers": ["Fashion Stylist"]},
+  {"id": 321, "question": "I can mentally rearrange furniture in a room with ease.", "category": "Spatial Aptitude", "target_careers": ["Interior Designer"]},
+  {"id": 322, "question": "I find it easy to understand blue-prints for mechanical parts.", "category": "Spatial Aptitude", "target_careers": ["Mechanical Designer"]},
+  {"id": 323, "question": "I enjoy looking at satellite imagery and identifying features.", "category": "Spatial Aptitude", "target_careers": ["Geologist"]},
+  {"id": 324, "question": "I can easily visualize how a garden would look when plants grow up.", "category": "Spatial Aptitude", "target_careers": ["Landscape Architect"]},
+  {"id": 325, "question": "I am good at predicting where a moving object will land.", "category": "Spatial Aptitude", "target_careers": ["Sports Coach"]},
+  {"id": 326, "question": "I find it easy to understand the mechanics of a gear system.", "category": "Spatial Aptitude", "target_careers": ["Mechanical Engineer"]},
+  {"id": 327, "question": "I can accurately draw a map of my neighborhood from memory.", "category": "Spatial Aptitude", "target_careers": ["Urban Planner"]},
+  {"id": 328, "question": "I enjoy thinking about the structure of molecules in 3D.", "category": "Spatial Aptitude", "target_careers": ["Biotechnologist"]},
+  {"id": 329, "question": "I find it easy to fold complex origami shapes.", "category": "Spatial Aptitude", "target_careers": ["Product Designer"]},
+  {"id": 330, "question": "I am quick to realize if I am holding a map upside down.", "category": "Spatial Aptitude", "target_careers": ["Pilot"]},
+  {"id": 331, "question": "I enjoy playing strategy games that involve territorial control.", "category": "Spatial Aptitude", "target_careers": ["Urban Planner"]},
+  {"id": 332, "question": "I can easily imagine the path of a pipe inside a wall.", "category": "Spatial Aptitude", "target_careers": ["Construction Engineer"]},
+  {"id": 333, "question": "I am good at estimating the volume of liquid in a container.", "category": "Spatial Aptitude", "target_careers": ["Chemical Engineer"]},
+  {"id": 334, "question": "I find it easy to follow instructions for a complex dance routine.", "category": "Spatial Aptitude", "target_careers": ["Choreographer"]},
+  {"id": 335, "question": "I enjoy creating 3D models using digital software.", "category": "Spatial Aptitude", "target_careers": ["Game Developer"]},
+  {"id": 336, "question": "I can easily tell which way is North without a compass.", "category": "Spatial Aptitude", "target_careers": ["Geologist"]},
+  {"id": 337, "question": "I am good at finding my way out of a complex maze.", "category": "Spatial Aptitude", "target_careers": ["Software Developer"]},
+  {"id": 338, "question": "I enjoy looking at isometric drawings of buildings.", "category": "Spatial Aptitude", "target_careers": ["Architect"]},
+  {"id": 339, "question": "I can accurately judge if a piece of furniture will fit through a door.", "category": "Spatial Aptitude", "target_careers": ["Interior Designer"]},
+  {"id": 340, "question": "I find it easy to visualize how colors will look on a large wall.", "category": "Spatial Aptitude", "target_careers": ["Interior Designer"]},
+  {"id": 341, "question": "I enjoy sketching objects from different perspectives.", "category": "Spatial Aptitude", "target_careers": ["Artist"]},
+  {"id": 342, "question": "I am good at estimating the slope of a hill.", "category": "Spatial Aptitude", "target_careers": ["Civil Engineer"]},
+  {"id": 343, "question": "I find it easy to visualize the movement of planets.", "category": "Spatial Aptitude", "target_careers": ["Astronomer"]},
+  {"id": 344, "question": "I enjoy designing complex patterns for textiles.", "category": "Spatial Aptitude", "target_careers": ["Fashion Designer"]},
+  {"id": 345, "question": "I can easily understand how a pulley system works.", "category": "Spatial Aptitude", "target_careers": ["Mechanical Engineer"]},
+  {"id": 346, "question": "I am good at organizing objects by their physical size and shape.", "category": "Spatial Aptitude", "target_careers": ["Warehouse Manager"]},
+  {"id": 347, "question": "I find it easy to imagine the layout of a future city.", "category": "Spatial Aptitude", "target_careers": ["Urban Planner"]},
+  {"id": 348, "question": "I enjoy playing with geometric blocks to create structures.", "category": "Spatial Aptitude", "target_careers": ["Architect"]},
+  {"id": 349, "question": "I can easily visualize the flow of air around an airplane wing.", "category": "Spatial Aptitude", "target_careers": ["Aerospace Engineer"]},
+  {"id": 350, "question": "I feel confident when I have to solve problems involving physical space.", "category": "Spatial Aptitude", "target_careers": ["Civil Engineer"]}
+,
+  {"id": 351, "question": "I can quickly spot a small mistake in a long list of numbers.", "category": "Perceptual Aptitude", "target_careers": ["Financial Auditor", "Accountant"]},
+  {"id": 352, "question": "I notice if a picture hanging on a wall is slightly tilted immediately.", "category": "Perceptual Aptitude", "target_careers": ["Interior Designer", "Quality Control Inspector"]},
+  {"id": 353, "question": "I can identify identical images in a 'spot the difference' game very fast.", "category": "Perceptual Aptitude", "target_careers": ["Software Quality Assurance Tester", "Forensic Scientist"]},
+  {"id": 354, "question": "I can quickly find a specific word on a large page of text.", "category": "Perceptual Aptitude", "target_careers": ["Proofreader", "Technical Writer"]},
+  {"id": 355, "question": "I am quick to differentiate between very similar shades of colors.", "category": "Perceptual Aptitude", "target_careers": ["Fashion Designer", "Graphic Designer"]},
+  {"id": 356, "question": "I can detect slight changes in a person's facial expression or tone.", "category": "Perceptual Aptitude", "target_careers": ["Psychologist", "Police Detective"]},
+  {"id": 357, "question": "I am good at scanning large amounts of data for specific keywords.", "category": "Perceptual Aptitude", "target_careers": ["Data Analyst", "Database Administrator"]},
+  {"id": 358, "question": "I notice small mechanical flaws in machines before they break down.", "category": "Perceptual Aptitude", "target_careers": ["Technician", "Mechanical Engineer"]},
+  {"id": 359, "question": "I can accurately sort items by size or color very quickly.", "category": "Perceptual Aptitude", "target_careers": ["Quality Control Inspector", "Pharmacist"]},
+  {"id": 360, "question": "I am very good at recognizing faces I have only seen once before.", "category": "Perceptual Aptitude", "target_careers": ["Police Officer", "HR Recruiter"]},
+  {"id": 361, "question": "I find it easy to spot typos in a social media post.", "category": "Perceptual Aptitude", "target_careers": ["Marketing Copywriter"]},
+  {"id": 362, "question": "I am quick to notice if a colleague's mood has changed slightly.", "category": "Perceptual Aptitude", "target_careers": ["Human Resources Manager"]},
+  {"id": 363, "question": "I can accurately compare two complex diagrams for differences.", "category": "Perceptual Aptitude", "target_careers": ["Electronics Design Engineer"]},
+  {"id": 364, "question": "I find it easy to scan a spreadsheet and find the highest value.", "category": "Perceptual Aptitude", "target_careers": ["Financial Analyst"]},
+  {"id": 365, "question": "I am very good at hearing a faint sound in a noisy room.", "category": "Perceptual Aptitude", "target_careers": ["Speech Pathologist"]},
+  {"id": 366, "question": "I notice when a single brick in a wall is a different color.", "category": "Perceptual Aptitude", "target_careers": ["Civil Engineer"]},
+  {"id": 367, "question": "I can quickly identify if a signature is slightly different.", "category": "Perceptual Aptitude", "target_careers": ["Banker"]},
+  {"id": 368, "question": "I am good at matching a paint color from memory.", "category": "Perceptual Aptitude", "target_careers": ["Interior Designer"]},
+  {"id": 369, "question": "I find it easy to proofread my own work for tiny errors.", "category": "Perceptual Aptitude", "target_careers": ["Technical Writer"]},
+  {"id": 370, "question": "I am quick to spot a bird or animal camouflaged in a tree.", "category": "Perceptual Aptitude", "target_careers": ["Wildlife Biologist"]},
+  {"id": 371, "question": "I notice when someone has changed a small detail in their appearance.", "category": "Perceptual Aptitude", "target_careers": ["Fashion Stylist"]},
+  {"id": 372, "question": "I can quickly find my keys in a cluttered drawer.", "category": "Perceptual Aptitude", "target_careers": ["Administrative Officer"]},
+  {"id": 373, "question": "I am good at recognizing a song after hearing just two notes.", "category": "Perceptual Aptitude", "target_careers": ["Musician"]},
+  {"id": 374, "question": "I find it easy to detect a slight smell of smoke or gas.", "category": "Perceptual Aptitude", "target_careers": ["Safety Inspector"]},
+  {"id": 375, "question": "I can quickly identify the brand of a car by its headlights.", "category": "Perceptual Aptitude", "target_careers": ["Marketing Analyst"]},
+  {"id": 376, "question": "I am very good at following a moving target with my eyes.", "category": "Perceptual Aptitude", "target_careers": ["Air Traffic Controller"]},
+  {"id": 377, "question": "I notice when a website's font has changed slightly.", "category": "Perceptual Aptitude", "target_careers": ["UI/UX Designer"]},
+  {"id": 378, "question": "I can quickly tell if a fruit is ripe by its subtle color.", "category": "Perceptual Aptitude", "target_careers": ["Chef"]},
+  {"id": 379, "question": "I am good at spotting a specific person in a large crowd.", "category": "Perceptual Aptitude", "target_careers": ["Security Officer"]},
+  {"id": 380, "question": "I find it easy to identify a mistake in a complex code snippet.", "category": "Perceptual Aptitude", "target_careers": ["Software Quality Assurance Tester"]},
+  {"id": 381, "question": "I am quick to notice if a price tag is wrong in a store.", "category": "Perceptual Aptitude", "target_careers": ["Financial Auditor"]},
+  {"id": 382, "question": "I can easily distinguish between similar textures of fabric.", "category": "Perceptual Aptitude", "target_careers": ["Fashion Designer"]},
+  {"id": 383, "question": "I am good at noticing if a clock is running slightly fast.", "category": "Perceptual Aptitude", "target_careers": ["Technician"]},
+  {"id": 384, "question": "I find it easy to spot a single weed in a large garden.", "category": "Perceptual Aptitude", "target_careers": ["Forestry Technician"]},
+  {"id": 385, "question": "I am quick to notice if a pattern on a dress is misaligned.", "category": "Perceptual Aptitude", "target_careers": ["Quality Control Inspector"]},
+  {"id": 386, "question": "I can easily find a specific location on a busy map.", "category": "Perceptual Aptitude", "target_careers": ["Urban Planner"]},
+  {"id": 387, "question": "I am good at noticing if a person's pupils have dilated.", "category": "Perceptual Aptitude", "target_careers": ["Physician"]},
+  {"id": 388, "question": "I find it easy to spot a specific star in a night sky.", "category": "Perceptual Aptitude", "target_careers": ["Astronomer"]},
+  {"id": 389, "question": "I am quick to notice a change in the humidity of a room.", "category": "Perceptual Aptitude", "target_careers": ["Environmental Scientist"]},
+  {"id": 390, "question": "I can easily distinguish between different types of wood by their grain.", "category": "Perceptual Aptitude", "target_careers": ["Interior Designer"]},
+  {"id": 391, "question": "I am good at noticing a subtle change in the taste of water.", "category": "Perceptual Aptitude", "target_careers": ["Environmental Engineer"]},
+  {"id": 392, "question": "I find it easy to spot an extra space in a paragraph.", "category": "Perceptual Aptitude", "target_careers": ["Proofreader"]},
+  {"id": 393, "question": "I am quick to notice if a car's engine sounds slightly different.", "category": "Perceptual Aptitude", "target_careers": ["Mechanical Engineer"]},
+  {"id": 394, "question": "I can easily spot a specific email in a crowded inbox.", "category": "Perceptual Aptitude", "target_careers": ["Administrative Officer"]},
+  {"id": 395, "question": "I am good at noticing if a painting is an original or a copy.", "category": "Perceptual Aptitude", "target_careers": ["Artist"]},
+  {"id": 396, "question": "I find it easy to spot a needle in a haystack metaphorically.", "category": "Perceptual Aptitude", "target_careers": ["Researcher"]},
+  {"id": 397, "question": "I am quick to notice a change in the speed of a machine.", "category": "Perceptual Aptitude", "target_careers": ["Industrial Engineer"]},
+  {"id": 398, "question": "I can easily spot a specific flower in a field of many.", "category": "Perceptual Aptitude", "target_careers": ["Biologist"]},
+  {"id": 399, "question": "I am good at noticing if a person is wearing their watch on the other hand.", "category": "Perceptual Aptitude", "target_careers": ["Police Detective"]},
+  {"id": 400, "question": "I feel confident when I have to perform tasks that require high accuracy.", "category": "Perceptual Aptitude", "target_careers": ["Pharmacist"]}
+,
+  {"id": 401, "question": "I enjoy identifying patterns and logic in abstract shapes.", "category": "Abstract Reasoning", "target_careers": ["AI Engineer", "Strategist"]},
+  {"id": 402, "question": "I can figure out the next shape in a complex sequence quickly.", "category": "Abstract Reasoning", "target_careers": ["Computer Programmer", "Mathematician"]},
+  {"id": 403, "question": "I like to find the underlying rule behind a difficult problem.", "category": "Abstract Reasoning", "target_careers": ["Software Developer", "Detective"]},
+  {"id": 404, "question": "I enjoy solving puzzles that involve 'if-then' logic scenarios.", "category": "Abstract Reasoning", "target_careers": ["Cybersecurity Expert", "Systems Analyst"]},
+  {"id": 405, "question": "I can easily see how different pieces of information fit together.", "category": "Abstract Reasoning", "target_careers": ["Solution Architect", "Business Analyst"]},
+  {"id": 406, "question": "I find logic puzzles like Sudoku to be very entertaining.", "category": "Abstract Reasoning", "target_careers": ["Logic Professor", "Data Scientist"]},
+  {"id": 407, "question": "I am good at identifying inconsistencies in complex theories.", "category": "Abstract Reasoning", "target_careers": ["Research Scientist", "Philosopher"]},
+  {"id": 408, "question": "I can understand complex systems by breaking them into smaller parts.", "category": "Abstract Reasoning", "target_careers": ["Operations Analyst", "Systems Engineer"]},
+  {"id": 409, "question": "I enjoy strategy games that require long-term planning.", "category": "Abstract Reasoning", "target_careers": ["Chess Player", "Policy Maker"]},
+  {"id": 410, "question": "I am good at finding creative solutions to logical paradoxes.", "category": "Abstract Reasoning", "target_careers": ["Theoretical Physicist", "Mathematician"]},
+  {"id": 411, "question": "I can predict the outcome of a complex situation based on patterns.", "category": "Abstract Reasoning", "target_careers": ["Forecaster"]},
+  {"id": 412, "question": "I enjoy decoding secret messages or symbols.", "category": "Abstract Reasoning", "target_careers": ["Cryptographer"]},
+  {"id": 413, "question": "I find it easy to group objects by abstract commonalities.", "category": "Abstract Reasoning", "target_careers": ["Taxonomist"]},
+  {"id": 414, "question": "I am quick to spot a break in a repeating pattern.", "category": "Abstract Reasoning", "target_careers": ["Network Administrator"]},
+  {"id": 415, "question": "I like to think about how different concepts overlap.", "category": "Abstract Reasoning", "target_careers": ["Theorist"]},
+  {"id": 416, "question": "I am good at mentally reassembling a broken object.", "category": "Abstract Reasoning", "target_careers": ["Restoration Expert"]},
+  {"id": 417, "question": "I enjoy learning about the laws of logic.", "category": "Abstract Reasoning", "target_careers": ["Lawyer"]},
+  {"id": 418, "question": "I can easily spot the 'odd one out' in a set of symbols.", "category": "Abstract Reasoning", "target_careers": ["Quality Auditor"]},
+  {"id": 419, "question": "I find it easy to explain a rule through an analogy.", "category": "Abstract Reasoning", "target_careers": ["Teacher"]},
+  {"id": 420, "question": "I am fascinated by how different systems interconnect.", "category": "Abstract Reasoning", "target_careers": ["Systems Designer"]},
+  {"id": 421, "question": "I enjoy puzzles that don't have a verbal explanation.", "category": "Abstract Reasoning", "target_careers": ["Developer"]},
+  {"id": 422, "question": "I can quickly grasp the mechanics of a new game.", "category": "Abstract Reasoning", "target_careers": ["Game Designer"]},
+  {"id": 423, "question": "I like to simplify complex flowcharts.", "category": "Abstract Reasoning", "target_careers": ["Process Engineer"]},
+  {"id": 424, "question": "I am good at finding multiple solutions to one logical problem.", "category": "Abstract Reasoning", "target_careers": ["Innovation Consultant"]},
+  {"id": 425, "question": "I enjoy identifying the hierarchy in a complex organization.", "category": "Abstract Reasoning", "target_careers": ["Management Analyst"]},
+  {"id": 426, "question": "I can visualize the logical flow of a computer program.", "category": "Abstract Reasoning", "target_careers": ["Software Engineer"]},
+  {"id": 427, "question": "I am quick to understand abstract mathematical proofs.", "category": "Abstract Reasoning", "target_careers": ["Mathematician"]},
+  {"id": 428, "question": "I enjoy discovering the 'hidden logic' in nature.", "category": "Abstract Reasoning", "target_careers": ["Ecologist"]},
+  {"id": 429, "question": "I can easily identify the cause-and-effect in a scenario.", "category": "Abstract Reasoning", "target_careers": ["Risk Manager"]},
+  {"id": 430, "question": "I find it easy to switch between different logical frameworks.", "category": "Abstract Reasoning", "target_careers": ["Consultant"]},
+  {"id": 431, "question": "I am good at estimating the next trend in technology.", "category": "Abstract Reasoning", "target_careers": ["Trend Analyst"]},
+  {"id": 432, "question": "I enjoy solving problems that require step-by-step thinking.", "category": "Abstract Reasoning", "target_careers": ["Programmer"]},
+  {"id": 433, "question": "I can see the 'big picture' without getting lost in details.", "category": "Abstract Reasoning", "target_careers": ["Strategic Planner"]},
+  {"id": 434, "question": "I am quick to learn new symbolic languages like Morse code.", "category": "Abstract Reasoning", "target_careers": ["Intelligence Officer"]},
+  {"id": 435, "question": "I enjoy comparing different philosophical systems.", "category": "Abstract Reasoning", "target_careers": ["Professor"]},
+  {"id": 436, "question": "I can accurately guess the result of a scientific experiment.", "category": "Abstract Reasoning", "target_careers": ["Researcher"]},
+  {"id": 437, "question": "I find it easy to understand the logic of a legal contract.", "category": "Abstract Reasoning", "target_careers": ["Legal Consultant"]},
+  {"id": 438, "question": "I am good at spotting the core issue in a chaotic situation.", "category": "Abstract Reasoning", "target_careers": ["Crisis Manager"]},
+  {"id": 439, "question": "I enjoy refining a process to make it more logical.", "category": "Abstract Reasoning", "target_careers": ["Industrial Engineer"]},
+  {"id": 440, "question": "I can easily identify the theme in an abstract painting.", "category": "Abstract Reasoning", "target_careers": ["Art Critic"]},
+  {"id": 441, "question": "I am quick to solve riddles that require lateral thinking.", "category": "Abstract Reasoning", "target_careers": ["Creative Lead"]},
+  {"id": 442, "question": "I enjoy analyzing the structure of a complex argument.", "category": "Abstract Reasoning", "target_careers": ["Debater"]},
+  {"id": 443, "question": "I can visualize how a small change affects a whole system.", "category": "Abstract Reasoning", "target_careers": ["Operations Manager"]},
+  {"id": 444, "question": "I am good at finding the common thread in various data points.", "category": "Abstract Reasoning", "target_careers": ["Intelligence Analyst"]},
+  {"id": 445, "question": "I find it easy to map out a logic tree for a project.", "category": "Abstract Reasoning", "target_careers": ["Project Planner"]},
+  {"id": 446, "question": "I enjoy learning about the structure of the human brain.", "category": "Abstract Reasoning", "target_careers": ["Neurologist"]},
+  {"id": 447, "question": "I can easily spot a flaw in a logical sequence.", "category": "Abstract Reasoning", "target_careers": ["Quality Analyst"]},
+  {"id": 448, "question": "I enjoy the feeling of solving a very complex puzzle.", "category": "Abstract Reasoning", "target_careers": ["Scientist"]},
+  {"id": 449, "question": "I am quick to adapt to new logical rules in a environment.", "category": "Abstract Reasoning", "target_careers": ["Software Tester"]},
+  {"id": 450, "question": "I feel confident in my ability to think logically and abstractly.", "category": "Abstract Reasoning", "target_careers": ["Systems Architect"]}
+,
+  {"id": 451, "question": "I find it easy to explain complex ideas using simple words.", "category": "Verbal Reasoning", "target_careers": ["Teacher", "Journalist"]},
+  {"id": 452, "question": "I can summarize a long book or movie in just a few sentences.", "category": "Verbal Reasoning", "target_careers": ["Content Strategist", "Copywriter"]},
+  {"id": 453, "question": "I am good at finding the main argument in a confusing article.", "category": "Verbal Reasoning", "target_careers": ["Lawyer", "Politician"]},
+  {"id": 454, "question": "I have a strong vocabulary and find it easy to express myself.", "category": "Verbal Reasoning", "target_careers": ["Public Speaker", "Editor"]},
+  {"id": 455, "question": "I enjoy learning new languages and their grammar rules.", "category": "Verbal Reasoning", "target_careers": ["Linguist", "Translator"]},
+  {"id": 456, "question": "I can easily write persuasive essays or reports.", "category": "Verbal Reasoning", "target_careers": ["Public Relations", "Advocate"]},
+  {"id": 457, "question": "I am good at identifying the tone of a written message.", "category": "Verbal Reasoning", "target_careers": ["Customer Support", "Psychologist"]},
+  {"id": 458, "question": "I enjoy debating and presenting my viewpoint with logic.", "category": "Verbal Reasoning", "target_careers": ["Debater", "Advocate"]},
+  {"id": 459, "question": "I can spot subtle meanings behind a person's choice of words.", "category": "Verbal Reasoning", "target_careers": ["Psychologist", "Interrogator"]},
+  {"id": 460, "question": "I am very good at editing and refining written content.", "category": "Verbal Reasoning", "target_careers": ["Proofreader", "Script Writer"]},
+  {"id": 461, "question": "I find it easy to understand complex metaphors in literature.", "category": "Verbal Reasoning", "target_careers": ["Literature Professor"]},
+  {"id": 462, "question": "I am quick to notice if a sentence is grammatically incorrect.", "category": "Verbal Reasoning", "target_careers": ["Editor"]},
+  {"id": 463, "question": "I enjoy reading technical manuals to understand how things work.", "category": "Verbal Reasoning", "target_careers": ["Technical Writer"]},
+  {"id": 464, "question": "I find it easy to come up with rhymes or wordplay.", "category": "Verbal Reasoning", "target_careers": ["Songwriter"]},
+  {"id": 465, "question": "I am good at predicting the ending of a story.", "category": "Verbal Reasoning", "target_careers": ["Screenwriter"]},
+  {"id": 466, "question": "I enjoy looking up the etymology (origins) of words.", "category": "Verbal Reasoning", "target_careers": ["Linguist"]},
+  {"id": 467, "question": "I find it easy to draft a professional email quickly.", "category": "Verbal Reasoning", "target_careers": ["Administrative Manager"]},
+  {"id": 468, "question": "I am quick to identify a logical fallacy in a speech.", "category": "Verbal Reasoning", "target_careers": ["Political Analyst"]},
+  {"id": 469, "question": "I enjoy writing poetry or creative stories.", "category": "Verbal Reasoning", "target_careers": ["Author"]},
+  {"id": 470, "question": "I can easily explain the same concept in three different ways.", "category": "Verbal Reasoning", "target_careers": ["Tutor"]},
+  {"id": 471, "question": "I am very good at solving crosswords or word puzzles.", "category": "Verbal Reasoning", "target_careers": ["Lexicographer"]},
+  {"id": 472, "question": "I find it easy to follow a complex legal argument.", "category": "Verbal Reasoning", "target_careers": ["Paralegal"]},
+  {"id": 473, "question": "I enjoy giving speeches in front of large audiences.", "category": "Verbal Reasoning", "target_careers": ["Public Figure"]},
+  {"id": 474, "question": "I am quick to spot double meanings in conversations.", "category": "Verbal Reasoning", "target_careers": ["Diplomat"]},
+  {"id": 475, "question": "I find it easy to write clear instructions for others.", "category": "Verbal Reasoning", "target_careers": ["Training Coordinator"]},
+  {"id": 476, "question": "I enjoy analyzing the lyrics of a song.", "category": "Verbal Reasoning", "target_careers": ["Music Critic"]},
+  {"id": 477, "question": "I am good at finding the perfect word for a specific feeling.", "category": "Verbal Reasoning", "target_careers": ["Poet"]},
+  {"id": 478, "question": "I find it easy to translate concepts between languages.", "category": "Verbal Reasoning", "target_careers": ["Interpreter"]},
+  {"id": 479, "question": "I enjoy reading long-form investigative journalism.", "category": "Verbal Reasoning", "target_careers": ["Reporter"]},
+  {"id": 480, "question": "I am quick to identify the target audience of an advertisement.", "category": "Verbal Reasoning", "target_careers": ["Marketing Strategist"]},
+  {"id": 481, "question": "I find it easy to remember quotes from books or movies.", "category": "Verbal Reasoning", "target_careers": ["Historian"]},
+  {"id": 482, "question": "I am good at mediating a verbal dispute between friends.", "category": "Verbal Reasoning", "target_careers": ["Counselor"]},
+  {"id": 483, "question": "I enjoy learning about the evolution of communication.", "category": "Verbal Reasoning", "target_careers": ["Anthropologist"]},
+  {"id": 484, "question": "I can easily draft a compelling press release.", "category": "Verbal Reasoning", "target_careers": ["PR Specialist"]},
+  {"id": 485, "question": "I find it easy to understand abstract legal concepts.", "category": "Verbal Reasoning", "target_careers": ["Lawyer"]},
+  {"id": 486, "question": "I am quick to notice if a person's verbal story doesn't add up.", "category": "Verbal Reasoning", "target_careers": ["Investigator"]},
+  {"id": 487, "question": "I enjoy participating in literature reading circles.", "category": "Verbal Reasoning", "target_careers": ["Librarian"]},
+  {"id": 488, "question": "I can accurately convey emotions through written text.", "category": "Verbal Reasoning", "target_careers": ["Ghostwriter"]},
+  {"id": 489, "question": "I find it easy to teach someone how to read or write.", "category": "Verbal Reasoning", "target_careers": ["Literacy Coach"]},
+  {"id": 490, "question": "I am good at summarizing a meeting's key takeaways.", "category": "Verbal Reasoning", "target_careers": ["Secretary"]},
+  {"id": 491, "question": "I enjoy the challenge of learning a complex new word.", "category": "Verbal Reasoning", "target_careers": ["Academic"]},
+  {"id": 492, "question": "I can easily spot the difference between a fact and an opinion.", "category": "Verbal Reasoning", "target_careers": ["Fact Checker"]},
+  {"id": 493, "question": "I enjoy drafting scripts for videos or plays.", "category": "Verbal Reasoning", "target_careers": ["Screenwriter"]},
+  {"id": 494, "question": "I find it easy to understand the context of a message.", "category": "Verbal Reasoning", "target_careers": ["Social Media Analyst"]},
+  {"id": 495, "question": "I am quick to identify irony in a situation.", "category": "Verbal Reasoning", "target_careers": ["Satirist"]},
+  {"id": 496, "question": "I enjoy participating in word-based trivia games.", "category": "Verbal Reasoning", "target_careers": ["Researcher"]},
+  {"id": 497, "question": "I can easily adapt my writing style for different purposes.", "category": "Verbal Reasoning", "target_careers": ["Copywriter"]},
+  {"id": 498, "question": "I find it easy to build a logical narrative for a report.", "category": "Verbal Reasoning", "target_careers": ["Business Consultant"]},
+  {"id": 499, "question": "I enjoy explaining the meaning of complex laws or rules.", "category": "Verbal Reasoning", "target_careers": ["Compliance Officer"]},
+  {"id": 500, "question": "I feel confident in my ability to communicate and reason through language.", "category": "Verbal Reasoning", "target_careers": ["Communications Director"]}
 ]
-  

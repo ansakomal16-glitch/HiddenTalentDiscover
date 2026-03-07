@@ -169,8 +169,8 @@
         let allQuestions = [];
         let userAnswers = {}; 
         let currentSession = 1;
-        const Q_PER_SESSION = 6;
-        const TOTAL_SESSIONS = 6;
+        const Q_PER_SESSION = 5;
+        const TOTAL_SESSIONS = 5;
 
         function syncUser() {
             document.getElementById('userNameDisplay').textContent = localStorage.getItem("userName") || "Explorer";
@@ -179,55 +179,72 @@
             document.getElementById('reportDate').textContent = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
         }
 
-        async function fetchQuestions() {
-            try {
-                const response = await fetch('questions.json'); 
-                allQuestions = await response.json();
-                renderSession();
-            } catch (e) {
-                console.error("JSON Error:", e);
-                allQuestions = Array.from({length: 20}, (_, i) => ({
-                    id: i + 1,
-                    question: `Sample Assessment Question #${i+1}`,
-                    category: "Numerical Aptitude"
-                }));
-                renderSession();
-            }
+       async function fetchQuestions() {
+    try {
+        const response = await fetch('questions.json'); 
+        let loadedQuestions = await response.json();
+
+        // --- SHUFFLE LOGIC START ---
+        // Fisher-Yates Shuffle Algorithm for better randomization
+        for (let i = loadedQuestions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [loadedQuestions[i], loadedQuestions[j]] = [loadedQuestions[j], loadedQuestions[i]];
         }
+        // --- SHUFFLE LOGIC END ---
 
-        function renderSession() {
-            const stack = document.getElementById('qStack');
-            stack.innerHTML = '';
-            const start = (currentSession - 1) * Q_PER_SESSION;
-            const end = start + Q_PER_SESSION;
-            const sessionData = allQuestions.slice(start, end);
-            
-            const progress = (currentSession / TOTAL_SESSIONS) * 100;
-            document.getElementById('pFill').style.width = `${progress}%`;
-            document.getElementById('pPercent').textContent = `${Math.round(progress)}%`;
-            document.getElementById('sessionCounter').textContent = `Session ${currentSession} of ${TOTAL_SESSIONS}`;
+        // Map through questions and ensure the UI logic doesn't use the 'id' for display
+        allQuestions = loadedQuestions;
+        renderSession();
+        console.log("✅ Questions Shuffled and Loaded (IDs hidden from UI)!");
+        
+    } catch (e) {
+        console.error("JSON Error or File Missing:", e);
+        
+        // Fallback categories for your Psychometric Profile radar chart
+        const categories = ["O_score", "C_score", "E_score", "A_score", "N_score", "Numerical", "Spatial", "Verbal", "Abstract", "Perceptual"];
+        
+        // Fallback questions generate karte waqt hum ID ko text mein include nahi kar rahe
+        allQuestions = Array.from({length: 20}, (_, i) => ({
+            id: i + 1, // ID backend logic ke liye zaroori hai
+            question: "Assess the following statement based on your personal preference.", // Generic text without numbers
+            category: categories[i % categories.length] 
+        }));
+        
+        renderSession();
+    }
+}function renderSession() {
+    const stack = document.getElementById('qStack');
+    stack.innerHTML = '';
+    const start = (currentSession - 1) * Q_PER_SESSION;
+    const end = start + Q_PER_SESSION;
+    const sessionData = allQuestions.slice(start, end);
+    
+    const progress = (currentSession / TOTAL_SESSIONS) * 100;
+    document.getElementById('pFill').style.width = `${progress}%`;
+    document.getElementById('pPercent').textContent = `${Math.round(progress)}%`;
+    document.getElementById('sessionCounter').textContent = `Session ${currentSession} of ${TOTAL_SESSIONS}`;
 
-            sessionData.forEach(q => {
-                const div = document.createElement('div');
-                div.innerHTML = `
-                    <p class="text-lg font-bold text-slate-800 mb-6 flex gap-4">
-                        <span class="text-indigo-500 opacity-30 font-black">${q.id}</span> ${q.question}
-                    </p>
-                    <div class="flex flex-wrap gap-3">
-                        ${[1, 2, 3, 4, 5].map(v => {
-                            const isSelected = userAnswers[q.id]?.score === v;
-                            const labels = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
-                            return `<button onclick="saveAnswer(${q.id}, ${v}, '${q.category}')" 
-                                    class="opt-btn px-6 py-3.5 rounded-xl text-[10px] font-extrabold uppercase tracking-widest 
-                                    ${isSelected ? 'opt-selected' : 'bg-white text-slate-400'}">
-                                    ${labels[v-1]}
-                                    </button>`;
-                        }).join('')}
-                    </div>
-                `;
-                stack.appendChild(div);
-            });
-            
+    sessionData.forEach(q => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <p class="text-lg font-bold text-slate-800 mb-6 flex gap-4">
+                ${q.question}
+            </p>
+            <div class="flex flex-wrap gap-3">
+                ${[1, 2, 3, 4, 5].map(v => {
+                    const isSelected = userAnswers[q.id]?.score === v;
+                    const labels = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+                    return `<button onclick="saveAnswer(${q.id}, ${v}, '${q.category}')" 
+                            class="opt-btn px-6 py-3.5 rounded-xl text-[10px] font-extrabold uppercase tracking-widest 
+                            ${isSelected ? 'opt-selected' : 'bg-white text-slate-400'}">
+                            ${labels[v-1]}
+                            </button>`;
+                }).join('')}
+            </div>
+        `;
+        stack.appendChild(div);
+    });
+
             document.getElementById('backBtn').classList.toggle('invisible', currentSession === 1);
             document.getElementById('nextBtn').classList.toggle('hidden', currentSession === TOTAL_SESSIONS);
             document.getElementById('doneBtn').classList.toggle('hidden', currentSession !== TOTAL_SESSIONS);
@@ -251,45 +268,75 @@
             document.getElementById(btn).style.pointerEvents = complete ? "auto" : "none";
         }
 
-        async function processResults() {
-            document.getElementById('quizContainer').classList.add('hidden');
-            document.getElementById('loadingView').classList.remove('hidden');
+       async function processResults() {
+    let predictedJob = "Interior Designer"; 
 
-            const finalScores = {};
-            Object.values(userAnswers).forEach(ans => {
-                finalScores[ans.category] = (finalScores[ans.category] || 0) + (ans.score * 2);
-            });
+    document.getElementById('quizContainer').classList.add('hidden');
+    document.getElementById('loadingView').classList.remove('hidden');
 
-            const salaryMap = {
-                "Data Scientist": "$95,000 - $160,000",
-                "Physician": "$180,000 - $320,000",
-                "Architect": "$75,000 - $135,000",
-                "Software Engineer": "$90,000 - $155,000"
-            };
+    const requiredLabels = [
+        'O_score', 'C_score', 'E_score', 'A_score', 'N_score', 
+        'Numerical Aptitude', 'Spatial Aptitude', 'Perceptual Aptitude', 
+        'Abstract Reasoning', 'Verbal Reasoning'
+    ];
 
-            let predictedJob = "Professional Consultant"; 
+    const finalScores = {};
+    requiredLabels.forEach(label => finalScores[label] = 0);
 
-            try {
-                const res = await fetch('http://127.0.0.1:5001/predict', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ scores: finalScores })
-                });
-                const data = await res.json();
-                predictedJob = data.prediction || predictedJob;
-            } catch (err) { console.warn('Backend offline. Using fallback.'); }
+    Object.values(userAnswers).forEach(ans => {
+        if (requiredLabels.includes(ans.category)) {
+            finalScores[ans.category] += (ans.score * 2); 
+        }
+    });
 
-            setTimeout(() => {
-                document.getElementById('loadingView').classList.add('hidden');
-                document.getElementById('resultView').classList.remove('hidden');
-                document.getElementById('mainCareer').textContent = predictedJob;
-                document.getElementById('salaryRange').textContent = salaryMap[predictedJob] || "$65,000 - $125,000";
-                
-                generateJobLinks(predictedJob);
-                initCharts(finalScores);
-            }, 1500);
+    // --- SALARY & CONFIDENCE DATA ---
+    const careerData = {
+        "Film Director": { salary: "$60,000 - $180,000", match: "96%" },
+        "Data Scientist": { salary: "$95,000 - $160,000", match: "92%" },
+        "Software Engineer": { salary: "$90,000 - $155,000", match: "88%" },
+        "Interior Designer": { salary: "$50,000 - $120,000", match: "85%" },
+        "Architect": { salary: "$75,000 - $135,000", match: "90%" }
+    };
+
+    try {
+        const res = await fetch('http://127.0.0.1:5001/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ scores: finalScores })
+        });
+        
+        if (!res.ok) throw new Error("Backend Error");
+        const data = await res.json();
+        predictedJob = data.prediction || predictedJob;
+    } catch (err) {
+        console.warn('Backend Error. Fallback active.');
+        predictedJob = "Software Engineer"; 
+    }
+
+    setTimeout(() => {
+        document.getElementById('loadingView').classList.add('hidden');
+        document.getElementById('resultView').classList.remove('hidden');
+        
+        // 1. Update Career Title
+        document.getElementById('mainCareer').textContent = predictedJob;
+
+        // 2. Update Salary (Check for your specific HTML IDs)
+        const salaryVal = careerData[predictedJob]?.salary || "$65,000 - $125,000";
+        const salaryElem = document.getElementById('salaryRange') || document.querySelector('.salary-value');
+        if (salaryElem) {
+            salaryElem.textContent = salaryVal;
         }
 
+        // 3. Update Match Confidence (Agar aapke pas confidence ka ID hai)
+        const confidenceElem = document.getElementById('matchConfidence');
+        if (confidenceElem) {
+            confidenceElem.textContent = careerData[predictedJob]?.match || "85%";
+        }
+        
+        initCharts(finalScores); 
+        if(window.generateJobLinks) window.generateJobLinks(predictedJob);
+    }, 1500);
+}
         function generateJobLinks(jobTitle) {
             const container = document.getElementById('jobLinksContainer');
             const encodedJob = encodeURIComponent(jobTitle);
@@ -308,43 +355,99 @@
             `).join('');
         }
 
-        function initCharts(scores) {
-            new Chart(document.getElementById('radarPlot'), {
-                type: 'radar',
-                data: {
-                    labels: Object.keys(scores),
-                    datasets: [{
-                        data: Object.values(scores),
-                        backgroundColor: 'rgba(79, 70, 229, 0.2)',
-                        borderColor: '#4f46e5',
-                        borderWidth: 3,
-                        pointBackgroundColor: '#4f46e5'
-                    }]
-                },
-                options: {
-                    plugins: { legend: { display: false } },
-                    scales: { r: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { display: false } } }
-                }
-            });
+      function initCharts(scores) {
+    const radarCanvas = document.getElementById('radarPlot');
+    const growthCanvas = document.getElementById('growthChart');
 
-            new Chart(document.getElementById('growthChart'), {
-                type: 'line',
-                data: {
-                    labels: ['2024', '2026', '2028', '2030'],
-                    datasets: [{ 
-                        data: [50, 68, 85, 98], 
-                        borderColor: '#0f172a', 
-                        tension: 0.4, 
-                        borderWidth: 4, 
-                        fill: false 
-                    }]
-                },
-                options: {
-                    plugins: { legend: { display: false } },
-                    scales: { y: { display: false } }
+    // 1. Data Processing
+    const labels = ['O_score', 'C_score', 'E_score', 'A_score', 'N_score', 'Numerical', 'Spatial', 'Perceptual', 'Abstract', 'Verbal'];
+    const dataValues = [
+        scores['O_score'] || 0, scores['C_score'] || 0, scores['E_score'] || 0, 
+        scores['A_score'] || 0, scores['N_score'] || 0, 
+        scores['Numerical Aptitude'] || 0, scores['Spatial Aptitude'] || 0, 
+        scores['Perceptual Aptitude'] || 0, scores['Abstract Reasoning'] || 0, 
+        scores['Verbal Reasoning'] || 0
+    ];
+
+    // 2. Radar Chart (Psychometric Profile)
+   new Chart(radarCanvas, {
+    type: 'radar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Your Talent DNA',
+            data: dataValues,
+            backgroundColor: 'rgba(79, 70, 229, 0.2)',
+            borderColor: '#4f46e5',
+            borderWidth: 2,
+            pointBackgroundColor: '#fff',
+            pointBorderColor: '#4f46e5',
+            pointRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+            padding: 30 // Isse labels ko phailne ki jagah mil jayegi
+        },
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            r: {
+                grid: { color: '#e5e7eb' },
+                angleLines: { color: '#e5e7eb' },
+                suggestedMin: 0,
+                suggestedMax: 20,
+                ticks: { display: false, stepSize: 5 },
+                pointLabels: {
+                    padding: 15, // Text aur lines ke darmiyan gap
+                    font: {
+                        size: 12,
+                        weight: '600',
+                        family: "'Inter', sans-serif"
+                    },
+                    color: '#4b5563'
                 }
-            });
+            }
         }
+    }
+});
+
+    // 3. Line Chart (Market Scalability)
+    new Chart(growthCanvas, {
+        type: 'line',
+        data: {
+            labels: ['2024', '2026', '2028', '2030'],
+            datasets: [{
+                label: 'Industry Growth (%)', // "undefined" ka fix yahan hai
+                data: [45, 68, 82, 95],
+                borderColor: '#10b981', // Professional Green color
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                tension: 0.4,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: '#10b981'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: { boxWidth: 10, usePointStyle: true }
+                }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { display: false } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+}
 
         function downloadPDF() {
             const element = document.getElementById('pdfArea');
