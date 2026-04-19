@@ -78,4 +78,20 @@ optB.addEventListener("click", () => checkAnswer(optB.textContent));
 function finishGame() {
     clearInterval(timerInterval);
     result.textContent = `🏆 Business IQ Score: ${score}`;
+
+    const finalScore = score;
+
+    fetch("http://127.0.0.1:5000/game-result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            business: finalScore
+        })
+    })
+        .then(res => res.json())
+        .then(data => {
+            alert("Your Career Match: " + data.prediction);
+        });
 }

@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "serve:front": "npx --yes live-server@1.2.2 HiddenTalentDiscoverer/frontent --port=5500 --open=index.html --host=127.0.0.1"
+  },
   "dependencies": {
     "axios": "^1.13.6",
     "jspdf": "^4.2.0",

@@ -669,6 +669,41 @@
         /* ================================================================
         [14. FOOTER ECOSYSTEM]
         ================================================================ */
+       
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.popup-content button {
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+}
+
+.close-btn {
+    cursor: pointer;
+    color: red;
+}
+
         .footer-root {
             background: #fff;
             padding: 120px 0 60px;
@@ -772,6 +807,75 @@
     justify-content: center;
     gap: 10px;
 }
+
+/* Sidebar */
+
+.sidebar {
+    height: 100%;
+    width: 260px;
+    background: #d5ceee;
+    color: white;
+    position: fixed;
+    top: 70px;   
+    left: -260px;
+    padding: 20px;
+    transition: 0.4s ease;
+    z-index: 9999;
+    overflow-y: auto;
+
+    /* IMPORTANT FIX */
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    /* IMPORTANT FIX */
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+}
+
+.nav-menu li {
+    margin: 15px 0;
+}
+
+.nav-menu li a {
+    display: block;  
+    width: 100%;     
+    color: rgb(34, 32, 32);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 0;
+}
+
+/* Menu Button */
+.menu-btn {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    font-size: 18px;
+    background: #111;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10000;
+    transition: 0.3s;
+}
+.menu-btn:hover {
+    background: #00c3ff;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 👈 2 columns fixed */
+    gap: 40px;
+}
+
         /* ================================================================
         [15. ANIMATIONS & REVEALS]
         ================================================================ */
@@ -803,7 +907,23 @@
     </style>
 </head>
 <body>
+<!-- Sidebar Toggle Button -->
+<div class="menu-btn" onclick="toggleSidebar()">☰</div>
 
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+    <h2>Menu</h2>
+    <ul class="nav-menu">
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="badges.html">Badges</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="recomendation.html">Recommendation</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="careermap.html">Career Map</a></li>
+        <li><a href="signup.html">Signup</a></li>
+    </ul>
+</div>
     <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">
@@ -811,18 +931,7 @@
                 HIDDEN<span>TALENT DISCOVERER</span>
             </a>
             
-            <ul class="nav-menu">
-               
             
-                <li><a href="leaderboard.html">leaderboard</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                 <li><a href="badges.html">Badges</a></li>
-                  <li><a href="profile.html">Profile</a></li>
-                   <li><a href="recomendation.html">Recommandation</a></li>
-                <li><a href="about.html">About Us</a></li>
-                 <li><a href="careermap.html">Career map</a></li>
-                <li><a href="signup.html">Signup</a></li>
-            </ul>
 
             <div class="nav-cta">
                 <div id="authContent">
@@ -896,12 +1005,7 @@
                 </div>
 
                 <div class="services-grid">
-                    <div class="service-card reveal" onclick="location.href='quiz.html'">
-                        <span class="card-num">01</span>
-                        <div class="s-icon"><i class="fas fa-brain"></i></div>
-                        <h3>Cognitive Matrix</h3>
-                        <p>Detailed psychometric testing to map fluid intelligence and logic-based reaction times.</p>
-                    </div>
+                    
 
                     <div class="service-card reveal" onclick="location.href='games.html'">
                         <span class="card-num">02</span>
@@ -916,12 +1020,7 @@
                         <h3>AI Career Architect</h3>
                         <p>24/7 access to an LLM-powered coach trained on 50 years of career success data.</p>
                     </div>
-                    <div class="service-card reveal" onclick="location.href='onlinegame.html'">
-                        <span class="card-num">03</span>
-                        <div class="s-icon"><i class="fas fa-robot"></i></div>
-                        <h3>Cool Games</h3>
-                        <p>24/7 access to an LLM-powered coach trained on 50 years of career success data.</p>
-                    </div>
+                   
 
                     <div class="service-card reveal" onclick="location.href='quizonline.html'">
                         <span class="card-num">04</span>
@@ -929,6 +1028,12 @@
                         <h3>Global Ranking</h3>
                         <p>Compare your unique talent index against the world's top 1% performers.</p>
                     </div>
+                    <div class="service-card reveal" onclick="openContactOptions()">
+    <span class="card-num">06</span>
+    <div class="s-icon"><i class="fas fa-headset"></i></div>
+    <h3>Chatbot Support</h3>
+    <p>Contact admin via Email or WhatsApp for guidance.</p>
+</div>
                 </div>
             </div>
         </section>
@@ -1059,7 +1164,18 @@
                 </div>
             </div>
         </section>
+<div id="contactPopup" class="popup">
+    <div class="popup-content">
+        <h3>Contact Admin</h3>
+        <p>Choose how you want to connect:</p>
 
+        <button onclick="contactWhatsApp()">📱 WhatsApp</button>
+        <button onclick="contactEmail()">📧 Email</button>
+
+        <br><br>
+        <span onclick="closePopup()" class="close-btn">❌ Close</span>
+    </div>
+</div>
         <footer class="footer-root">
             <div class="container">
                 <div class="footer-grid">
@@ -1237,6 +1353,33 @@ function toggleFaq(el) {
 
 // Initializing
 document.addEventListener("DOMContentLoaded", () => AppEngine.init());
+
+function openContactOptions() {
+    document.getElementById("contactPopup").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("contactPopup").style.display = "none";
+}
+
+function contactWhatsApp() {
+    window.location.href = "https://wa.me/92346891450?text=Hello%20Admin,%20I%20need%20help%20with%20Hidden%20Talent!";
+}
+
+function contactEmail() {
+    window.location.href = "mailto:areebaakhtar444@gmail.com?subject=Help Needed&body=Hello Admin, I need help with Hidden Talent.";
+}
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar.style.left === "0px") {
+        sidebar.style.left = "-260px"; // hide
+    } else {
+        sidebar.style.left = "0px"; // show
+    }
+}
+
+
 </script>
+
 </body>
 </html>

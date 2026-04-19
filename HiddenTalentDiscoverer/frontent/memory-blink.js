@@ -5,69 +5,122 @@ const result = document.getElementById("result");
 
 let pattern = [];
 let userClicks = [];
-let level = 1;
+let level = 0;
+let score = 0;
 
+const totalLevels = 5;
+
+// =====================
+// INIT
+// =====================
+startBtn.innerText = "NEXT";
+
+// =====================
+// NEXT BUTTON
+// =====================
 startBtn.onclick = () => {
-    startBtn.classList.add("hide");
-    resetBtn.classList.remove("hide");
+
+    if (level >= totalLevels) return;
+
+    level++;
+
     startLevel();
-};
 
-resetBtn.onclick = () => {
-    location.reload();
-};
-
-function startLevel() {
     result.textContent = "Level " + level;
-    pattern = generatePattern(level + 2); 
+    localStorage.setItem("memoryResult", JSON.stringify({
+    score: score,
+    total: pattern.length + score
+}));
+
+    if (level === totalLevels) {
+
+        setTimeout(() => {
+
+            localStorage.setItem("memoryResult", JSON.stringify({
+                score: score
+            }));
+
+            window.location.href = "game-result.html";
+
+        }, 800);
+    }
+};
+
+// =====================
+// RESET
+// =====================
+resetBtn.onclick = () => location.reload();
+
+// =====================
+// LEVEL START (IMPORTANT FIX)
+// =====================
+function startLevel() {
+
+    pattern = [];
     userClicks = [];
 
-    blinkPattern(pattern);
-}
+    let count = level + 2;
 
-function generatePattern(n) {
-    let arr = [];
-    for (let i = 0; i < n; i++) {
-        arr.push(Math.floor(Math.random() * 9)); // 0–8 grid boxes
+    for (let i = 0; i < count; i++) {
+        pattern.push(Math.floor(Math.random() * 9));
     }
-    return arr;
+
+    showPattern();   // ⭐⭐⭐ THIS WAS MISSING (MAIN BUG FIX)
 }
 
-function blinkPattern(arr) {
+// =====================
+// SHOW BLINK PATTERN
+// =====================
+function showPattern() {
+
     let boxes = document.querySelectorAll(".box");
 
-    arr.forEach((num, i) => {
+    pattern.forEach((num, i) => {
+
         setTimeout(() => {
+
             boxes[num].classList.add("blink");
-            setTimeout(() => boxes[num].classList.remove("blink"), 300);
+
+            setTimeout(() => {
+                boxes[num].classList.remove("blink");
+            }, 300);
+
         }, 500 * i);
     });
 }
 
-// Build grid 3×3
+// =====================
+// CLICK CHECK
+// =====================
+function handleClick(i) {
+
+    userClicks.push(i);
+
+    let index = userClicks.length - 1;
+
+    if (userClicks[index] !== pattern[index]) {
+        result.textContent = "❌ Wrong!";
+        return;
+    }
+
+    score++;
+}
+
+// =====================
+// GRID CREATE
+// =====================
 function createGrid() {
+
     for (let i = 0; i < 9; i++) {
+
         let div = document.createElement("div");
         div.classList.add("box");
+
         div.onclick = () => handleClick(i);
+
         grid.appendChild(div);
     }
 }
 
-function handleClick(i) {
-    userClicks.push(i);
 
-    if (userClicks[userClicks.length - 1] !== pattern[userClicks.length - 1]) {
-        result.textContent = "❌ Wrong! Game Over";
-        startBtn.classList.remove("hide");
-        return;
-    }
-
-    if (userClicks.length === pattern.length) {
-        result.textContent = "✔ Level Up!";
-        level++;
-        setTimeout(startLevel, 1000);
-    }
-}
-
-createGrid();
+createGrid()

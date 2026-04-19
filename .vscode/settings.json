@@ -1,3 +1,7 @@
 {
-    "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.host": "127.0.0.1",
+  "liveServer.settings.root": "/HiddenTalentDiscoverer/frontent",
+  "liveServer.settings.NoBrowser": false,
+  "liveServer.settings.ignoreFiles": [".vscode/**", "**/node_modules/**", "**/backend/**"]
 }

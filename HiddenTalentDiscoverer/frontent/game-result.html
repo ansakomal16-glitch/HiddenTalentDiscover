@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body{
+            background:#111;
+            color:white;
+            font-family:Arial;
+            text-align:center;
+            padding:20px;
+        }
+
+        .box{
+            background:#222;
+            padding:20px;
+            margin:20px auto;
+            width:80%;
+            border-radius:15px;
+        }
+
+        canvas{
+            background:white;
+            border-radius:10px;
+            padding:10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🧠 AI Game Result</h1>
+
+<div class="box">
+    <h2 id="career"></h2>
+    <p id="accuracy"></p>
+</div>
+
+<div class="box">
+    <canvas id="chart"></canvas>
+</div>
+
+<script src="game-result.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    let data = JSON.parse(localStorage.getItem("gameResult")) || {};
+
+    // ✅ data.accuracy ab seedha number milega (e.g., 100)
+    let accuracy = data.accuracy !== undefined ? data.accuracy : 0;
+    let speed = Number(localStorage.getItem("speed")) || 0;
+    let career = data.career || "N/A";
+
+    // UI UPDATE
+    document.getElementById("career").innerText = "Career: " + career;
+    document.getElementById("accuracy").innerText = "Accuracy: " + accuracy + "%"; 
+
+    // Chart logic mein bhi 'accuracy' variable pass karein...
+    // baqi chart code same rahega.
+});
+</script>
+
+
+</body>
+</html>
