@@ -1,195 +1,91 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pandas as pd
+import numpy as np
 from sklearn.neural_network import MLPClassifier
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 import os
 
 app = Flask(__name__)
 CORS(app)
 
-# =========================
-# FEATURES (CAREER MODEL)
-# =========================
 FEATURE_COLS = [
-    "O_score", "C_score", "E_score", "A_score", "N_score",
-    "Numerical Aptitude", "Spatial Aptitude",
-    "Perceptual Aptitude", "Abstract Reasoning", "Verbal Reasoning"
+    "O_score", "C_score", "E_score", "A_score", "N_score", 
+    "Numerical Aptitude", "Spatial Aptitude", "Perceptual Aptitude", 
+    "Abstract Reasoning", "Verbal Reasoning"
 ]
 
 model = None
-scaler = StandardScaler()
+scaler = StandardScaler() # Neural Networks ke liye StandardScaler behtar perform karta hai
 
-# =========================
-# TRAIN CAREER MODEL
-# =========================
 def train_nn_engine():
     global model, scaler
-
-    file_path = os.path.join(os.path.dirname(__file__), "Data_final.csv")
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "Data_final.csv") 
+    
     if os.path.exists(file_path):
         df = pd.read_csv(file_path)
-
         X = df[FEATURE_COLS]
-        y = df["Career"]
-
+        y = df['Career']
+        
+        # Data Normalization
         X_scaled = scaler.fit_transform(X)
-
+        
+        # Neural Network Architecture
+        # (100, 50, 25) matlab 3 hidden layers hain jin mein 100, 50, aur 25 neurons hain
         model = MLPClassifier(
-            hidden_layer_sizes=(100, 50, 25),
-            max_iter=1000,
+            hidden_layer_sizes=(100, 50, 25), 
+            max_iter=1000, 
+            activation='relu', 
+            solver='adam', 
             random_state=42
         )
-
         model.fit(X_scaled, y)
-        print("✅ Career Model Trained")
+        print("✅ Neural Network Trained Successfully!")
+    else:
+        print(f"❌ ERROR: {file_path} missing!")
 
-# =========================
-# TRAIN GAME MODEL
-# =========================
-game_model = None
+train_nn_engine()
 
-def train_game_model():
-    global game_model
-
-    X = [
-        [1, 10],[2, 9],[3, 8],[4, 7],[5, 6],
-        [6, 5],[7, 4],[8, 3],[9, 2],[10, 1]
-    ]
-
-    y = [
-        "Weak","Weak","Average","Average","Good",
-        "Good","Very Good","Excellent","Expert","Genius"
-    ]
-
-    game_model = KNeighborsClassifier(n_neighbors=3)
-    game_model.fit(X, y)
-
-    print("🎮 Game Model Trained")
-
-# =========================
-# CAREER PREDICT API
-# =========================
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
         content = request.json
-        scores = content.get("scores", {})
+        scores = content.get('scores', {})
 
+        # 1. Dataframe banayein exact FEATURE_COLS ke sath
         input_data = {}
-
         for col in FEATURE_COLS:
-            key = col.replace(" ", "_")
-            val = scores.get(key, scores.get(col, 0))
+            # Check for space vs underscore (e.g., "Numerical Aptitude" vs "Numerical_Aptitude")
+            key_variant1 = col.replace(" ", "_")
+            val = scores.get(key_variant1, scores.get(col, 0.0)) # Default 0.0 for better debugging
             input_data[col] = [float(val)]
+        
+        input_df = pd.DataFrame(input_data)
 
-        df = pd.DataFrame(input_data)
-        scaled = scaler.transform(df)
+        # --- TERMINAL LOGGING START ---
+        print("\n" + "="*30)
+        print("📊 RECEIVED INPUT SCORES:")
+        # Loop ke zariye har feature aur uska score terminal mein print karein
+        for col in FEATURE_COLS:
+            score_val = input_data[col][0]
+            print(f"{col:20}: {score_val}")
+        print("="*30)
+        # --- TERMINAL LOGGING END ---
 
-        prediction = model.predict(scaled)[0]
+        # 2. Scale aur Predict
+        scaled_input = scaler.transform(input_df)
+        prediction = model.predict(scaled_input)[0]
+        
+        print(f"🎯 PREDICTED CAREER: {prediction}\n") 
 
         return jsonify({
-            "prediction": prediction
+            "prediction": str(prediction),
+            "status": "success"
         })
-
+        
     except Exception as e:
-        return jsonify({"error": str(e)})
-
-# =========================
-# GAME RESULT API
-# =========================
-# =========================
-# MAIN GAME RESULT API
-# =========================
-@app.route('/game-result', methods=['POST'])
-
-def game_result():
-    print("ROUTE LOADED: /game-result")
-
-    data = request.json or {}
-
-    # ALL GAME INPUTS (SAFE DEFAULTS)
-    score = float(data.get("score", 0))
-    memory = float(data.get("memory", 0))
-    logic = float(data.get("logic", 0))
-    creativity = float(data.get("creativity", 0))
-    business = float(data.get("business", 0))
-
-    # =========================
-    # SAFE NORMALIZED SYSTEM
-    # =========================
-
-    base_score = score + memory + logic + creativity + business
-
-    accuracy = min(100, (base_score / 50) * 100)
-
-    speed = min(100, (logic + memory) * 5)
-
-    creativity_boost = min(100, creativity * 8)
-
-    final_score = (
-        accuracy * 0.4 +
-        speed * 0.3 +
-        creativity_boost * 0.3
-    )
-
-    # =========================
-    # CAREER SYSTEM
-    # =========================
-    if final_score >= 80:
-        career = "🧠 AI Engineer / Strategist"
-    elif final_score >= 60:
-        career = "📊 Business Analyst / Manager"
-    elif final_score >= 40:
-        career = "🎨 Creative Designer / Thinker"
-    else:
-        career = "📚 Learning Stage"
-
-    # =========================
-    # GRAPH DATA
-    # =========================
-    graph = {
-        "labels": ["Accuracy", "Speed", "Creativity", "Final Score"],
-        "values": [
-            round(accuracy, 2),
-            round(speed, 2),
-            round(creativity_boost, 2),
-            round(final_score, 2)
-        ]
-    }
-
-    return jsonify({
-        "career": career,
-        "accuracy": round(accuracy, 2),
-        "speed": round(speed, 2),
-        "final_score": round(final_score, 2),
-        "graph": graph
-    })
-
-
-# =========================
-# HEALTH CHECK (IMPORTANT)
-# =========================
-@app.route('/', methods=['GET'])
-def home():
-    return {"status": "Server Running Fine"}, 200
-
-
-
-# =========================
-# RUN SERVER (ONLY ONE)
-if __name__ == "__main__":
-    try:
-        train_nn_engine()
-    except Exception as e:
-        print("NN error:", e)
-
-    try:
-        train_game_model()
-    except Exception as e:
-        print("Game model error:", e)
-
-    print("🚀 Flask Starting...")
-    app.run(debug=True)
+        print(f"❌ PYTHON ERROR: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)

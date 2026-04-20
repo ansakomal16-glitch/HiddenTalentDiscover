@@ -268,26 +268,84 @@
             document.getElementById(btn).style.pointerEvents = complete ? "auto" : "none";
         }
 
-       async function processResults() {
-    let predictedJob = "Interior Designer"; 
-
+    async function processResults() {
     document.getElementById('quizContainer').classList.add('hidden');
     document.getElementById('loadingView').classList.remove('hidden');
 
-    const requiredLabels = [
-        'O_score', 'C_score', 'E_score', 'A_score', 'N_score', 
-        'Numerical Aptitude', 'Spatial Aptitude', 'Perceptual Aptitude', 
-        'Abstract Reasoning', 'Verbal Reasoning'
-    ];
-
+    // 1. Prepare Scores
     const finalScores = {};
-    requiredLabels.forEach(label => finalScores[label] = 0);
-
     Object.values(userAnswers).forEach(ans => {
-        if (requiredLabels.includes(ans.category)) {
-            finalScores[ans.category] += (ans.score * 2); 
-        }
+        // Categories ko normalized form mein save karein
+        finalScores[ans.category] = (finalScores[ans.category] || 0) + (ans.score * 2);
     });
+
+    try {
+        // 2. Get Prediction from Flask (Machine Learning Model)
+        const flaskRes = await fetch('http://127.0.0.1:5001/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ scores: finalScores })
+        });
+        
+        if (!flaskRes.ok) throw new Error("Flask Server Not Responding");
+        
+        const flaskData = await flaskRes.json();
+        const predictedJob = flaskData.prediction;
+
+        // 3. Prepare Report Data for MongoDB
+        const reportData = {
+            username: localStorage.getItem("userName") || "Guest User",
+            email: localStorage.getItem("userEmail") || "no-email@provided.com",
+            predictedJob: predictedJob,
+            scores: {
+                O_score: finalScores['O_score'] || 0,
+                C_score: finalScores['C_score'] || 0,
+                E_score: finalScores['E_score'] || 0,
+                A_score: finalScores['A_score'] || 0,
+                N_score: finalScores['N_score'] || 0,
+                Numerical: finalScores['Numerical Aptitude'] || 0,
+                Spatial: finalScores['Spatial Aptitude'] || 0,
+                Perceptual: finalScores['Perceptual Aptitude'] || 0,
+                Abstract: finalScores['Abstract Reasoning'] || 0,
+                Verbal: finalScores['Verbal Reasoning'] || 0
+            }
+        };
+
+        // 4. SAVE TO DATABASE (Node.js API Call)
+        const dbResponse = await fetch('http://localhost:5000/api/save-full-report', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reportData)
+        });
+
+        const dbResult = await dbResponse.json();
+        if(dbResult.success) {
+            console.log("✅ Database Sync: Data Saved Successfully!");
+        }
+
+        // 5. Update UI
+        setTimeout(() => {
+            document.getElementById('loadingView').classList.add('hidden');
+            document.getElementById('resultView').classList.remove('hidden');
+            document.getElementById('mainCareer').textContent = predictedJob;
+            
+            // Salary update logic
+            const careerData = {
+                "Film Director": { salary: "$60,000 - $180,000" },
+                "Data Scientist": { salary: "$95,000 - $160,000" },
+                "Software Engineer": { salary: "$90,000 - $155,000" }
+            };
+            const salaryElem = document.getElementById('salaryRange');
+            if (salaryElem) salaryElem.textContent = careerData[predictedJob]?.salary || "$65,000 - $125,000";
+
+            initCharts(finalScores);
+            if(window.generateJobLinks) window.generateJobLinks(predictedJob);
+        }, 1500);
+
+    } catch (err) {
+        console.error("❌ Critical Error during result processing:", err);
+        alert("Server connection failed. Please check if Node.js and Flask are running.");
+    }
 
     // --- SALARY & CONFIDENCE DATA ---
     const careerData = {

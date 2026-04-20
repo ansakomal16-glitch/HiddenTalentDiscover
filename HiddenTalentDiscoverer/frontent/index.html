@@ -206,7 +206,28 @@
             font-weight: 800;
             font-size: 0.9rem;
         }
-
+.feedback-container {
+    max-width: 400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+select, textarea { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+textarea { height: 100px; resize: vertical; }
+button { 
+    width: 100%; 
+    padding: 10px; 
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+button:hover { background-color: #218838; }
         /* ================================================================
         [5. HERO / SPLASH COMPONENT]
         ================================================================ */
@@ -875,7 +896,31 @@
     grid-template-columns: repeat(2, 1fr); /* 👈 2 columns fixed */
     gap: 40px;
 }
+.menu-btn {
+  width: 40px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  background: #1f2937; /* dark bg */
+  transition: 0.3s;
+}
 
+.menu-btn:hover {
+  background: #374151;
+  transform: scale(1.05);
+}
+
+.menu-btn span {
+  height: 4px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
         /* ================================================================
         [15. ANIMATIONS & REVEALS]
         ================================================================ */
@@ -908,7 +953,11 @@
 </head>
 <body>
 <!-- Sidebar Toggle Button -->
-<div class="menu-btn" onclick="toggleSidebar()">☰</div>
+<div class="menu-btn" onclick="toggleSidebar()">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
 
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar">
@@ -928,7 +977,7 @@
         <div class="container nav-container">
             <a href="#" class="logo">
                 <i class="fas fa-compass"></i>
-                HIDDEN<span>TALENT DISCOVERER</span>
+                HIDDEN<span>TALENT </span>DISCOVERER
             </a>
             
             
@@ -1217,7 +1266,30 @@
                         </ul>
                     </div>
                 </div>
+                
+<div class="feedback-container">
+    <h2>Share Your Experience 🌟</h2>
+    <form id="feedbackForm">
+        <div class="input-group">
+            <label>Rating:</label>
+            <select id="rating" required>
+                <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                <option value="4">⭐⭐⭐⭐ (Good)</option>
+                <option value="3">⭐⭐⭐ (Average)</option>
+                <option value="2">⭐⭐ (Fair)</option>
+                <option value="1">⭐ (Poor)</option>
+            </select>
+        </div>
 
+        <div class="input-group">
+            <label>Your Message:</label>
+            <textarea id="message" placeholder="Tell us how we can improve..." required></textarea>
+        </div>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+    <p id="status"></p>
+</div>
                 <div class="legal-box">
                     <p>&copy; 2026 Hidden Talent Discovery Corp. Optimized for Neural Excellence.</p>
                     <div style="display:flex; gap:30px;">
@@ -1235,6 +1307,46 @@
  * APPLICATION CORE ENGINE (Optimized & Secure)
  * Handles Session, Security, Search Intelligence, and UI toggles.
  */
+document.addEventListener('DOMContentLoaded', function() {
+    const feedbackForm = document.getElementById('feedbackForm');
+    
+    if(feedbackForm) {
+        feedbackForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.log("Button Clicked!"); // Ye console mein check karne ke liye hai
+
+            const rating = document.getElementById('rating').value;
+            const message = document.getElementById('message').value;
+
+            // Simple data object
+            const feedbackData = {
+                username: "User", // Temporary testing ke liye
+                email: "test@gmail.com",
+                rating: parseInt(rating),
+                message: message
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/submit-feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(feedbackData)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert("Feedback Saved!");
+                    feedbackForm.reset();
+                }
+            } catch (err) {
+                console.error("Error:", err);
+                alert("Server connection failed!");
+            }
+        });
+    } else {
+        console.error("Form element not found!");
+    }
+});
 const AppEngine = {
     state: {
         isLoggedIn: false,

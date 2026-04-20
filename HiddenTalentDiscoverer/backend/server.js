@@ -3,104 +3,67 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(express.json());
 
-// CORS Fix for all browsers
+// --- MIDDLEWARE ---
+app.use(express.json());
 app.use(cors({ origin: '*', methods: ['GET', 'POST'] }));
 
+// --- DATABASE CONNECTION ---
 const uri = "mongodb+srv://areebaakhtar444_db_user:Hu8tXYH1GIFPJzX3@cluster0.ibssaj5.mongodb.net/HiddenTalentDB?retryWrites=true&w=majority";
 
 mongoose.connect(uri)
-    .then(() => console.log("🔥 Neural Server: Connected & Ready!"))
+    .then(() => console.log("🔥 Neural Server: Connected | Mode: Clean & Professional"))
     .catch(err => console.error("❌ DB Connection Error:", err.message));
 
-// --- 1. MODELS (Updated for High-Class Features) ---
+// --- 1. MODELS (Database Tables) ---
 
-const userSchema = new mongoose.Schema({ 
+// User Registration Table
+const User = mongoose.model('User', new mongoose.Schema({ 
     username: { type: String, required: true }, 
     email: { type: String, unique: true, required: true }, 
     password: { type: String, required: true },
-    contact: String,   // Naya field
-    dob: String,       // Naya field
-    district: String   // Naya field
-});
-const User = mongoose.model('User', userSchema);
-
-const QuizResult = mongoose.model('QuizResult', new mongoose.Schema({
-    username: String, email: String, score: Number, category: String, date: { type: Date, default: Date.now }
+    contact: String,
+    dob: String,
+    district: String 
 }));
 
-const GameResult = mongoose.model('GameResult', new mongoose.Schema({
-    username: String, email: String, score: Number, gameName: String, date: { type: Date, default: Date.now }
-}));
-
-const Leaderboard = mongoose.model('Leaderboard', new mongoose.Schema({
+// Career Report Table
+const CareerReport = mongoose.model('CareerReport', new mongoose.Schema({
     username: String,
-    email: { type: String, unique: true },
-    totalQuizScore: { type: Number, default: 0 },
-    totalGameScore: { type: Number, default: 0 },
-    overallTotal: { type: Number, default: 0 },
-    level: { type: Number, default: 1 }, // Added for Dashboard compatibility
-    lastUpdated: { type: Date, default: Date.now }
+    email: { type: String, required: true },
+    predictedJob: String,
+    scores: {
+        O_score: Number, C_score: Number, E_score: Number, A_score: Number, N_score: Number,
+        Numerical: Number, Spatial: Number, Perceptual: Number, Abstract: Number, Verbal: Number
+    },
+    date: { type: Date, default: Date.now }
 }));
 
-// --- 2. THE BRAIN: SYNC FUNCTION ---
-async function syncLeaderboard(email, username, score, type) {
-    let update = {};
-    if (type === 'quiz') {
-        update = { $inc: { totalQuizScore: score, overallTotal: score } };
-    } else {
-        update = { $inc: { totalGameScore: score, overallTotal: score } };
-    }
+// Feedback Table
+const Feedback = mongoose.model('Feedback', new mongoose.Schema({
+    username: String,
+    email: String,
+    rating: { type: Number, required: true }, 
+    message: { type: String, required: true },
+    date: { type: Date, default: Date.now }
+}));
 
-    return await Leaderboard.findOneAndUpdate(
-        { email: email },
-        { ...update, username: username, lastUpdated: new Date() },
-        { upsert: true, new: true }
-    );
-}
+// --- 2. ROUTES (API Endpoints) ---
 
-// --- 3. ROUTES ---
-
-// AUTH: Signup (Updated with all new fields)
+// SIGNUP: Naya account banane ke liye
 app.post('/api/signup', async (req, res) => {
     try {
         const { username, email, password, contact, dob, district } = req.body;
-
-        // 1. Check if user already exists
         const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ success: false, error: "Email already registered." });
-        }
+        if (existingUser) return res.status(400).json({ success: false, error: "Email already registered." });
 
-        // 2. Create User with high-class details
         const newUser = new User({ username, email, password, contact, dob, district });
         await newUser.save();
-        
-        // 3. Initialize Leaderboard to prevent dashboard crashes
-        const initialLeaderboard = new Leaderboard({ 
-            username, 
-            email,
-            totalQuizScore: 0,
-            totalGameScore: 0,
-            overallTotal: 0,
-            level: 1 
-        });
-        await initialLeaderboard.save();
-        
-        res.json({ 
-            success: true, 
-            message: "Identity Initialized Successfully",
-            user: { name: username, email: email } 
-        });
-
-    } catch (err) { 
-        console.error("Signup Error:", err);
-        res.status(500).json({ success: false, error: "Neural Link Failed: System Error" }); 
-    }
+        res.json({ success: true, message: "Account Created Successfully!" });
+    } catch (err) { res.status(500).json({ success: false, error: "Signup Failed" }); }
 });
 
-// AUTH: Login
+// LOGIN: User verify karne ke liye
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -113,61 +76,48 @@ app.post('/api/login', async (req, res) => {
     } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// SAVE QUIZ
-app.post('/api/save-quiz', async (req, res) => {
+// SAVE REPORT: Quiz results save karne ke liye
+app.post('/api/save-full-report', async (req, res) => {
     try {
-        const { email, username, score, category } = req.body;
-        const result = new QuizResult({ email, username, score, category });
-        await result.save();
-        await syncLeaderboard(email, username, score, 'quiz');
-        res.json({ success: true, message: "Quiz Synced!" });
-    } catch (err) { res.status(500).json({ error: err.message }); }
+        const newReport = new CareerReport(req.body);
+        await newReport.save();
+        res.json({ success: true, message: "Analysis saved to database!" });
+    } catch (err) { res.status(500).json({ success: false, error: err.message }); }
 });
 
-// SAVE GAME
-app.post('/api/save-game', async (req, res) => {
-    try {
-        const { email, username, score, gameName } = req.body;
-        const result = new GameResult({ email, username, score, gameName });
-        await result.save();
-        await syncLeaderboard(email, username, score, 'game');
-        res.json({ success: true, message: "Game Synced!" });
-    } catch (err) { res.status(500).json({ error: err.message }); }
-});
-
-// GET USER PROFILE
+// GET PROFILE: Dashboard ke liye data mangwane ke liye
 app.get('/api/user-profile/:email', async (req, res) => {
     try {
-        const email = req.params.email;
-        let stats = await Leaderboard.findOne({ email: email });
-        
-        if (!stats) {
-            stats = { totalQuizScore: 0, totalGameScore: 0, overallTotal: 0, level: 1 };
-        }
+        const user = await User.findOne({ email: req.params.email }, { password: 0 });
+        const report = await CareerReport.findOne({ email: req.params.email }).sort({ date: -1 });
+        res.json({ user, latestReport: report });
+    } catch (err) { res.status(500).json({ error: "Profile Load Error" }); }
+});
 
-        const quizHistory = await QuizResult.find({ email }).sort({ date: -1 }).limit(5);
-        const gameHistory = await GameResult.find({ email }).sort({ date: -1 }).limit(5);
-        
-        res.json({ stats, quizHistory, gameHistory });
-    } catch (err) { 
-        res.status(500).json({ error: "Profile Load Error" }); 
+// SUBMIT FEEDBACK: User ka feedback save karne ke liye
+app.post('/api/submit-feedback', async (req, res) => {
+    try {
+        const { username, email, rating, message } = req.body;
+        const newFeedback = new Feedback({ username, email, rating, message });
+        await newFeedback.save();
+        res.json({ success: true, message: "Thank you! Your feedback has been saved." });
+    } catch (err) {
+        res.status(500).json({ success: false, error: "Feedback submission failed" });
     }
 });
 
-// GLOBAL LEADERBOARD
-app.get('/api/global-leaderboard', async (req, res) => {
+// GET ALL FEEDBACKS: Tamam feedbacks dekhne ke liye
+app.get('/api/feedbacks', async (req, res) => {
     try {
-        const data = await Leaderboard.find().sort({ overallTotal: -1 }).limit(10);
-        res.json(data);
-    } catch (err) { res.status(500).json({ error: "Ranking Load Error" }); }
+        const feedbacks = await Feedback.find().sort({ date: -1 });
+        res.json(feedbacks);
+    } catch (err) {
+        res.status(500).json({ error: "Could not fetch feedbacks" });
+    }
 });
 
+// --- 3. SERVER START ---
 const PORT = 5000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`
-    =========================================
-    🚀 NEURAL SERVER LIVE ON PORT: ${PORT}
-    📡 CONNECTION: http://localhost:${PORT}
-    =========================================
-    `);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

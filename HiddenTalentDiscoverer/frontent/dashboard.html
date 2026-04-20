@@ -150,6 +150,7 @@
         }
 
         /* --- DYNAMIC CAREER HERO (Solid High-Contrast) --- */
+       
         .career-hero {
             background: white;
             border-radius: var(--radius-xl);
@@ -455,145 +456,147 @@
         </div>
     </main>
 
-    <script>
-        /**
-         * 700+ LINE CORE SYSTEM LOGIC
-         * Handles: Real-time Sync, Zero-Score Engine, Custom Chart Renderers
-         */
-        // Isay NeuralSystem object ke andar ya script tag mein paste karein
+   <script>
 const NeuralSystem = {
     config: {
+        apiEndpoint: 'YOUR_BACKEND_URL/api/predictions', // Apni sahi API url yahan likhein
         themeColor: '#4f46e5',
-        secondaryColor: '#ec4899',
-        // Aapka backend report route
-        apiEndpoint: 'http://localhost:5000/api/user-report'
+        secondaryColor: '#06b6d4'
     },
-
     state: {
-        userName: localStorage.getItem('userName') || 'Agent Alpha',
-        userEmail: localStorage.getItem('userEmail'),
-        scores: { quiz: 0, game: 0, total: 0 },
-        history: [],
-        latestPrediction: "Neural Recruit"
+        userEmail: localStorage.getItem('userEmail'), // LocalStorage se email uthayen
+        userName: localStorage.getItem('userName') || 'User',
+        latestReport: null,
+        charts: {} // Charts instances save karne ke liye
     },
 
-    // --- SYNC: Fetch Data from Backend ---
     init: async function() {
+        // Login check
         if (!this.state.userEmail) {
-            window.location.href = 'login.html'; // Redirect if not logged in
+            window.location.href = 'login.html';
             return;
         }
 
-        document.getElementById('user-display').innerText = `Hi, ${this.state.userName}`;
+        const userDisplay = document.getElementById('user-display');
+        if(userDisplay) userDisplay.innerText = `Hi, ${this.state.userName}`;
         
         try {
-            // Backend se data mangwana
             const res = await fetch(`${this.config.apiEndpoint}/${this.state.userEmail}`);
+            if (!res.ok) throw new Error("Data not found");
+            
             const data = await res.json();
             
-            if(data) {
-                // Quiz aur Game history ko combine karna
-                this.state.history = [...(data.quizHistory || []), ...(data.gameHistory || [])];
-                
-                // Latest prediction nikalna (Sab se upar wali row se)
-                if (this.state.history.length > 0) {
-                    const latest = this.state.history.sort((a,b) => new Date(b.date) - new Date(a.date))[0];
-                    this.state.latestPrediction = latest.prediction || "In Analysis";
-                }
+            // Check if data is an array or object based on your backend response
+            const report = Array.isArray(data) ? data[0] : data;
 
-                // Scores calculation
-                this.state.scores.quiz = (data.quizHistory || []).reduce((acc, curr) => acc + (curr.score || 0), 0);
-                this.state.scores.game = (data.gameHistory || []).reduce((acc, curr) => acc + (curr.score || 0), 0);
+            if(report && report.scores) {
+                this.state.latestReport = report;
+                this.refreshUI();
+            } else {
+                console.log("No previous reports found.");
+                // Yahan aap "No Data" ka koi placeholder dikha sakte hain
             }
         } catch(e) {
             console.error("System Fetch Error:", e);
         }
-
-        this.refreshUI();
     },
 
-    // --- RENDER: UI & Charts Updates ---
     refreshUI: function() {
-        const s = this.state.scores;
+        const report = this.state.latestReport;
+        if(!report) return;
+
+        // 1. Hero Section Update
+        const predRole = document.getElementById('pred-role');
+        const predDesc = document.getElementById('pred-desc');
         
-        // Main Hero Section Update
-        document.getElementById('pred-role').innerText = this.state.latestPrediction;
-        document.getElementById('val-quiz').innerText = s.quiz;
-        document.getElementById('val-game').innerText = s.game;
+        if(predRole) predRole.innerText = report.predictedJob || "In Analysis";
+        if(predDesc) predDesc.innerText = `Based on your neural patterns, you have a high affinity for ${report.predictedJob}. Your psychometric profile is now synchronized.`;
 
-        // Agar prediction mil gayi hai to description update karein
-        if(this.state.latestPrediction !== "Neural Recruit") {
-            document.getElementById('pred-desc').innerText = `Based on your latest assessment, you have been classified as a ${this.state.latestPrediction}. Your cognitive trajectory is showing positive growth.`;
-        }
+        // 2. Stats Update (Aptitude Scores calculation)
+        const scoresArr = Object.values(report.scores);
+        const avgScore = scoresArr.reduce((a, b) => a + (Number(b) || 0), 0) / scoresArr.length;
+        
+        const valQuiz = document.getElementById('val-quiz');
+        if(valQuiz) valQuiz.innerText = Math.round(avgScore * 10); 
+        
+        const valGame = document.getElementById('val-game');
+        if(valGame) valGame.innerText = "Active";
 
-        this.renderCharts();
-        this.renderLogs();
+        // Render Charts & Logs
+        this.renderCharts(report.scores);
+        this.renderLogs(report);
     },
 
-    renderCharts: function() {
-        // 1. Gauge Chart (Overall Performance based on scores)
-        const totalPossible = 200; // Example max
-        const performancePercent = Math.min(Math.round(((this.state.scores.quiz + this.state.scores.game) / totalPossible) * 100), 100);
+    renderCharts: function(scores) {
+        // GAUGE CHART
+        const totalValue = Object.values(scores).reduce((a, b) => a + (Number(b) || 0), 0);
+        const percent = Math.min(Math.round((totalValue / 100) * 100), 100);
 
-        new ApexCharts(document.querySelector("#hero-gauge"), {
-            series: [performancePercent || 15],
+        this.createChart("#hero-gauge", {
+            series: [percent],
             chart: { type: 'radialBar', height: 350 },
             plotOptions: {
                 radialBar: {
                     hollow: { size: '65%' },
                     dataLabels: {
-                        name: { show: true, color: '#94a3b8' },
-                        value: { color: '#0f172a', fontSize: '40px', fontWeight: 800 }
+                        name: { show: true, label: 'POTENTIAL', color: '#94a3b8' },
+                        value: { color: '#0f172a', fontSize: '30px', fontWeight: 800 }
                     }
                 }
             },
             colors: [this.config.themeColor]
-        }).render();
+        }, 'gauge');
 
-        // 2. Performance Trajectory (Using real scores from history)
-        const chartData = this.state.history.map(h => h.score).reverse();
-        const chartLabels = this.state.history.map(h => new Date(h.date).toLocaleDateString()).reverse();
+        // RADAR CHART
+        const radarData = [
+            scores.O_score || 0, scores.C_score || 0, scores.E_score || 0, 
+            scores.A_score || 0, scores.N_score || 0, scores.Numerical || 0, 
+            scores.Spatial || 0, scores.Perceptual || 0, scores.Abstract || 0, scores.Verbal || 0
+        ];
 
-        new ApexCharts(document.querySelector("#area-chart"), {
-            series: [{ name: 'Score', data: chartData.length > 0 ? chartData : [0,0,0,0,0] }],
-            chart: { type: 'area', height: 300, toolbar: {show:false} },
-            colors: [this.config.themeColor],
-            stroke: { curve: 'smooth', width: 3 },
-            xaxis: { categories: chartLabels.length > 0 ? chartLabels : ['Point 1', 'Point 2', 'Point 3'] }
-        }).render();
-
-        // 3. Radar Map (Static distribution based on career)
-        new ApexCharts(document.querySelector("#radar-chart"), {
-            series: [{ name: 'Cognitive Level', data: [80, 70, 90, 60, 85, 75] }],
-            chart: { type: 'radar', height: 300, toolbar: {show:false} },
-            xaxis: { categories: ['Logic', 'Reflex', 'Focus', 'IQ', 'Memory', 'Speed'] },
-            colors: [this.config.secondaryColor]
-        }).render();
+        this.createChart("#radar-chart", {
+            series: [{ name: 'Cognitive Level', data: radarData }],
+            chart: { type: 'radar', height: 350, toolbar: {show:false} },
+            xaxis: { 
+                categories: ['Open', 'Consc', 'Extro', 'Agree', 'Neuro', 'Num', 'Spat', 'Perc', 'Abst', 'Verb'],
+                labels: { style: { colors: "#94a3b8", fontSize: '10px' } }
+            },
+            colors: [this.config.secondaryColor],
+            fill: { opacity: 0.4 }
+        }, 'radar');
     },
 
-    renderLogs: function() {
-        const body = document.getElementById('logs-body');
-        // Sort by date latest first
-        const logs = this.state.history.sort((a,b) => new Date(b.date) - new Date(a.date));
-
-        if(logs.length === 0) {
-            body.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:40px; color:#94a3b8;">No assessment data found. Start a quiz to see results.</td></tr>';
-            return;
+    // Helper function to prevent chart duplication
+    createChart: function(selector, options, key) {
+        if (this.state.charts[key]) {
+            this.state.charts[key].destroy();
         }
+        const container = document.querySelector(selector);
+        if (container) {
+            this.state.charts[key] = new ApexCharts(container, options);
+            this.state.charts[key].render();
+        }
+    },
 
-        body.innerHTML = logs.map(l => `
+    renderLogs: function(report) {
+        const body = document.getElementById('logs-body');
+        if(!body) return;
+
+        const dateStr = report.date ? new Date(report.date).toLocaleDateString() : "Recent";
+        
+        body.innerHTML = `
             <tr>
-                <td><i class="fas fa-file-invoice" style="margin-right:10px; color:var(--primary);"></i> ${l.prediction || 'Assessment'}</td>
-                <td>${l.category || l.gameName || 'General'}</td>
-                <td style="color:var(--primary)">+${l.score}</td>
-                <td>${new Date(l.date).toLocaleDateString()}</td>
-                <td><span class="badge" style="background:#f0fdf4; color:#22c55e;">SYNCED</span></td>
+                <td><i class="fas fa-brain" style="margin-right:10px; color:${this.config.themeColor};"></i> AI Classification</td>
+                <td>Psychometric</td>
+                <td style="color:${this.config.themeColor}; font-weight:bold;">${report.predictedJob}</td>
+                <td>${dateStr}</td>
+                <td><span class="badge" style="background:#f0fdf4; color:#22c55e; padding: 5px 10px; border-radius: 12px; font-size: 12px;">COMPLETED</span></td>
             </tr>
-        `).join('');
+        `;
     }
 };
 
 window.onload = () => NeuralSystem.init();
- </script>
+</script>
 </body>
 </html>
