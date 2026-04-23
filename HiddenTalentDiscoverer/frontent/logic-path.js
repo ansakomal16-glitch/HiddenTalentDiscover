@@ -116,3 +116,17 @@ function buildGrid() {
 }
 
 window.onload = () => buildGrid();
+const handleGameOver = async (finalScore) => {
+    const data = {
+        email: userEmail, // Login se save kiya hua email
+        gameName: "Logic Path Puzzle",
+        score: finalScore,
+        accuracy: 90 
+    };
+    
+    await fetch('http://localhost:5000/api/save-game-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+};

@@ -9,36 +9,193 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --p: #4f46e5; --border: #f1f5f9; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #ffffff; color: #1e293b; height: 100vh; overflow: hidden; }
-        .sidebar { width: 280px; background: #fcfdfe; border-right: 1px solid var(--border); }
-        .nav-link { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: #64748b; border-radius: 12px; margin: 4px 16px; font-weight: 600; transition: 0.2s; }
-        .nav-active { background: white; color: var(--p); box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid var(--border); }
-        .main-content { flex: 1; overflow-y: auto; scroll-behavior: smooth; }
-        .glass-card { background: white; border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 10px 40px -15px rgba(0,0,0,0.05); }
-        .opt-btn { border: 1px solid #e2e8f0; transition: 0.2s; cursor: pointer; }
-        .opt-selected { background: var(--p) !important; border-color: var(--p) !important; color: white !important; box-shadow: 0 8px 20px -5px rgba(79, 70, 229, 0.4); transform: translateY(-2px); }
-        .loader { border-top-color: #4f46e5; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @media print { .no-print { display: none; } #pdfArea { padding: 0; } body { overflow: visible; height: auto; } }
-        .job-link { transition: all 0.3s ease; border: 1px solid #e2e8f0; }
-        .job-link:hover { border-color: #4f46e5; background: #f8fafc; transform: translateX(5px); }
+        /* --- Root Variables for High-Class Look --- */
+:root { 
+    --p: #4f46e5;        /* Indigo-600 */
+    --p-hover: #4338ca;
+    --p-light: #eef2ff;
+    --border: #f1f5f9;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --bg-light: #fcfdfe;
+}
+
+/* --- Base Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: #ffffff; 
+    color: var(--text-main); 
+    height: 100vh; 
+    width: 100vw;
+    display: flex;       /* Sidebar aur Content ko side-by-side lane ke liye */
+    overflow: hidden;    /* Poore page ko scroll hone se rokne ke liye */
+}
+
+/* --- Sidebar Styling --- */
+aside, .sidebar { 
+    width: 260px; 
+    min-width: 260px;
+    height: 100vh;
+    background: var(--bg-light); 
+    border-right: 1px solid var(--border); 
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
+    position: relative; /* Fixed se hata diya taake layout flex mein fit ho */
+    z-index: 50;
+}
+
+/* Logo Section */
+.sidebar-logo {
+    padding: 0 24px;
+    margin-bottom: 30px;
+}
+
+/* Sidebar Navigation Items */
+.nav-item, .nav-link { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    padding: 12px 24px; 
+    color: var(--text-muted); 
+    text-decoration: none;
+    font-weight: 600; 
+    font-size: 0.95rem;
+    transition: 0.2s ease;
+    margin: 4px 16px;
+    border-radius: 12px;
+}
+
+.nav-item:hover, .nav-link:hover { 
+    background: var(--p-light); 
+    color: var(--p); 
+}
+
+/* Active State for Sidebar */
+.nav-item.active, .nav-active { 
+    background: white !important; 
+    color: var(--p) !important; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    border: 1px solid var(--border); 
+}
+
+/* --- Main Content Area (The Fix) --- */
+.main-content, .main-wrapper { 
+    flex: 1;             /* Baki poori screen ye area le lega */
+    height: 100vh;
+    overflow-y: auto;    /* Sirf quiz wala hissa scroll hoga */
+    background: #ffffff;
+    padding: 40px; 
+    scroll-behavior: smooth; 
+}
+
+/* --- Quiz Card & Design Elements --- */
+.glass-card { 
+    background: white; 
+    border: 1px solid var(--border); 
+    border-radius: 24px; 
+    box-shadow: 0 10px 40px -15px rgba(0,0,0,0.05); 
+    padding: 32px;
+    max-width: 900px;
+    margin: 0 auto; /* Quiz card ko screen ke center mein rakhega */
+}
+
+/* Options Buttons Styling */
+.opt-btn { 
+    width: 100%;
+    text-align: left;
+    padding: 16px 24px;
+    margin-bottom: 12px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0; 
+    border-radius: 14px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.2s ease; 
+    cursor: pointer; 
+    display: block;
+}
+
+.opt-btn:hover {
+    border-color: var(--p);
+    background: var(--bg-light);
+    transform: translateX(4px);
+}
+
+.opt-selected { 
+    background: var(--p) !important; 
+    border-color: var(--p) !important; 
+    color: white !important; 
+    box-shadow: 0 8px 20px -5px rgba(79, 70, 229, 0.4); 
+    transform: translateY(-2px); 
+}
+
+/* --- Utilities & Animations --- */
+.loader { 
+    width: 40px; 
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--p); 
+    border-radius: 50%;
+    animation: spin 1s linear infinite; 
+    margin: 20px auto;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.text-rose-500 { color: #f43f5e !important; }
+
+/* Career Links */
+.job-link { 
+    display: block;
+    padding: 16px;
+    margin-top: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.job-link:hover { 
+    border-color: var(--p); 
+    background: var(--bg-light); 
+    transform: translateX(8px); 
+}
+
+/* Printing logic */
+@media print { 
+    .no-print { display: none; } 
+    body { overflow: visible; height: auto; } 
+}
     </style>
 </head>
 <body class="flex">
 
-    <aside class="sidebar flex flex-col py-8 no-print">
-        <div class="px-10 mb-12 flex items-center gap-3">
-            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            </div>
-            <h1 class="text-lg font-extrabold tracking-tight">NEURAL<span class="text-indigo-600">PATH</span></h1>
+      <aside>
+        <div class="flex items-center gap-3 mb-10 px-2">
+            <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-lg"><i class="fas fa-brain"></i></div>
+            <span class="font-extrabold text-lg tracking-tighter uppercase">Hidden<span class="text-blue-600">Talent</span></span>
         </div>
         <nav class="flex-grow">
-            <a href="#" class="nav-link nav-active">Assessment</a>
+            <a href="index.html" class="nav-item"><i class="fas fa-home w-5"></i> Home</a>
+            <a href="onlinegame.html" class="nav-item active"><i class="fas fa-gamepad w-5"></i> QUIZ</a>
+            <a href="leaderboard.html" class="nav-item"><i class="fas fa-trophy w-5"></i> Leaderboard</a>
+            <a href="badges.html" class="nav-item"><i class="fas fa-medal w-5"></i> Badges</a>
+            <a href="profile.html" class="nav-item"><i class="fas fa-user w-5"></i> Profile</a>
+            <a href="recomendation.html" class="nav-item"><i class="fas fa-star w-5"></i> Recommendations</a>
+            <a href="careermap.html" class="nav-item"><i class="fas fa-map w-5"></i> Career Map</a>
+            <a href="about.html" class="nav-item"><i class="fas fa-info-circle w-5"></i> About Us</a>
         </nav>
-        <div class="px-8 pt-8 border-t border-slate-100">
-            <button onclick="window.location.reload()" class="text-xs text-slate-400 font-bold hover:text-red-500 flex items-center gap-2">Restart Test</button>
+        <div class="mt-auto pt-4 border-t border-slate-100">
+            <a href="signup.html" class="nav-item text-rose-500 hover:bg-rose-50"><i class="fas fa-sign-out-alt w-5"></i> Sign Out</a>
         </div>
     </aside>
 

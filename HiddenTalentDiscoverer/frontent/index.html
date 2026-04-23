@@ -207,27 +207,84 @@
             font-size: 0.9rem;
         }
 .feedback-container {
-    max-width: 400px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 40px auto; /* Is se form center mein aa jayega */
+    border: 1px solid #f1f5f9;
 }
-.input-group { margin-bottom: 15px; }
-.input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-select, textarea { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
-textarea { height: 100px; resize: vertical; }
-button { 
-    width: 100%; 
-    padding: 10px; 
-    background-color: #28a745; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
+
+.feedback-container h2 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin-bottom: 25px;
+    text-align: center;
 }
-button:hover { background-color: #218838; }
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.input-group select, 
+.input-group textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fcfdfe;
+}
+
+.input-group select:focus, 
+.input-group textarea:focus {
+    outline: none;
+    border-color: #4f46e5; /* Indigo color focus par */
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.input-group textarea {
+    height: 120px;
+    resize: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+}
+
+#status {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
         /* ================================================================
         [5. HERO / SPLASH COMPONENT]
         ================================================================ */
@@ -1000,16 +1057,11 @@ button:hover { background-color: #218838; }
                         <p class="hero-desc">
                             We don't just assess. We decode your neural patterns through gamified psychometrics to find the career trajectory you were born to lead.
                         </p>
-                        
-                        <div class="search-complex">
-                            <i class="fas fa-search" style="margin: 20px; color: var(--text-muted);"></i>
-                            <input type="text" id="aiSearch" placeholder="Type: 'Discover my logic score' or 'Quiz'">
-                            <button class="btn-base btn-primary">Analyze Potential</button>
-                        </div>
+                       
 
                         <div style="display:flex; gap:20px;">
-                            <a href="quiz.html" class="btn-base btn-primary">Start Assessment <i class="fas fa-bolt"></i></a>
-                            <a href="quizonline.html" class="btn-base btn-primary"></a>
+                            <a href="onlinegame.html" class="btn-base btn-primary">Start Game<i class="fas fa-bolt"></i></a>
+                            <a href="quizonline.html" class="btn-base btn-primary">Start Quiz<i class="fas fa-bolt"></i></a>
                             <a href="#process" class="btn-base btn-outline">See Methodology</a>
                         </div>
                     </div>
@@ -1056,15 +1108,15 @@ button:hover { background-color: #218838; }
                 <div class="services-grid">
                     
 
-                    <div class="service-card reveal" onclick="location.href='games.html'">
-                        <span class="card-num">02</span>
+                    <div class="service-card reveal" onclick="location.href='onlinegame.html'">
+                        <span class="card-num">01</span>
                         <div class="s-icon"><i class="fas fa-microchip"></i></div>
                         <h3>Neural Forge</h3>
                         <p>Measure decision-making under high stress through gamified neural simulations.</p>
                     </div>
 
                     <div class="service-card reveal" onclick="location.href='chatbot.html'">
-                        <span class="card-num">03</span>
+                        <span class="card-num">02</span>
                         <div class="s-icon"><i class="fas fa-robot"></i></div>
                         <h3>AI Career Architect</h3>
                         <p>24/7 access to an LLM-powered coach trained on 50 years of career success data.</p>
@@ -1072,13 +1124,13 @@ button:hover { background-color: #218838; }
                    
 
                     <div class="service-card reveal" onclick="location.href='quizonline.html'">
-                        <span class="card-num">04</span>
+                        <span class="card-num">03</span>
                         <div class="s-icon"><i class="fas fa-trophy"></i></div>
                         <h3>Global Ranking</h3>
                         <p>Compare your unique talent index against the world's top 1% performers.</p>
                     </div>
                     <div class="service-card reveal" onclick="openContactOptions()">
-    <span class="card-num">06</span>
+    <span class="card-num">04</span>
     <div class="s-icon"><i class="fas fa-headset"></i></div>
     <h3>Chatbot Support</h3>
     <p>Contact admin via Email or WhatsApp for guidance.</p>
@@ -1128,53 +1180,58 @@ button:hover { background-color: #218838; }
 
       <section class="pricing-root section-py">
     <div class="container">
-        <div class="services-header reveal">
+        <div class="services-header reveal" style="text-align: center; margin-bottom: 40px;">
             <span class="badge-pill">Neural Tiers</span>
             <h2 style="font-family: 'Outfit'; font-size: 2.5rem; margin-top: 10px;">Unlock Your Potential</h2>
-            <p style="color: var(--text-muted);">Points earned from quizzes unlock advanced AI features.</p>
+            <p style="color: var(--text-muted);">Monitor your growth through points and milestones.</p>
         </div>
 
-        <div class="pricing-grid">
-            <div class="price-card reveal">
-                <h4 style="font-family: 'Outfit';">Neural Recruit</h4>
-                <div class="price-val">0<span> XP</span></div>
-                <ul class="feature-list">
-                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Basic IQ Assessment</li>
-                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Public Community Access</li>
-                    <li><i class="fas fa-times" style="color:var(--text-muted)"></i> Detailed Career Path</li>
-                    <li><i class="fas fa-times" style="color:var(--text-muted)"></i> Priority Skill Support</li>
-                </ul>
-                <button class="btn-base btn-primary" style="width:100%">Current Tier</button>
+        <div class="talent-showcase" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px;">
+            
+            <div class="glass-card" style="padding: 30px; display: flex; flex-direction: column; justify-content: center; background: white;">
+                <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                    <div style="font-size: 40px; background: #eef2ff; padding: 20px; border-radius: 20px;">⭐</div>
+                    <div>
+                        <h4 style="margin: 0; color: #64748b; font-size: 1rem;">Total Neural XP</h4>
+                        <p id="stat-xp" style="font-size: 2.5rem; font-weight: 800; margin: 0; color: #1e293b;">0</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: bold; margin-bottom: 8px;">
+                        <span>Progress to Expert</span>
+                        <span id="xp-needed">Need 5,000 XP</span>
+                    </div>
+                    <div style="height: 10px; background: #f1f5f9; border-radius: 10px; overflow: hidden;">
+                        <div id="xp-progress-fill" style="width: 0%; height: 100%; background: linear-gradient(90deg, #4f46e5, #818cf8); transition: 1.5s ease-in-out;"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="price-card featured reveal">
-                <div class="popular-label">RECOMMENDED</div>
-                <h4 style="font-family: 'Outfit';">Elite Analyst</h4>
-                <div class="price-val">5,000<span> XP</span></div>
-                <ul class="feature-list">
-                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Advanced Neural Logic</li>
-                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Full AI Career Roadmap</li>
-                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Skill Forge Tools</li>
-                    <li><i class="fas fa-check" style="color:var(--primary)"></i> Verified Badge</li>
-                </ul>
-                <button id="unlock-pro" class="btn-lock">
-                    <i class="fas fa-lock"></i> Earn XP to Unlock
-                </button>
+            <div class="glass-card" style="padding: 30px; background: #fcfdfe; border-left: 4px solid #4f46e5;">
+                <h3 style="font-weight: 800; margin-bottom: 20px;"><i class="fas fa-award" style="color: #f59e0b;"></i> Achievements</h3>
+                <div id="milestone-list" style="display: flex; flex-direction: column; gap: 15px;">
+                    
+                    <div class="milestone-item" style="display: flex; align-items: center; gap: 15px; padding: 12px; background: white; border: 1px solid #f1f5f9; border-radius: 15px;">
+                        <div style="font-size: 24px; background: #fff7ed; padding: 10px; border-radius: 12px;">🌱</div>
+                        <div>
+                            <h5 style="margin: 0; font-weight: 700;">Early Bird</h5>
+                            <p style="margin: 0; font-size: 0.75rem; color: #64748b;">Journey Started</p>
+                        </div>
+                        <i class="fas fa-check-circle" style="margin-left: auto; color: #10b981;"></i>
+                    </div>
+
+                    <div id="expert-milestone" style="display: flex; align-items: center; gap: 15px; padding: 12px; background: #f8fafc; border: 1px dashed #e2e8f0; border-radius: 15px; opacity: 0.5;">
+                        <div style="font-size: 24px; filter: grayscale(1);">🏆</div>
+                        <div>
+                            <h5 style="margin: 0; font-weight: 700;">Expert Analyst</h5>
+                            <p style="margin: 0; font-size: 0.75rem; color: #64748b;">Locked Milestone</p>
+                        </div>
+                        <i class="fas fa-lock" style="margin-left: auto; color: #94a3b8;"></i>
+                    </div>
+                </div>
             </div>
 
-            <div class="price-card reveal">
-                <h4 style="font-family: 'Outfit';">Neural Architect</h4>
-                <div class="price-val">15,000<span> XP</span></div>
-                <ul class="feature-list">
-                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Custom Skill Games</li>
-                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Mentor Network Access</li>
-                    <li><i class="fas fa-check" style="color:var(--accent)"></i> Beta Testing Rights</li>
-                    <li><i class="fas fa-check" style="color:var(--accent)"></i> System Prefs Control</li>
-                </ul>
-                <button class="btn-lock">
-                    <i class="fas fa-lock"></i> Locked Tier
-                </button>
-            </div>
         </div>
     </div>
 </section>
@@ -1188,31 +1245,42 @@ button:hover { background-color: #218838; }
         </section>
 
         <section class="faq-root reveal">
-            <div class="services-header"><h2>Frequently Asked Questions</h2></div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">How is the neural score calculated? <i class="fas fa-plus"></i></div>
-                <div class="faq-answer">Our AI analyzes reaction velocity, pattern recognition, and lateral thinking biases across 50+ dimensions during the games.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Is my cognitive data shared with employers? <i class="fas fa-plus"></i></div>
-                <div class="faq-answer">Only if you opt-in for recruitment. Otherwise, your neural fingerprint is encrypted and private.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Can I retake the assessments? <i class="fas fa-plus"></i></div>
-                <div class="faq-answer">We recommend retaking every 6 months to measure cognitive growth and neural plasticity.</div>
-            </div>
-        </section>
+    <div class="services-header">
+        <h2>Frequently Asked Questions</h2>
+    </div>
 
-        <section class="cta-root reveal">
-            <div class="container">
-                <h2>Ready to meet the real you?</h2>
-                <p>Join 850,000+ others who discovered their hidden edge.</p>
-                <div class="cta-form">
-                    <input type="email" placeholder="Enter your email to start...">
-                    <button class="btn-base btn-outline" style="background:#fff; border:none; color:var(--primary)">Get Access</button>
-                </div>
-            </div>
-        </section>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            How is the neural score calculated? 
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+            Our AI analyzes reaction velocity, pattern recognition, and lateral thinking biases across 50+ dimensions during the games.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            Is my cognitive data shared with employers? 
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+            Only if you opt-in for recruitment. Otherwise, your neural fingerprint is encrypted and private.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            Can I retake the assessments? 
+            <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+            We recommend retaking every 6 months to measure cognitive growth and neural plasticity.
+        </div>
+    </div>
+</section>
+
+        
 <div id="contactPopup" class="popup">
     <div class="popup-content">
         <h3>Contact Admin</h3>
@@ -1222,7 +1290,7 @@ button:hover { background-color: #218838; }
         <button onclick="contactEmail()">📧 Email</button>
 
         <br><br>
-        <span onclick="closePopup()" class="close-btn">❌ Close</span>
+        <span onclick="closePopup()" class="close-btn"> Close</span>
     </div>
 </div>
         <footer class="footer-root">
@@ -1302,7 +1370,30 @@ button:hover { background-color: #218838; }
     </main>
 
     <script>
-        /**
+      async function fetchUserScores() {
+    // 1. User ki email (jo login ke waqt save ki thi)
+    const email = localStorage.getItem('userEmail') || "areebar444@gmail.com"; 
+
+    try {
+        // 2. Backend ko request bhejna
+        const response = await fetch(`http://localhost:5000/api/user-stats/${email}`);
+        const data = await response.json();
+
+        if (response.ok) {
+            // 3. HTML elements mein score dalna
+            document.getElementById('stat-xp').innerText = data.overallTotal;
+            
+            // Agar aapne bars banayi hain:
+            const logicScore = data.scores.logical;
+            console.log("Aapka Logical Score hai: " + logicScore);
+        }
+    } catch (error) {
+        console.error("Connection failed:", error);
+    }
+}
+
+// Page load hote hi function chale
+window.onload = fetchUserScores;  /**
        /**
  * APPLICATION CORE ENGINE (Optimized & Secure)
  * Handles Session, Security, Search Intelligence, and UI toggles.
@@ -1313,20 +1404,28 @@ document.addEventListener('DOMContentLoaded', function() {
     if(feedbackForm) {
         feedbackForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            console.log("Button Clicked!"); // Ye console mein check karne ke liye hai
+            
+            // 1. LocalStorage se login user ki info nikalna
+            const currentUserName = localStorage.getItem('userName') || "Anonymous User";
+            const currentUserEmail = localStorage.getItem('userEmail') || "no-email@test.com";
 
             const rating = document.getElementById('rating').value;
             const message = document.getElementById('message').value;
 
-            // Simple data object
+            // 2. Data object mein real user info dalna
             const feedbackData = {
-                username: "User", // Temporary testing ke liye
-                email: "test@gmail.com",
+                username: currentUserName, 
+                email: currentUserEmail,
                 rating: parseInt(rating),
                 message: message
             };
 
             try {
+                // Button ko disable karein taake baar baar click na ho
+                const submitBtn = feedbackForm.querySelector('button');
+                submitBtn.innerText = "Sending...";
+                submitBtn.disabled = true;
+
                 const response = await fetch('http://localhost:5000/api/submit-feedback', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1334,17 +1433,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 const result = await response.json();
-                if (result.success) {
-                    alert("Feedback Saved!");
+                
+                if (response.ok) {
+                    alert("🌟 Thank you, " + currentUserName + "! Your feedback is saved.");
                     feedbackForm.reset();
+                } else {
+                    alert("Error: " + result.message);
                 }
             } catch (err) {
                 console.error("Error:", err);
                 alert("Server connection failed!");
+            } finally {
+                // Button wapis normal karein
+                const submitBtn = feedbackForm.querySelector('button');
+                submitBtn.innerText = "Submit Feedback";
+                submitBtn.disabled = false;
             }
         });
-    } else {
-        console.error("Form element not found!");
     }
 });
 const AppEngine = {

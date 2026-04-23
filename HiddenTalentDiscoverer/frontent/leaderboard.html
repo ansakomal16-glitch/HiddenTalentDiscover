@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Stream | Global Ranking</title>
+    <title>HiddenTalent | Global Leaderboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #4f46e5;
-            --bg-body: #f8fafc;
+            --bg-body: #fcfdfe;
             --card-white: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --gold: #f59e0b;
+            --border-color: #f1f5f9;
+            --gold: #fbbf24;
             --silver: #94a3b8;
-            --bronze: #b45309;
+            --bronze: #cd7f32;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -29,156 +29,208 @@
             min-height: 100vh;
         }
 
-        header { text-align: center; margin-bottom: 60px; }
-        header h1 { font-size: 42px; font-weight: 800; color: var(--text-main); }
-        header p { color: var(--text-muted); letter-spacing: 2px; font-size: 12px; margin-top: 5px; font-weight: 700; }
+        header { text-align: center; margin-bottom: 80px; }
+        header h1 { font-size: 48px; font-weight: 800; color: var(--text-main); letter-spacing: -2px; }
+        header p { color: var(--text-muted); letter-spacing: 3px; font-size: 11px; margin-top: 8px; font-weight: 800; }
 
-        /* Podium Layout */
+        /* Podium Animations */
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         .podium { 
             display: grid; 
             grid-template-columns: 1fr 1.2fr 1fr; 
-            gap: 20px; 
+            gap: 24px; 
             align-items: flex-end; 
-            max-width: 1000px; 
-            margin: 0 auto 80px; 
+            max-width: 1100px; 
+            margin: 0 auto 100px; 
         }
         
         .p-card {
             background: var(--card-white); 
-            border: 2px solid var(--border-color); 
-            border-radius: 24px;
+            border: 1px solid var(--border-color); 
+            border-radius: 32px;
             padding: 40px 20px; 
             text-align: center;
             position: relative;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
         }
 
-        /* Standard Text Color (No Clipping) */
-        .p-score { 
-            font-size: 48px; 
-            font-weight: 900; 
-            color: var(--primary); 
-            display: block;
-            margin-top: 10px;
-        }
-
-        .rank-1 { border-color: var(--gold); height: 420px; }
-        .rank-2 { border-color: var(--silver); height: 350px; }
-        .rank-3 { border-color: var(--bronze); height: 320px; }
+        .rank-1 { border-bottom: 8px solid var(--gold); height: 460px; z-index: 2; animation-delay: 0.2s; }
+        .rank-2 { border-bottom: 8px solid var(--silver); height: 380px; animation-delay: 0.1s; }
+        .rank-3 { border-bottom: 8px solid var(--bronze); height: 340px; animation-delay: 0.3s; }
 
         .p-avatar {
             width: 80px; height: 80px; 
             border-radius: 50%; 
-            background: #f1f5f9;
-            color: var(--primary);
-            margin: 0 auto 20px; 
+            background: #f8fafc;
+            color: var(--text-main);
+            margin: 0 auto 24px; 
             display: flex; align-items: center; justify-content: center;
-            font-size: 24px; font-weight: 800;
+            font-size: 28px; font-weight: 800;
             border: 4px solid var(--border-color);
+            position: relative;
         }
 
-        .rank-1 .p-avatar { background: var(--gold); color: white; border-color: #fff; width: 90px; height: 90px; }
+        .rank-1 .p-avatar { 
+            width: 100px; height: 100px; font-size: 36px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white; border-color: #fef3c7;
+        }
 
-        .p-name { font-size: 20px; font-weight: 800; color: var(--text-main); }
-        .p-label { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-top: 5px; }
+        .crown { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-size: 40px; }
 
-        /* List Section */
+        .p-name { font-size: 22px; font-weight: 800; color: var(--text-main); display: block; }
+        .p-label { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-top: 8px; letter-spacing: 1px; }
+        .p-score { font-size: 56px; font-weight: 900; color: var(--text-main); display: block; margin-top: 15px; letter-spacing: -2px; }
+
+        /* Rest of the List */
         .list-container { 
-            max-width: 800px; margin: 0 auto; 
+            max-width: 850px; margin: 0 auto; 
             background: var(--card-white); 
-            border-radius: 20px; 
+            border-radius: 32px; 
             border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
             overflow: hidden;
         }
         
-        .list-item {
-            display: flex; align-items: center; padding: 20px 30px; 
-            border-bottom: 1px solid var(--border-color);
+        .list-header {
+            display: flex; padding: 25px 40px; background: #f8fafc;
+            font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
         }
+
+        .list-item {
+            display: flex; align-items: center; padding: 25px 40px; 
+            border-bottom: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+        .list-item:hover { background: #fcfdfe; transform: scale(1.01); }
         .list-item:last-child { border-bottom: none; }
         
-        .l-rank { width: 50px; font-weight: 800; color: var(--text-muted); }
-        .l-name { flex-grow: 1; font-weight: 700; font-size: 16px; color: var(--text-main); }
-        .l-score { font-size: 20px; font-weight: 800; color: var(--primary); }
+        .l-rank { width: 60px; font-weight: 800; color: var(--text-muted); font-size: 18px; }
+        .l-avatar { width: 40px; height: 40px; border-radius: 50%; background: #eff6ff; color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 800; margin-right: 20px; }
+        .l-name { flex-grow: 1; font-weight: 700; font-size: 18px; color: var(--text-main); }
+        .l-score { font-size: 22px; font-weight: 900; color: var(--primary); letter-spacing: -1px; }
 
         .btn-back {
-            display: block; width: fit-content; margin: 40px auto;
-            padding: 15px 35px; background: var(--text-main); color: #fff;
-            text-decoration: none; border-radius: 12px; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 10px;
+            margin: 60px auto; padding: 18px 40px; background: var(--text-main); color: #fff;
+            text-decoration: none; border-radius: 20px; font-weight: 800; font-size: 14px;
+            transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+        .btn-back:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); background: #000; }
 
-        @media (max-width: 768px) {
-            .podium { grid-template-columns: 1fr; }
+        /* Loader */
+        .neural-loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 850px) {
+            .podium { grid-template-columns: 1fr; padding: 0 20px; }
             .rank-1, .rank-2, .rank-3 { height: auto; }
+            header h1 { font-size: 32px; }
+            
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Global <span style="color:var(--primary)">Leaderboard</span></h1>
-    <p>TOP TALENT SYNCED VIA NEURAL STREAM</p>
+    <h1>Global <span style="color:var(--primary)">Neural Rank</span></h1>
+    <p>TOP PERFORMERS IN HIDDENTALENT NETWORK</p>
 </header>
 
-<div id="podium" class="podium">
+<div id="podium-wrapper">
+    <div id="podium" class="podium">
+        <div style="grid-column: span 3; text-align:center;">
+            <div class="neural-loader"></div>
+            <p style="font-weight: 800; color: var(--text-muted); font-size: 10px; letter-spacing: 2px;">SYNCING NEURAL DATA...</p>
+        </div>
     </div>
+</div>
 
 <div class="list-container">
+    <div class="list-header">
+        <span style="width: 60px;">Rank</span>
+        <span style="flex-grow: 1;">Candidate</span>
+        <span>Neural Score</span>
+    </div>
     <div id="list"></div>
 </div>
 
-<a href="dashboard.html" class="btn-back">RETURN TO DASHBOARD</a>
+<div style="text-align: center;">
+    <a href="dashboard.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> RETURN TO DASHBOARD
+    </a>
+</div>
 
 <script>
     async function init() {
+        const podium = document.getElementById('podium');
+        const list = document.getElementById('list');
+
         try {
             const res = await fetch('http://localhost:5000/api/global-leaderboard');
             const data = await res.json();
             
-            const podium = document.getElementById('podium');
-            const list = document.getElementById('list');
-
             if (!data || data.length === 0) {
-                podium.innerHTML = `<div style="grid-column: span 3; text-align:center; padding: 40px;">Waiting for Neural Data...</div>`;
+                podium.innerHTML = `<div style="grid-column: span 3; text-align:center; padding: 60px; font-weight:800; color:var(--text-muted);">NO NEURAL DATA RECORDED YET.</div>`;
                 return;
             }
 
+            // Sort data to ensure it's in descending order
+            data.sort((a, b) => b.overallTotal - a.overallTotal);
+
             const t = data.slice(0, 3);
             
-            // Top 3 (Podium)
+            // Render Podium with specific order (2, 1, 3) for visual balance
             podium.innerHTML = `
                 <div class="p-card rank-2">
-                    <div class="p-avatar">${t[1]?.username.charAt(0) || '2'}</div>
+                    <div class="p-avatar">${(t[1]?.username || '2').charAt(0).toUpperCase()}</div>
                     <span class="p-name">${t[1]?.username || '---'}</span>
                     <div class="p-label">Silver Tier</div>
                     <span class="p-score">${t[1]?.overallTotal || 0}</span>
                 </div>
+
                 <div class="p-card rank-1">
-                    <div style="font-size:30px; margin-bottom:10px;">👑</div>
-                    <div class="p-avatar">${t[0]?.username.charAt(0) || '1'}</div>
+                    <div class="crown">👑</div>
+                    <div class="p-avatar">${(t[0]?.username || '1').charAt(0).toUpperCase()}</div>
                     <span class="p-name">${t[0]?.username || '---'}</span>
                     <div class="p-label">Elite Master</div>
                     <span class="p-score">${t[0]?.overallTotal || 0}</span>
                 </div>
+
                 <div class="p-card rank-3">
-                    <div class="p-avatar">${t[2]?.username.charAt(0) || '3'}</div>
+                    <div class="p-avatar">${(t[2]?.username || '3').charAt(0).toUpperCase()}</div>
                     <span class="p-name">${t[2]?.username || '---'}</span>
                     <div class="p-label">Bronze Tier</div>
                     <span class="p-score">${t[2]?.overallTotal || 0}</span>
                 </div>
             `;
 
-            // The rest of the list
-            list.innerHTML = data.slice(3).map((u, i) => `
-                <div class="list-item">
-                    <div class="l-rank">#${i+4}</div>
-                    <div class="l-name">${u.username}</div>
-                    <div class="l-score">${u.overallTotal}</div>
-                </div>
-            `).join('');
+            // Render Remaining List (4th place onwards)
+            if(data.length > 3) {
+                list.innerHTML = data.slice(3).map((u, i) => `
+                    <div class="list-item">
+                        <div class="l-rank">#${i+4}</div>
+                        <div class="l-avatar">${u.username.charAt(0).toUpperCase()}</div>
+                        <div class="l-name">${u.username}</div>
+                        <div class="l-score">${u.overallTotal}</div>
+                    </div>
+                `).join('');
+            } else {
+                list.innerHTML = `<p style="padding:40px; text-align:center; color:var(--text-muted); font-weight:700;">Complete more assessments to fill the ranks!</p>`;
+            }
 
         } catch(e) {
-            document.getElementById('podium').innerHTML = `<div style="grid-column: span 3; text-align:center; color:red;">⚠️ Server Connection Failed</div>`;
+            podium.innerHTML = `
+                <div style="grid-column: span 3; text-align:center; padding: 60px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size:40px; color:#f87171; margin-bottom:20px;"></i>
+                    <p style="font-weight:800; color:var(--text-main);">NEURAL LINK DISCONNECTED</p>
+                    <p style="font-size:12px; color:var(--text-muted); margin-top:5px;">Please ensure the backend server is running on port 5000.</p>
+                </div>`;
         }
     }
     window.onload = init;

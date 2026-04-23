@@ -167,7 +167,7 @@
                         <label>Full Name</label>
                         <div class="input-wrapper">
                             <i class="fas fa-id-card"></i>
-                            <input type="text" id="fullname" placeholder="John Doe" required>
+                            <input type="text" id="fullname" placeholder="Enter Name" required>
                         </div>
                     </div>
 
@@ -230,77 +230,105 @@
         </div>
     </div>
 
-    <script>
-        async function handleSignup(event) {
-            event.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const status = document.getElementById('status');
-            
-            const name = document.getElementById('fullname').value;
-            const email = document.getElementById('email').value;
-            const contact = document.getElementById('contact').value;
-            const dob = document.getElementById('dob').value;
-            const district = document.getElementById('district').value;
-            const password = document.getElementById('password').value;
-            const confirmPass = document.getElementById('confirmPassword').value;
+   <script>
+    async function handleSignup(event) {
+        event.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        const status = document.getElementById('status');
+        
+        // Input Values
+        const nameVal = document.getElementById('fullname').value;
+        const emailVal = document.getElementById('email').value;
+        const contactVal = document.getElementById('contact').value;
+        const dobVal = document.getElementById('dob').value;
+        const districtVal = document.getElementById('district').value;
+        const passwordVal = document.getElementById('password').value;
+        const confirmPassVal = document.getElementById('confirmPassword').value;
 
-            if (password !== confirmPass) {
-                status.style.display = "block";
+        // Reset Status for new attempt
+        status.style.display = "block";
+        status.style.padding = "12px";
+        status.style.borderRadius = "8px";
+        status.style.marginTop = "15px";
+        status.style.fontSize = "14px";
+        status.style.fontWeight = "600";
+
+        // 1. Name Validation (Letters Only)
+        const nameRegex = /^[A-Za-z\s]+$/;
+        if (!nameRegex.test(nameVal)) {
+            status.style.background = "#fef2f2";
+            status.style.color = "#ef4444";
+            status.innerText = "❌ Please enter name in alphabets only (A-Z).";
+            return; // Stop execution
+        }
+
+        // 2. Password Strength Validation
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+        if (!passwordRegex.test(passwordVal)) {
+            status.style.background = "#fef2f2";
+            status.style.color = "#ef4444";
+            status.innerText = "❌ Use a mix of letters, numbers, and symbols (@#$!).";
+            return;
+        }
+
+        // 3. Confirm Password Match
+        if (passwordVal !== confirmPassVal) {
+            status.style.background = "#fef2f2";
+            status.style.color = "#ef4444";
+            status.innerText = "❌ Security Keys do not match!";
+            return;
+        }
+
+        // If validation passes, start Backend Process
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
+        status.style.background = "#f1f5f9";
+        status.style.color = "#64748b";
+        status.innerText = "Synchronizing with Neural Server...";
+
+        try {
+           // Is hissay ko update karein handleSignup ke andar
+const response = await fetch('http://localhost:5000/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+        username: nameVal,  // <-- 'fullname' ki jagah 'username' likhein
+        email: emailVal, 
+        password: passwordVal,
+        contact: contactVal,
+        dob: dobVal,
+        district: districtVal
+    })
+});
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("userName", nameVal);
+                localStorage.setItem("userEmail", emailVal);
+
+                status.style.background = "#ecfdf5";
+                status.style.color = "#10b981";
+                status.innerText = "✨ Identity Verified! Redirecting...";
+
+                setTimeout(() => { window.location.href = "login.html"; }, 1500);
+            } else {
                 status.style.background = "#fef2f2";
                 status.style.color = "#ef4444";
-                status.innerText = "❌ Keys do not match!";
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
-            status.style.display = "block";
-            status.style.background = "#f1f5f9";
-            status.style.color = "#64748b";
-            status.innerText = "Synchronizing with Neural Server...";
-
-            try {
-                const response = await fetch('http://localhost:5000/api/signup', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        username: name,
-                        email, 
-                        password,
-                        contact,
-                        dob,
-                        district
-                    })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem("isLoggedIn", "true");
-                    localStorage.setItem("userName", name);
-                    localStorage.setItem("userEmail", email);
-
-                    status.style.background = "#ecfdf5";
-                    status.style.color = "#10b981";
-                    status.innerText = "✨ Identity Verified! Redirecting...";
-
-                    setTimeout(() => { window.location.href = "index.html"; }, 1500);
-                } else {
-                    status.style.background = "#fef2f2";
-                    status.style.color = "#ef4444";
-                    status.innerText = data.error || "System Error Occurred.";
-                    btn.disabled = false;
-                    btn.innerText = "Initialize Identity";
-                }
-            } catch (error) {
-                status.style.background = "#fffbeb";
-                status.style.color = "#d97706";
-                status.innerText = "⚠️ Backend Unreachable. Check Node.js!";
+                status.innerText = data.message || data.error || "System Error Occurred.";
                 btn.disabled = false;
-                btn.innerText = "Retry Initialization";
+                btn.innerText = "Initialize Identity";
             }
+        } catch (error) {
+            status.style.background = "#fffbeb";
+            status.style.color = "#d97706";
+            status.innerText = "⚠️ Backend Unreachable. Check Node.js Terminal!";
+            btn.disabled = false;
+            btn.innerText = "Retry Initialization";
         }
-    </script>
+    }
+</script>
 </body>
 </html>

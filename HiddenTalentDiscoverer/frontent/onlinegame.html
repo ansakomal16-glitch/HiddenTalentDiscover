@@ -3,971 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discovery Lab | Neural OS</title>
+    <title>HiddenTalent | Full Neural Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-    <!-- Charts + PDF for career dashboard -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
     <style>
-        :root {
-            --primary: #4f46e5;
-            --bg-light: #f8fafc;
-            --card-bg: #ffffff;
-            --border: #e2e8f0;
-            --text-dark: #0f172a;
-        }
-
-        body { 
-            background: var(--bg-light); 
-            color: var(--text-dark); 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { background: #fcfdfe; color: #1e293b; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; height: 100vh; overflow: hidden; }
         
-        /* Premium Card Styling */
-        .talent-card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-        .talent-card:hover { 
-            border-color: var(--primary); 
-            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.1); 
-            transform: translateY(-8px); 
-        }
+        aside { width: 260px; background: #ffffff; border-right: 1px solid #f1f5f9; display: flex; flex-direction: column; padding: 2rem 1.2rem; flex-shrink: 0; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; color: #64748b; font-weight: 600; font-size: 0.85rem; transition: 0.2s; margin-bottom: 5px; }
+        .nav-item:hover, .nav-item.active { background: #eff6ff; color: #3b82f6; }
 
-        /* Game Overlay - White Glassmorphism */
-        .game-overlay { 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(20px); 
-        }
+        main { flex-grow: 1; overflow-y: auto; padding: 2rem 3rem; position: relative; }
+        .game-card { background: #ffffff; border-radius: 20px; border: 1px solid #f1f5f9; padding: 1.5rem; cursor: pointer; transition: 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.01); }
+        .game-card:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+
+        #game-view { display: none; position: absolute; inset: 0; background: #ffffff; z-index: 50; padding: 2rem 3rem; flex-direction: column; }
+        #canvas { flex-grow: 1; background: #f8fafc; border-radius: 30px; border: 2px dashed #e2e8f0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+
+        .game-input { background: transparent; border-bottom: 4px solid #3b82f6; font-size: 4rem; font-weight: 800; text-align: center; width: 300px; outline: none; color: #1e293b; }
+        .target { width: 70px; height: 70px; border-radius: 18px; background: #3b82f6; position: absolute; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3); }
+        .stat-badge { background: #f8fafc; padding: 6px 16px; border-radius: 12px; border: 1px solid #f1f5f9; text-align: center; }
         
-        #game-canvas { 
-            height: 450px; 
-            background: #ffffff;
-            border: 2px dashed #cbd5e1;
-            border-radius: 32px; 
-            position: relative; 
-            overflow: hidden; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
-        }
-
-        /* Node Styling for Reflex Game */
-        .node { 
-            width: 70px; height: 70px; border-radius: 20px; cursor: pointer; 
-            position: absolute; display: flex; align-items: center; 
-            justify-content: center; font-weight: bold; transition: 0.15s;
-            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
-        }
-
-        /* Matrix Button Styling */
-        .matrix-btn { 
-            width: 85px; height: 85px; background: #f1f5f9; 
-            border: 1px solid var(--border); border-radius: 18px; 
-            font-size: 24px; font-weight: 800; transition: 0.2s; 
-            color: var(--text-dark);
-        }
-        .matrix-btn:hover { background: var(--primary); color: white; transform: scale(0.95); border-color: var(--primary); }
-
-        /* Custom Input for Math/Logic */
-        .game-input {
-            background: transparent;
-            border-bottom: 6px solid var(--primary);
-            text-align: center;
-            font-weight: 900;
-            color: var(--primary);
-            outline: none;
-            width: 280px;
-        }
-
-        .fade-up {
-            opacity: 0;
-            transform: translateY(16px);
-            animation: fade-up 480ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fade-up {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* Grid Game Style */
+        .grid-box { width: 80px; height: 80px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+        .grid-box.active { background: #3b82f6; border-color: #3b82f6; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body>
 
-    <header class="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row justify-between items-center bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
-        <div>
-            <div class="flex items-center gap-3 mb-1">
-                <div class="w-3 h-3 bg-indigo-600 rounded-full animate-pulse"></div>
-                <span class="text-xs font-bold tracking-[0.2em] text-indigo-600 uppercase">System Active</span>
-            </div>
-            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Discovery <span class="text-indigo-600">Lab</span></h1>
-            <p class="text-slate-500 font-medium mt-1">Measuring neural performance and cognitive speed.</p>
+    <aside>
+        <div class="flex items-center gap-3 mb-10 px-2">
+            <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-lg"><i class="fas fa-brain"></i></div>
+            <span class="font-extrabold text-lg tracking-tighter uppercase">Hidden<span class="text-blue-600">Talent</span></span>
         </div>
-        <div class="mt-6 md:mt-0 flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
-            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                <i class="fas fa-user-tie text-indigo-600"></i>
-            </div>
+        <nav class="flex-grow">
+            <a href="index.html" class="nav-item"><i class="fas fa-home w-5"></i> Home</a>
+            <a href="onlinegame.html" class="nav-item active"><i class="fas fa-gamepad w-5"></i> Dashboard</a>
+            <a href="leaderboard.html" class="nav-item"><i class="fas fa-trophy w-5"></i> Leaderboard</a>
+            <a href="badges.html" class="nav-item"><i class="fas fa-medal w-5"></i> Badges</a>
+            <a href="profile.html" class="nav-item"><i class="fas fa-user w-5"></i> Profile</a>
+            <a href="recomendation.html" class="nav-item"><i class="fas fa-star w-5"></i> Recommendations</a>
+            <a href="careermap.html" class="nav-item"><i class="fas fa-map w-5"></i> Career Map</a>
+            <a href="about.html" class="nav-item"><i class="fas fa-info-circle w-5"></i> About Us</a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-slate-100">
+            <a href="signup.html" class="nav-item text-rose-500 hover:bg-rose-50"><i class="fas fa-sign-out-alt w-5"></i> Sign Out</a>
+        </div>
+    </aside>
+
+    <main>
+        <header class="flex justify-between items-center mb-8">
             <div>
-                <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Authorized Subject</span>
-                <p id="player-name" class="text-lg font-bold text-slate-900">Guest User</p>
+                <h1 class="text-2xl font-black text-slate-900 tracking-tight">Discovery Assessment Lab</h1>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Active: <span id="user-tag" class="text-blue-600">Syncing...</span></p>
             </div>
-        </div>
-    </header>
-
-    <div id="games-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
-        
-        <div onclick="openGame('Logic', 'Pattern Master')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
-            <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-all duration-300">
-                <i class="fas fa-brain text-indigo-600 text-2xl group-hover:text-white"></i>
+            <div class="stat-badge">
+                <p class="text-[9px] font-bold text-slate-400 uppercase">Neural Score</p>
+                <p id="total-score-ui" class="text-lg font-black">0</p>
             </div>
-            <h3 class="text-lg font-bold text-slate-900">Pattern Master</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Abstract reasoning & sequence deduction.</p>
-        </div>
+        </header>
 
-        <div onclick="openGame('Math', 'Neural Math')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
-            <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 transition-all duration-300">
-                <i class="fas fa-calculator text-emerald-600 text-2xl group-hover:text-white"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Neural Math</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Quantitative speed and mental arithmetic.</p>
-        </div>
+        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
 
-        <div onclick="openGame('Reflex', 'Reflex Sync')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
-            <div class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-600 transition-all duration-300">
-                <i class="fas fa-bolt text-rose-600 text-2xl group-hover:text-white"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Reflex Sync</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Neuromuscular response latency test.</p>
-        </div>
-
-        <div onclick="openGame('Memory', 'Digit Span')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
-            <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-600 transition-all duration-300">
-                <i class="fas fa-microchip text-amber-600 text-2xl group-hover:text-white"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Digit Span</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Short-term working memory capacity.</p>
-        </div>
-
-        <div onclick="openGame('Focus', 'Focus Matrix')" class="talent-card p-8 rounded-[2.5rem] cursor-pointer group">
-            <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-600 transition-all duration-300">
-                <i class="fas fa-eye text-purple-600 text-2xl group-hover:text-white"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Focus Matrix</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Visual search and focus endurance.</p>
-        </div>
-
-    </div>
-
-    <div id="game-overlay" class="fixed inset-0 hidden game-overlay z-50 flex flex-col items-center justify-center p-4">
-        <div class="max-w-4xl w-full bg-white border border-slate-200 p-10 rounded-[3.5rem] shadow-2xl relative">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
-                <div>
-                    <h2 id="active-game-title" class="text-3xl font-black text-slate-900 tracking-tight uppercase">Game Title</h2>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span class="w-2 h-2 bg-indigo-600 rounded-full"></span>
-                        <p id="game-status-text" class="text-indigo-600 font-bold text-[10px] tracking-widest uppercase">Session Active</p>
-                    </div>
-                </div>
-                <div class="flex gap-4 mt-6 md:mt-0">
-                    <div class="bg-slate-50 px-8 py-3 rounded-2xl border border-slate-100 text-center">
-                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Neural Alignment</p>
-                        <p id="live-score" class="text-3xl font-black text-indigo-600">0</p>
-                    </div>
-                    <div class="bg-slate-900 px-8 py-3 rounded-2xl text-center min-w-[120px]">
-                        <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Time Left</p>
-                        <p id="timer" class="text-3xl font-black text-white">20s</p>
-                    </div>
+        <section id="game-view">
+            <div class="flex justify-between items-center mb-6">
+                <button onclick="abortGame()" class="flex items-center gap-2 text-slate-400 hover:text-rose-500 font-bold text-xs uppercase transition">
+                    <i class="fas fa-chevron-left"></i> Exit Lab
+                </button>
+                <div class="flex gap-3">
+                    <div class="stat-badge border-blue-100"><p class="text-[8px] font-bold text-blue-400 uppercase">Points</p><p id="live-score" class="text-xl font-black text-blue-600">0</p></div>
+                    <div class="stat-badge border-rose-100"><p class="text-[8px] font-bold text-rose-400 uppercase">Time</p><p id="timer" class="text-xl font-black text-rose-600">20s</p></div>
                 </div>
             </div>
-
-            <div id="game-canvas"></div>
-
-            <div class="flex justify-between items-center mt-10">
-                <button onclick="closeGame()" class="px-8 py-3 bg-white border border-slate-200 hover:border-rose-500 hover:text-rose-500 text-slate-400 rounded-2xl transition-all font-bold text-xs uppercase tracking-widest">Abort Mission</button>
-                <div class="text-slate-300 text-[10px] font-bold uppercase tracking-widest flex items-center gap-3">
-                    <i class="fas fa-shield-halved"></i>
-                    Encrypted Data Uplink
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hidden Career Prediction Dashboard (shown after game ends) -->
-    <section id="career-dashboard" class="hidden max-w-5xl mx-auto mt-10 mb-16 fade-up">
-        <div id="result-ui" class="bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_40px_80px_rgba(15,23,42,0.06)] px-8 py-8 md:px-10 md:py-10">
-            <div class="mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div>
-                    <p class="text-xs font-semibold tracking-[0.22em] uppercase text-slate-400 mb-1">
-                        Neural career diagnostic
-                    </p>
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight leading-tight text-slate-900">
-                        Full‑spectrum career report
-                    </h2>
-                    <p class="mt-2 text-sm text-slate-500 max-w-xl">
-                        A synthesized view of your in‑game performance mapped to long‑term career potential.
-                    </p>
-                </div>
-                <div class="flex flex-col items-end gap-2">
-                    <div class="flex items-center gap-3">
-                        <div class="h-9 w-9 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-[11px] font-semibold text-slate-500">
-                            NE
-                        </div>
-                        <div class="text-right">
-                            <p id="dashboardName" class="text-sm font-semibold tracking-tight text-slate-900">
-                                Neural Explorer
-                            </p>
-                            <p id="dashboardEmail" class="text-[11px] text-slate-400 tracking-tight">
-                                <!-- email -->
-                            </p>
-                        </div>
-                    </div>
-                    <button
-                        id="downloadPdfBtn"
-                        type="button"
-                        class="inline-flex items-center gap-2 rounded-full border border-indigo-500 bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-tight text-indigo-600 hover:bg-indigo-50 hover:border-indigo-600 transition-colors"
-                    >
-                        <span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-current text-[9px]">
-                            ⬇︎
-                        </span>
-                        <span>Download expert report</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="grid gap-6 lg:grid-cols-4 auto-rows-[minmax(0,1fr)]">
-                <!-- Radar -->
-                <article class="lg:col-span-2 lg:row-span-2 rounded-[2rem] bg-white/80 backdrop-blur-2xl shadow-[0_40px_80px_rgba(79,70,229,0.10)] px-6 py-6 flex flex-col">
-                    <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-slate-400 mb-2">
-                        Neural performance radar
-                    </p>
-                    <h3 class="text-base font-semibold tracking-tight text-slate-900 mb-4">
-                        Real‑time trait response map
-                    </h3>
-                    <div class="flex-1 flex items-center justify-center">
-                        <canvas id="traitRadarCanvas"></canvas>
-                    </div>
-                </article>
-
-                <!-- Salary graph -->
-                <article class="lg:col-span-2 rounded-[2rem] bg-white/80 backdrop-blur-2xl shadow-[0_40px_80px_rgba(15,23,42,0.08)] px-6 py-6 flex flex-col">
-                    <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-slate-400 mb-2">
-                        Salary projection
-                    </p>
-                    <h3 class="text-base font-semibold tracking-tight text-slate-900 mb-1">
-                        5‑year growth curve
-                    </h3>
-                    <p id="salarySubtitle" class="text-xs text-slate-500 mb-4">
-                        Indicative 5‑year compensation trajectory.
-                    </p>
-                    <div class="flex-1 flex items-center justify-center">
-                        <canvas id="salaryChartCanvas"></canvas>
-                    </div>
-                </article>
-
-                <!-- Market demand -->
-                <article class="lg:col-span-2 rounded-[2rem] bg-white/80 backdrop-blur-2xl shadow-[0_40px_80px_rgba(148,163,184,0.10)] px-6 py-6 flex flex-col justify-between">
-                    <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-slate-400 mb-2">
-                        Market demand
-                    </p>
-                    <div class="flex items-center justify-between gap-4 mb-3">
-                        <h3 class="text-base font-semibold tracking-tight text-slate-900">
-                            Outlook for 2026
-                        </h3>
-                        <span id="marketDemandBadge" class="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold tracking-tight text-indigo-700">
-                            High demand
-                        </span>
-                    </div>
-                    <div>
-                        <div class="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
-                            <div id="marketDemandBar" class="h-full w-3/4 rounded-full bg-gradient-to-r from-indigo-400 via-indigo-500 to-indigo-600"></div>
-                        </div>
-                        <p id="marketDemandText" class="mt-2 text-xs text-slate-500">
-                            Strong hiring activity projected across major markets.
-                        </p>
-                    </div>
-                </article>
-
-                <!-- Skill roadmap -->
-                <article class="lg:col-span-2 rounded-[2rem] bg-white/80 backdrop-blur-2xl shadow-[0_40px_80px_rgba(148,163,184,0.10)] px-6 py-6 flex flex-col">
-                    <div class="flex items-center justify-between gap-4 mb-3">
-                        <div>
-                            <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-slate-400 mb-1">
-                                Skill roadmap
-                            </p>
-                            <h3 class="text-base font-semibold tracking-tight text-slate-900">
-                                Elite path (3 steps)
-                            </h3>
-                        </div>
-                    </div>
-                    <ol
-                        id="skillRoadmap"
-                        class="flex flex-col sm:flex-row gap-4 text-sm sm:text-base text-slate-700"
-                    >
-                        <!-- injected -->
-                    </ol>
-                </article>
-
-                <!-- Additional careers -->
-                <article class="lg:col-span-4 rounded-[2rem] bg-white/80 backdrop-blur-2xl shadow-[0_40px_80px_rgba(148,163,184,0.10)] px-6 py-6">
-                    <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-slate-400 mb-2">
-                        Additional directions
-                    </p>
-                    <div id="careerCards" class="space-y-4"></div>
-                </article>
-
-                <!-- Gaming Signature Analysis -->
-                <article class="lg:col-span-4 rounded-[2rem] bg-slate-50/80 backdrop-blur-2xl border border-slate-100 px-6 py-6">
-                    <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-slate-400 mb-2">
-                        Gaming signature analysis
-                    </p>
-                    <p id="gamingAnalysisText" class="text-sm text-slate-600 leading-relaxed">
-                        Your timing, accuracy, and decision patterns in this session are being mapped to long‑term career trajectories.
-                    </p>
-                </article>
-            </div>
-        </div>
-    </section>
+            <h2 id="active-title" class="text-2xl font-black text-slate-800 uppercase mb-4 tracking-tighter">Initializing...</h2>
+            <div id="canvas"></div>
+            <div class="mt-6 flex justify-between items-center"><div id="acc-ui" class="text-[10px] font-bold text-slate-400 bg-slate-50 px-4 py-1 rounded-full uppercase tracking-widest">Accuracy: 100%</div></div>
+        </section>
+    </main>
 
     <script>
-        // ... (Baaki JavaScript Logic Same Rahegi) ...
+        const API_URL = "http://localhost:5000/api";
         const userEmail = localStorage.getItem('userEmail');
-        const userName = localStorage.getItem('userName') || localStorage.getItem('username') || "Neural Explorer";
-        document.getElementById('player-name').innerText = userName;
+        const userName = localStorage.getItem('userName') || "Research_Subject";
 
-        let currentScore = 0;
-        let timeLeft = 20;
-        let gameInterval;
-        let gameType = "";
-        let radarChart = null;
-        let salaryChart = null;
-        // Per-session game result object (no localStorage coupling)
-        let currentGameResults = {
-            scores: null,
-            user_traits: null,
-            predictions: []
-        };
+        const gamesList = [
+            { id: 'm1', title: 'Neural Addition', icon: 'fa-plus', type: 'Math' },
+            { id: 'r1', title: 'Flash Target', icon: 'fa-bolt', type: 'Reflex' },
+            { id: 'me1', title: 'Digit Memory', icon: 'fa-brain', type: 'Memory' },
+            { id: 'f1', title: 'Color Match', icon: 'fa-palette', type: 'Focus' },
+            { id: 'l1', title: 'Series Logic', icon: 'fa-shapes', type: 'Logic' },
+            { id: 'm2', title: 'Rapid Product', icon: 'fa-times', type: 'Math' },
+            { id: 'r2', title: 'Aim Sniper', icon: 'fa-crosshairs', type: 'Reflex' },
+            { id: 'me2', title: 'Word Recall', icon: 'fa-font', type: 'Memory' },
+            { id: 'f2', title: 'Search Matrix', icon: 'fa-search', type: 'Focus' },
+            { id: 'l2', title: 'Odd One Out', icon: 'fa-clone', type: 'Logic' },
+            { id: 'm3', title: 'Fast Division', icon: 'fa-divide', type: 'Math' },
+            { id: 'r3', title: 'Speed Clicker', icon: 'fa-hand-pointer', type: 'Reflex' },
+            { id: 'me3', title: 'Grid Memory', icon: 'fa-th', type: 'Memory' },
+            { id: 'f3', title: 'Color Stroop', icon: 'fa-adjust', type: 'Focus' }
+        ];
 
-        function openGame(category, title) {
-            if(!userEmail) {
-                alert("Please Login first.");
-                window.location.href = 'login.html';
-                return;
-            }
-            // reset session results for this run
-            currentGameResults = { scores: null, user_traits: null, predictions: [] };
+        let score = 0, time = 20, clicks = 0, hits = 0, activeGameId = "", interval;
 
-            document.getElementById('game-overlay').classList.remove('hidden');
-            document.getElementById('active-game-title').innerText = title;
-            gameType = title;
-            currentScore = 0;
-            timeLeft = 20;
-            document.getElementById('live-score').innerText = "0";
-            
-            if(category === 'Math') startMathChallenge();
-            else if(category === 'Reflex') startReflexChallenge();
-            else if(category === 'Memory') startMemoryChallenge();
-            else if(category === 'Focus') startFocusChallenge();
-            else if(category === 'Logic') startLogicChallenge();
-
-            gameInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timer').innerText = timeLeft + "s";
-                if(timeLeft <= 0) endGame();
-            }, 1000);
-        }
-
-        function closeGame() {
-            clearInterval(gameInterval);
-            document.getElementById('game-overlay').classList.add('hidden');
-        }
-
-        function buildScoresFromGame() {
-            // Normalize raw score into 0–1
-            const normalizedScore = Math.max(0, Math.min(currentScore, 100)) / 100;
-
-            // Start from a 1–5 space for trait shaping
-            const base5 = 2 + normalizedScore * 3;
-
-            const scores5 = {
-                O_score: base5,
-                C_score: base5,
-                E_score: base5,
-                A_score: base5,
-                N_score: 5 - base5 + 2,
-                Numerical: base5,
-                Spatial: base5,
-                Perceptual: base5,
-                Abstract: base5,
-                Verbal: base5
-            };
-
-            // Game-to-trait mapper (8-game battery friendly) in 1–5 space
-            if (gameType.includes("Math") || gameType.includes("Rapid")) {
-                // Rapid Math → Numerical ability
-                scores5.Numerical = Math.min(5, base5 + 0.8);
-            } else if (gameType.includes("Reflex") || gameType.includes("Reaction") || gameType.includes("Focus")) {
-                // Reaction/Focus → Conscientiousness & Perceptual
-                scores5.Perceptual = Math.min(5, base5 + 0.8);
-                scores5.C_score = Math.min(5, base5 + 0.6);
-            } else if (gameType.includes("Memory") || gameType.includes("Matrix")) {
-                // Memory Matrix → Planning / Conscientiousness
-                scores5.C_score = Math.min(5, base5 + 0.8);
-            } else if (gameType.includes("Pattern") || gameType.includes("Logic")) {
-                // Pattern Match → Abstract reasoning
-                scores5.Abstract = Math.min(5, base5 + 0.8);
-            } else if (gameType.includes("Verbal")) {
-                // Verbal Flow → Extraversion & Verbal
-                scores5.E_score = Math.min(5, base5 + 0.8);
-                scores5.Verbal = Math.min(5, base5 + 0.8);
-            } else if (gameType.includes("Spatial")) {
-                // Spatial Rotation → Spatial ability & Openness
-                scores5.Spatial = Math.min(5, base5 + 0.8);
-                scores5.O_score = Math.min(5, base5 + 0.6);
-            } else if (gameType.includes("Color")) {
-                // Color Focus → Perceptual / creativity
-                scores5.Perceptual = Math.min(5, base5 + 0.7);
-            } else if (gameType.includes("Emotional") || gameType.includes("Pulse")) {
-                // Emotional Pulse → Agreeableness / Neuroticism
-                scores5.A_score = Math.min(5, base5 + 0.8);
-                scores5.N_score = Math.max(1, 5 - base5 + 1);
-            }
-
-            // Clamp to 1–5 then scale into 1–10 for the model
-            const scores10 = {};
-            Object.keys(scores5).forEach(k => {
-                const clamped5 = Math.max(1, Math.min(5, Math.round(scores5[k])));
-                scores10[k] = Math.max(1, Math.min(10, clamped5 * 2));
+        function init() {
+            if(!userEmail) { window.location.href = 'signup.html'; return; }
+            document.getElementById('user-tag').innerText = userName;
+            const grid = document.getElementById('grid');
+            gamesList.forEach(g => {
+                grid.innerHTML += `<div onclick="startGame('${g.id}', '${g.title}')" class="game-card group"><div class="w-10 h-10 bg-slate-50 text-slate-400 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition shadow-sm"><i class="fas ${g.icon}"></i></div><h3 class="font-bold text-sm text-slate-800 group-hover:text-blue-600 transition">${g.title}</h3><p class="text-[9px] text-slate-400 uppercase mt-1 tracking-widest">${g.type}</p></div>`;
             });
-
-            return scores10;
+            fetch(`${API_URL}/user-profile/${userEmail}`).then(r => r.json()).then(d => document.getElementById('total-score-ui').innerText = d.user.totalPoints || 0);
         }
 
-        function getDisplayName() {
-            return userName || "Neural Explorer";
+        function startGame(id, title) {
+            document.getElementById('game-view').style.display = 'flex';
+            document.getElementById('active-title').innerText = title;
+            activeGameId = id; score = 0; time = 20; clicks = 0; hits = 0;
+            updateStats();
+            runLogic();
+            interval = setInterval(() => { time--; document.getElementById('timer').innerText = time + "s"; if(time <= 0) finalizeGame(); }, 1000);
         }
 
-        function getUserEmailSafe() {
-            return userEmail || "";
+        function updateStats() {
+            document.getElementById('live-score').innerText = score;
+            const acc = clicks > 0 ? Math.round((hits/clicks)*100) : 100;
+            document.getElementById('acc-ui').innerText = `ACCURACY: ${acc}%`;
         }
 
-        function resolvePredictions() {
-            if (currentGameResults && Array.isArray(currentGameResults.predictions) && currentGameResults.predictions.length) {
-                return currentGameResults.predictions;
-            }
-            if (!currentGameResults || !currentGameResults.user_traits) return [];
-            const traits = currentGameResults.user_traits;
-            return Object.keys(traits)
-                .map(key => ({ career: key + " Specialist", match: Math.round(traits[key] * 20), market_demand: "High" }));
-        }
-
-        function renderRadar() {
-            const canvas = document.getElementById('traitRadarCanvas');
-            if (!canvas || !currentGameResults || !currentGameResults.user_traits) return;
-
-            const traits = currentGameResults.user_traits;
-            const labels = Object.keys(traits);
-            const values = labels.map(k => traits[k]);
-
-            if (radarChart) radarChart.destroy();
-
-            radarChart = new Chart(canvas, {
-                type: 'radar',
-                data: {
-                    labels,
-                    datasets: [{
-                        data: values,
-                        backgroundColor: "rgba(30, 64, 175, 0.25)",
-                        borderColor: "rgba(30, 64, 175, 0.95)",
-                        borderWidth: 2,
-                        pointBackgroundColor: "#1d4ed8",
-                        pointRadius: 2.5,
-                        pointHoverRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        r: {
-                            suggestedMin: 0,
-                            suggestedMax: 5,
-                            grid: { color: "rgba(15,23,42,0.22)" },
-                            angleLines: { color: "rgba(15,23,42,0.22)" },
-                            ticks: { display: false },
-                            pointLabels: {
-                                font: { family: "Plus Jakarta Sans", size: 11, weight: "500" },
-                                color: "#0f172a"
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        function renderSalary() {
-            const canvas = document.getElementById('salaryChartCanvas');
-            if (!canvas) return;
-
-            const predictions = resolvePredictions();
-            const top = predictions[0];
-
-            let base = 60;
-            let peak = 140;
-
-            if (top) {
-                if (typeof top.salary_entry === "number" && typeof top.salary_expert === "number") {
-                    base = top.salary_entry;
-                    peak = top.salary_expert;
-                } else if (typeof top.match === "number") {
-                    const factor = top.match / 100;
-                    base = Math.round(50 + 40 * factor);
-                    peak = Math.round(110 + 60 * factor);
-                }
-
-                const subtitleEl = document.getElementById('salarySubtitle');
-                if (subtitleEl) {
-                    const label = top.career ? " for " + top.career : "";
-                    subtitleEl.textContent = "Indicative 5‑year compensation trajectory" + label + " (relative index).";
-                }
-            }
-
-            const labels = ["Year 1", "Year 2", "Year 3", "Year 4", "Year 5"];
-            const step = (peak - base) / (labels.length - 1 || 1);
-            const values = labels.map((_, idx) => Math.round(base + step * idx));
-
-            if (salaryChart) salaryChart.destroy();
-
-            salaryChart = new Chart(canvas, {
-                type: "line",
-                data: {
-                    labels,
-                    datasets: [{
-                        data: values,
-                        tension: 0.35,
-                        borderColor: "rgba(79,70,229,0.9)",
-                        backgroundColor: "rgba(79,70,229,0.12)",
-                        fill: true,
-                        pointRadius: 3,
-                        pointBackgroundColor: "#4F46E5"
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: "#0f172a", font: { family: "Plus Jakarta Sans", size: 11 } }
-                        },
-                        y: {
-                            grid: { color: "rgba(148,163,184,0.15)" },
-                            ticks: { display: false }
-                        }
-                    }
-                }
-            });
-        }
-
-        function renderMarket() {
-            const predictions = resolvePredictions();
-            const top = predictions[0];
-            const badge = document.getElementById('marketDemandBadge');
-            const bar = document.getElementById('marketDemandBar');
-            const text = document.getElementById('marketDemandText');
-            if (!badge || !bar || !text) return;
-
-            const level = (top && top.market_demand ? String(top.market_demand) : "High").toLowerCase();
-            let label = "Balanced demand";
-            let width = "60%";
-            let description = "Steady hiring activity expected over the next cycle.";
-
-            if (level.includes("high")) {
-                label = "High demand";
-                width = "85%";
-                description = "Elevated demand across major markets in 2026.";
-            } else if (level.includes("low")) {
-                label = "Emerging demand";
-                width = "40%";
-                description = "Niche but growing opportunities for specialists.";
-            }
-
-            badge.textContent = label;
-            bar.style.width = width;
-            text.textContent = description;
-        }
-
-        function renderRoadmap() {
-            const list = document.getElementById('skillRoadmap');
-            if (!list) return;
-            list.innerHTML = "";
-
-            const predictions = resolvePredictions();
-            const top = predictions[0] || {};
-            const skills = Array.isArray(top.skills) && top.skills.length > 0
-                ? top.skills.slice(0, 3)
-                : [
-                    "Solidify core problem‑solving and quantitative skills",
-                    "Build a portfolio of projects in this domain",
-                    "Target senior roles with mentorship and leadership exposure"
-                ];
-
-            skills.forEach(function (skill, index) {
-                const li = document.createElement("li");
-                li.className = "flex items-center gap-3 flex-1";
-
-                const badge = document.createElement("span");
-                badge.className =
-                    "inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-indigo-600 text-[11px] font-semibold text-white";
-                badge.textContent = String(index + 1);
-
-                const label = document.createElement("p");
-                label.className = "text-sm sm:text-base text-slate-700";
-                label.textContent = skill;
-
-                li.appendChild(badge);
-                li.appendChild(label);
-                list.appendChild(li);
-            });
-        }
-
-        function renderCareers() {
-            const container = document.getElementById('careerCards');
-            if (!container) return;
-            container.innerHTML = "";
-            const predictions = resolvePredictions();
-
-            predictions.forEach(function (prediction, index) {
-                const card = document.createElement("article");
-                card.className = "border-b border-slate-100 pb-4 last:border-b-0 last:pb-0";
-
-                const title = document.createElement("h3");
-                title.className = "text-base sm:text-lg font-semibold tracking-tight text-slate-900";
-                title.textContent = prediction.career;
-
-                const subtitle = document.createElement("p");
-                subtitle.className = "mt-1 text-xs text-slate-400";
-                subtitle.textContent =
-                    "Alignment level · " + (index === 0 ? "Primary" : index === 1 ? "Secondary" : "Supporting");
-
-                const header = document.createElement("div");
-                header.appendChild(title);
-                header.appendChild(subtitle);
-
-                const matchWrapper = document.createElement("div");
-                matchWrapper.className = "flex items-baseline gap-2 text-slate-700 mt-2";
-
-                const matchValue = document.createElement("span");
-                matchValue.className = "text-lg font-semibold";
-                matchValue.textContent = (prediction.match || 90) + "%";
-
-                const matchLabel = document.createElement("span");
-                matchLabel.className = "text-xs text-slate-400";
-                matchLabel.textContent = "match strength";
-
-                matchWrapper.appendChild(matchValue);
-                matchWrapper.appendChild(matchLabel);
-
-                const actions = document.createElement("div");
-                actions.className = "flex gap-2 mt-2";
-
-                const linkedinLink = document.createElement("a");
-                linkedinLink.href = "https://www.linkedin.com/jobs/search/?keywords=" +
-                    encodeURIComponent(prediction.career + " remote");
-                linkedinLink.target = "_blank";
-                linkedinLink.rel = "noopener noreferrer";
-                linkedinLink.className =
-                    "px-4 py-2 rounded-2xl bg-white border border-slate-200 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 hover:text-indigo-700 transition-colors";
-                linkedinLink.textContent = "View LinkedIn Jobs";
-
-                const fiverrLink = document.createElement("a");
-                fiverrLink.href = "https://www.fiverr.com/search/gigs?query=" +
-                    encodeURIComponent(prediction.career);
-                fiverrLink.target = "_blank";
-                fiverrLink.rel = "noopener noreferrer";
-                fiverrLink.className =
-                    "px-4 py-2 rounded-2xl bg-white border border-slate-200 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 hover:text-indigo-700 transition-colors";
-                fiverrLink.textContent = "Explore Fiverr Gigs";
-
-                actions.appendChild(linkedinLink);
-                actions.appendChild(fiverrLink);
-
-                card.appendChild(header);
-                card.appendChild(matchWrapper);
-                card.appendChild(actions);
-
-                container.appendChild(card);
-            });
-        }
-
-        function showDashboard() {
-            const overlay = document.getElementById('game-overlay');
-            const section = document.getElementById('career-dashboard');
-            if (overlay) overlay.classList.add('hidden');
-            if (section) section.classList.remove('hidden');
-
-            const nameEl = document.getElementById('dashboardName');
-            const emailEl = document.getElementById('dashboardEmail');
-            if (nameEl) nameEl.textContent = getDisplayName();
-            if (emailEl) emailEl.textContent = getUserEmailSafe();
-
-            renderRadar();
-            renderSalary();
-            renderMarket();
-            renderRoadmap();
-            renderCareers();
-
-            const analysisEl = document.getElementById('gamingAnalysisText');
-            if (analysisEl && currentGameResults && currentGameResults.scores) {
-                const s = currentGameResults.scores;
-                const strengths = [];
-                if (s.Numerical >= 4) strengths.push("numerical reasoning");
-                if (s.Abstract >= 4) strengths.push("abstract pattern recognition");
-                if (s.Perceptual >= 4) strengths.push("perceptual speed");
-                if (s.C_score >= 4) strengths.push("focus and follow‑through");
-
-                const strengthText = strengths.length
-                    ? "Your strongest signals in this run were " + strengths.join(", ") + "."
-                    : "Your signals in this run were evenly distributed across traits.";
-
-                analysisEl.textContent =
-                    strengthText +
-                    " This gaming signature feeds directly into your neural career prediction, weighting fast, accurate decisions more heavily than random clicks.";
-            }
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
-        async function endGame() {
-            clearInterval(gameInterval);
-            document.getElementById('game-canvas').innerHTML = `
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-check text-indigo-600 text-2xl"></i>
-                    </div>
-                    <h2 class="text-3xl font-black text-slate-900 mb-2">SESSION COMPLETE</h2>
-                    <p class="text-slate-400 uppercase tracking-widest text-xs font-bold">Synchronizing with Neural Cloud...</p>
-                </div>`;
-
-            const scores = buildScoresFromGame();
-            currentGameResults.scores = scores;
-
-            const payload = { email: userEmail, username: userName, score: currentScore, gameName: gameType, source: "game", traits: scores };
-
-            try {
-                await fetch('http://localhost:5000/api/save-game', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (err) {
-                // ignore save errors
-            }
-
-            try {
-                const res = await fetch('http://127.0.0.1:5001/predict', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ scores })
-                });
-                const data = await res.json();
-                currentGameResults.user_traits = data.user_traits || {};
-                currentGameResults.predictions = data.predictions || [];
-
-                // Persist game prediction summary to Node backend
-                try {
-                    const emailFromStorage = window.localStorage ? window.localStorage.getItem('userEmail') : null;
-                    if (!emailFromStorage) {
-                        alert("Error: User Email not found in LocalStorage!");
-                    }
-
-                    const email = userEmail || emailFromStorage || null;
-                    const top = (currentGameResults.predictions && currentGameResults.predictions[0]) || null;
-                    const predictionCareer = top && top.career ? top.career : null;
-
-                    const dataToSend = {
-                        email: email,
-                        datetime: new Date().toISOString(),
-                        gameName: gameType || null,
-                        prediction: predictionCareer
-                    };
-
-                    console.log("1. Fetch started for email:", emailFromStorage);
-                    console.log("2. Data being sent:", JSON.stringify(dataToSend));
-
-                    (async function () {
-                        try {
-                            const response = await fetch('http://localhost:5000/api/save-game-prediction', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(dataToSend)
-                            });
-
-                            const respJson = await response.json().catch(function () { return null; });
-                            console.log("3. Server Response:", respJson);
-                        } catch (err) {
-                            console.error('Error saving game prediction:', err);
-                        }
-                    })();
-                } catch (persistErr) {
-                    console.error('Persistence error (game prediction):', persistErr);
-                }
-
-                showDashboard();
-            } catch (err) {
-                alert("Could not reach career prediction service. Please ensure the Flask API is running on 127.0.0.1:5001.");
-            }
-        }
-
-        // --- GAME LOGICS (Updated Colors for White Theme) ---
-
-        function startMathChallenge() {
-            const canvas = document.getElementById('game-canvas');
-            const n1 = Math.floor(Math.random() * 50) + 10;
-            const n2 = Math.floor(Math.random() * 50) + 10;
-            const sum = n1 + n2;
-            canvas.innerHTML = `
-                <div class="text-center">
-                    <h1 class="text-8xl font-black mb-6 text-slate-900 tracking-tighter">${n1}+${n2}</h1>
-                    <input type="number" id="ans" class="game-input text-6xl p-4" autofocus>
-                </div>`;
-            const input = document.getElementById('ans');
-            input.focus();
-            input.oninput = () => {
-                if(input.value == sum) {
-                    currentScore += 5;
-                    document.getElementById('live-score').innerText = currentScore;
-                    startMathChallenge();
-                }
-            };
-        }
-
-        function startReflexChallenge() {
-            const canvas = document.getElementById('game-canvas');
+        function runLogic() {
+            const canvas = document.getElementById('canvas');
             canvas.innerHTML = '';
-            const node = document.createElement('div');
-            node.className = 'node bg-indigo-600 text-white';
-            node.innerHTML = '<i class="fas fa-fingerprint"></i>';
-            node.style.left = Math.random() * (canvas.clientWidth - 100) + 'px';
-            node.style.top = Math.random() * (canvas.clientHeight - 100) + 'px';
-            node.onclick = () => {
-                currentScore += 2;
-                document.getElementById('live-score').innerText = currentScore;
-                startReflexChallenge();
-            };
-            canvas.appendChild(node);
-        }
 
-        function startMemoryChallenge() {
-            const canvas = document.getElementById('game-canvas');
-            let target = "";
-            for(let i=0; i<4; i++) target += Math.floor(Math.random()*10);
-            
-            canvas.innerHTML = `<h1 class="text-8xl font-black text-indigo-600 tracking-[0.3em]">${target}</h1>`;
-            
-            setTimeout(() => {
-                canvas.innerHTML = `
-                    <div class="text-center">
-                        <p class="mb-4 text-slate-400 uppercase tracking-widest font-bold text-xs">Recall sequence</p>
-                        <input type="number" id="ans" class="game-input text-6xl p-4" autofocus>
-                    </div>`;
-                const input = document.getElementById('ans');
-                input.focus();
-                input.oninput = () => {
-                    if(input.value === target) {
-                        currentScore += 10;
-                        document.getElementById('live-score').innerText = currentScore;
-                        startMemoryChallenge();
-                    }
-                };
-            }, 1000);
-        }
-
-        function startFocusChallenge() {
-            const canvas = document.getElementById('game-canvas');
-            canvas.innerHTML = '<div id="matrix-grid" class="grid grid-cols-3 gap-4"></div>';
-            const grid = document.getElementById('matrix-grid');
-            const target = Math.floor(Math.random() * 9) + 1;
-            
-            for(let i=1; i<=9; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'matrix-btn';
-                btn.innerText = i;
-                btn.onclick = () => {
-                    if(i === target) {
-                        currentScore += 3;
-                        document.getElementById('live-score').innerText = currentScore;
-                        startFocusChallenge();
-                    }
-                };
-                grid.appendChild(btn);
+            // 1. NEURAL ADDITION
+            if(activeGameId === 'm1') {
+                let n1 = Math.floor(Math.random()*50)+10, n2 = Math.floor(Math.random()*50)+10, ans = n1+n2;
+                canvas.innerHTML = `<div class="text-center"><h1 class="text-7xl font-black mb-8">${n1}+${n2}</h1><input type="number" id="inp" class="game-input" autofocus></div>`;
+                const i = document.getElementById('inp'); i.focus();
+                i.oninput = () => { if(i.value.length >= ans.toString().length) { clicks++; if(i.value == ans){ hits++; score += 50; } updateStats(); runLogic(); }};
             }
-            canvas.prepend(Object.assign(document.createElement('p'), {
-                innerText: `Find Node: ${target}`,
-                className: 'absolute top-10 text-sm font-black text-indigo-600 uppercase tracking-widest'
-            }));
-        }
-
-        function startLogicChallenge() {
-            const canvas = document.getElementById('game-canvas');
-            const patterns = [
-                {q: "2, 4, 8, 16, ?", a: "32"},
-                {q: "1, 4, 9, 16, ?", a: "25"},
-                {q: "Z, Y, X, ?", a: "W"}
-            ];
-            const p = patterns[Math.floor(Math.random()*patterns.length)];
-            canvas.innerHTML = `
-                <div class="text-center">
-                    <p class="text-slate-400 mb-4 uppercase tracking-widest text-xs font-bold">Logic Pattern</p>
-                    <h1 class="text-7xl font-black mb-6 text-slate-900">${p.q}</h1>
-                    <input type="text" id="ans" class="game-input text-6xl p-4" autofocus>
-                </div>`;
-            const input = document.getElementById('ans');
-            input.focus();
-            input.oninput = () => {
-                if(input.value.toUpperCase() === p.a) {
-                    currentScore += 5;
-                    document.getElementById('live-score').innerText = currentScore;
-                    startLogicChallenge();
-                }
-            };
-        }
-
-        // PDF export for dashboard
-        document.addEventListener('DOMContentLoaded', function () {
-            const downloadBtn = document.getElementById('downloadPdfBtn');
-            if (downloadBtn && window.html2pdf) {
-                downloadBtn.addEventListener('click', function () {
-                    const target = document.getElementById('result-ui');
-                    if (!target) return;
-
-                    const safeName = (getDisplayName() || "User").replace(/[^\w\-]+/g, "_");
-                    const fileName = "Neural_Career_Report_" + safeName + ".pdf";
-
-                    const opt = {
-                        margin: 0,
-                        filename: fileName,
-                        image: { type: "jpeg", quality: 0.98 },
-                        html2canvas: { scale: 2, useCORS: true },
-                        jsPDF: { unit: "pt", format: "a4", orientation: "portrait" }
-                    };
-
-                    window.html2pdf().set(opt).from(target).save();
+            // 2. FLASH TARGET
+            else if(activeGameId === 'r1') {
+                const t = document.createElement('div'); t.className = 'target';
+                t.style.left = (Math.random()*80+5)+"%"; t.style.top = (Math.random()*80+5)+"%";
+                t.onclick = () => { clicks++; hits++; score += 40; updateStats(); runLogic(); };
+                canvas.appendChild(t);
+            }
+            // 3. DIGIT MEMORY
+            else if(activeGameId === 'me1') {
+                const seq = Math.random().toString().slice(2, 7);
+                canvas.innerHTML = `<h1 class="text-8xl font-black text-blue-600">${seq}</h1>`;
+                setTimeout(() => {
+                    canvas.innerHTML = `<input type="number" id="inp" class="game-input" placeholder="Recall?" autofocus>`;
+                    const i = document.getElementById('inp'); i.focus();
+                    i.oninput = () => { if(i.value.length >= 5) { clicks++; if(i.value == seq){ hits++; score += 100; } updateStats(); runLogic(); }};
+                }, 800);
+            }
+            // 4. COLOR MATCH
+            else if(activeGameId === 'f1') {
+                const colors = ['Red', 'Blue', 'Green', 'Yellow'];
+                const targetColor = colors[Math.floor(Math.random()*4)];
+                canvas.innerHTML = `<div class="text-center"><h1 class="text-5xl font-black mb-10">Find: ${targetColor}</h1><div id="btns" class="flex gap-4"></div></div>`;
+                colors.forEach(c => {
+                    const b = document.createElement('button'); b.className = "w-20 h-20 rounded-xl shadow-lg"; b.style.background = c.toLowerCase();
+                    b.onclick = () => { clicks++; if(c === targetColor){ hits++; score += 40; } updateStats(); runLogic(); };
+                    document.getElementById('btns').appendChild(b);
                 });
             }
-        });
+            // 5. SERIES LOGIC
+            else if(activeGameId === 'l1') {
+                const base = Math.floor(Math.random()*10), step = Math.floor(Math.random()*5)+2;
+                const series = [base, base+step, base+(step*2)]; const ans = base+(step*3);
+                canvas.innerHTML = `<div class="text-center"><h1 class="text-6xl font-black mb-8">${series.join(', ')}, ?</h1><input type="number" id="inp" class="game-input" autofocus></div>`;
+                const i = document.getElementById('inp'); i.focus();
+                i.oninput = () => { if(i.value.length >= ans.toString().length) { clicks++; if(i.value == ans){ hits++; score += 60; } updateStats(); runLogic(); }};
+            }
+            // 6. RAPID PRODUCT
+            else if(activeGameId === 'm2') {
+                let n1 = Math.floor(Math.random()*12)+2, n2 = Math.floor(Math.random()*12)+2, ans = n1*n2;
+                canvas.innerHTML = `<div class="text-center"><h1 class="text-7xl font-black mb-8">${n1} x ${n2}</h1><input type="number" id="inp" class="game-input" autofocus></div>`;
+                const i = document.getElementById('inp'); i.focus();
+                i.oninput = () => { if(i.value.length >= ans.toString().length) { clicks++; if(i.value == ans){ hits++; score += 50; } updateStats(); runLogic(); }};
+            }
+            // 7. AIM SNIPER
+            else if(activeGameId === 'r2') {
+                canvas.innerHTML = `<div class="text-slate-300 font-bold">CLICK THE CENTER</div>`;
+                const t = document.createElement('div'); t.className = 'target w-10 h-10 border-4 border-white';
+                t.style.left = (Math.random()*85)+"%"; t.style.top = (Math.random()*85)+"%";
+                t.onclick = () => { clicks++; hits++; score += 50; updateStats(); runLogic(); };
+                canvas.appendChild(t);
+            }
+            // 8. WORD RECALL
+            else if(activeGameId === 'me2') {
+                const words = ["DATA", "CODE", "NODE", "HTML", "JAVA", "MERN"];
+                const pick = words[Math.floor(Math.random()*words.length)];
+                canvas.innerHTML = `<h1 class="text-7xl font-black text-blue-600">${pick}</h1>`;
+                setTimeout(() => {
+                    canvas.innerHTML = `<input type="text" id="inp" class="game-input" placeholder="Type word" autofocus>`;
+                    const i = document.getElementById('inp'); i.focus();
+                    i.oninput = () => { if(i.value.length >= 4) { clicks++; if(i.value.toUpperCase() == pick){ hits++; score += 120; } updateStats(); runLogic(); }};
+                }, 800);
+            }
+            // 9. SEARCH MATRIX
+            else if(activeGameId === 'f2') {
+                canvas.innerHTML = `<div class="grid grid-cols-4 gap-4" id="matrix"></div>`;
+                const m = document.getElementById('matrix');
+                const winIdx = Math.floor(Math.random()*16);
+                for(let j=0; j<16; j++) {
+                    const b = document.createElement('div'); b.className = "w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center cursor-pointer font-bold";
+                    b.innerText = (j===winIdx) ? "X" : "O";
+                    b.onclick = () => { clicks++; if(j===winIdx){ hits++; score += 50; } updateStats(); runLogic(); };
+                    m.appendChild(b);
+                }
+            }
+            // 10. ODD ONE OUT
+           // 10. ODD ONE OUT (Improved & Error-Free)
+else if(activeGameId === 'l2') {
+    // Hamne aik list banayi jis mein 3 cheezein aik jaisi hain aur 1 alag
+    const sets = [
+        { items: ["🍎", "🍎", "🍎", "🍌"], odd: "🍌" },
+        { items: ["🚗", "🚗", "🚲", "🚗"], odd: "🚲" },
+        { items: ["🐶", "🐱", "🐶", "🐶"], odd: "🐱" },
+        { items: ["💻", "💻", "💻", "📱"], odd: "📱" }
+    ];
+
+    // Randomly aik set pick kiya
+    const selectedSet = sets[Math.floor(Math.random() * sets.length)];
+    const shuffledItems = [...selectedSet.items].sort(() => Math.random() - 0.5);
+
+    canvas.innerHTML = `
+        <div class="text-center">
+            <h1 class="text-3xl font-black mb-10 text-slate-700 uppercase tracking-tight">Find the Odd One</h1>
+            <div id="btns" class="flex gap-6 justify-center"></div>
+        </div>`;
+
+    shuffledItems.forEach((item, index) => {
+        const b = document.createElement('button');
+        b.innerHTML = item;
+        b.className = "w-24 h-24 text-6xl bg-white border-2 border-slate-100 rounded-3xl shadow-sm hover:border-blue-500 hover:bg-blue-50 transition transform active:scale-90";
+        
+        b.onclick = () => {
+            clicks++;
+            if(item === selectedSet.odd) {
+                hits++;
+                score += 60;
+                // Success animation ya agla level
+                b.classList.add('bg-green-100', 'border-green-500');
+                setTimeout(() => runLogic(), 300); // Thora gap de kar agla challenge
+            } else {
+                b.classList.add('bg-rose-100', 'border-rose-500');
+                setTimeout(() => runLogic(), 300);
+            }
+            updateStats();
+        };
+        document.getElementById('btns').appendChild(b);
+    });
+}
+            // 11. FAST DIVISION
+            else if(activeGameId === 'm3') {
+                let n2 = Math.floor(Math.random()*10)+2, n1 = n2 * (Math.floor(Math.random()*10)+1);
+                canvas.innerHTML = `<div class="text-center"><h1 class="text-7xl font-black mb-8">${n1} / ${n2}</h1><input type="number" id="inp" class="game-input" autofocus></div>`;
+                const i = document.getElementById('inp'); i.focus();
+                i.oninput = () => { if(i.value.length >= (n1/n2).toString().length) { clicks++; if(i.value == (n1/n2)){ hits++; score += 70; } updateStats(); runLogic(); }};
+            }
+            // 12. SPEED CLICKER
+            else if(activeGameId === 'r3') {
+                canvas.innerHTML = `<button id="speed" class="w-40 h-40 bg-blue-600 text-white rounded-full font-black text-2xl animate-ping">TAP!</button>`;
+                document.getElementById('speed').onclick = () => { clicks++; hits++; score += 20; updateStats(); runLogic(); };
+            }
+            // 13. GRID MEMORY
+            else if(activeGameId === 'me3') {
+                canvas.innerHTML = `<div class="grid grid-cols-3 gap-3" id="g-mem"></div>`;
+                const g = document.getElementById('g-mem');
+                const winIdx = Math.floor(Math.random()*9);
+                for(let j=0; j<9; j++) {
+                    const b = document.createElement('div'); b.className = `grid-box ${j===winIdx ? 'active' : ''}`;
+                    g.appendChild(b);
+                }
+                setTimeout(() => {
+                    Array.from(g.children).forEach((child, idx) => {
+                        child.classList.remove('active');
+                        child.onclick = () => { clicks++; if(idx===winIdx){ hits++; score += 100; } updateStats(); runLogic(); };
+                    });
+                }, 600);
+            }
+            // 14. COLOR STROOP
+            else if(activeGameId === 'f3') {
+                const names = ["RED", "BLUE", "GREEN"]; const colors = ["#22c55e", "#ef4444", "#3b82f6"];
+                const nameIdx = Math.floor(Math.random()*3), colorIdx = Math.floor(Math.random()*3);
+                canvas.innerHTML = `<div class="text-center"><h1 class="text-7xl font-black mb-8" style="color:${colors[colorIdx]}">${names[nameIdx]}</h1><p class="text-slate-400 font-bold mb-4">Click the COLOR, not the word!</p><div id="btns" class="flex gap-4"></div></div>`;
+                colors.forEach((c, idx) => {
+                    const b = document.createElement('button'); b.className="w-16 h-16 rounded-full border-4 border-slate-100"; b.style.background = c;
+                    b.onclick = () => { clicks++; if(idx === colorIdx){ hits++; score += 80; } updateStats(); runLogic(); };
+                    document.getElementById('btns').appendChild(b);
+                });
+            }
+        }
+
+        async function finalizeGame() {
+            clearInterval(interval);
+            const accuracy = clicks > 0 ? Math.round((hits/clicks)*100) : 0;
+            const canvas = document.getElementById('canvas');
+            canvas.innerHTML = `<div class="text-center"><h2 class="text-4xl font-black mb-4">Test Finished!</h2><p class="text-slate-500 mb-10">Score: ${score} | Accuracy: ${accuracy}%</p><button onclick="location.reload()" class="bg-blue-600 text-white px-12 py-4 rounded-2xl font-bold shadow-lg">Save & Return</button></div>`;
+            if(userEmail) {
+                try {
+                    await fetch(`${API_URL}/update-progress`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ email: userEmail, gameName: document.getElementById('active-title').innerText, score, accuracy })
+                    });
+                } catch(e) { console.log("Sync Error"); }
+            }
+        }
+
+        function abortGame() { clearInterval(interval); location.reload(); }
+        init();
     </script>
 </body>
 </html>

@@ -140,16 +140,7 @@
                 <p>Welcome back! Please enter your credentials.</p>
             </div>
 
-            <div class="social-btns">
-                <button class="btn-social">
-                    <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google"> Google
-                </button>
-                <button class="btn-social">
-                    <img src="https://www.svgrepo.com/show/341847/github.svg" alt="GitHub"> GitHub
-                </button>
-            </div>
-
-            <div class="divider">or continue with email</div>
+            
 
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
@@ -173,7 +164,7 @@
                     <label class="remember-me">
                         <input type="checkbox"> Remember me
                     </label>
-                    <a href="#" class="forgot-pass">Forgot key?</a>
+                   <a href="#" class="forgot-pass" onclick="handleForgotPassword(event)">Forgot key?</a>
                 </div>
 
                 <button type="submit" id="loginBtn" class="btn-login">Authorize Access</button>
@@ -187,6 +178,34 @@
     </div>
 
     <script>
+        async function handleForgotPassword(event) {
+    event.preventDefault(); // Page reload hone se rokne ke liye
+    
+    // 1. User se email input lena
+    const email = prompt("Enter your registered email to recover your key:");
+    
+    if (!email) return; // Agar cancel kar dein toh kuch na ho
+
+    try {
+        // 2. Backend ko request bhejna
+        const response = await fetch('http://localhost:5000/api/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("✨ Success! Reset instructions have been sent to " + email);
+        } else {
+            alert("❌ Error: " + (data.error || "Email not found in our neural core."));
+        }
+    } catch (err) {
+        console.error("Forgot Password Error:", err);
+        alert("⚠️ Connection failed! Make sure your backend server is running.");
+    }
+}
         function togglePass() {
             const p = document.getElementById('password');
             const icon = document.querySelector('.pass-toggle');
